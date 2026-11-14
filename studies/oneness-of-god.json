@@ -1,0 +1,662 @@
+{
+  "id": "oneness-of-god",
+  "title": "The Oneness of God",
+  "subtitle": "A guided topical study in Apostolic / Oneness Pentecostal teaching",
+  "author": "David K. Bernard",
+  "work": "The Oneness of God",
+  "publisher": "Word Aflame Press",
+  "year": 1983,
+  "viewpoint": "Apostolic / Oneness Pentecostal",
+  "disclaimer": "These lessons present the position of David K. Bernard, The Oneness of God (Word Aflame Press, 1983). The summaries are original study notes written for this app; they are not a reproduction of the book and do not quote its wording. Scripture is cited from the World English Bible (public domain). Chapter titles and order follow the book's table of contents.",
+  "tocSource": "Chapter titles and order were checked against published tables of contents for the Word Aflame Press edition (including publicly listed course outlines of the book). Lessons follow that chapter order. They do not reproduce the book's text.",
+  "lessons": [
+    {
+      "id": "1",
+      "chapter": 1,
+      "title": "Christian Monotheism",
+      "summary": "This lesson presents Bernard's position: the Bible, in both Testaments, teaches that there is only one God—not a committee of divine persons, but one undivided God. Oneness teaching starts here, with the Jewish and apostolic confession that the Lord is one, and reads every later passage in that light.",
+      "verses": [
+        {
+          "ref": "Deut.6.4",
+          "note": "The Shema: YHWH is one.",
+          "highlight": [
+            {
+              "wit": "heb",
+              "strong": "H259",
+              "label": "echad"
+            },
+            {
+              "wit": "heb",
+              "strong": "H430",
+              "label": "Elohim"
+            }
+          ]
+        },
+        {
+          "ref": "Isa.44.6",
+          "note": "The Lord is first and last; besides him there is no God.",
+          "highlight": [
+            {
+              "wit": "heb",
+              "strong": "H430",
+              "label": "Elohim"
+            }
+          ]
+        },
+        {
+          "ref": "Isa.44.24",
+          "note": "The Lord alone stretched out the heavens.",
+          "highlight": []
+        },
+        {
+          "ref": "Isa.45.5",
+          "note": "“I am the Lord, and there is no other.”",
+          "highlight": []
+        },
+        {
+          "ref": "Isa.45.6",
+          "note": "That all may know there is none besides him.",
+          "highlight": []
+        },
+        {
+          "ref": "1Tim.2.5",
+          "note": "One God, and one mediator.",
+          "highlight": [
+            {
+              "wit": "grk",
+              "strong": "G2316",
+              "label": "Theos"
+            }
+          ]
+        }
+      ],
+      "questions": [
+        "How does the Shema shape the way you read later New Testament language about Father, Son, and Spirit?",
+        "Where in the prophets is God most clearly said to be alone as Creator and Savior?",
+        "If there is only one God, what must follow about the identity of Jesus?"
+      ],
+      "furtherReading": "Bernard, The Oneness of God, ch. 1"
+    },
+    {
+      "id": "2",
+      "chapter": 2,
+      "title": "The Nature of God",
+      "summary": "Bernard's position here is that God is one Spirit: invisible, present everywhere, all-knowing, all-powerful, eternal, and unchanging. Visible appearances in Scripture (theophanies) are God making himself known, not a second divine person standing beside him.",
+      "verses": [
+        {
+          "ref": "John.4.24",
+          "note": "God is Spirit.",
+          "highlight": [
+            {
+              "wit": "grk",
+              "strong": "G2316",
+              "label": "Theos"
+            }
+          ]
+        },
+        {
+          "ref": "1Tim.1.17",
+          "note": "The invisible, eternal King.",
+          "highlight": []
+        },
+        {
+          "ref": "Jer.23.24",
+          "note": "God fills heaven and earth.",
+          "highlight": []
+        },
+        {
+          "ref": "Mal.3.6",
+          "note": "The Lord does not change.",
+          "highlight": []
+        },
+        {
+          "ref": "Dan.3.25",
+          "note": "A theophany often discussed as “the fourth man in the fire.”",
+          "highlight": []
+        }
+      ],
+      "questions": [
+        "What does it mean, in this view, that God is a Spirit rather than a body of flesh?",
+        "How would a theophany differ from a second person in the Godhead?",
+        "Which of God’s attributes in this chapter most affects how you pray?"
+      ],
+      "furtherReading": "Bernard, The Oneness of God, ch. 2"
+    },
+    {
+      "id": "3",
+      "chapter": 3,
+      "title": "The Names and Titles of God",
+      "summary": "In Bernard's account, a biblical name reveals who God is. Old Testament titles and the compound names of Jehovah unfold that one identity, and the name Jesus is presented as the New Testament revelation of that same name—Jehovah-Savior—not a different God.",
+      "verses": [
+        {
+          "ref": "Exod.3.14",
+          "note": "“I AM” as God’s self-revelation.",
+          "highlight": []
+        },
+        {
+          "ref": "Exod.6.3",
+          "note": "The name YHWH made known.",
+          "highlight": []
+        },
+        {
+          "ref": "Isa.9.6",
+          "note": "The child called Mighty God, Everlasting Father.",
+          "highlight": [
+            {
+              "wit": "heb",
+              "strong": "H410",
+              "label": "El"
+            }
+          ]
+        },
+        {
+          "ref": "Matt.1.21",
+          "note": "You shall call his name Jesus: he will save his people.",
+          "highlight": [
+            {
+              "wit": "grk",
+              "strong": "G3686",
+              "label": "onoma"
+            }
+          ]
+        },
+        {
+          "ref": "Acts.4.12",
+          "note": "No other name by which we must be saved.",
+          "highlight": [
+            {
+              "wit": "grk",
+              "strong": "G3686",
+              "label": "onoma"
+            }
+          ]
+        }
+      ],
+      "questions": [
+        "Why might a name be more than a label in the Old Testament?",
+        "How does this study connect the name Jesus with Jehovah?",
+        "What difference does “the name” make for baptism and prayer in Oneness practice?"
+      ],
+      "furtherReading": "Bernard, The Oneness of God, ch. 3"
+    },
+    {
+      "id": "4",
+      "chapter": 4,
+      "title": "Jesus Is God",
+      "summary": "This lesson presents Bernard's central claim: Jesus is not a second God or a merely exalted man. The Old and New Testaments identify him with the one God. “The Word became flesh,” “in him all the fullness of deity dwells bodily,” and “God was manifested in the flesh” are read as saying that the one God himself came in the person of Jesus.",
+      "verses": [
+        {
+          "ref": "Isa.9.6",
+          "note": "The child with divine titles.",
+          "highlight": []
+        },
+        {
+          "ref": "John.1.1",
+          "note": "The Word was God.",
+          "highlight": [
+            {
+              "wit": "grk",
+              "strong": "G2316",
+              "label": "Theos"
+            },
+            {
+              "wit": "grk",
+              "strong": "G3056",
+              "label": "Logos"
+            }
+          ]
+        },
+        {
+          "ref": "John.1.14",
+          "note": "The Word became flesh.",
+          "highlight": [
+            {
+              "wit": "grk",
+              "strong": "G3056",
+              "label": "Logos"
+            }
+          ]
+        },
+        {
+          "ref": "Col.2.9",
+          "note": "All the fullness of deity dwells in him bodily.",
+          "highlight": [
+            {
+              "wit": "grk",
+              "strong": "G2320",
+              "label": "theotēs"
+            }
+          ]
+        },
+        {
+          "ref": "1Tim.3.16",
+          "note": "God was manifested in the flesh (as many manuscripts and this tradition read the verse).",
+          "highlight": []
+        },
+        {
+          "ref": "John.14.9",
+          "note": "Whoever has seen me has seen the Father.",
+          "highlight": []
+        },
+        {
+          "ref": "John.20.28",
+          "note": "Thomas: “My Lord and my God.”",
+          "highlight": [
+            {
+              "wit": "grk",
+              "strong": "G2316",
+              "label": "Theos"
+            }
+          ]
+        }
+      ],
+      "questions": [
+        "Which verse most clearly, in this view, identifies Jesus with the one God?",
+        "How does John 1:1 and 1:14 together support incarnation rather than a second divine being?",
+        "What does Colossians 2:9 add that titles alone do not?",
+        "How would you answer someone who says Jesus is divine but not the Father?"
+      ],
+      "furtherReading": "Bernard, The Oneness of God, ch. 4"
+    },
+    {
+      "id": "5",
+      "chapter": 5,
+      "title": "The Son of God",
+      "summary": "Bernard's position is that “Son of God” speaks of the incarnation: God in true, sinless humanity, not an eternal second person begotten before the world. The Son has a beginning in the womb of Mary; the deity of Jesus is the one eternal God, and the sonship is the human mode in which that God came to redeem.",
+      "verses": [
+        {
+          "ref": "Luke.1.35",
+          "note": "The Holy Spirit comes upon Mary; the child is called the Son of God.",
+          "highlight": []
+        },
+        {
+          "ref": "Gal.4.4",
+          "note": "God sent forth his Son, born of a woman.",
+          "highlight": []
+        },
+        {
+          "ref": "Heb.1.8",
+          "note": "“Your throne, O God, is forever”—language applied to the Son.",
+          "highlight": [
+            {
+              "wit": "grk",
+              "strong": "G2316",
+              "label": "Theos"
+            }
+          ]
+        },
+        {
+          "ref": "Heb.1.9",
+          "note": "The continuation of that address.",
+          "highlight": []
+        },
+        {
+          "ref": "John.5.19",
+          "note": "The Son’s dependence, read here as the genuine humanity of Christ.",
+          "highlight": []
+        }
+      ],
+      "questions": [
+        "In this teaching, when does “the Son” begin, and why does that matter?",
+        "How can Jesus be both fully God and fully human without two persons in the Godhead?",
+        "What is at stake in speaking of a “begotten Son” rather than an “eternal Son”?"
+      ],
+      "furtherReading": "Bernard, The Oneness of God, ch. 5"
+    },
+    {
+      "id": "6",
+      "chapter": 6,
+      "title": "Father, Son, and Holy Ghost",
+      "summary": "This lesson presents Bernard's reading of Father, Son, and Holy Spirit as three manifestations or roles of the one God, not three co-eternal persons. The Father is God in relation to the world and to the incarnation; the Son is God in flesh; the Spirit is God at work in and with the church. Matthew 28:19’s “name” (singular) is set beside Acts 2:38, where the apostles baptize in the name of Jesus.",
+      "verses": [
+        {
+          "ref": "Matt.28.19",
+          "note": "Baptize in the name (singular) of the Father, Son, and Holy Spirit.",
+          "highlight": [
+            {
+              "wit": "grk",
+              "strong": "G3686",
+              "label": "onoma"
+            }
+          ]
+        },
+        {
+          "ref": "Acts.2.38",
+          "note": "Repent and be baptized in the name of Jesus Christ.",
+          "highlight": [
+            {
+              "wit": "grk",
+              "strong": "G3686",
+              "label": "onoma"
+            }
+          ]
+        },
+        {
+          "ref": "John.14.16",
+          "note": "Another Comforter—read here as Jesus coming as the Spirit.",
+          "highlight": []
+        },
+        {
+          "ref": "John.14.18",
+          "note": "“I will come to you.”",
+          "highlight": []
+        },
+        {
+          "ref": "2Cor.3.17",
+          "note": "The Lord is the Spirit.",
+          "highlight": []
+        }
+      ],
+      "questions": [
+        "Why does this study stress that Matthew 28:19 says “name,” not “names”?",
+        "How does Acts 2:38 relate to Matthew 28:19 in Oneness baptismal practice?",
+        "What does it mean, on this view, that the Father is the Holy Spirit?",
+        "Is God limited to three manifestations, or are these the primary ways Scripture speaks?"
+      ],
+      "furtherReading": "Bernard, The Oneness of God, ch. 6"
+    },
+    {
+      "id": "7",
+      "chapter": 7,
+      "title": "Old Testament Explanations",
+      "summary": "Bernard addresses Old Testament passages often used to argue for a plurality of persons: the plural form Elohim, “Let us make” in Genesis 1:26, and the Hebrew word echad (“one”). In this view, plural forms can express majesty or fullness, and echad can mean a simple, undivided one. Theophanies, the angel of the Lord, and phrases such as “holy, holy, holy” are read as the one God revealing himself, not as a conversation among persons.",
+      "verses": [
+        {
+          "ref": "Gen.1.26",
+          "note": "“Let us make humankind.”",
+          "highlight": [
+            {
+              "wit": "heb",
+              "strong": "H430",
+              "label": "Elohim"
+            }
+          ]
+        },
+        {
+          "ref": "Deut.6.4",
+          "note": "Echad: the Lord is one.",
+          "highlight": [
+            {
+              "wit": "heb",
+              "strong": "H259",
+              "label": "echad"
+            }
+          ]
+        },
+        {
+          "ref": "Isa.6.3",
+          "note": "“Holy, holy, holy.”",
+          "highlight": []
+        },
+        {
+          "ref": "Gen.18.1",
+          "note": "The Lord appears to Abraham.",
+          "highlight": []
+        },
+        {
+          "ref": "Isa.48.16",
+          "note": "The Lord God and his Spirit—a passage often raised in this debate.",
+          "highlight": []
+        }
+      ],
+      "questions": [
+        "How does this chapter explain Elohim and “let us make” without multiple persons?",
+        "What is at issue in the meaning of echad?",
+        "Which Old Testament appearance of God do you find hardest, or most helpful, on this reading?"
+      ],
+      "furtherReading": "Bernard, The Oneness of God, ch. 7"
+    },
+    {
+      "id": "8",
+      "chapter": 8,
+      "title": "New Testament Explanations: The Gospels",
+      "summary": "Here Bernard takes up Gospel passages that sound like a conversation between persons: Jesus’ baptism, the voice from heaven, his prayers, the cry from the cross, and the promise of another Comforter. The Oneness explanation is the dual nature of Christ: the man Jesus prays to the Father (the deity), while that same deity is present in Jesus. The Gospels’ “with” and “sent” language is read in that light, not as proof of two divine persons.",
+      "verses": [
+        {
+          "ref": "Matt.3.16",
+          "note": "The baptism of Jesus.",
+          "highlight": []
+        },
+        {
+          "ref": "Matt.3.17",
+          "note": "The voice from heaven.",
+          "highlight": []
+        },
+        {
+          "ref": "John.17.1",
+          "note": "Jesus prays to the Father.",
+          "highlight": []
+        },
+        {
+          "ref": "Matt.27.46",
+          "note": "“My God, my God, why have you forsaken me?”",
+          "highlight": []
+        },
+        {
+          "ref": "John.14.26",
+          "note": "The Comforter, the Holy Spirit.",
+          "highlight": []
+        },
+        {
+          "ref": "John.10.30",
+          "note": "“I and the Father are one.”",
+          "highlight": [
+            {
+              "wit": "grk",
+              "strong": "G1520",
+              "label": "heis"
+            }
+          ]
+        }
+      ],
+      "questions": [
+        "How does the dual-nature explanation handle the prayers of Jesus?",
+        "What is the Oneness reading of the baptismal scene (voice, dove, and Son)?",
+        "Does “I and the Father are one” mean one in purpose only, or one in identity, in this view?",
+        "Which Gospel passage still feels most difficult, and why?"
+      ],
+      "furtherReading": "Bernard, The Oneness of God, ch. 8"
+    },
+    {
+      "id": "9",
+      "chapter": 9,
+      "title": "New Testament Explanations: Acts to Revelation",
+      "summary": "This lesson presents Bernard's treatment of apostolic greetings, the benediction in 2 Corinthians 13:14, the right hand of God, the “fullness” texts, Philippians 2, and the Lamb in Revelation. Threefold phrases are taken as aspects of the one God’s work, not a roll call of three persons. The Lamb who is worshiped is the same God who sits on the throne, now revealed in the crucified and risen Jesus.",
+      "verses": [
+        {
+          "ref": "2Cor.13.14",
+          "note": "The apostolic benediction.",
+          "highlight": []
+        },
+        {
+          "ref": "Phil.2.6",
+          "note": "Though in the form of God, he emptied himself.",
+          "highlight": []
+        },
+        {
+          "ref": "Phil.2.7",
+          "note": "Taking the form of a servant.",
+          "highlight": []
+        },
+        {
+          "ref": "Col.1.19",
+          "note": "All the fullness was pleased to dwell in him.",
+          "highlight": []
+        },
+        {
+          "ref": "Rev.5.6",
+          "note": "The Lamb in the midst of the throne.",
+          "highlight": []
+        },
+        {
+          "ref": "Acts.7.55",
+          "note": "Jesus at the right hand of God—a phrase this chapter discusses.",
+          "highlight": []
+        }
+      ],
+      "questions": [
+        "How can a threefold greeting or blessing be read without three persons?",
+        "What does Philippians 2:6–8 mean if the one who empties himself is the one God?",
+        "How does the worship of the Lamb in Revelation fit Oneness monotheism?"
+      ],
+      "furtherReading": "Bernard, The Oneness of God, ch. 9"
+    },
+    {
+      "id": "10",
+      "chapter": 10,
+      "title": "Oneness Believers in Church History",
+      "summary": "Bernard argues that the earliest post-apostolic faith was effectively Oneness, and that later “modalistic monarchian” teachers preserved the confession that Father, Son, and Spirit are the one God revealed in different ways. The lesson is historical rather than a string of proof texts: it asks how the church spoke of God before later trinitarian creeds became standard, and it traces a line of similar confessors from late antiquity to modern Apostolic Pentecostalism. (This is the book’s historical claim; historians of doctrine debate the details.)",
+      "verses": [
+        {
+          "ref": "Jude.1.3",
+          "note": "Contend for the faith once delivered.",
+          "highlight": []
+        },
+        {
+          "ref": "Acts.2.42",
+          "note": "The apostles’ teaching as a starting point for later history.",
+          "highlight": []
+        }
+      ],
+      "questions": [
+        "Why does this study care about second- and third-century teachers?",
+        "What is “modalistic monarchianism,” in the book’s terms, and how is it related to Oneness today?",
+        "How should a historical claim like this be weighed alongside the biblical texts you have already read?"
+      ],
+      "furtherReading": "Bernard, The Oneness of God, ch. 10"
+    },
+    {
+      "id": "11",
+      "chapter": 11,
+      "title": "Trinitarianism: Definition and Historical Development",
+      "summary": "This lesson presents Bernard's account of how trinitarian doctrine is defined and how it developed: the move toward three co-equal, co-eternal persons, the risk of tritheism or of making the Son less than the Father, and the use of terms not found in Scripture. He also sketches later creed-making and alleged non-biblical influences. The aim, in the book, is to show that the received trinitarian language is a later development rather than the first apostolic confession.",
+      "verses": [
+        {
+          "ref": "Deut.6.4",
+          "note": "The standard of monotheism against which later terms are measured.",
+          "highlight": [
+            {
+              "wit": "heb",
+              "strong": "H259",
+              "label": "echad"
+            }
+          ]
+        },
+        {
+          "ref": "Col.2.8",
+          "note": "A warning about philosophy and human tradition, often cited in this debate.",
+          "highlight": []
+        },
+        {
+          "ref": "1Tim.3.16",
+          "note": "The “mystery of godliness” as a biblical way of speaking.",
+          "highlight": []
+        }
+      ],
+      "questions": [
+        "What problems does this chapter see in tritheism and in subordinationism?",
+        "Why does non-biblical terminology matter to Bernard’s argument?",
+        "How would you state the difference between “later development” and “untrue”?"
+      ],
+      "furtherReading": "Bernard, The Oneness of God, ch. 11"
+    },
+    {
+      "id": "12",
+      "chapter": 12,
+      "title": "Trinitarianism: An Evaluation",
+      "summary": "Bernard evaluates trinitarian explanations of the difficult passages and finds them, from the Oneness viewpoint, less consistent with biblical monotheism and with the full deity of Jesus. The lesson invites you to test both readings against the same verses: is Jesus the one God manifested in flesh, or one person of a tri-personal God? The book’s answer is the former.",
+      "verses": [
+        {
+          "ref": "Col.2.9",
+          "note": "The fullness of deity in Christ, used as a test of any Godhead doctrine.",
+          "highlight": [
+            {
+              "wit": "grk",
+              "strong": "G2320",
+              "label": "theotēs"
+            }
+          ]
+        },
+        {
+          "ref": "John.14.9",
+          "note": "To see Jesus is to see the Father.",
+          "highlight": []
+        },
+        {
+          "ref": "Deut.6.4",
+          "note": "The monotheistic measure.",
+          "highlight": [
+            {
+              "wit": "heb",
+              "strong": "H259",
+              "label": "echad"
+            }
+          ]
+        },
+        {
+          "ref": "John.1.14",
+          "note": "The Word became flesh.",
+          "highlight": []
+        }
+      ],
+      "questions": [
+        "Which trinitarian explanation do you now want to re-read beside a Oneness one?",
+        "Does Colossians 2:9, in your judgment, fit better with manifestation or with distinct persons? Why?",
+        "What would change in worship if you took Bernard’s evaluation as true?"
+      ],
+      "furtherReading": "Bernard, The Oneness of God, ch. 12"
+    },
+    {
+      "id": "13",
+      "chapter": 13,
+      "title": "Conclusion",
+      "summary": "The closing lesson gathers Bernard's position: there is one God; Jesus is that God manifested in flesh; Father, Son, and Spirit are the one God’s ways of being with us; and the saving name is Jesus, as the apostles preached and baptized. Readers are invited to return to Scripture—especially the Shema, the Gospel of John, Colossians, and Acts—and to answer for themselves whether this reading holds.",
+      "verses": [
+        {
+          "ref": "Deut.6.4",
+          "note": "The Lord is one.",
+          "highlight": [
+            {
+              "wit": "heb",
+              "strong": "H259",
+              "label": "echad"
+            }
+          ]
+        },
+        {
+          "ref": "Col.2.9",
+          "note": "The fullness of deity in Jesus.",
+          "highlight": [
+            {
+              "wit": "grk",
+              "strong": "G2320",
+              "label": "theotēs"
+            }
+          ]
+        },
+        {
+          "ref": "Acts.2.38",
+          "note": "Repentance, baptism in Jesus’ name, and the Spirit.",
+          "highlight": [
+            {
+              "wit": "grk",
+              "strong": "G3686",
+              "label": "onoma"
+            }
+          ]
+        },
+        {
+          "ref": "John.1.14",
+          "note": "The Word became flesh.",
+          "highlight": []
+        }
+      ],
+      "questions": [
+        "In one or two sentences, how would you now state the Oneness of God in your own words?",
+        "Which lesson most changed, or most challenged, the way you read a familiar verse?",
+        "What further reading or conversation do you want to pursue after this study?"
+      ],
+      "furtherReading": "Bernard, The Oneness of God, ch. 13"
+    }
+  ]
+}

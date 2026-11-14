@@ -248,6 +248,112 @@ select.sel{min-height:44px;border:1px solid var(--line);border-radius:12px;backg
 .occlist{margin-top:6px}
 .more{margin-top:6px}
 .vtitle{font:600 11px var(--ui);color:var(--ink3)}
+
+/* ===== v6: free-flowing Read + edge-to-edge Chords ===== */
+body[data-tab=read] main, body[data-tab=conn] main{max-width:none}
+body[data-tab=conn] main{padding-left:0;padding-right:0}
+body[data-tab=read] main{padding-left:12px;padding-right:12px}
+
+/* Read column */
+#view-read .read-col{max-width:70ch;margin:0 auto;position:relative}
+@media (min-width:900px){
+  body[data-tab=read] #view-read{position:relative}
+  body[data-tab=read] main{
+    mask-image:linear-gradient(90deg,transparent 0, #000 28px, #000 calc(100% - 28px), transparent);
+    -webkit-mask-image:linear-gradient(90deg,transparent 0, #000 28px, #000 calc(100% - 28px), transparent);
+  }
+}
+.chapterhead{display:flex;align-items:flex-start;gap:4px;margin:8px 0 10px}
+.chapterhead-main{flex:1;min-width:0;text-align:center}
+.chaptertitle{border:0;background:none;color:var(--ink);font:600 clamp(26px,6.4vw,42px)/1.15 'Noto Serif',Georgia,serif;padding:2px 6px;min-height:0;letter-spacing:-.02em;cursor:pointer;width:100%}
+.chaptertitle:hover{color:var(--gold)}
+.chaptertitle:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:8px}
+.charr{border:0;background:none;color:var(--ink3);font:300 36px/1 Georgia,serif;min-width:44px;min-height:44px;padding:0 2px;cursor:pointer}
+.charr:hover,.charr:focus-visible{color:var(--gold)}
+#view-read .cov{margin:2px 0 0;font-size:11px;color:var(--ink3)}
+.readbar{position:sticky;top:0;z-index:15;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:7px 10px;margin:0 0 14px;background:color-mix(in srgb,var(--paper) 82%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:999px;box-shadow:0 6px 24px color-mix(in srgb,var(--ink) 8%,transparent)}
+.readbar #witnessWrap{display:contents}
+.readbar .label{display:none}
+.readbar .seg{margin:0;gap:4px}
+.readbar .seg button,.readbar .barbtn{min-height:40px;padding:5px 11px;font-size:12px;border-radius:999px;border:0;background:transparent;color:var(--ink2)}
+.readbar .seg button[aria-pressed=true],.readbar .barbtn:active{background:var(--accent);color:var(--paper)}
+.readbar .barbtn{cursor:pointer;font:600 12px var(--ui)}
+.readbar .sel{min-height:40px;border:0;background:transparent;font-size:12px;padding:4px 6px;max-width:42vw}
+.readbar .hint{flex:1 1 100%;margin:0;padding:4px 6px 2px;background:none;border-radius:0;font-size:12px;color:var(--ink2)}
+.readbar .hintx{border:0;background:none;color:var(--ink3);min-width:32px;min-height:32px;font-size:14px;cursor:pointer;float:right}
+body.hidereadhint #hint{display:none}
+#verses{font-family:'Noto Serif',Georgia,serif;font-size:calc(19px*var(--fs));line-height:1.8}
+#view-read #verses .verse{background:none;border:0;border-radius:8px;padding:0 .12em;margin:0;cursor:pointer;display:inline;box-shadow:none;transition:background .15s}
+#view-read #verses .verse .eng{font-family:inherit;font-size:inherit;line-height:inherit;display:inline}
+#view-read #verses .verse .vhead,#view-read #verses .verse .vref{display:inline;font:700 calc(11px*var(--fs))/1 var(--ui);color:var(--gold);vertical-align:super;margin:0 .28em 0 .02em;letter-spacing:0;position:static}
+#view-read #verses .verse .vmode{display:none}
+#view-read #verses .verse .vnote{position:relative;display:inline;border:0;background:none;color:var(--gold);opacity:0;min-width:32px;min-height:32px;padding:0 4px;margin:0 2px;font-size:13px;vertical-align:middle;transition:opacity .15s;cursor:pointer}
+#view-read #verses .verse:hover .vnote,#view-read #verses .verse:focus-within .vnote,#view-read #verses .verse .vnote.has,#view-read #verses .verse:active .vnote{opacity:1}
+@media (hover:none){#view-read #verses .verse .vnote{opacity:.4} #view-read #verses .verse .vnote.has{opacity:1}}
+@media (hover:hover){#view-read #verses .verse:hover{background:color-mix(in srgb,var(--gold) 12%,transparent)}}
+#view-read #verses .verse:active{background:color-mix(in srgb,var(--gold) 18%,transparent)}
+#view-read #verses .verse.open{display:block;margin:.55em -6px;padding:8px 8px 10px;background:color-mix(in srgb,var(--accent) 7%,transparent);border-radius:14px}
+#view-read #verses .verse.open .eng{display:none}
+.interwrap{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .28s ease,opacity .28s ease}
+.interwrap.open{grid-template-rows:1fr;opacity:1}
+.interwrap .inter-inner{overflow:hidden}
+.chapterfoot{display:flex;justify-content:space-between;gap:12px;margin:28px 2px 8px}
+.textnav{border:0;background:none;color:var(--ink3);font:500 13px var(--ui);min-height:44px;padding:0;cursor:pointer}
+.textnav:hover{color:var(--gold)}
+:root[data-dys] #verses{font-family:var(--ui);letter-spacing:.05em;word-spacing:.18em;line-height:1.9;text-align:left}
+
+/* Chords: edge-to-edge stage, no card */
+#view-conn{display:flex;flex-direction:column;min-height:calc(100dvh - 132px)}
+@media (min-width:760px){#view-conn{min-height:calc(100dvh - 128px)}}
+#chordStage{position:relative;flex:1 1 auto;width:100%;min-height:min(100vw, calc(100dvh - 200px));height:calc(100dvh - 200px);overflow:hidden;touch-action:none;
+  background:
+    radial-gradient(ellipse 68% 58% at 50% 48%, color-mix(in srgb, var(--gold) 18%, transparent), transparent 68%),
+    radial-gradient(ellipse 90% 80% at 50% 100%, color-mix(in srgb, var(--accent) 11%, transparent), transparent 70%),
+    var(--bg)}
+#chordGl,#chord{position:absolute;inset:0;width:100%;height:100%;display:block;background:transparent;border:0;border-radius:0}
+#view-conn.gl-on #chord{opacity:0;pointer-events:none}
+#view-conn:not(.gl-on) #chordGl,#view-conn:not(.gl-on) #chordLabels{display:none}
+#chordLabels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+#chordLabels span{position:absolute;transform:translate(-50%,-50%);font:600 calc(10.5px*var(--fs)) var(--ui);color:var(--ink2);white-space:nowrap;text-shadow:0 0 10px var(--bg),0 0 4px var(--bg);pointer-events:auto;cursor:pointer;padding:6px 4px}
+#chordLabels span.cur{color:var(--gold);font-weight:700}
+#chordLabels span.is-hidden{opacity:0;pointer-events:none}
+#chordBar{position:absolute;top:10px;left:50%;transform:translateX(-50%);z-index:5;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px 6px;max-width:calc(100% - 16px);padding:6px 8px;background:color-mix(in srgb,var(--paper) 80%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:999px;box-shadow:0 6px 24px color-mix(in srgb,var(--ink) 10%,transparent)}
+#chordBar .seg{margin:0;gap:3px}
+#chordBar .seg button{min-height:36px;padding:4px 10px;font-size:12px;border:0;background:transparent;color:var(--ink2)}
+#chordBar .seg button[aria-pressed=true]{background:var(--accent);color:var(--paper);border-color:transparent}
+#chordBar .sel{min-height:36px;border:0;background:transparent;font-size:12px;max-width:42vw;padding:2px 4px}
+#xCount{position:absolute;top:58px;left:0;right:0;text-align:center;font-size:11px;color:var(--ink3);margin:0;pointer-events:none;text-shadow:0 0 8px var(--bg)}
+#view-conn .panel{position:absolute;left:12px;right:12px;bottom:10px;z-index:5;max-height:30vh;overflow:auto;margin:0;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:0;border-radius:16px;box-shadow:0 8px 28px color-mix(in srgb,var(--ink) 10%,transparent)}
+@media (min-width:760px){#view-conn .panel{left:auto;right:16px;width:min(360px,36vw);max-height:42vh;bottom:16px}}
+:root[data-dys] #chordLabels span,:root[data-dys] #chordBar,:root[data-dys] #xCount{letter-spacing:.04em;font-family:var(--ui)}
+
+/* Latin witness + study highlights */
+.lat .o, .polytext.lat{font-family:'Noto Serif',Georgia,serif;font-size:calc(18px*var(--fs));direction:ltr}
+#view-read #verses .verse .word.hl, .word.hl{background:var(--hl);box-shadow:0 0 0 3px var(--hl)}
+.study-teaser{background:color-mix(in srgb,var(--accent) 8%,transparent);border-radius:16px;padding:12px 14px;margin:0 0 16px}
+.study-wrap{max-width:70ch;margin:0 auto}
+.study-wrap h2{font:600 clamp(22px,5vw,32px)/1.2 'Noto Serif',Georgia,serif;margin:8px 0 4px}
+.study-meta,.study-disc{font-size:13px;color:var(--ink2);line-height:1.5}
+.study-disc{background:color-mix(in srgb,var(--warn) 10%,transparent);border-radius:12px;padding:8px 10px;margin:10px 0}
+.lesson{padding:10px 0;border-top:1px solid color-mix(in srgb,var(--line) 80%,transparent)}
+.lesson h3{margin:0 0 6px;font-size:16px}
+.lesson .chlab{font-size:11px;color:var(--gold);letter-spacing:.06em;text-transform:uppercase}
+.lesson .done{color:var(--ok);font-size:12px;margin-left:6px}
+.vlink{display:block;width:100%;text-align:left;border:0;background:transparent;color:inherit;padding:8px 2px;min-height:44px;cursor:pointer;border-radius:8px}
+.vlink:hover{background:color-mix(in srgb,var(--gold) 10%,transparent)}
+.vlink .r{font:700 12px var(--ui);color:var(--accent)}
+.vlink .n{font-size:13px;color:var(--ink2)}
+.qlist{margin:8px 0 0;padding:0 0 0 1.2em}
+.qlist li{margin:6px 0;line-height:1.45}
+.study-prog{font-size:12px;color:var(--ink3);margin:4px 0 10px}
+.lesson-notes{margin-top:8px}
+
+@media print{
+  header, nav.tabs, #arm, #callout, #dim, .sheet, #readBar, #chordBar, #chordStage, #hint, .charr, .study-teaser .btn, .btnrow .btn{ display:none !important; }
+  #printPage, #printPage *{ visibility:visible; }
+  body{ background:#fff; color:#111; }
+}
+#importSheet .pn{ max-height:80vh; overflow:auto; }
 </style>
 
 </head>
@@ -263,6 +369,7 @@ select.sel{min-height:44px;border:1px solid var(--line);border-radius:12px;backg
     <div class="hbtns">
       <button class="iconbtn" id="settingsBtn" aria-label="Reading settings"><b style="font-size:15px">Aa</b></button>
       <button class="iconbtn" id="themeBtn" aria-label="Toggle light/dark">◐</button>
+      <button class="iconbtn" id="tab-study" aria-label="Studies"><svg viewBox="0 0 24 24"><path d="M4 5h10a3 3 0 0 1 2 1v13H6a2 2 0 0 0-2 2z"/><path d="M16 6h4v15h-4"/></svg></button>
       <button class="iconbtn" id="tab-about" aria-label="About and sources"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg></button>
     </div>
   </div>
@@ -276,20 +383,26 @@ select.sel{min-height:44px;border:1px solid var(--line);border-radius:12px;backg
 </header>
 <main>
 <section id="view-read">
-  <div class="navrow">
-    <button class="btn chnav" id="prevCh" aria-label="Previous chapter">‹</button>
-    <button class="btn pickbtn" id="pickBtn" aria-haspopup="dialog"><span id="pickLabel">Genesis 1</span> ▾</button>
-    <button class="btn chnav" id="nextCh" aria-label="Next chapter">›</button>
+  <div class="read-col">
+  <nav class="chapterhead">
+    <button type="button" class="charr" id="prevCh" aria-label="Previous chapter">‹</button>
+    <div class="chapterhead-main">
+      <button type="button" class="chaptertitle" id="pickBtn" aria-haspopup="dialog"><span id="pickLabel">Genesis 1</span></button>
+      <div class="cov" id="covLine"></div>
+    </div>
+    <button type="button" class="charr" id="nextCh" aria-label="Next chapter">›</button>
+  </nav>
+  <div id="readBar" class="readbar">
+    <div id="witnessWrap">
+      <div class="seg" id="witSeg"></div>
+    </div>
+    <select class="sel" id="vfSel" aria-label="Show verses"></select>
+    <button type="button" class="barbtn" id="flipAll">Flip All</button>
+    <p class="hint" id="hint">Tap a verse to flip it to the original language. Then <b>press and hold</b> any word for its details. Tap the dimmed area to close. <button type="button" class="hintx" id="hintDismiss" aria-label="Dismiss hint">✕</button></p>
   </div>
-  <div class="cov" id="covLine"></div>
-  <div id="witnessWrap">
-    <div class="label">Original-language witness</div>
-    <div class="seg" id="witSeg"></div>
-  </div>
-  <div class="hint" id="hint">Tap a verse to flip it to the original language. Then <b>press and hold</b> any word for its details. Tap the dimmed area to close.</div>
-  <div class="vfrow"><label class="label" for="vfSel" style="margin:0">Show</label><select class="sel" id="vfSel" aria-label="Show verses"></select><button class="btn" id="flipAll">Flip All Cards</button></div>
   <div id="verses"><div class="loading">Loading…</div></div>
-  <div class="navrow" style="margin-top:14px"><button class="btn" id="prevCh2" style="flex:1">‹ Previous chapter</button><button class="btn" id="nextCh2" style="flex:1">Next chapter ›</button></div>
+  <div class="chapterfoot"><button type="button" class="textnav" id="prevCh2">‹ Previous chapter</button><button type="button" class="textnav" id="nextCh2">Next chapter ›</button></div>
+  </div>
 </section>
 
 <section id="view-poly" hidden>
@@ -297,26 +410,43 @@ select.sel{min-height:44px;border:1px solid var(--line);border-radius:12px;backg
   <div id="polyBody"></div>
 </section>
 
+<section id="view-study" hidden>
+  <div id="studyBody"><div class="loading">Loading studies…</div></div>
+</section>
+
 <section id="view-lex" hidden>
+  <div class="study-teaser" id="studyTeaser">
+    <h2 class="sec" style="margin-top:0">Studies</h2>
+    <p class="note" style="margin-top:0">Guided topical studies that open verses here in Read, with original-language highlights. Progress is saved only on this device.</p>
+    <button type="button" class="btn" id="openStudies">Open Studies</button>
+  </div>
   <h2 class="sec">Lexicon &amp; concordance</h2>
   <div class="seg" id="lexSeg"></div>
   <input class="search" id="lexQ" type="search" placeholder="Search the whole Bible: lemma, gloss, Strong's…" aria-label="Search the lexicon">
   <div id="lexCount" class="note" style="margin:0 2px 4px"></div>
   <div id="lexList"></div>
   <h2 class="sec">Scribe Notebook</h2>
-  <div class="note" style="margin-top:0">Your personal notes on words and verses. Saved on this device only (never uploaded). Add notes from a word's popup or the ✎ button on a verse.</div>
-  <div class="btnrow"><button class="btn" id="expMd">Export Markdown</button><button class="btn" id="expJson">Export JSON</button><button class="btn" id="copyMd">Copy Markdown</button></div>
+  <div class="note" style="margin-top:0">Your personal notes on words, verses and studies. Saved on this device only (never uploaded). Add notes from a word’s popup, the ✎ button on a verse, or a study lesson. Export and import let you move them to another device.</div>
+  <div class="btnrow"><button class="btn" id="expMd">Export notes (Markdown)</button><button class="btn" id="expJson">Export notes (JSON)</button><button class="btn" id="expNotesPrint">Print notes / save PDF</button><button class="btn" id="copyMd">Copy Markdown</button></div>
+  <div class="btnrow"><button class="btn" id="expAllMd">Export everything (Markdown)</button><button class="btn" id="expAllJson">Export everything (JSON)</button><button class="btn" id="expAllPrint">Print everything / save PDF</button><button class="btn primary" id="impBtn">Import JSON</button><input type="file" id="impFile" accept="application/json,.json" hidden></div>
+  <div class="note">“Export everything” includes the Scribe Notebook plus Studies progress and answers. On a phone, export may open the share sheet when the browser allows it; otherwise a file downloads. Import merges; if an item already exists with different text, you will be asked before anything is overwritten.</div>
   <div id="nbList"></div>
 </section>
 
 <section id="view-conn" hidden>
-  <div class="hint" id="connHint">Cross-references from OpenBible.info for the chapter you are reading, ranked by reader votes. Pick a verse or how many to show, then tap a line, dot or book.</div>
-  <div class="seg" id="xTestSeg"></div>
-  <div class="vfrow"><select class="sel" id="xVerseSel" aria-label="Verse"></select></div>
-  <div class="seg" id="xTopSeg"></div>
-  <div id="xCount"></div>
-  <svg id="chord" viewBox="0 0 360 360" role="img" aria-label="Circular cross-reference diagram"></svg>
-  <div class="panel" id="connPanel"></div>
+  <div id="chordStage">
+    <canvas id="chordGl" aria-label="Cross-reference visualization"></canvas>
+    <svg id="chord" viewBox="0 0 360 360" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Circular cross-reference diagram"></svg>
+    <div id="chordLabels" aria-hidden="true"></div>
+    <div id="chordBar">
+      <div class="seg" id="xTestSeg"></div>
+      <select class="sel" id="xVerseSel" aria-label="Verse"></select>
+      <div class="seg" id="xTopSeg"></div>
+      <div class="seg" id="xShapeSeg"></div>
+    </div>
+    <div id="xCount"></div>
+    <div class="panel" id="connPanel"></div>
+  </div>
 </section>
 
 <section id="view-about" class="credits" hidden>
@@ -332,18 +462,21 @@ select.sel{min-height:44px;border:1px solid var(--line);border-radius:12px;backg
     <li><b>Hebrew and Aramaic OT (39 books):</b> STEPBible TAHOT (Translators Amalgamated Hebrew OT), © Tyndale House Cambridge / STEPBible.org, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, from <a href="https://github.com/STEPBible/STEPBible-Data">STEPBible.github.io/STEPBible-Data</a>. Its Hebrew is the Westminster Leningrad Codex (WLC 4.20, public domain) via OpenScriptures, with Tyndale corrections toward the Leningrad Codex. Morphology is ETCBC parsing written in the OpenScriptures (OSHB) code format; lemmas are extended Strong's numbers; the small English under each word, the transliteration and the Qere/Ketiv marks are TAHOT's. Psalm titles (Hebrew verse 1, or 1–2) are shown with English verse 1, as the WEB prints them. Changes: words regrouped by WEB verse; slash separators removed for display.</li>
     <li><b>Greek NT (27 books):</b> SBL Greek New Testament text, © 2010 Society of Biblical Literature and Logos Bible Software, used under the <a href="https://sblgnt.com/license/">SBLGNT license</a>; morphology and lemmas from <a href="https://github.com/morphgnt/sblgnt">MorphGNT</a>, CC BY-SA 3.0. English word glosses, transliteration and Strong's numbers from STEPBible TAGNT (CC BY 4.0, Tyndale House / STEPBible.org), matched word by word to the SBLGNT text (words TAGNT lists for the SBL edition only). The WEB follows the Majority Text, so a few WEB verses (e.g. John 7:53–8:11, Acts 8:37) have no SBLGNT text.</li>
     <li><b>Septuagint Greek (OT and deuterocanonical books):</b> Greek text of Brenton's Septuagint with Apocrypha (eBible.org “grcbrent”), public domain. No openly licensed, morphologically tagged LXX was found: the tagged Rahlfs texts (CCAT-based, e.g. eliranwong/LXX-Rahlfs-1935) are CC BY-NC-SA or carry the CCAT user agreement, so they are not used. The LXX therefore has no word glosses, lemmas or parsing here. Because the Septuagint numbers and orders many chapters differently, each LXX verse was placed next to the WEB verse automatically by comparing the WEB with Brenton's public-domain English translation of the same Greek; the LXX reference is always shown. Placement is least reliable in Jeremiah, 1 Kings (3 Kingdoms), Nehemiah, Proverbs 24–31, Exodus 35–40 and Sirach 30–36; about 2% of OT verses have no LXX match.</li>
+    <li><b>Latin Vulgate (all 73 books, where a match was found):</b> Clementine Vulgate Latin text, public domain, from Michael Tweedale’s transcription (vulsearch), via the <a href="https://github.com/seven1m/open-bibles">Open Bibles</a> collection (<code>lat-clementine.usfx.xml</code>). Users are requested to acknowledge that source and to make any modifications clear: the wording of the Latin is unaltered; verses were grouped to the WEB by automatic alignment with the public-domain Douay-Rheims (same collection, <code>eng-dra.usfx.xml</code>). The Vulgate chapter and verse reference is always shown when it differs (for example in the Psalms). Text only: no glosses or parsing.</li>
     <li><b>Targum:</b> Targum Onkelos on the Torah (Sefaria “Onkelos Genesis…Deuteronomy”, source toratemetfreeware.com, public domain) and Targum Jonathan on the Prophets, Joshua–Kings and Isaiah–Malachi (Sefaria “Mikraot Gedolot”, public domain), from the <a href="https://www.sefaria.org">Sefaria</a> API. Hebrew verse numbers were converted to English ones with TAHOT's verse map. No Targum is included for the Writings (Ruth, Chronicles, Ezra–Nehemiah, Esther, Job, Psalms, Proverbs, Ecclesiastes, Song, Lamentations, Daniel): Sefaria's versions there are not clearly openly licensed or were not checked. Targum text only: no glosses or parsing.</li>
     <li><b>Lexicon:</b> STEPBible TBESH (Hebrew/Aramaic) and TBESG (Greek) brief lexicons, CC BY 4.0. Definitions are shortened to about 300 characters. Occurrence counts are computed from the Hebrew and Greek NT texts above (not the LXX or Targum, which are not lemmatized here).</li>
     <li><b>Cross-references:</b> <a href="https://www.openbible.info/labs/cross-references/">OpenBible.info</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> (data file dated 2026-11-09). Top 10 per verse by votes, zero and negative votes dropped. OpenBible.info has no data for the deuterocanonical books.</li>
     <li><b>Gematria / isopsephy:</b> computed in the app with the standard letter values (Hebrew: final letters same as regular; Greek: accents, breathings and iota subscript ignored after Unicode decomposition).</li>
     <li><b>Logos Bridge</b> notes are hand-written study notes, not sourced data.</li>
     <li>Fonts: Noto Serif and Noto Serif Hebrew (© The Noto Project Authors, SIL Open Font License 1.1), bundled so the app works offline.</li>
+    <li><b>Hebrew and Aramaic fragments not included:</b> this app does not invent text for sources it does not carry. Sirach (Ecclesiasticus) is known in Hebrew for about two-thirds of the book (Cairo Geniza, Masada, and related finds), but no openly packaged, clearly licensed Hebrew Sirach was included here, so Sirach is Greek (LXX) and Latin only. Tobit is attested in Aramaic and Hebrew fragments from Qumran; those fragments are not in this app. A Greek fragment of the Letter of Jeremiah (Baruch 6) is known as 7Q2; the text here is the Brenton Septuagint (and the Vulgate where aligned), not a transcription of 7Q2. These are notes about what exists, not additional readings.</li>
   </ul>
   <h3>Known limits</h3>
   <ul>
     <li>The full Bible needs the app served over http(s) (it loads chapters on demand). The single-file version contains Genesis 1 and John 1 only.</li>
     <li>Your view and notes are saved on this device when the browser allows it.</li>
     <li>Dyslexia reading mode uses wider spacing, a sans-serif face and higher contrast (OpenDyslexic is not bundled).</li>
+    <li>Guided Studies present a named author’s position in original lesson notes; they do not reproduce copyrighted book text. See each study’s source note.</li>
   </ul>
 </section>
 </main>
@@ -354,6 +487,16 @@ select.sel{min-height:44px;border:1px solid var(--line);border-radius:12px;backg
   <div class="srow"><label class="toggle"><input type="checkbox" id="dysChk"> Dyslexia reading mode</label><div class="desc">Sans-serif, extra letter and word spacing, higher contrast, no italics.</div></div>
   <div class="srow"><div class="lbl">Hebrew &amp; Aramaic vowels</div><div class="seg" id="vowSeg"><button data-vow="full">Full points</button><button data-vow="cons">Consonants only</button></div>
     <label class="toggle"><input type="checkbox" id="cantChk"> Show cantillation marks (te'amim)</label><div class="desc">Cantillation marks come with the Westminster Leningrad Codex Hebrew; the Targum texts have vowels but no cantillation. Consonants only also hides the vowels.</div></div>
+  <div class="srow"><div class="lbl">Canon</div>
+    <label class="toggle"><input type="checkbox" id="dcChk" checked> Show deuterocanonical books</label>
+    <div class="desc">When this is on (the default), the app uses the 73-book Catholic canon. When it is off, you get a 66-book Protestant view: Tobit, Judith, Wisdom, Sirach, Baruch, 1–2 Maccabees, and the Greek additions to Esther and Daniel are hidden from the picker, chapter nav, lexicon hits and cross-references.</div></div>
+  <div class="srow"><div class="lbl">Original-language witnesses</div>
+    <label class="toggle"><input type="checkbox" id="witHeb" checked> Hebrew (WLC)</label>
+    <label class="toggle"><input type="checkbox" id="witGrk" checked> Greek NT (SBLGNT)</label>
+    <label class="toggle"><input type="checkbox" id="witLxx" checked> Septuagint (LXX, Brenton)</label>
+    <label class="toggle"><input type="checkbox" id="witTg" checked> Targum</label>
+    <label class="toggle"><input type="checkbox" id="witVul" checked> Latin Vulgate (Clementine)</label>
+    <div class="desc">Turn a witness off to hide it from the chapter chips and the Polyglot matrix. English (WEB) is always shown.</div></div>
   <div class="srow"><div class="lbl">Offline</div>
     <div class="desc" id="dlInfo">Chapters you open are kept for offline use.</div>
     <div class="progress" id="dlBar" hidden><div></div></div><div class="dlstat" id="dlStat"></div>
@@ -369,6 +512,19 @@ select.sel{min-height:44px;border:1px solid var(--line);border-radius:12px;backg
   <h2><span id="noteTitle">Note</span> <button class="iconbtn x" data-close aria-label="Close">✕</button></h2>
   <textarea class="notebox" id="noteText" placeholder="Your note…"></textarea>
   <div class="btnrow"><button class="btn primary" id="noteSave">Save note</button><button class="btn" id="noteDel">Delete</button><span class="saved" id="noteSaved"></span></div>
+</div></div>
+
+<div class="sheet" id="importSheet" role="dialog" aria-modal="true" aria-label="Import conflicts"><div class="bd"></div><div class="pn">
+  <h2>Import conflicts <button class="iconbtn x" data-close aria-label="Close">✕</button></h2>
+  <p class="note" id="impCount">Some items already exist with different text.</p>
+  <p class="note">New items with no match are always added. Choose what to do with the conflicts. Nothing is overwritten until you pick.</p>
+  <div id="impConflicts"></div>
+  <div class="btnrow">
+    <button class="btn" id="impKeep">Keep mine (skip conflicts)</button>
+    <button class="btn primary" id="impUse">Use imported on conflicts</button>
+    <button class="btn" data-close>Cancel</button>
+    <span class="saved" id="impMsg"></span>
+  </div>
 </div></div>
 <div id="dim" aria-hidden="true"></div>
 <div id="lift" aria-hidden="true"><span class="o"></span><span class="g"></span></div>
@@ -494,6 +650,7 @@ const state = {
   xTest: ['all','OT','NT'].includes(saved.xTest)?saved.xTest:'all',
   xVerse: (saved.xVerse && /^\d/.test(saved.xVerse))?saved.xVerse:'all',
   xTop: [3,5,10].includes(saved.xTop)?saved.xTop:3,
+  xShape: saved.xShape==='sphere'?'sphere':'ring',
   lexLang: ['all','heb','arc','grk'].includes(saved.lexLang)?saved.lexLang:'all',
   scroll: (saved.scroll && typeof saved.scroll==='object')?saved.scroll:{},
   popup: (saved.popup && typeof saved.popup==='object' && saved.popup.ch)?saved.popup:null
@@ -504,13 +661,13 @@ function saveScroll(){ if(!popupOpen) state.scroll[scrollKey()] = Math.round(scr
 function restoreScroll(){ const y = state.scroll[scrollKey()]||0; scrollTo(0, Math.min(y, document.documentElement.scrollHeight)); }
 function persist(){
   const ks=Object.keys(state.scroll); if(ks.length>60) ks.slice(0,ks.length-60).forEach(k=>delete state.scroll[k]);
-  try{ localStorage.setItem(STORE_KEY, JSON.stringify({book:state.book,ch:state.ch,wit:state.wit,open:[...state.open].slice(-400),tab:state.tab,theme:state.theme,vf:state.vf,pm:state.pm,xTest:state.xTest,xVerse:state.xVerse,xTop:state.xTop,lexLang:state.lexLang,settings:state.settings,scroll:state.scroll,popup:state.popup})); }catch(e){}
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify({book:state.book,ch:state.ch,wit:state.wit,open:[...state.open].slice(-400),tab:state.tab,theme:state.theme,vf:state.vf,pm:state.pm,xTest:state.xTest,xVerse:state.xVerse,xTop:state.xTop,xShape:state.xShape,lexLang:state.lexLang,settings:state.settings,scroll:state.scroll,popup:state.popup})); }catch(e){}
 }
 
 // ---------- reading settings ----------
 const FS = {S:.9, M:1, L:1.15, XL:1.3};
 const savedSet = (saved.settings && typeof saved.settings==='object') ? saved.settings : {};
-state.settings = { fs: FS[savedSet.fs]?savedSet.fs:'M', dys: !!savedSet.dys, vow: savedSet.vow==='cons'?'cons':'full', cant: savedSet.cant===undefined?true:!!savedSet.cant };
+state.settings = { fs: FS[savedSet.fs]?savedSet.fs:'M', dys: !!savedSet.dys, vow: savedSet.vow==='cons'?'cons':'full', cant: savedSet.cant===undefined?true:!!savedSet.cant, hideHint: !!savedSet.hideHint, showDC: savedSet.showDC!==false, wits: Object.assign({heb:true,grk:true,lxx:true,tg:true,vul:true}, (savedSet.wits&&typeof savedSet.wits==='object')?savedSet.wits:{}) };
 const RE_POINTS = /[\u0591-\u05AF\u05B0-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7]/g;
 const RE_CANT = /[\u0591-\u05AF\u05BD]/g;
 function hebView(s){ s=String(s); if(state.settings.vow==='cons') return s.replace(RE_POINTS,''); if(!state.settings.cant) return s.replace(RE_CANT,''); return s; }
@@ -519,6 +676,10 @@ window.hebView = hebView;
 function applySettings(){
   const r=document.documentElement; r.style.setProperty('--fs', FS[state.settings.fs]);
   if(state.settings.dys) r.dataset.dys='1'; else delete r.dataset.dys;
+  document.body.classList.toggle('hidereadhint', !!state.settings.hideHint);
+  const dc=$('#dcChk'), ww=state.settings.wits||{};
+  if(dc) dc.checked=!!state.settings.showDC;
+  [['witHeb','heb'],['witGrk','grk'],['witLxx','lxx'],['witTg','tg'],['witVul','vul']].forEach(([id,k])=>{ const el=$('#'+id); if(el) el.checked=ww[k]!==false; });
   document.querySelectorAll('#fsSeg button').forEach(b=>b.setAttribute('aria-pressed', b.dataset.fs===state.settings.fs));
   document.querySelectorAll('#vowSeg button').forEach(b=>b.setAttribute('aria-pressed', b.dataset.vow===state.settings.vow));
   $('#dysChk').checked=state.settings.dys; $('#cantChk').checked=state.settings.cant; $('#cantChk').disabled=state.settings.vow==='cons';
@@ -559,14 +720,36 @@ function flashMsg(m){ const el=$('#nbMsg'); if(el){ el.textContent=m; setTimeout
 
 // ---------- chapter data & witnesses ----------
 let CH=null, EN=null;     // current chapter originals, current book English
-const WNAME = {heb:'Hebrew (WLC)', grk:'Greek NT (SBLGNT)', lxx:'Greek (LXX, Brenton)', tg:null};
+const WNAME = {heb:'Hebrew (WLC)', grk:'Greek NT (SBLGNT)', lxx:'Greek (LXX, Brenton)', tg:null, vul:'Latin Vulgate (Clementine)'};
+function showDC(){ return state.settings.showDC!==false; }
+function witOn(id){ const w=state.settings.wits||{}; return w[id]!==false; }
+function bookVisible(b){ return !BOOK[b] || showDC() || BOOK[b].dc!==1; }
+function chapterVisible(b,c){ if(!bookVisible(b)) return false; if(!showDC() && b==='Dan' && c>=13) return false; return true; }
+function isGreekAddition(b,c,v){ v=+v; if(b==='Esth'&&c===4&&v>=18) return true; if(b==='Esth'&&c===10&&v>=4) return true; if(b==='Dan'&&c===3&&v>=24&&v<=90) return true; if(b==='Dan'&&(c===13||c===14)) return true; return false; }
+function verseVisible(b,c,v){ return showDC() || !isGreekAddition(b,c,v); }
+function visibleVlabels(b,c){ return vlabels(b,c).filter(v=>verseVisible(b,c,v)); }
+function nearestVisible(b,c){
+  if(bookVisible(b)&&chapterVisible(b,c)) return [b,c];
+  const i=BOOKS.findIndex(x=>x.id===b);
+  for(const dir of [-1,1]){
+    for(let k=i+dir;k>=0&&k<BOOKS.length;k+=dir){ if(bookVisible(BOOKS[k].id)) return [BOOKS[k].id, dir<0?visibleChapters(BOOKS[k].id).slice(-1)[0]:visibleChapters(BOOKS[k].id)[0]]; }
+  }
+  return ['Gen',1];
+}
+function visibleChapters(b){ return Array.from({length:BOOK[b].ch.length},(_,i)=>i+1).filter(c=>chapterVisible(b,c)); }
 function witnessesFor(b,c){
   const B=BOOK[b], m=B.ch[c-1], ws=[];
-  if(B.nt) ws.push({id:'grk',name:'Greek NT (SBLGNT)',cls:'grk',rtl:false});
-  if(m.h) ws.push({id:'heb',name:(b==='Dan'&&(c>=2&&c<=7))||(b==='Ezra'&&(c===4||c===5||c===6||c===7))?'Hebrew / Aramaic (WLC)':'Hebrew (WLC)',cls:'heb',rtl:true});
-  if(m.l) ws.push({id:'lxx',name:'Greek (LXX, Brenton)',cls:'grk',rtl:false});
-  if(m.t) ws.push({id:'tg',name:['Gen','Exod','Lev','Num','Deut'].includes(b)?'Aramaic (Targum Onkelos)':'Aramaic (Targum Jonathan)',cls:'arc',rtl:true});
+  if(B.nt && (m.g||B.nt) && witOn('grk')) ws.push({id:'grk',name:'Greek NT (SBLGNT)',cls:'grk',rtl:false});
+  if(m.h && witOn('heb')) ws.push({id:'heb',name:(b==='Dan'&&(c>=2&&c<=7))||(b==='Ezra'&&(c===4||c===5||c===6||c===7))?'Hebrew / Aramaic (WLC)':'Hebrew (WLC)',cls:'heb',rtl:true});
+  if(m.l && witOn('lxx')) ws.push({id:'lxx',name:'Greek (LXX, Brenton)',cls:'grk',rtl:false});
+  if(m.t && witOn('tg')) ws.push({id:'tg',name:['Gen','Exod','Lev','Num','Deut'].includes(b)?'Aramaic (Targum Onkelos)':'Aramaic (Targum Jonathan)',cls:'arc',rtl:true});
+  if((m.vlt||(CH&&CH.vul&&Object.keys(CH.vul).length)) && witOn('vul')) ws.push({id:'vul',name:'Latin Vulgate (Clementine)',cls:'lat',rtl:false});
   return ws;
+}
+function defaultWit(b,c){
+  const ws=witnessesFor(b,c);
+  if(BOOK[b]&&BOOK[b].dc===1){ const l=ws.find(w=>w.id==='lxx'); if(l) return l.id; }
+  return ws.length?ws[0].id:null;
 }
 let WITS=[];
 // words of a verse for a witness: [{w,g,...raw}]
@@ -576,6 +759,7 @@ function verseWords(wit, v){
   if(wit==='grk'){ const d=CH.grk[v]; return d? d.w.map(a=>({w:a[0],g:a[2],raw:a})) : null; }
   if(wit==='lxx'){ const d=CH.lxx[v]; return d? d.t.split(/\s+/).filter(Boolean).map(t=>({w:t,g:''})) : null; }
   if(wit==='tg'){ const d=CH.tg[v]; return d? d.t.split(/\s+/).filter(Boolean).map(t=>({w:t,g:''})) : null; }
+  if(wit==='vul'){ const d=CH.vul&&CH.vul[v]; return d? d.t.split(/\s+/).filter(Boolean).map(t=>({w:t,g:''})) : null; }
   return null;
 }
 function witRefNote(wit, v){
@@ -583,13 +767,15 @@ function witRefNote(wit, v){
   if(wit==='lxx') return 'LXX '+d.r.join(', ');
   if(wit==='heb' && d.r) return (state.book==='Esth'||state.book==='Dan'?'Hebrew Bible ':'Hebrew numbering ')+d.r;
   if(wit==='tg' && d.r) return 'Hebrew numbering '+d.r;
+  if(wit==='vul') return 'Vulgate '+(Array.isArray(d.r)?d.r.join(', '):'');
   return '';
 }
 const BADGE = {
   heb:'<span class="badge ok">Sourced: WLC text, ETCBC morphology, glosses &amp; Strong\'s via STEPBible TAHOT (CC BY 4.0)</span>',
   grk:'<span class="badge ok">Sourced: SBLGNT text + MorphGNT parsing; glosses &amp; Strong\'s from STEPBible TAGNT (CC BY 4.0)</span>',
   lxx:'<span class="badge ok">Sourced: Brenton LXX Greek (public domain)</span><span class="badge warn">verse placement aligned automatically · no word data</span>',
-  tg:'<span class="badge ok">Sourced: Sefaria, public domain edition</span><span class="badge warn">text only · no word data</span>'
+  tg:'<span class="badge ok">Sourced: Sefaria, public domain edition</span><span class="badge warn">text only · no word data</span>',
+  vul:'<span class="badge ok">Sourced: Clementine Vulgate (public domain; Tweedale / vulsearch transcription)</span><span class="badge warn">verse placement aligned automatically · no word data</span>'
 };
 async function loadChapter(b,c){
   const [ch,en] = await Promise.all([getJSON(`ch/${b}.${c}.json.gz`), getJSON(`en/${b}.json.gz`)]);
@@ -598,13 +784,14 @@ async function loadChapter(b,c){
 let loadSeq=0;
 async function gotoChapter(b,c,opts={}){
   if(!BOOK[b]) b='Gen'; c=Math.max(1,Math.min(c,BOOK[b].ch.length));
+  if(!bookVisible(b) || !chapterVisible(b,c)){ const n=nearestVisible(b,c); b=n[0]; c=n[1]; }
   const seq=++loadSeq;
   if(!opts.keepScroll) saveScroll();
   closePopup();
   state.book=b; state.ch=c;
   WITS=witnessesFor(b,c);
-  if(!WITS.some(w=>w.id===state.wit)) state.wit = WITS.length?WITS[0].id:null;
-  if(state.vf!=='all' && !vlabels(b,c).includes(state.vf)) state.vf='all';
+  if(!WITS.some(w=>w.id===state.wit)) state.wit = defaultWit(b,c);
+  if(state.vf!=='all' && !visibleVlabels(b,c).includes(state.vf)) state.vf='all';
   if(state.xVerse!=='all' && !vlabels(b,c).includes(state.xVerse)) state.xVerse='all';
   $('#pickLabel').textContent = refName(b,c);
   renderCov();
@@ -627,16 +814,30 @@ async function gotoChapter(b,c,opts={}){
       : `<div class="err">Could not load ${esc(refName(b,c))}: ${esc(e.message)}. ${navigator.onLine===false?'You are offline and this chapter has not been downloaded yet.':''}</div>`;
   }
 }
-function neighbour(d){ let b=state.book, c=state.ch+d; let bi=BOOKS.findIndex(x=>x.id===b);
-  if(c<1){ bi--; if(bi<0) return null; b=BOOKS[bi].id; c=BOOKS[bi].ch.length; }
-  else if(c>BOOK[b].ch.length){ bi++; if(bi>=BOOKS.length) return null; b=BOOKS[bi].id; c=1; }
-  return [b,c]; }
+function neighbour(d){
+  const step=d>0?1:-1; let b=state.book, c=state.ch, bi=BOOKS.findIndex(x=>x.id===b);
+  for(let n=0;n<2000;n++){
+    c+=step;
+    if(c<1){ bi--; if(bi<0) return null; b=BOOKS[bi].id; c=BOOKS[bi].ch.length; }
+    else if(c>BOOK[b].ch.length){ bi++; if(bi>=BOOKS.length) return null; b=BOOKS[bi].id; c=1; }
+    if(chapterVisible(b,c) && visibleVlabels(b,c).length) return [b,c];
+  }
+  return null;
+}
 function prefetchNeighbours(){ if(INLINE) return; const n=neighbour(1); if(n) setTimeout(()=>getJSON(`ch/${n[0]}.${n[1]}.json.gz`).catch(()=>{}),800); }
+function dcBadge(b){
+  if(b.dc===1) return ' <span class="dc">Deuterocanonical · Greek (Septuagint) original</span>';
+  if(b.dc===2) return ' <span class="dc">includes Greek additions (LXX)</span>';
+  return '';
+}
 function renderCov(){
-  const m=BOOK[state.book].ch[state.ch-1], parts=[];
-  if(BOOK[state.book].nt) parts.push(`<b>Greek</b> ${m.g}/${m.n}`);
-  else { if(m.h) parts.push(`<b>Hebrew</b> ${m.h}/${m.n}`); if(m.l) parts.push(`<b>LXX</b> ${m.l}/${m.n}`); if(m.t) parts.push(`<b>Targum</b> ${m.t}/${m.n}`); }
-  $('#covLine').innerHTML = `${m.n} verses · English (WEB) · ${parts.join(' · ')||'no original-language text'}${BOOK[state.book].dc===1?' · deuterocanonical':''}`;
+  const B=BOOK[state.book], m=B.ch[state.ch-1], parts=[], n=visibleVlabels(state.book,state.ch).length;
+  if(B.nt && m.g) parts.push(`<b>Greek NT</b> ${m.g}/${m.n}`);
+  if(m.h) parts.push(`<b>Hebrew</b> ${m.h}/${m.n}`);
+  if(m.l) parts.push(`<b>LXX</b> ${m.l}/${m.n}`);
+  if(m.t) parts.push(`<b>Targum</b> ${m.t}/${m.n}`);
+  if(m.vlt) parts.push(`<b>Vulgate</b> ${m.vlt}/${m.n}`);
+  $('#covLine').innerHTML = `${n} verse${n===1?'':'s'} · English (WEB) · ${parts.join(' · ')||'no original-language text'}${dcBadge(B)}`;
 }
 
 // ---------- Read view ----------
@@ -644,31 +845,48 @@ function renderWitSeg(){
   $('#witnessWrap').hidden = !WITS.length;
   $('#witSeg').innerHTML = WITS.map(w=>`<button data-wit="${w.id}" aria-pressed="${w.id===state.wit}">${esc(w.name)}</button>`).join('');
 }
-function visibleVerses(){ const all=vlabels(state.book,state.ch); return state.vf==='all'?all:all.filter(v=>v===state.vf); }
+function visibleVerses(){ const all=visibleVlabels(state.book,state.ch); return state.vf==='all'?all:all.filter(v=>v===state.vf); }
 function renderVF(){
-  $('#vfSel').innerHTML = `<option value="all">All ${vlabels(state.book,state.ch).length} verses</option>`+vlabels(state.book,state.ch).map(v=>`<option value="${v}"${v===state.vf?' selected':''}>Verse ${v}</option>`).join('');
+  $('#vfSel').innerHTML = `<option value="all">All ${visibleVlabels(state.book,state.ch).length} verses</option>`+visibleVlabels(state.book,state.ch).map(v=>`<option value="${v}"${v===state.vf?' selected':''}>Verse ${v}</option>`).join('');
   $('#vfSel').value=state.vf;
 }
 const vid_ = v=>`${state.book}.${state.ch}.${v}`;
+function strongMatch(field, code){
+  if(!field||!code) return false;
+  const want=String(code).toUpperCase().replace(/^([HG])0+/,'$1');
+  const src=String(field).toUpperCase();
+  return [...src.matchAll(/[HG]0*(\d+)/g)].some(m => (m[0][0]+String(parseInt(m[1],10)))===want);
+}
 function interHTML(v){
   const wit=WITS.find(w=>w.id===state.wit);
-  if(!wit) return `<div class="missing">No original-language text for this book in the sources used.</div>`;
+  if(!wit) return `<div class="missing">No original-language text is available for this verse with the witnesses you have turned on.</div>`;
   const ws=verseWords(wit.id,v);
-  if(!ws) return `<div class="missing">No ${esc(wit.name)} text for this verse${wit.id==='lxx'?' (not found in the Septuagint, or the automatic alignment found no match)':wit.id==='grk'?' (not in the SBLGNT; the WEB follows the Majority Text here)':wit.id==='heb'?' (Greek addition: no Hebrew)':''}.</div>`;
-  const rn=witRefNote(wit.id,v), lang=wit.cls==='grk'?'grc':(wit.cls==='heb'?'he':'arc');
+  if(!ws) return `<div class="missing">No ${esc(wit.name)} text for this verse${wit.id==='lxx'?' (not found in the Septuagint, or the automatic alignment found no match)':wit.id==='grk'?' (not in the SBLGNT; the WEB follows the Majority Text here)':wit.id==='heb'?' (Greek addition (LXX): no Hebrew or Aramaic in the sources used)':wit.id==='vul'?' (not found in the Clementine Vulgate, or the automatic alignment found no match)':''}.</div>`;
+  const rn=witRefNote(wit.id,v), lang=wit.cls==='grk'?'grc':wit.cls==='lat'?'la':(wit.cls==='heb'?'he':'arc');
   return (rn?`<div class="lxxref">${esc(rn)}</div>`:'')+
     `<div class="inter ${wit.cls}" dir="${wit.rtl?'rtl':'ltr'}" lang="${lang}">`+
-    ws.map((w,i)=>`<div class="word${NOTES[`w|${state.book}|${state.ch}|${wit.id}|${v}|${i}`]?' noted':''}" data-v="${v}" data-i="${i}"><span class="o">${esc(view(w.w,wit.cls))}</span>${w.g?`<span class="g">${esc(w.g)}</span>`:''}</div>`).join('')+
+    ws.map((w,i)=>{ const hit=state.hl&&String(state.hl.v)===String(v)&&state.hl.strongs&&w.raw&&state.hl.strongs.some(s=>strongMatch(w.raw[3],s)); return `<div class="word${NOTES[`w|${state.book}|${state.ch}|${wit.id}|${v}|${i}`]?' noted':''}${hit?' hl':''}" data-v="${v}" data-i="${i}"><span class="o">${esc(view(w.w,wit.cls))}</span>${w.g?`<span class="g">${esc(w.g)}</span>`:''}</div>`; }).join('')+
     `</div><div>${BADGE[wit.id]}</div>`;
 }
 function renderVerses(){
   if(!CH){ return; }
-  const wit=WITS.find(w=>w.id===state.wit);
   $('#verses').innerHTML = visibleVerses().map(v=>{
     const id=vid_(v), open=state.open.has(id);
-    const body = open ? interHTML(v) : `<div class="eng">${esc(EN[v]||'')}</div>`;
-    return `<article class="verse" id="v-${state.book}-${state.ch}-${v}" data-id="${id}" data-v="${v}"><div class="vhead"><span class="vref">${esc(refName(state.book,state.ch,v))}</span><span class="vmode">${open?(wit?esc(wit.name):'')+' · tap to go back to English':'English (WEB)'+(WITS.length?' · tap for original':'')}</span><button class="vnote${NOTES[`v|${state.book}|${state.ch}|${v}`]?' has':''}" data-note="v|${state.book}|${state.ch}|${v}" aria-label="Note on ${esc(refName(state.book,state.ch,v))}">✎</button></div>${body}</article>`;
+    const inter=open?`<div class="interwrap open"><div class="inter-inner">${interHTML(v)}</div></div>`:'';
+    return `<article class="verse${open?' open':''}" id="v-${state.book}-${state.ch}-${v}" data-id="${id}" data-v="${v}"><span class="vhead vref" title="${esc(refName(state.book,state.ch,v))}">${esc(String(v))}</span><button class="vnote${NOTES[`v|${state.book}|${state.ch}|${v}`]?' has':''}" data-note="v|${state.book}|${state.ch}|${v}" aria-label="Note on ${esc(refName(state.book,state.ch,v))}">✎</button><div class="eng">${esc(EN[v]||'')}</div>${inter}</article>`;
   }).join('') || '<div class="loading">No verses.</div>';
+}
+function animateVerse(card, open){
+  const v=card.dataset.v;
+  let wrap=card.querySelector('.interwrap');
+  if(open){
+    if(!wrap){ wrap=document.createElement('div'); wrap.className='interwrap'; wrap.innerHTML=`<div class="inter-inner">${interHTML(v)}</div>`; card.appendChild(wrap); }
+    card.classList.add('open');
+    requestAnimationFrame(()=>requestAnimationFrame(()=>wrap.classList.add('open')));
+  } else {
+    card.classList.remove('open');
+    if(wrap){ wrap.classList.remove('open'); const done=()=>{ if(!card.classList.contains('open')) wrap.remove(); }; wrap.addEventListener('transitionend',done,{once:true}); setTimeout(done,420); }
+  }
 }
 function render(){ renderWitSeg(); renderVF(); renderVerses(); }
 $('#witSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; state.wit=b.dataset.wit; persist(); render(); preloadLex(); });
@@ -710,8 +928,10 @@ versesEl.addEventListener('click',e=>{
   if(e.target.closest('button,a')) return;
   const card=e.target.closest('.verse'); if(!card||!WITS.length) return;
   const sel=getSelection(); if(sel && !sel.isCollapsed && String(sel).trim() && card.contains(sel.anchorNode)) return;
-  const id=card.dataset.id; state.open.has(id)?state.open.delete(id):(state.open.add(id),preloadLex());
-  persist(); renderVerses();
+  const id=card.dataset.id, opening=!state.open.has(id);
+  opening?state.open.add(id):state.open.delete(id);
+  if(opening) preloadLex();
+  persist(); animateVerse(card, opening);
 });
 
 // ---------- lexicon files (lazy) ----------
@@ -841,18 +1061,22 @@ function restorePopup(){
 }
 
 // ---------- tabs ----------
-const TABS=['read','poly','conn','lex','about'];
+const TABS=['read','poly','conn','lex','about','study'];
 function showTab(name, init){
   if(!init){ closePopup(); closeSheets(); saveScroll(); }
   TABS.forEach(n=>{ $('#tab-'+n).setAttribute('aria-selected',n===name); $('#view-'+n).hidden=n!==name; });
   state.tab=name;
+  document.body.dataset.tab=name;
   if(name==='poly') renderPoly();
   if(name==='conn') renderConn();
   if(name==='lex'){ renderLex(); renderNotebook(); }
   if(name==='about') renderCovList();
+  if(name==='study') renderStudy();
+  if(window.chordsGL) chordsGL.setActive(name==='conn');
   restoreScroll(); persist();
 }
 TABS.forEach(n=>$('#tab-'+n).onclick=()=>showTab(n));
+$('#hintDismiss').onclick=()=>{ state.settings.hideHint=true; applySettings(); persist(); };
 
 // ---------- sheets ----------
 function openSheet(id){ closePopup(); $(id).classList.add('on'); }
@@ -860,11 +1084,26 @@ function closeSheets(){ document.querySelectorAll('.sheet.on').forEach(s=>s.clas
 document.querySelectorAll('.sheet').forEach(sh=>sh.addEventListener('click',e=>{ if(e.target.classList.contains('bd')||e.target.closest('[data-close]')) sh.classList.remove('on'); }));
 $('#settingsBtn').onclick=()=>{ applySettings(); updateOfflineInfo(); openSheet('#settingsSheet'); };
 $('#openSources').onclick=()=>showTab('about');
-function settingsChanged(){ applySettings(); persist(); renderVerses(); if(state.tab==='poly') renderPoly(); if(state.tab==='lex') renderLex(); }
+function settingsChanged(){
+  applySettings(); persist();
+  if(!bookVisible(state.book) || !chapterVisible(state.book,state.ch)){
+    const n=nearestVisible(state.book,state.ch); gotoChapter(n[0],n[1]); return;
+  }
+  WITS=witnessesFor(state.book,state.ch);
+  if(!WITS.some(w=>w.id===state.wit)) state.wit=defaultWit(state.book,state.ch);
+  if(state.vf!=='all' && !visibleVlabels(state.book,state.ch).includes(state.vf)) state.vf='all';
+  render(); if(state.tab==='poly') renderPoly(); if(state.tab==='lex') renderLex();
+  if(state.tab==='conn'){ renderConn(); if(window.chordsGL) chordsGL.relabel(); }
+}
 $('#fsSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; state.settings.fs=b.dataset.fs; settingsChanged(); });
 $('#vowSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; state.settings.vow=b.dataset.vow; settingsChanged(); });
 $('#dysChk').onchange=e=>{ state.settings.dys=e.target.checked; settingsChanged(); };
 $('#cantChk').onchange=e=>{ state.settings.cant=e.target.checked; settingsChanged(); };
+$('#dcChk').onchange=e=>{ state.settings.showDC=e.target.checked; settingsChanged(); };
+[['witHeb','heb'],['witGrk','grk'],['witLxx','lxx'],['witTg','tg'],['witVul','vul']].forEach(([id,k])=>{
+  const el=$('#'+id); if(!el) return;
+  el.onchange=e=>{ state.settings.wits=state.settings.wits||{heb:true,grk:true,lxx:true,tg:true,vul:true}; state.settings.wits[k]=e.target.checked; settingsChanged(); };
+});
 let noteKey=null;
 function openNoteSheet(key){ noteKey=key; const [,b,c,v]=key.split('|');
   $('#noteTitle').textContent=`Note on ${refName(b,c,v)}`; $('#noteText').value=(NOTES[key]||{}).text||''; $('#noteSaved').textContent=''; openSheet('#noteSheet'); }
@@ -878,20 +1117,27 @@ const OT_GROUPS=['Pentateuch','Historical books','Wisdom books','Prophets'];
 function covText(b){
   const sum=k=>b.ch.reduce((a,c)=>a+(c[k]||0),0), n=b.ch.reduce((a,c)=>a+c.n,0), pc=k=>Math.round(100*sum(k)/n);
   const out=['English'];
-  if(b.nt) out.push(`Greek NT ${pc('g')}%`); else { if(sum('h')) out.push(`Hebrew ${pc('h')}%`); if(sum('l')) out.push(`LXX ${pc('l')}%`); if(sum('t')) out.push(`Targum ${pc('t')}%`); }
+  if(b.nt) out.push(`Greek NT ${pc('g')}%`);
+  if(sum('h')) out.push(`Hebrew ${pc('h')}%`);
+  if(sum('l')) out.push(`LXX ${pc('l')}%`);
+  if(sum('t')) out.push(`Targum ${pc('t')}%`);
+  if(sum('vlt')) out.push(`Vulgate ${pc('vlt')}%`);
   return out;
 }
 function renderCanon(){
   let html='', lastGrp=null;
-  BOOKS.forEach((b,bi)=>{
-    if(bi===0) html+='<h3>Old Testament</h3>'; if(b.nt && !BOOKS[bi-1].nt) html+='<h3>New Testament</h3>';
+  const list=BOOKS.filter(b=>bookVisible(b.id));
+  list.forEach((b,bi)=>{
+    if(bi===0 && !b.nt) html+='<h3>Old Testament</h3>'; if(b.nt && (bi===0 || !list[bi-1].nt)) html+='<h3>New Testament</h3>';
     if(b.grp!==lastGrp){ html+=`<h3 style="margin-top:6px;font-size:11px;opacity:.8">${esc(b.grp)}</h3>`; lastGrp=b.grp; }
-    html+=`<div class="bk" data-book="${b.id}"><button aria-expanded="false">${esc(b.name)}${b.dc===1?' <span class="dc">deuterocanonical</span>':b.dc===2?' <span class="dc">incl. Greek additions</span>':''}<span class="meta">${b.ch.length} ch.</span></button>`+
+    const chs=visibleChapters(b.id);
+    html+=`<div class="bk" data-book="${b.id}"><button aria-expanded="false">${esc(b.name)}${dcBadge(b)}<span class="meta">${chs.length} ch.</span></button>`+
       `<div class="covline">${covText(b).map(t=>`<span>${esc(t)}</span>`).join('')}</div>`+
-      `<div class="chgrid" hidden>${b.ch.map((m,k)=>{ const c=k+1, cur=b.id===state.book&&c===state.ch, na=sampleOnly(b.id,c);
+      `<div class="chgrid" hidden>${chs.map(c=>{ const na=sampleOnly(b.id,c), cur=b.id===state.book&&c===state.ch;
         return `<button class="avail${cur?' cur':''}${na?' na':''}" data-go="${b.id}" data-c="${c}" aria-label="${esc(b.name)} ${c}${na?', full app only':''}">${c}</button>`; }).join('')}</div></div>`;
   });
-  $('#canonList').innerHTML=html+`<div class="note">${BOOKS.length} books · ${BOOKS.reduce((a,b)=>a+b.ch.length,0)} chapters.${INLINE?' This single-file sample opens Genesis 1 and John 1 only; faded chapters need the full app.':''}</div>`;
+  const nch=list.reduce((a,b)=>a+visibleChapters(b.id).length,0);
+  $('#canonList').innerHTML=html+`<div class="note">${list.length} books · ${nch} chapters${showDC()?'':' · Protestant 66-book view'}.${INLINE?' This single-file sample opens Genesis 1 and John 1 only; faded chapters need the full app.':''}</div>`;
 }
 $('#pickBtn').onclick=()=>{ renderCanon(); const cur=document.querySelector(`#canonList .bk[data-book="${state.book}"]`);
   if(cur){ cur.querySelector('.chgrid').hidden=false; cur.firstChild.setAttribute('aria-expanded','true'); } openSheet('#pickSheet');
@@ -904,10 +1150,13 @@ $('#canonList').addEventListener('click',e=>{
 });
 
 // ---------- open a word or verse in Read ----------
-async function jumpTo(b,c,wit,v,i){
+async function jumpTo(b,c,wit,v,i,opts){
   closeSheets(); closePopup();
+  opts=opts||{};
+  state.hl = opts.hl && opts.hl.length ? {v:String(v), strongs:opts.hl} : null;
   if(b!==state.book||c!==state.ch||!CH){ state.vf='all'; await gotoChapter(b,c); } else if(state.vf!=='all'&&state.vf!==v){ state.vf='all'; }
   if(wit && WITS.some(w=>w.id===wit)) state.wit=wit;
+  else if(opts.preferWit && WITS.some(w=>w.id===opts.preferWit)) state.wit=opts.preferWit;
   state.open.add(`${b}.${c}.${v}`); render(); if(state.tab!=='read') showTab('read');
   const el=document.getElementById(`v-${b}-${c}-${v}`); if(!el) return;
   el.scrollIntoView({block:'center'}); el.classList.add('flash'); setTimeout(()=>el.classList.remove('flash'),1600);
@@ -918,11 +1167,11 @@ async function jumpTo(b,c,wit,v,i){
 // ---------- polyglot ----------
 const NTSET = ()=>new Set(BOOKS.filter(b=>b.nt).map(b=>b.id));
 function rowHTML(label, badge, cls, words, hi){
-  const dir=cls==='grk'?'ltr':'rtl', lang=cls==='grk'?'grc':(cls==='heb'?'he':'arc');
+  const dir=(cls==='grk'||cls==='lat')?'ltr':'rtl', lang=cls==='grk'?'grc':cls==='lat'?'la':(cls==='heb'?'he':'arc');
   const t = words.map(w=>{ const s=esc(view(w.w,cls)); return hi&&hi(w)?`<b style="color:var(--gold)">${s}</b>`:s; }).join(' ');
   return `<div class="prow"><div class="plabel">${label} ${badge}</div><div class="polytext ${cls}" dir="${dir}" lang="${lang}">${t}</div></div>`;
 }
-const MINI={heb:'<span class="badge ok mini">TAHOT · WLC</span>',grk:'<span class="badge ok mini">SBLGNT</span>',lxx:'<span class="badge ok mini">Brenton · public domain</span><span class="badge warn mini">auto-aligned</span>',tg:'<span class="badge ok mini">Sefaria · public domain</span>'};
+const MINI={heb:'<span class="badge ok mini">TAHOT · WLC</span>',grk:'<span class="badge ok mini">SBLGNT</span>',lxx:'<span class="badge ok mini">Brenton · public domain</span><span class="badge warn mini">auto-aligned</span>',tg:'<span class="badge ok mini">Sefaria · public domain</span>',vul:'<span class="badge ok mini">Clementine Vulgate · public domain</span><span class="badge warn mini">auto-aligned</span>'};
 function polyRows(ch, wits, v, hi={}){
   let h='';
   for(const w of wits){
@@ -975,18 +1224,19 @@ let GEO=null, LINKS=[], NODES={}, VCOL={};
 function css(v){ return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
 function renderXFilters(){
   $('#xTestSeg').innerHTML=[['all','All'],['OT','Old Testament'],['NT','New Testament']].map(([id,l])=>`<button data-xtest="${id}" aria-pressed="${id===state.xTest}">${l}</button>`).join('');
-  const vs=CH?vlabels(state.book,state.ch).filter(v=>CH.x[v]):[];
+  const vs=CH?visibleVlabels(state.book,state.ch).filter(v=>CH.x[v]):[];
   $('#xVerseSel').innerHTML=`<option value="all">All verses of ${esc(refName(state.book,state.ch))}</option>`+vs.map(v=>`<option value="${v}">${esc(refName(state.book,state.ch,v))}</option>`).join('');
   $('#xVerseSel').value=vs.includes(state.xVerse)?state.xVerse:'all';
   $('#xTopSeg').innerHTML=[3,5,10].map(n=>`<button data-xt="${n}" aria-pressed="${n===state.xTop}">Top ${n}</button>`).join('');
+  $('#xShapeSeg').innerHTML=[['ring','Ring'],['sphere','Sphere']].map(([id,l])=>`<button data-xshape="${id}" aria-pressed="${id===state.xShape}">${l}</button>`).join('');
 }
 function computeLinks(){
-  const nt=NTSET(), vs=vlabels(state.book,state.ch).filter(v=>CH.x[v]);
+  const nt=NTSET(), vs=visibleVlabels(state.book,state.ch).filter(v=>CH.x[v]);
   VCOL={}; vs.forEach((v,k)=>VCOL[v]=`hsl(${Math.round(360*k/Math.max(1,vs.length))} 62% 47%)`);
   LINKS=[]; NODES={};
   const src = state.xVerse==='all'?vs:vs.filter(v=>v===state.xVerse);
   src.forEach(v=>(CH.x[v]||[]).slice(0,state.xTop).forEach(([ref,votes])=>{
-    const t=parseRef(ref); if(!BOOK[t.b]) return;
+    const t=parseRef(ref); if(!BOOK[t.b]||!bookVisible(t.b)||!chapterVisible(t.b,t.c)||!verseVisible(t.b,t.c,t.v)) return;
     if(state.xTest!=='all' && (nt.has(t.b)?'NT':'OT')!==state.xTest) return;
     LINKS.push({v,ref,votes,k:LINKS.length});
   }));
@@ -1024,6 +1274,7 @@ function drawChord(){
   svg.innerHTML=s;
   const nb=Object.values(NODES).filter(n=>!n.cur).length;
   $('#xCount').textContent = CH && Object.keys(CH.x).length ? `${LINKS.length} links shown · ${nb} passages` : `No cross-references for ${refName(state.book,state.ch)} in the OpenBible.info data${BOOK[state.book].dc?' (it has none for the deuterocanonical books)':''}.`;
+  if(window.chordsGL) chordsGL.sync();
 }
 async function refText(ref){ // WEB text of an OpenBible ref (ranges: first 4 verses)
   const [a,b]=ref.split('-'); const p=a.split('.'), q=(b||a).split('.');
@@ -1035,6 +1286,7 @@ async function refText(ref){ // WEB text of an OpenBible ref (ranges: first 4 ve
 }
 async function selectLinks(ks,title){
   document.querySelectorAll('.chordline').forEach(p=>{ const on=ks.includes(+p.dataset.k); p.classList.toggle('active',on); p.classList.toggle('faded',!on); });
+  if(window.chordsGL) chordsGL.setSelection(ks);
   const Ls=ks.map(k=>LINKS[k]); const refs=[...new Set(Ls.map(L=>L.ref))].slice(0,12); const vs=[...new Set(Ls.map(L=>L.v))].slice(0,6);
   $('#connPanel').innerHTML=`<h3>${esc(title)}</h3><div class="loading">Loading texts…</div>`;
   const texts=await Promise.all(refs.map(refText));
@@ -1056,6 +1308,7 @@ function renderConn(){ renderXFilters(); drawChord(); resetPanel(); }
 $('#xTestSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; state.xTest=b.dataset.xtest; persist(); renderConn(); });
 $('#xVerseSel').addEventListener('change',e=>{ state.xVerse=e.target.value; persist(); renderConn(); });
 $('#xTopSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; state.xTop=+b.dataset.xt; persist(); renderConn(); });
+$('#xShapeSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; state.xShape=b.dataset.xshape; persist(); renderXFilters(); if(window.chordsGL) chordsGL.sync(); });
 $('#connPanel').addEventListener('click',e=>{ const b=e.target.closest('.jump'); if(!b) return; jumpTo(b.dataset.b,+b.dataset.c,null,b.dataset.v); });
 
 // ---------- lexicon & concordance ----------
@@ -1113,7 +1366,8 @@ async function renderLex(){
 }
 async function fillOcc(){
   if(!lexOpen) return; const el=document.getElementById('occ-'+lexOpen); if(!el) return;
-  try{ const vids=await concFor(lexOpen); const L=lexOpen[0], wit=L==='G'?'grk':'heb';
+  try{ const raw=await concFor(lexOpen); const L=lexOpen[0], wit=L==='G'?'grk':'heb';
+    const vids=raw.filter(x=>{ const r=vidToRef(x>>8); return r&&bookVisible(r.b)&&chapterVisible(r.b,r.c)&&verseVisible(r.b,r.c,r.v); });
     const shown=vids.slice(0,lexShown).map(x=>({r:vidToRef(x>>8),i:x&255}));
     el.innerHTML=`<div class="note" style="margin:2px 0">${vids.length} occurrence${vids.length===1?'':'s'}</div>`+shown.map(o=>`<button class="occ" data-b="${o.r.b}" data-c="${o.r.c}" data-w="${wit}" data-v="${o.r.v}" data-i="${o.i}">${esc(o.r.b)} ${o.r.c}:${esc(o.r.v)}</button>`).join('')+
       (vids.length>lexShown?`<div class="more"><button class="btn" data-more="1">Show more</button></div>`:'');
@@ -1140,6 +1394,7 @@ $('#nbList').addEventListener('click',e=>{
   const b=e.target.closest('[data-act]'); if(!b) return; const k=b.closest('.nb').dataset.key, n=NOTES[k]; if(!n) return;
   if(b.dataset.act==='del'){ if(b.dataset.armed){ setNote(k,''); renderVerses(); } else { b.dataset.armed='1'; b.textContent='Tap again to delete'; } return; }
   const p=k.split('|');
+  if(p[0]==='s'){ if(window.__studies) window.__studies.openStudy(p[1], p[2]); return; }
   if(p[0]==='w') jumpTo(p[1],+p[2],p[3],p[4],+p[5]); else jumpTo(p[1],+p[2],null,p[3]).then(()=>openNoteSheet(k));
 });
 $('#expMd').onclick=()=>download('hive-scribe-notes.md',notesMarkdown(),'text/markdown');
@@ -1181,7 +1436,7 @@ window.__downloadAll=downloadAll;
 
 // ---------- theme ----------
 $('#themeBtn').onclick=()=>{ const cur=document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
-  state.theme=cur==='dark'?'light':'dark'; document.documentElement.dataset.theme=state.theme; persist(); if(state.tab==='conn') drawChord(); };
+  state.theme=cur==='dark'?'light':'dark'; document.documentElement.dataset.theme=state.theme; persist(); if(state.tab==='conn'){ drawChord(); if(window.chordsGL) chordsGL.theme(); } };
 
 function renderCovList(){
   if(!INDEX) return; const ot=BOOKS.filter(b=>!b.nt), dc=ot.filter(b=>b.dc===1);
@@ -1193,6 +1448,7 @@ function renderCovList(){
     `Greek NT (SBLGNT): ${nt.length} books, ${sum(nt,'g').toLocaleString()} of ${nv(nt).toLocaleString()} WEB verses.`,
     `Septuagint (Brenton): ${ot.filter(b=>sum([b],'l')).length} books, ${sum(ot,'l').toLocaleString()} of ${nv(ot).toLocaleString()} OT verses placed (${dc.length} deuterocanonical books in Greek only).`,
     `Targum: ${ot.filter(b=>sum([b],'t')).length} books (Onkelos: Torah; Jonathan: Joshua–Kings, Isaiah–Malachi), ${sum(ot,'t').toLocaleString()} verses.`,
+    `Latin Vulgate (Clementine): ${BOOKS.filter(b=>sum([b],'vlt')).length} books, ${sum(BOOKS,'vlt').toLocaleString()} of ${nv(BOOKS).toLocaleString()} WEB verses placed.`,
     `Cross-references: ${INDEX.xrefVerses?INDEX.xrefVerses.toLocaleString():'—'} verses with links (none for the deuterocanon).`,
     `Download size for offline use: ${fmtMB(INDEX.bytes)} (${INDEX.files.length} files).`
   ].map(t=>`<li>${esc(t)}</li>`).join('');
@@ -1226,6 +1482,943 @@ if('serviceWorker' in navigator && location.protocol!=='file:'){ addEventListene
   (document.fonts&&document.fonts.ready?Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,1500))]):Promise.resolve()).then(()=>requestAnimationFrame(finishRestore));
 })();
 
+// ---------- Canonical Chords: three.js ring/sphere (SVG fallback in app5) ----------
+(function(){
+  const reduced = ()=> matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hasWebGL = ()=>{
+    try{ const c=document.createElement('canvas'); return !!(c.getContext('webgl2')||c.getContext('webgl')); }
+    catch(e){ return false; }
+  };
+  const canGL = ()=>{
+    if(window.__forceSvgChords) return false;
+    if(!window.THREE) return false;
+    return hasWebGL();
+  };
+  const darkNow = ()=>{
+    const t=document.documentElement.dataset.theme;
+    if(t==='dark') return true; if(t==='light') return false;
+    return matchMedia('(prefers-color-scheme: dark)').matches;
+  };
+  const hex = (v, fb)=>{
+    const s=getComputedStyle(document.documentElement).getPropertyValue(v).trim()||fb;
+    const c=new THREE.Color();
+    try{ c.set(s); }catch(e){ c.set(fb); }
+    return c;
+  };
+  const parseHsl = (str)=>{
+    const c=new THREE.Color();
+    try{ c.set(str); }catch(e){ c.set('#c98f12'); }
+    return c;
+  };
+  const bez = (a,b,c,t,out)=>{
+    const u=1-t;
+    out.copy(a).multiplyScalar(u*u).addScaledVector(c, 2*u*t).addScaledVector(b, t*t);
+    return out;
+  };
+
+  const G = {
+    ready:false, failed:false, active:false, raf:0, ro:null,
+    renderer:null, scene:null, camera:null, root:null, glow:null,
+    links:null, dots:null, arcs:null, pts:null, pick:null,
+    sel:new Set(),
+    view:{rotX:.42, rotY:0, rotZ:0, zoom:1, panX:0, panY:0},
+    t0:0, paths:[], particles:[], lastW:0, lastH:0
+  };
+  const resetView = ()=>{ G.view={rotX: state.xShape==='sphere'?.15:.42, rotY:0, rotZ:0, zoom:1, panX:0, panY:0}; };
+
+  function applyView(){
+    if(!G.root||!G.camera) return;
+    G.root.rotation.set(G.view.rotX, G.view.rotY, G.view.rotZ);
+    G.root.position.set(G.view.panX, G.view.panY, 0);
+    G.camera.position.z = (state.xShape==='sphere'?3.35:2.85)/G.view.zoom;
+    G.camera.updateProjectionMatrix();
+  }
+
+  function nodePos(n, mode){
+    const {C,R,pos}=GEO;
+    const p=pos[n.id]; if(!p) return null;
+    if(mode==='sphere'){
+      const books=BOOKS.length||73;
+      let lat, lon;
+      if(n.cur){
+        const vs=Object.values(NODES).filter(x=>x.cur);
+        const i=vs.findIndex(x=>x.id===n.id);
+        lon = (i/(Math.max(1,vs.length)))*0.7 - 0.35;
+        lat = 0.95;
+      } else {
+        const bi=Math.max(0, bookIdx(n.b));
+        lon = (bi/books)*Math.PI*2 - Math.PI;
+        lat = 0.85 - (Math.min(n.c||1,40)/40)*1.5;
+      }
+      const r=1.15;
+      return new THREE.Vector3(
+        r*Math.cos(lat)*Math.sin(lon),
+        r*Math.sin(lat),
+        r*Math.cos(lat)*Math.cos(lon)
+      );
+    }
+    const x=(p.x-C)/R, y=-(p.y-C)/R;
+    return new THREE.Vector3(x, y, 0);
+  }
+
+  function ctrlFor(A,B,mode){
+    if(mode==='sphere'){
+      const mid=A.clone().add(B).multiplyScalar(0.5);
+      const lift=1.35 + Math.min(0.45, A.distanceTo(B)*0.25);
+      if(mid.lengthSq()<1e-4) mid.set(0,1,0);
+      return mid.normalize().multiplyScalar(lift);
+    }
+    const mid=A.clone().add(B).multiplyScalar(0.5);
+    const chord=A.distanceTo(B);
+    mid.z = 0.22 + chord*0.28;
+    mid.multiplyScalar(0.22);
+    mid.z = 0.22 + chord*0.28;
+    return mid;
+  }
+
+  function clearGroup(g){ if(!g) return; while(g.children.length){ const o=g.children[0]; g.remove(o); if(o.geometry) o.geometry.dispose(); if(o.material){ if(Array.isArray(o.material)) o.material.forEach(m=>m.dispose()); else o.material.dispose(); } } }
+
+  function themeColors(){
+    const dark=darkNow();
+    return {
+      dark,
+      bg: hex('--bg', dark?'#121315':'#f7f5f0'),
+      ink: hex('--ink', dark?'#ecebe7':'#1d1b18'),
+      ink2: hex('--ink2', dark?'#b4b0a8':'#5d5850'),
+      ink3: hex('--ink3', dark?'#857f76':'#8a847a'),
+      gold: hex('--gold', dark?'#e8b23a':'#a8740a'),
+      accent: hex('--accent', dark?'#8db8e6':'#2f5d8a'),
+      add: dark
+    };
+  }
+
+  function build(){
+    if(!G.ready || !GEO || !CH) return;
+    const THREE=window.THREE, mode=state.xShape||'ring';
+    const col=themeColors();
+    clearGroup(G.root);
+    G.paths=[]; G.particles=[];
+    G.links=new THREE.Group(); G.arcs=new THREE.Group(); G.dots=new THREE.Group(); G.pick=new THREE.Group();
+    G.root.add(G.arcs); G.root.add(G.links); G.root.add(G.dots); G.root.add(G.pick);
+    G.pick.visible=false;
+
+    // book arcs
+    const rArc = mode==='sphere'?1.18:1.06;
+    GEO.arcs.forEach((A,i)=>{
+      const n=Math.max(8, Math.round((A.a1-A.a0)/0.05)+1);
+      const pts=[];
+      for(let k=0;k<=n;k++){
+        const a=A.a0+(A.a1-A.a0)*k/n;
+        if(mode==='sphere'){
+          // map ring angle onto a latitude band by book
+          const lon=a, lat = A.b==='__cur'?0.95 : 0.2;
+          pts.push(new THREE.Vector3(rArc*Math.cos(lat)*Math.sin(lon+Math.PI), rArc*Math.sin(lat), rArc*Math.cos(lat)*Math.cos(lon+Math.PI)));
+        } else {
+          pts.push(new THREE.Vector3(Math.cos(a)*rArc, -Math.sin(a)*rArc, 0));
+        }
+      }
+      const geo=new THREE.BufferGeometry().setFromPoints(pts);
+      const c = A.b==='__cur'?col.gold : (i%2?col.ink3:col.accent);
+      const mat=new THREE.LineBasicMaterial({color:c, transparent:true, opacity:A.b==='__cur'?0.95:0.55, blending: col.add?THREE.AdditiveBlending:THREE.NormalBlending, depthWrite:false});
+      const line=new THREE.Line(geo, mat);
+      line.userData={kind:'book', book:A.b};
+      G.arcs.add(line);
+      // slightly wider soft glow
+      const mat2=new THREE.LineBasicMaterial({color:c, transparent:true, opacity:0.22, blending:THREE.AdditiveBlending, depthWrite:false});
+      G.arcs.add(new THREE.Line(geo.clone(), mat2));
+    });
+
+    const nodeP={};
+    Object.values(NODES).forEach(n=>{ const p=nodePos(n,mode); if(p) nodeP[n.id]=p; });
+
+    // ribbons for links
+    const positions=[], colors=[], idx=[];
+    const pickPos=[], pickIdx=[];
+    const tmp=new THREE.Vector3(), side=new THREE.Vector3(), tan=new THREE.Vector3();
+    const SEGS=18;
+    LINKS.forEach(L=>{
+      const a=nodeP['S'+L.v], b=nodeP[L.ref]; if(!a||!b) return;
+      const c=ctrlFor(a,b,mode);
+      const colA=parseHsl(VCOL[L.v]||'#c98f12');
+      const colB=colA.clone().lerp(col.gold, 0.35);
+      const w=0.008 + Math.min(0.018, (L.votes||0)/8000);
+      const base=positions.length/3;
+      const pbase=pickPos.length/3;
+      const pts=[];
+      for(let i=0;i<=SEGS;i++){
+        const t=i/SEGS;
+        const p=bez(a,b,c,t,tmp.clone());
+        pts.push(p.clone());
+        const t2=Math.min(1,t+1/SEGS);
+        bez(a,b,c,t2,tan).sub(p);
+        if(tan.lengthSq()<1e-8) tan.set(0,0,1);
+        tan.normalize();
+        side.set(-tan.y, tan.x, 0);
+        if(mode==='sphere'){ side.crossVectors(p, tan).normalize(); }
+        if(side.lengthSq()<1e-8) side.set(0,0,1);
+        side.normalize().multiplyScalar(w);
+        const p1=p.clone().add(side), p2=p.clone().sub(side);
+        positions.push(p1.x,p1.y,p1.z, p2.x,p2.y,p2.z);
+        const cc=colA.clone().lerp(colB, t);
+        colors.push(cc.r,cc.g,cc.b, cc.r,cc.g,cc.b);
+        // pick ribbon, wider
+        const s2=side.clone().multiplyScalar(4);
+        const q1=p.clone().add(s2), q2=p.clone().sub(s2);
+        pickPos.push(q1.x,q1.y,q1.z, q2.x,q2.y,q2.z);
+      }
+      G.paths.push({k:L.k, a,b,c, color:colA, votes:L.votes});
+      for(let i=0;i<SEGS;i++){
+        const i0=base+i*2, j0=pbase+i*2;
+        idx.push(i0,i0+1,i0+2, i0+1,i0+3,i0+2);
+        pickIdx.push(j0,j0+1,j0+2, j0+1,j0+3,j0+2);
+      }
+      if(!reduced() && G.particles.length<48){
+        G.particles.push({k:L.k, a,b,c, color:colA, t:Math.random(), sp:0.08+Math.random()*0.12});
+      }
+    });
+    if(positions.length){
+      const g=new THREE.BufferGeometry();
+      g.setAttribute('position', new THREE.Float32BufferAttribute(positions,3));
+      g.setAttribute('color', new THREE.Float32BufferAttribute(colors,3));
+      g.setIndex(idx);
+      const mat=new THREE.MeshBasicMaterial({
+        vertexColors:true, transparent:true, opacity: col.add?0.85:0.72,
+        blending: col.add?THREE.AdditiveBlending:THREE.NormalBlending,
+        depthWrite:false, side:THREE.DoubleSide
+      });
+      const mesh=new THREE.Mesh(g, mat);
+      mesh.userData.kind='links';
+      G.links.add(mesh);
+      // soft outer glow
+      const matG=new THREE.MeshBasicMaterial({
+        vertexColors:true, transparent:true, opacity:0.2,
+        blending:THREE.AdditiveBlending, depthWrite:false, side:THREE.DoubleSide
+      });
+      const glow=mesh.clone(); glow.material=matG; glow.scale.setScalar(1.0);
+      G.links.add(glow);
+
+      const pg=new THREE.BufferGeometry();
+      pg.setAttribute('position', new THREE.Float32BufferAttribute(pickPos,3));
+      pg.setIndex(pickIdx);
+      // store k per triangle pair via groups? we'll pick by closest path in screen later if needed.
+      const pmesh=new THREE.Mesh(pg, new THREE.MeshBasicMaterial({visible:false, side:THREE.DoubleSide, transparent:true, opacity:0}));
+      pmesh.userData.kind='linkPick';
+      G.pick.add(pmesh);
+      // map face index -> link: each link has SEGS*2 faces
+      G.faceToK=[];
+      LINKS.forEach(L=>{
+        const a=nodeP['S'+L.v], b=nodeP[L.ref]; if(!a||!b) return;
+        for(let i=0;i<SEGS*2;i++) G.faceToK.push(L.k);
+      });
+    }
+
+    // dots
+    const sphere=new THREE.SphereGeometry(1, 10, 8);
+    Object.values(NODES).forEach(n=>{
+      const p=nodeP[n.id]; if(!p) return;
+      if(n.cur && !LINKS.some(L=>'S'+L.v===n.id) && state.xVerse!=='all') return;
+      const r=n.cur?0.032:0.018;
+      const mesh=new THREE.Mesh(sphere, new THREE.MeshBasicMaterial({
+        color: n.cur?parseHsl(VCOL[n.v]||'#c98f12'):col.ink2,
+        transparent:true, opacity:0.95
+      }));
+      mesh.position.copy(p);
+      mesh.scale.setScalar(r);
+      mesh.userData={kind:'node', id:n.id};
+      G.dots.add(mesh);
+      const hit=mesh.clone(); hit.scale.setScalar(r*4); hit.material=new THREE.MeshBasicMaterial({visible:false});
+      hit.userData={kind:'node', id:n.id};
+      G.pick.add(hit);
+    });
+
+    // particles
+    if(G.particles.length){
+      const g=new THREE.BufferGeometry();
+      const arr=new Float32Array(G.particles.length*3);
+      const cols=new Float32Array(G.particles.length*3);
+      G.particles.forEach((P,i)=>{
+        bez(P.a,P.b,P.c,P.t,tmp);
+        arr[i*3]=tmp.x; arr[i*3+1]=tmp.y; arr[i*3+2]=tmp.z;
+        cols[i*3]=P.color.r; cols[i*3+1]=P.color.g; cols[i*3+2]=P.color.b;
+      });
+      g.setAttribute('position', new THREE.BufferAttribute(arr,3));
+      g.setAttribute('color', new THREE.BufferAttribute(cols,3));
+      G.pts=new THREE.Points(g, new THREE.PointsMaterial({
+        size:4, sizeAttenuation:false, vertexColors:true, transparent:true, opacity:0.95,
+        blending:THREE.AdditiveBlending, depthWrite:false
+      }));
+      G.root.add(G.pts);
+    } else G.pts=null;
+
+    paintSelection();
+    placeLabels(nodeP, mode);
+    applyView();
+    renderOnce();
+  }
+
+  function paintSelection(){
+    if(!G.links) return;
+    const has=G.sel.size>0;
+    G.links.children.forEach((m,i)=>{
+      if(!m.material) return;
+      if(!has){ m.material.opacity = i?0.2:(themeColors().add?0.85:0.72); }
+      else { m.material.opacity = i?0.06:0.18; }
+    });
+    // We fade the whole ribbon mesh; overlay selected paths as bright tubes
+    if(G.selGlow){ G.root.remove(G.selGlow); clearGroup(G.selGlow); G.selGlow=null; }
+    if(!has) return;
+    const THREE=window.THREE;
+    const grp=new THREE.Group();
+    const tmp=new THREE.Vector3();
+    G.paths.forEach(P=>{
+      if(!G.sel.has(P.k)) return;
+      const pts=[];
+      for(let i=0;i<=24;i++) pts.push(bez(P.a,P.b,P.c,i/24,tmp.clone()));
+      const geo=new THREE.BufferGeometry().setFromPoints(pts);
+      grp.add(new THREE.Line(geo, new THREE.LineBasicMaterial({color:P.color, transparent:true, opacity:1, blending:THREE.AdditiveBlending, depthWrite:false})));
+    });
+    G.selGlow=grp; G.root.add(grp);
+  }
+
+  function placeLabels(nodeP, mode){
+    const box=$('#chordLabels'); if(!box) return;
+    box.innerHTML='';
+    if(!G.camera || !GEO) return;
+    const {arcs}=GEO;
+    const cam=G.camera, w=G.lastW, h=G.lastH;
+    const v=new THREE.Vector3();
+    const items=[];
+    arcs.forEach(A=>{
+      const midAng=(A.a0+A.a1)/2;
+      let pos;
+      if(mode==='sphere'){
+        const lat=A.b==='__cur'?0.95:0.2, lon=midAng, r=1.32;
+        pos=new THREE.Vector3(r*Math.cos(lat)*Math.sin(lon+Math.PI), r*Math.sin(lat), r*Math.cos(lat)*Math.cos(lon+Math.PI));
+      } else {
+        const lr=1.22;
+        pos=new THREE.Vector3(Math.cos(midAng)*lr, -Math.sin(midAng)*lr, 0);
+      }
+      G.root.localToWorld(v.copy(pos));
+      v.project(cam);
+      if(v.z>1 || v.z<-1) return;
+      const x=(v.x*0.5+0.5)*w, y=(-v.y*0.5+0.5)*h;
+      const label=A.b==='__cur'?`${state.book} ${state.ch}`:A.b;
+      items.push({x,y,label,book:A.b,cur:A.b==='__cur', n:A.n||1, z:v.z});
+    });
+    // scale + overlap
+    const fs=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--fs'))||1;
+    const zoom=G.view.zoom||1;
+    const size=Math.max(9, Math.min(16, 10.5*fs*(0.85+0.3*zoom)));
+    items.sort((a,b)=>(b.cur-a.cur)||(b.n-a.n));
+    const taken=[];
+    items.forEach(it=>{
+      const hide = taken.some(t=>Math.hypot(t.x-it.x,t.y-it.y)<Math.max(14, size*1.6)) && !it.cur;
+      if(it.cur || zoom>0.85 || it.n>=2) {
+        const el=document.createElement('span');
+        el.textContent=it.label;
+        el.dataset.book=it.book;
+        el.style.left=it.x+'px'; el.style.top=it.y+'px';
+        el.style.fontSize=size+'px';
+        if(it.cur) el.classList.add('cur');
+        if(hide) el.classList.add('is-hidden');
+        else taken.push(it);
+        box.appendChild(el);
+      }
+    });
+  }
+
+  function renderOnce(){
+    if(!G.renderer||!G.scene) return;
+    applyView();
+    G.renderer.render(G.scene, G.camera);
+  }
+
+  function tick(now){
+    G.raf=0;
+    if(!G.active || document.hidden || state.tab!=='conn') return;
+    const dt=Math.min(0.05, (now-(G.t0||now))/1000); G.t0=now;
+    if(!reduced()){
+      if(state.xShape==='sphere') G.view.rotY += dt*0.07;
+      else G.view.rotZ += dt*0.05;
+      const breath=1+0.012*Math.sin(now/1800);
+      if(G.root) G.root.scale.setScalar(breath);
+      if(G.pts && G.particles.length){
+        const arr=G.pts.geometry.attributes.position.array;
+        const tmp=new THREE.Vector3();
+        G.particles.forEach((P,i)=>{
+          P.t=(P.t+P.sp*dt)%1;
+          bez(P.a,P.b,P.c,P.t,tmp);
+          arr[i*3]=tmp.x; arr[i*3+1]=tmp.y; arr[i*3+2]=tmp.z;
+        });
+        G.pts.geometry.attributes.position.needsUpdate=true;
+      }
+    }
+    applyView();
+    if($('#chordLabels') && (now|0)%2===0) placeLabels(null, state.xShape||'ring');
+    // labels need positions even when nodeP not passed — recompute from GEO
+    G.renderer.render(G.scene, G.camera);
+    G.raf=requestAnimationFrame(tick);
+  }
+
+  function loop(on){
+    if(on){
+      if(!G.raf && G.ready && G.active && !document.hidden && state.tab==='conn'){
+        G.t0=performance.now();
+        if(reduced()){ renderOnce(); placeLabels(null, state.xShape||'ring'); }
+        else G.raf=requestAnimationFrame(tick);
+      }
+    } else if(G.raf){ cancelAnimationFrame(G.raf); G.raf=0; }
+  }
+
+  function resize(){
+    const stage=$('#chordStage'), canvas=$('#chordGl');
+    if(!stage||!G.renderer||!G.camera) return;
+    const w=Math.max(1, stage.clientWidth), h=Math.max(1, stage.clientHeight);
+    const pr=Math.min(window.devicePixelRatio||1, 2);
+    if(w===G.lastW && h===G.lastH && G.renderer.getPixelRatio()===pr) return;
+    G.lastW=w; G.lastH=h;
+    G.renderer.setPixelRatio(pr);
+    G.renderer.setSize(w,h,true);
+    G.camera.aspect=w/h;
+    G.camera.updateProjectionMatrix();
+    renderOnce();
+    placeLabels(null, state.xShape||'ring');
+  }
+
+  function init(){
+    if(G.ready || G.failed) return G.ready;
+    if(!canGL()){ G.failed=true; return false; }
+    const THREE=window.THREE;
+    const canvas=$('#chordGl'), stage=$('#chordStage');
+    if(!canvas||!stage) return false;
+    let renderer;
+    try{
+      renderer=new THREE.WebGLRenderer({canvas, antialias:true, alpha:true, preserveDrawingBuffer:true, powerPreference:'low-power'});
+    }catch(e){ G.failed=true; return false; }
+    renderer.setClearColor(0x000000, 0);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, 2));
+    const scene=new THREE.Scene();
+    const camera=new THREE.PerspectiveCamera(42, 1, 0.1, 20);
+    camera.position.set(0, 0.08, 2.85);
+    camera.lookAt(0,0,0);
+    const root=new THREE.Group();
+    scene.add(root);
+    G.renderer=renderer; G.scene=scene; G.camera=camera; G.root=root;
+    G.ready=true;
+    bindInput(canvas);
+    G.ro=new ResizeObserver(()=>resize());
+    G.ro.observe(stage);
+    addEventListener('visibilitychange', ()=>{ if(document.hidden) loop(false); else loop(true); });
+    $('#view-conn').classList.add('gl-on');
+    resize();
+    return true;
+  }
+
+  function bindInput(canvas){
+    const pt=new Map();
+    let lastTap=0, moved=false, startDist=0, startZoom=1, startPan={x:0,y:0};
+    const pos=e=>({x:e.clientX, y:e.clientY});
+    const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+    canvas.addEventListener('pointerdown',e=>{
+      canvas.setPointerCapture(e.pointerId);
+      pt.set(e.pointerId, pos(e));
+      moved=false;
+      if(pt.size===2){
+        const [a,b]=[...pt.values()];
+        startDist=dist(a,b)||1; startZoom=G.view.zoom;
+        startPan={x:G.view.panX,y:G.view.panY};
+      }
+    });
+    canvas.addEventListener('pointermove',e=>{
+      if(!pt.has(e.pointerId)) return;
+      const p=pos(e), prev=pt.get(e.pointerId);
+      if(pt.size===1){
+        const dx=p.x-prev.x, dy=p.y-prev.y;
+        if(Math.hypot(dx,dy)>6) moved=true;
+        if(moved){
+          if(state.xShape==='sphere'){ G.view.rotY += dx*0.008; G.view.rotX = Math.max(-1.1, Math.min(1.1, G.view.rotX+dy*0.008)); }
+          else { G.view.rotZ += dx*0.008; G.view.rotX = Math.max(0.05, Math.min(1.15, G.view.rotX+dy*0.006)); }
+          renderOnce(); placeLabels(null, state.xShape||'ring');
+        }
+      } else if(pt.size===2){
+        pt.set(e.pointerId, p);
+        const [a,b]=[...pt.values()];
+        const d=dist(a,b);
+        if(startDist){ G.view.zoom=Math.max(0.6, Math.min(2.6, startZoom*(d/startDist))); moved=true; renderOnce(); placeLabels(null, state.xShape||'ring'); }
+      }
+      pt.set(e.pointerId, p);
+    });
+    const up=e=>{
+      const was=pt.size; pt.delete(e.pointerId);
+      if(was===1 && !moved){
+        const now=performance.now();
+        if(now-lastTap<320){ resetView(); applyView(); renderOnce(); placeLabels(null, state.xShape||'ring'); lastTap=0; }
+        else { lastTap=now; pickAt(e.clientX, e.clientY); }
+      }
+    };
+    canvas.addEventListener('pointerup',up);
+    canvas.addEventListener('pointercancel',e=>pt.delete(e.pointerId));
+    canvas.addEventListener('wheel',e=>{
+      e.preventDefault();
+      G.view.zoom=Math.max(0.6, Math.min(2.6, G.view.zoom*(e.deltaY>0?0.92:1.08)));
+      renderOnce(); placeLabels(null, state.xShape||'ring');
+    },{passive:false});
+    $('#chordLabels').addEventListener('click',e=>{
+      const s=e.target.closest('span'); if(!s) return;
+      const b=s.dataset.book;
+      const ks=LINKS.filter(L=>b==='__cur'||parseRef(L.ref).b===b).map(L=>L.k);
+      selectLinks(ks, `${b==='__cur'?refName(state.book,state.ch):BOOK[b].name}: ${ks.length} connection${ks.length===1?'':'s'}`);
+    });
+  }
+
+  function pickAt(cx, cy){
+    if(!G.ready||!G.camera) return;
+    const THREE=window.THREE;
+    const rect=$('#chordGl').getBoundingClientRect();
+    const ndc=new THREE.Vector2(((cx-rect.left)/rect.width)*2-1, -((cy-rect.top)/rect.height)*2+1);
+    const ray=new THREE.Raycaster();
+    ray.setFromCamera(ndc, G.camera);
+    ray.params.Line={threshold:0.08};
+    const hits=ray.intersectObjects(G.pick.children, false);
+    if(hits.length){
+      const o=hits[0].object, ud=o.userData;
+      if(ud.kind==='node'){
+        const id=ud.id; const ks=LINKS.filter(L=>L.ref===id||'S'+L.v===id).map(L=>L.k); const n=NODES[id];
+        if(n) selectLinks(ks, `${n.cur?refName(state.book,state.ch,n.v):shortRef(id)}: ${ks.length} connection${ks.length===1?'':'s'}`);
+        return;
+      }
+      if(ud.kind==='linkPick' && hits[0].faceIndex!=null){
+        const k=G.faceToK && G.faceToK[hits[0].faceIndex];
+        if(k!=null && LINKS[k]){ const L=LINKS[k]; selectLinks([L.k], `${refName(state.book,state.ch,L.v)} ↔ ${shortRef(L.ref)}`); return; }
+      }
+    }
+    // fallback: nearest path in screen space
+    let best=null, bestD=14;
+    const tmp=new THREE.Vector3();
+    G.paths.forEach(P=>{
+      for(let i=0;i<=16;i++){
+        bez(P.a,P.b,P.c,i/16,tmp);
+        G.root.localToWorld(tmp);
+        tmp.project(G.camera);
+        const x=(tmp.x*0.5+0.5)*rect.width, y=(-tmp.y*0.5+0.5)*rect.height;
+        const d=Math.hypot(x-(cx-rect.left), y-(cy-rect.top));
+        if(d<bestD){ bestD=d; best=P; }
+      }
+    });
+    if(best){ const L=LINKS[best.k]; if(L) selectLinks([L.k], `${refName(state.book,state.ch,L.v)} ↔ ${shortRef(L.ref)}`); }
+  }
+
+  function samplePixels(){
+    if(!G.ready||!G.renderer) return [];
+    renderOnce();
+    const gl=G.renderer.getContext(), w=G.renderer.domElement.width, h=G.renderer.domElement.height;
+    const n=8, buf=new Uint8Array(n*n*4);
+    gl.readPixels(Math.max(0,(w>>1)-n/2), Math.max(0,(h>>1)-n/2), n, n, gl.RGBA, gl.UNSIGNED_BYTE, buf);
+    return Array.from(buf);
+  }
+
+  const api={
+    mode:()=> (G.ready && !G.failed && $('#view-conn').classList.contains('gl-on'))?'webgl':'svg',
+    ready:()=>G.ready,
+    running:()=>!!G.raf,
+    setActive(on){
+      G.active=!!on;
+      if(on){
+        if(!G.ready && !G.failed) init();
+        if(G.ready){ $('#view-conn').classList.add('gl-on'); resize(); build(); loop(true); }
+      } else loop(false);
+    },
+    sync(){
+      if(!G.active) return;
+      if(!G.ready && !G.failed) init();
+      if(G.ready){ $('#view-conn').classList.add('gl-on'); resize(); build(); loop(true); }
+      else { const v=$('#view-conn'); if(v) v.classList.remove('gl-on'); }
+    },
+    setSelection(ks){ G.sel=new Set(ks||[]); if(G.ready){ paintSelection(); renderOnce(); } },
+    relabel(){ if(G.ready) placeLabels(null, state.xShape||'ring'); },
+    theme(){ if(G.ready){ build(); loop(true); } },
+    reset: resetView,
+    samplePixels,
+    linkCount:()=>LINKS.length
+  };
+  window.chordsGL=api;
+  window.__chords=api;
+
+  function boot(){
+    if(window.__forceSvgChords){ G.failed=true; const v=$('#view-conn'); if(v) v.classList.remove('gl-on'); return; }
+    if(!window.THREE) return;
+    if(!hasWebGL()){ G.failed=true; const v=$('#view-conn'); if(v) v.classList.remove('gl-on'); return; }
+    if(G.active && !G.ready && !G.failed) init();
+  }
+  if(window.THREE) boot();
+  addEventListener('three-ready', boot);
+  addEventListener('three-fail', ()=>{ G.failed=true; });
+})();
+
+// ---------- Studies (data-driven: studies/*.json) ----------
+const STUDY_KEY='hiveScribe.studies.v1';
+let STUDY_INDEX=null, STUDY=null, STUDY_PROG={};
+try{ STUDY_PROG=JSON.parse(localStorage.getItem(STUDY_KEY)||'{}')||{}; }catch(e){ STUDY_PROG={}; }
+function saveStudyProg(){ try{ localStorage.setItem(STUDY_KEY, JSON.stringify(STUDY_PROG)); }catch(e){} }
+function studyProg(id){ if(!STUDY_PROG[id]) STUDY_PROG[id]={current:null,completed:[],notes:{}}; return STUDY_PROG[id]; }
+async function loadStudyIndex(){
+  if(STUDY_INDEX) return STUDY_INDEX;
+  const r=await fetch('studies/index.json'); if(!r.ok) throw new Error('HTTP '+r.status);
+  STUDY_INDEX=await r.json(); return STUDY_INDEX;
+}
+async function loadStudy(id){
+  const r=await fetch('studies/'+id+'.json'); if(!r.ok) throw new Error('HTTP '+r.status);
+  STUDY=await r.json(); return STUDY;
+}
+function parseStudyRef(ref){ // "Deut.6.4" or "Deut.6.4-Deut.6.5"
+  const a=ref.split('-')[0].split('.'); return {b:a[0], c:+a[1], v:a[2]};
+}
+function renderStudyList(ix){
+  const items=(ix.studies||[]).map(s=>{
+    const p=studyProg(s.id); const n=(p.completed||[]).length;
+    return `<article class="lesson"><h3>${esc(s.title)}</h3>
+      <div class="study-meta">${esc(s.author)}, <i>${esc(s.work)}</i> (${esc(s.publisher)}, ${s.year}) · ${s.lessons} lessons</div>
+      <div class="study-prog">${n?`${n} lesson${n===1?'':'s'} completed`:''}</div>
+      <button type="button" class="btn primary" data-open-study="${esc(s.id)}">Open study</button></article>`;
+  }).join('') || '<div class="note">No studies are bundled in this copy.</div>';
+  $('#studyBody').innerHTML=`<div class="study-wrap"><h2>Studies</h2>
+    <p class="study-meta">Guided topical studies. Lesson notes are written for this app and labelled as presenting an author’s position; they do not reproduce copyrighted book text. Tapping a verse opens it in Read, flipped to the original language, with selected words highlighted. Your progress and study notes stay on this device and also appear in the Scribe Notebook.</p>
+    ${items}
+    <div class="btnrow" style="margin-top:16px">
+      <button type="button" class="btn" id="expAllMd2">Export everything (Markdown)</button>
+      <button type="button" class="btn" id="expAllJson2">Export everything (JSON)</button>
+      <button type="button" class="btn" id="expAllPrint2">Print / save PDF</button>
+    </div>
+    <p class="note">Exports include your Scribe Notebook and every study’s progress and answers. Import is in Lexicon &amp; Notes. Nothing is uploaded.</p>
+    </div>`;
+}
+function renderStudyDetail(s){
+  const p=studyProg(s.id);
+  const lessons=s.lessons.map(L=>{
+    const done=(p.completed||[]).includes(L.id);
+    const note=(p.notes&&p.notes[L.id])|| (NOTES[`s|${s.id}|${L.id}`]||{}).text||'';
+    return `<article class="lesson" id="lesson-${esc(L.id)}">
+      <div class="chlab">Chapter ${L.chapter}${done?'<span class="done"> · completed</span>':''}</div>
+      <h3>${esc(L.title)}</h3>
+      <p class="study-meta">${esc(L.summary)}</p>
+      <div class="label">Key verses</div>
+      ${L.verses.map(v=>`<button type="button" class="vlink" data-sref="${esc(v.ref)}" data-shl="${esc((v.highlight||[]).map(h=>h.strong).filter(Boolean).join(','))}" data-swit="${esc((v.highlight||[]).map(h=>h.wit).find(Boolean)||'')}">
+        <div class="r">${esc(v.ref.replace(/\./g,' '))}${v.highlight&&v.highlight.length?` · ${(v.highlight.map(h=>h.label||h.strong).join(', '))}`:''}</div>
+        <div class="n">${esc(v.note||'')}</div></button>`).join('')}
+      <div class="label">Reflection</div>
+      <ol class="qlist">${L.questions.map(q=>`<li>${esc(q)}</li>`).join('')}</ol>
+      ${L.furtherReading?`<div class="note">Further reading: ${esc(L.furtherReading)}</div>`:''}
+      <div class="lesson-notes"><label class="label" for="sn-${esc(L.id)}">Your notes on this lesson</label>
+        <textarea class="notebox" id="sn-${esc(L.id)}" data-snote="${esc(L.id)}" placeholder="Saved on this device…">${esc(note)}</textarea>
+        <div class="btnrow"><button type="button" class="btn" data-save-snote="${esc(L.id)}">Save note</button>
+          <button type="button" class="btn" data-done-lesson="${esc(L.id)}">${done?'Mark uncomplete':'Mark complete'}</button>
+          <span class="saved" id="smsg-${esc(L.id)}"></span></div></div>
+    </article>`;
+  }).join('');
+  const n=(p.completed||[]).length;
+  $('#studyBody').innerHTML=`<div class="study-wrap">
+    <button type="button" class="textnav" id="studyBack">‹ All studies</button>
+    <h2>${esc(s.title)}</h2>
+    <div class="study-meta">${esc(s.subtitle||'')}<br>${esc(s.author)}, <i>${esc(s.work)}</i> (${esc(s.publisher)}, ${s.year}). ${esc(s.viewpoint||'')}</div>
+    <p class="study-disc">${esc(s.disclaimer)} ${esc(s.tocSource||'')}</p>
+    <div class="study-prog">${n} of ${s.lessons.length} lessons marked complete.</div>
+    <div class="btnrow">
+      <button type="button" class="btn" data-exp-study="md">Export this study (Markdown)</button>
+      <button type="button" class="btn" data-exp-study="json">Export this study (JSON)</button>
+      <button type="button" class="btn" data-exp-study="print">Print / save PDF</button>
+    </div>
+    ${lessons}
+  </div>`;
+}
+async function renderStudy(){
+  const el=$('#studyBody'); if(!el) return;
+  el.innerHTML='<div class="loading">Loading studies…</div>';
+  try{
+    if(STUDY) renderStudyDetail(STUDY);
+    else renderStudyList(await loadStudyIndex());
+  }catch(e){ el.innerHTML=`<div class="err">Studies are not available (${esc(e.message)}). In the single-file sample they need the full hosted app.</div>`; }
+}
+async function openStudy(id, lessonId){
+  await loadStudy(id); const p=studyProg(id);
+  if(lessonId) p.current=lessonId;
+  if(!p.current) p.current=(STUDY.lessons[0]||{}).id;
+  saveStudyProg();
+  showTab('study'); renderStudyDetail(STUDY);
+  const cur=document.getElementById('lesson-'+(lessonId||p.current||'')); if(cur) setTimeout(()=>cur.scrollIntoView({block:'start'}),40);
+}
+const openStudiesBtn=$('#openStudies'); if(openStudiesBtn) openStudiesBtn.onclick=()=>{ STUDY=null; showTab('study'); };
+$('#studyBody').addEventListener('click',e=>{
+  const back=e.target.closest('#studyBack'); if(back){ STUDY=null; renderStudy(); return; }
+  const os=e.target.closest('[data-open-study]'); if(os){ openStudy(os.dataset.openStudy); return; }
+  const vl=e.target.closest('.vlink'); if(vl){
+    const r=parseStudyRef(vl.dataset.sref); const hl=(vl.dataset.shl||'').split(',').filter(Boolean);
+    const prefer=vl.dataset.swit|| (r.b && BOOK[r.b] && BOOK[r.b].nt ? 'grk':'heb');
+    jumpTo(r.b,r.c,null,r.v,null,{hl, preferWit:prefer}); return;
+  }
+  const sv=e.target.closest('[data-save-snote]'); if(sv){
+    const lid=sv.dataset.saveSnote, text=($('#sn-'+lid)||{}).value||'';
+    const p=studyProg(STUDY.id); p.notes[lid]=text; saveStudyProg();
+    const L=STUDY.lessons.find(x=>x.id===lid);
+    setNote(`s|${STUDY.id}|${lid}`, text, {kind:'study', ref:`Study: ${STUDY.title} — ${L?L.title:('Lesson '+lid)}`, studyId:STUDY.id, lessonId:lid, book:state.book, ch:state.ch});
+    const msg=$('#smsg-'+lid); if(msg) msg.textContent=text.trim()?'Saved in Scribe Notebook ✓':'Note removed';
+    return;
+  }
+  const ex=e.target.closest('[data-exp-study]'); if(ex){ exportStudy(STUDY.id, ex.dataset.expStudy); return; }
+  const dn=e.target.closest('[data-done-lesson]'); if(dn){
+    const lid=dn.dataset.doneLesson, p=studyProg(STUDY.id);
+    const i=(p.completed||[]).indexOf(lid);
+    if(i>=0) p.completed.splice(i,1); else p.completed.push(lid);
+    p.current=lid; saveStudyProg(); renderStudyDetail(STUDY);
+    const el=document.getElementById('lesson-'+lid); if(el) el.scrollIntoView({block:'start'});
+  }
+});
+window.__studies={openStudy,renderStudy,prog:()=>STUDY_PROG};
+
+// ---------- Export / import: notes + studies ----------
+function isoNow(){ return new Date().toISOString(); }
+function notesArray(){ return notesSorted().map(k=>Object.assign({key:k},NOTES[k])); }
+function studyNotesFor(id){ return notesArray().filter(n=>n.key===`s|${id}|`+(n.lessonId||'') || (n.key||'').startsWith('s|'+id+'|')); }
+function bundleAll(){
+  return {app:'Hive Scribe', format:'hiveScribe.backup.v1', exported:isoNow(), notes:notesArray(), studies:JSON.parse(JSON.stringify(STUDY_PROG||{}))};
+}
+function bundleStudy(id){
+  const s=STUDY && STUDY.id===id ? STUDY : null;
+  const p=studyProg(id);
+  const lessons=(s?s.lessons:[]).map(L=>Object.assign({},L,{completed:(p.completed||[]).includes(L.id), answers:(p.notes&&p.notes[L.id])||''}));
+  return {app:'Hive Scribe', format:'hiveScribe.study.v1', exported:isoNow(),
+    study:{id, title:s&&s.title, author:s&&s.author, work:s&&s.work, publisher:s&&s.publisher, year:s&&s.year, viewpoint:s&&s.viewpoint, disclaimer:s&&s.disclaimer, tocSource:s&&s.tocSource, lessons},
+    progress:JSON.parse(JSON.stringify(p)),
+    notes:studyNotesFor(id)};
+}
+function mdEsc(s){ return String(s||'').replace(/\r\n/g,'\n'); }
+function studiesMarkdown(prog, studiesMeta){
+  const ids=Object.keys(prog||{});
+  if(!ids.length && !(studiesMeta&&studiesMeta.lessons)) return '_No study progress saved._\n';
+  let md='';
+  const one=(id, pack)=>{
+    const p=prog[id]||{}; const title=(pack&&pack.title)||id;
+    md+=`\n### ${title}\n\n`;
+    if(pack&&pack.author) md+=`${pack.author}, *${pack.work||title}*${pack.publisher?` (${pack.publisher}${pack.year?', '+pack.year:''})`:''}.\n\n`;
+    const done=p.completed||[]; md+=`Progress: ${done.length} lesson${done.length===1?'':'s'} marked complete${p.current?` · last opened: ${p.current}`:''}.\n\n`;
+    (pack&&pack.lessons||[]).forEach(L=>{
+      md+=`#### ${L.chapter?`Chapter ${L.chapter} — `:''}${L.title||('Lesson '+L.id)}\n\n`;
+      md+=`Status: ${done.includes(L.id)?'completed':'not marked complete'}\n\n`;
+      if(L.summary) md+=`${mdEsc(L.summary)}\n\n`;
+      if(L.verses&&L.verses.length){ md+='Key verses:\n'; L.verses.forEach(v=>md+=`- ${v.ref}${v.note?` — ${v.note}`:''}\n`); md+='\n'; }
+      if(L.questions&&L.questions.length){ md+='Reflection questions:\n'; L.questions.forEach((q,i)=>md+=`${i+1}. ${q}\n`); md+='\n'; }
+      const ans=(p.notes&&p.notes[L.id])||L.answers||''; if(ans) md+=`Your notes and answers:\n\n${mdEsc(ans)}\n\n`;
+      if(L.furtherReading) md+=`Further reading: ${L.furtherReading}\n\n`;
+    });
+    if(!(pack&&pack.lessons&&pack.lessons.length)){
+      if(done.length) md+=`Completed lesson ids: ${done.join(', ')}\n\n`;
+      Object.keys(p.notes||{}).forEach(lid=>{ md+=`Notes on lesson ${lid}:\n\n${mdEsc(p.notes[lid])}\n\n`; });
+    }
+  };
+  if(studiesMeta&&studiesMeta.lessons){ one(studiesMeta.id||'study', studiesMeta); }
+  else ids.forEach(id=>one(id, null));
+  return md;
+}
+function allMarkdown(){
+  let md='# Hive Scribe export\n\nExported '+isoNow()+'\n\nThese are your notes, study progress and answers from this device. Lesson summaries are short original notes written for the app (they present a named author’s position; they do not reproduce copyrighted book text).\n\n## Scribe Notebook\n\n';
+  const n=notesMarkdown();
+  md += n.replace(/^# Hive Scribe notebook\n\nExported[^\n]*\n/,'');
+  md += '\n## Studies\n'+studiesMarkdown(STUDY_PROG);
+  return md;
+}
+async function markdownForStudy(id){
+  if(!STUDY||STUDY.id!==id) await loadStudy(id);
+  const pack=bundleStudy(id).study;
+  return `# ${pack.title||id}\n\nExported ${isoNow()}\n\n${pack.disclaimer||''} ${pack.tocSource||''}\n\n`+studiesMarkdown({[id]:studyProg(id)}, pack);
+}
+function printBodyFromMarkdown(md){
+  // very small markdown-to-html for headings, italics, lists
+  const escH=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  return md.split('\n').map(line=>{
+    if(/^# /.test(line)) return `<h1>${escH(line.slice(2))}</h1>`;
+    if(/^## /.test(line)) return `<h2>${escH(line.slice(3))}</h2>`;
+    if(/^### /.test(line)) return `<h3>${escH(line.slice(4))}</h3>`;
+    if(/^#### /.test(line)) return `<h3>${escH(line.slice(5))}</h3>`;
+    if(/^- /.test(line)) return `<div class="q">• ${escH(line.slice(2))}</div>`;
+    if(/^\d+\. /.test(line)) return `<div class="q">${escH(line)}</div>`;
+    if(line==='_No study progress saved._') return `<p class="meta">${escH(line)}</p>`;
+    const ital=escH(line).replace(/\*([^*]+)\*/g,'<i>$1</i>');
+    return line.trim()?`<p>${ital}</p>`:'';
+  }).join('\n');
+}
+function openPrint(title, md){
+  const body=printBodyFromMarkdown(md);
+  const html=`<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title>
+<style>
+@page{margin:18mm}
+body{font:16px/1.5 Georgia,'Noto Serif',serif;color:#111;max-width:40rem;margin:1.5rem auto;padding:0 1rem;background:#fff}
+h1{font-size:1.6rem;margin:0 0 0.6rem} h2{font-size:1.25rem;margin:1.6rem 0 0.5rem;border-bottom:1px solid #ccc;padding-bottom:.2rem}
+h3{font-size:1.08rem;margin:1.1rem 0 .3rem} p,.q{margin:.35rem 0} .meta{color:#444;font-size:.92rem}
+.noprint{margin:0 0 1rem}
+@media print{ .noprint{display:none!important} body{margin:0;max-width:none} }
+</style></head><body>
+<p class="noprint"><button onclick="window.print()">Print or save as PDF</button> <span class="meta">Use your browser’s print dialog and choose “Save as PDF” if you want a file. Nothing is sent to a server.</span></p>
+${body}
+</body></html>`;
+  if(!window.__backup) window.__backup={};
+  window.__backup.lastPrintHtml=html;
+  let w=null;
+  try{ w=window.open('','_blank','noopener,noreferrer'); }catch(e){ w=null; }
+  if(w){ w.document.open(); w.document.write(html); w.document.close(); setTimeout(()=>{ try{ w.focus(); w.print(); }catch(e){} }, 300); }
+  else {
+    let f=$('#printFrame'); if(!f){ f=document.createElement('iframe'); f.id='printFrame'; f.title='Print preview'; f.style.cssText='position:fixed;left:-9999px;top:0;width:800px;height:600px;border:0'; document.body.appendChild(f); }
+    const d=f.contentDocument; d.open(); d.write(html); d.close();
+    setTimeout(()=>{ try{ f.contentWindow.focus(); f.contentWindow.print(); }catch(e){} }, 300);
+  }
+  return html;
+}
+async function shareOrDownload(name, text, type){
+  const blob=new Blob([text],{type:type||'text/plain'});
+  if(!window.__forceDownload && navigator.share && navigator.canShare){
+    try{
+      const file=new File([blob], name, {type:type||'text/plain'});
+      if(navigator.canShare({files:[file]})){ await navigator.share({files:[file], title:name}); return 'share'; }
+    }catch(e){ if(e && e.name==='AbortError') return 'abort'; }
+  }
+  download(name, text, type||'text/plain'); return 'download';
+}
+async function exportAll(kind){
+  if(kind==='json') return shareOrDownload('hive-scribe-export.json', JSON.stringify(bundleAll(),null,2), 'application/json');
+  const md=allMarkdown();
+  if(kind==='print'){ openPrint('Hive Scribe export', md); return 'print'; }
+  return shareOrDownload('hive-scribe-export.md', md, 'text/markdown');
+}
+async function exportStudy(id, kind){
+  if(!STUDY||STUDY.id!==id) await loadStudy(id);
+  if(kind==='json') return shareOrDownload(`hive-scribe-study-${id}.json`, JSON.stringify(bundleStudy(id),null,2), 'application/json');
+  const md=await markdownForStudy(id);
+  if(kind==='print'){ openPrint((STUDY&&STUDY.title)||id, md); return 'print'; }
+  return shareOrDownload(`hive-scribe-study-${id}.md`, md, 'text/markdown');
+}
+
+function parseBackup(text){
+  const obj=typeof text==='string'?JSON.parse(text):text;
+  if(!obj||typeof obj!=='object') throw new Error('Not a JSON object');
+  const notes=Array.isArray(obj.notes)?obj.notes:[];
+  let studies=obj.studies&&typeof obj.studies==='object' && !Array.isArray(obj.studies) ? obj.studies : {};
+  if(obj.format==='hiveScribe.study.v1' && obj.progress && obj.study && obj.study.id){
+    studies=Object.assign({}, studies, {[obj.study.id]:obj.progress});
+  }
+  return {obj, notes, studies, format:obj.format||''};
+}
+function previewImport(parsed){
+  const conflicts=[], adds=[];
+  parsed.notes.forEach(n=>{
+    if(!n||!n.key) return;
+    const cur=NOTES[n.key]; const text=String(n.text||'').trim();
+    if(!cur || !String(cur.text||'').trim()){ if(text) adds.push({kind:'note', key:n.key, incoming:n, label:(n.ref||n.key)+' (note)'}); }
+    else if(String(cur.text||'').trim()!==text) conflicts.push({kind:'note', key:n.key, incoming:n, current:cur, label:(n.ref||n.key)+' (note)'});
+  });
+  Object.keys(parsed.studies||{}).forEach(id=>{
+    const inc=parsed.studies[id]||{}; const cur=STUDY_PROG[id];
+    if(!cur){ adds.push({kind:'study', key:id, incoming:inc, label:'Study '+id+' (new progress)'}); return; }
+    const incNotes=inc.notes||{}; const curNotes=(cur.notes||{});
+    Object.keys(incNotes).forEach(lid=>{
+      const a=String(incNotes[lid]||'').trim(), b=String(curNotes[lid]||'').trim();
+      if(!b && a) adds.push({kind:'snote', key:id+'|'+lid, incoming:inc, label:`Study ${id}, lesson ${lid} (note)`});
+      else if(a && b && a!==b) conflicts.push({kind:'snote', key:id+'|'+lid, incoming:inc, current:cur, label:`Study ${id}, lesson ${lid} (note)`});
+    });
+    const ic=(inc.completed||[]).slice().sort().join(','), cc=(cur.completed||[]).slice().sort().join(',');
+    if(ic && cc && ic!==cc) conflicts.push({kind:'sprog', key:id, incoming:inc, current:cur, label:`Study ${id} (progress)`});
+    else if(ic && !cc) adds.push({kind:'sprog', key:id, incoming:inc, label:`Study ${id} (progress)`});
+  });
+  return {conflicts, adds};
+}
+function applyImport(parsed, resolve){
+  const prev=previewImport(parsed);
+  if(prev.conflicts.length && !resolve) return prev;
+  const take=resolve==='import';
+  parsed.notes.forEach(n=>{
+    if(!n||!n.key||!String(n.text||'').trim()) return;
+    const cur=NOTES[n.key];
+    const isConf=cur && String(cur.text||'').trim() && String(cur.text||'').trim()!==String(n.text||'').trim();
+    if(isConf && !take) return;
+    if(!isConf && cur && String(cur.text||'').trim()===String(n.text||'').trim()) return;
+    const meta=Object.assign({},n); delete meta.key; delete meta.text;
+    NOTES[n.key]=Object.assign({}, isConf?cur:{}, meta, {text:String(n.text).trim(), updated:n.updated||isoNow()});
+  });
+  saveNotes();
+  Object.keys(parsed.studies||{}).forEach(id=>{
+    const inc=JSON.parse(JSON.stringify(parsed.studies[id]||{}));
+    if(!STUDY_PROG[id]){ STUDY_PROG[id]=inc; return; }
+    const cur=STUDY_PROG[id];
+    const ic=new Set(inc.completed||[]), cc=new Set(cur.completed||[]);
+    const progConflict=[...ic].sort().join(',') && [...cc].sort().join(',') && [...ic].sort().join(',')!==[...cc].sort().join(',');
+    if(progConflict && take){ cur.completed=inc.completed||[]; if(inc.current) cur.current=inc.current; }
+    else if(!progConflict){ cur.completed=[...new Set([...(cur.completed||[]),...(inc.completed||[])])]; if(inc.current && !cur.current) cur.current=inc.current; }
+    cur.notes=cur.notes||{};
+    Object.keys(inc.notes||{}).forEach(lid=>{
+      const a=String(inc.notes[lid]||'').trim(), b=String(cur.notes[lid]||'').trim();
+      if(!a) return;
+      if(!b) cur.notes[lid]=a;
+      else if(a!==b && take) cur.notes[lid]=a;
+    });
+  });
+  saveStudyProg();
+  renderNotebook();
+  if(state.tab==='study') renderStudy();
+  return {conflicts:prev.conflicts, adds:prev.adds, applied:true, resolve:resolve||'keep'};
+}
+
+let IMP_PENDING=null;
+function showImportConflicts(prev, parsed){
+  IMP_PENDING={parsed, prev};
+  const el=$('#impConflicts');
+  if(el) el.innerHTML=prev.conflicts.map(c=>`<div class="nb"><div class="r">${esc(c.label)}</div><div class="t"><b>On this device:</b> ${esc(((c.current&&(c.current.text||(c.current.notes&&JSON.stringify(c.current.notes))))||'—')+'').slice(0,400)}</div><div class="t"><b>Imported:</b> ${esc((c.incoming&&(c.incoming.text||JSON.stringify(c.incoming))).toString().slice(0,400))}</div></div>`).join('');
+  const n=$('#impCount'); if(n) n.textContent=`${prev.conflicts.length} conflict${prev.conflicts.length===1?'':'s'} · ${prev.adds.length} new item${prev.adds.length===1?'':'s'} will be added.`;
+  openSheet('#importSheet');
+}
+function finishImport(resolve){
+  if(!IMP_PENDING) return;
+  const r=applyImport(IMP_PENDING.parsed, resolve);
+  IMP_PENDING=null; closeSheets();
+  const msg=$('#nbMsg')||$('#impMsg'); if(msg) msg.textContent=resolve==='import'?'Imported, including replacements for conflicts.':'Imported; existing notes on this device were kept where they differed.';
+  return r;
+}
+function importBackupText(text, resolve){
+  const parsed=parseBackup(text);
+  const prev=previewImport(parsed);
+  if(prev.conflicts.length && !resolve){
+    if(typeof document!=='undefined' && $('#importSheet') && !window.__importSilent) showImportConflicts(prev, parsed);
+    return Object.assign({applied:false}, prev);
+  }
+  return applyImport(parsed, resolve||'keep');
+}
+
+function bindExportUi(){
+  const hook=(sel, fn)=>{ const el=$(sel); if(el) el.onclick=fn; };
+  hook('#expAllMd', ()=>exportAll('md')); hook('#expAllMd2', ()=>exportAll('md'));
+  hook('#expAllJson', ()=>exportAll('json')); hook('#expAllJson2', ()=>exportAll('json'));
+  hook('#expAllPrint', ()=>exportAll('print')); hook('#expAllPrint2', ()=>exportAll('print'));
+  hook('#expNotesPrint', ()=>openPrint('Hive Scribe notebook', notesMarkdown()));
+  hook('#impBtn', ()=>{ const f=$('#impFile'); if(f) f.click(); });
+  const file=$('#impFile');
+  if(file && !file._bound){ file._bound=1; file.addEventListener('change', async ev=>{
+    const f=ev.target.files&&ev.target.files[0]; ev.target.value=''; if(!f) return;
+    try{ const r=importBackupText(await f.text()); if(r.applied){ const msg=$('#nbMsg'); if(msg) msg.textContent=`Imported ${r.adds.length} new item${r.adds.length===1?'':'s'}.`; } }
+    catch(e){ const msg=$('#nbMsg'); if(msg) msg.textContent='Could not import: '+(e.message||e); }
+  }); }
+  hook('#impKeep', ()=>finishImport('keep'));
+  hook('#impUse', ()=>finishImport('import'));
+}
+bindExportUi();
+// Rebind after study list/detail redraws for buttons inside studyBody
+const _rs=renderStudyList, _rd=renderStudyDetail;
+// bindings use ids inside studyBody that are recreated; click on studyBody also:
+$('#studyBody').addEventListener('click',e=>{
+  if(e.target.closest('#expAllMd2')){ exportAll('md'); }
+  if(e.target.closest('#expAllJson2')){ exportAll('json'); }
+  if(e.target.closest('#expAllPrint2')){ exportAll('print'); }
+});
+
+window.__backup={bundleAll,bundleStudy,allMarkdown,exportAll,exportStudy,importBackupText,previewImport,applyImport,parseBackup,openPrint,shareOrDownload,printBodyFromMarkdown};
+window.__studies={openStudy,renderStudy,prog:()=>STUDY_PROG, save:saveStudyProg, setProg:(p)=>{ STUDY_PROG=p||{}; saveStudyProg(); }};
+
 </script>
+<script type="module">import * as THREE from "./vendor/three.module.min.js"; window.THREE=THREE; dispatchEvent(new Event("three-ready"));</script>
 </body>
 </html>

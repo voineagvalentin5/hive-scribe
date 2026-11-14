@@ -137,4 +137,53 @@ The full license text is included at fonts/OFL.txt
 and is also available at https://openfontlicense.org
 
 -------------------------------------------------------------------------------
+9. Clementine Vulgate (Latin, all 73 books where a match was found)
+-------------------------------------------------------------------------------
+
+Clementine Vulgate Latin text, public domain, from Michael Tweedale’s
+transcription (vulsearch), via the Open Bibles collection:
+
+    https://github.com/seven1m/open-bibles
+    (lat-clementine.usfx.xml)
+
+Users of that transcription are requested to acknowledge the source and to
+make any modifications clear. The wording of the Latin is unaltered. Verses
+were grouped to the World English Bible by automatic alignment with the
+public-domain Douay-Rheims in the same collection (eng-dra.usfx.xml). The
+Vulgate chapter and verse reference is always shown when it differs (for
+example in the Psalms). Text only: no glosses or parsing.
+
+-------------------------------------------------------------------------------
+10. three.js (Canonical Chords visualization)
+      MIT License
+-------------------------------------------------------------------------------
+
+three.js r170.0, © 2010-2025 three.js authors.
+https://github.com/mrdoob/three.js
+License text is included at vendor/LICENSE.
+
+The library is vendored in this app (vendor/three.module.min.js) so the
+visualization works offline. No CDN is used.
+
+-------------------------------------------------------------------------------
+11. Studies and texts not included
+-------------------------------------------------------------------------------
+
+Guided Studies in this app present a named author’s position in original
+lesson notes written for Hive Scribe. They do not reproduce copyrighted
+book text. The first bundled study, “The Oneness of God,” follows the
+chapter titles and order of David K. Bernard, The Oneness of God (Word
+Aflame Press, 1983). Lesson summaries, reflection questions, and verse
+notes are original to this app. Scripture is cited from the World English
+Bible (public domain).
+
+Hebrew and Aramaic fragments that exist but are not packaged here are
+not invented: Sirach is known in Hebrew for about two-thirds of the book
+(Cairo Geniza, Masada, and related finds); Tobit is attested in Aramaic
+and Hebrew fragments from Qumran; a Greek fragment of the Letter of
+Jeremiah (Baruch 6) is known as 7Q2. This app uses the Brenton Septuagint
+(and the Vulgate where aligned) for those books, not those fragments.
+
+-------------------------------------------------------------------------------
 End of NOTICE
+

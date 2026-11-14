@@ -1,6 +1,6 @@
 # Hive Scribe
 
-A free, installable interlinear Bible study app by [Codex Hive Labs](https://codex-hive.com). Compare verses in Hebrew, Greek, and Aramaic, word by word, with English (World English Bible) for the whole 73-book Catholic canon.
+A free, installable interlinear Bible study app by [Codex Hive Labs](https://codex-hive.com). Compare verses in Hebrew, Greek, Aramaic, and Latin, word by word, with English (World English Bible) for the whole 73-book Catholic canon. A Settings toggle can hide the deuterocanonical books for a 66-book Protestant view.
 
 **Live app:** [https://scribe.codex-hive.com](https://scribe.codex-hive.com)
 
@@ -8,7 +8,7 @@ A free, installable interlinear Bible study app by [Codex Hive Labs](https://cod
 
 ## How to use
 
-Open the live app in a browser on your phone or computer. Tap a verse to flip it to the original language with a short English gloss under each word. Press and hold a word for its definition, grammar, Strong’s number, transliteration, and gematria. Cross-references appear as a ring on the Canonical Chords tab.
+Open the live app in a browser on your phone or computer. Tap a verse to flip it to the original language with a short English gloss under each word. Press and hold a word for its definition, grammar, Strong’s number, transliteration, and gematria. Cross-references appear as a free-flowing ring (or optional sphere) on the Canonical Chords tab. Guided Studies, including “The Oneness of God,” are in the header and under Lexicon & Notes. Notes and study progress can be exported (Markdown, JSON, or a print-to-PDF page) and imported from JSON on another device.
 
 ### Install on your phone
 
@@ -20,7 +20,7 @@ Chapters you open are cached automatically. In **Settings (Aa)** choose **Downlo
 
 ### Reading tools
 
-Text size (S–XL), a dyslexia-friendly reading mode, Hebrew vowel-point and cantillation toggles, a Logos Bridge (Genesis 1 with John 1), a lexicon and concordance, and notes you can export as Markdown or JSON.
+Text size (S–XL), a dyslexia-friendly reading mode, Hebrew vowel-point and cantillation toggles, a canon toggle and per-witness visibility (Hebrew WLC, Greek NT, Septuagint, Targum, Latin Vulgate), a Logos Bridge (Genesis 1 with John 1), a lexicon and concordance, guided Studies, and notes you can export and import.
 
 ## What’s included
 
@@ -28,6 +28,8 @@ Text size (S–XL), a dyslexia-friendly reading mode, Hebrew vowel-point and can
 - **Hebrew and Greek, word by word:** every Protestant Old and New Testament book, with Strong’s numbers, morphology, glosses, and gematria.
 - **Septuagint:** Brenton’s Greek text for most Old Testament and deuterocanonical verses (plain text; no word-level tagging).
 - **Targum:** Onkelos on the Torah and Jonathan on the Prophets (plain text).
+- **Latin Vulgate:** Clementine Vulgate (public domain; Tweedale / vulsearch transcription), automatically placed next to WEB verses; the Vulgate reference is shown when it differs.
+- **Studies:** data-driven topical studies (`studies/*.json`). Lesson notes are original to this app and labelled as presenting a named author’s position; they do not reproduce copyrighted book text.
 
 Honest limits, also labelled in the app:
 
@@ -35,6 +37,7 @@ Honest limits, also labelled in the app:
 - There is no Targum yet for the Writings.
 - OpenBible.info has no cross-references for the deuterocanonical books.
 - A few WEB verses that follow the Majority Text (for example John 7:53–8:11) have no SBLGNT Greek.
+- Sirach Hebrew (Cairo Geniza / Masada), Tobit Aramaic/Hebrew from Qumran, and 7Q2 (Letter of Jeremiah) are not included; those books use the Septuagint (and Vulgate where aligned).
 
 Chapter and verse numbers follow the WEB (English tradition), so a few differ from other Bibles.
 
@@ -51,6 +54,8 @@ Full attributions also appear on the app’s Sources page (the **i** button) and
 | Greek NT glosses, transliteration, Strong’s | STEPBible TAGNT (Tyndale House / STEPBible.org) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
 | Septuagint Greek | Brenton’s Septuagint with Apocrypha (eBible.org `grcbrent`) | Public domain |
 | Targum Onkelos and Targum Jonathan | [Sefaria](https://www.sefaria.org) public-domain editions | Public domain |
+| Latin Vulgate (Clementine) | Michael Tweedale (vulsearch) via [Open Bibles](https://github.com/seven1m/open-bibles) (`lat-clementine.usfx.xml`); aligned with the public-domain Douay-Rheims | Public domain |
+| Canonical Chords renderer | [three.js](https://github.com/mrdoob/three.js) r170.0 (vendored) | [MIT](vendor/LICENSE) |
 | Lexicons | STEPBible TBESH (Hebrew/Aramaic) and TBESG (Greek) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
 | Cross-references | [OpenBible.info](https://www.openbible.info/labs/cross-references/) (data dated 2026-11-09) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
 | Fonts | Noto Serif and Noto Serif Hebrew (The Noto Project Authors) | [SIL Open Font License 1.1](fonts/OFL.txt) |
