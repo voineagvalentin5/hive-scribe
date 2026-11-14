@@ -289,9 +289,9 @@ body.hidereadhint #hint{display:none}
 #view-read #verses .verse .word,#view-read #verses .verse{scroll-margin-top:96px;scroll-margin-bottom:80px}
 #view-read #verses .verse{background:none;border:0;border-radius:8px;padding:0 .12em;margin:0;cursor:pointer;display:inline;box-shadow:none;transition:background .15s}
 #view-read #verses .verse .eng{font-family:inherit;font-size:inherit;line-height:inherit;display:inline}
-#view-read #verses .verse .vhead,#view-read #verses .verse .vref{display:inline;font:700 calc(11px*var(--fs))/1 var(--ui);color:var(--gold);vertical-align:super;margin:0 .28em 0 .02em;letter-spacing:0;position:static}
+#view-read #verses .verse .vhead,#view-read #verses .verse .vref{display:inline;font:700 calc(11px*var(--fs))/1 var(--ui);color:var(--gold);vertical-align:super;margin:0 .12em 0 0;letter-spacing:0;position:static}
 #view-read #verses .verse .vmode{display:none}
-#view-read #verses .verse .vnote{position:relative;display:inline;border:0;background:none;color:var(--gold);opacity:0;min-width:32px;min-height:32px;padding:0 4px;margin:0 2px;font-size:13px;vertical-align:middle;transition:opacity .15s;cursor:pointer}
+#view-read #verses .verse .vnote{display:inline;border:0;background:none;color:var(--gold);opacity:0;width:0;min-width:0;min-height:0;height:0;padding:0;margin:0;overflow:visible;font-size:13px;line-height:0;vertical-align:super;transition:opacity .15s;cursor:pointer}
 #view-read #verses .verse:hover .vnote,#view-read #verses .verse:focus-within .vnote,#view-read #verses .verse .vnote.has,#view-read #verses .verse:active .vnote{opacity:1}
 @media (hover:none){#view-read #verses .verse .vnote{opacity:.4} #view-read #verses .verse .vnote.has{opacity:1}}
 @media (hover:hover){#view-read #verses .verse:hover{background:color-mix(in srgb,var(--gold) 12%,transparent)}}
@@ -314,19 +314,21 @@ body.hidereadhint #hint{display:none}
     radial-gradient(ellipse 68% 58% at 50% 48%, color-mix(in srgb, var(--gold) 18%, transparent), transparent 68%),
     radial-gradient(ellipse 90% 80% at 50% 100%, color-mix(in srgb, var(--accent) 11%, transparent), transparent 70%),
     var(--bg)}
-#chordGl,#chord{position:absolute;inset:0;width:100%;height:100%;display:block;background:transparent;border:0;border-radius:0}
+#chordStage{--chordPadTop:96px}
+@media (max-width:759px){#chordStage{--chordPadTop:140px}}
+#chordGl,#chord{position:absolute;left:0;top:var(--chordPadTop);width:100%;height:calc(100% - var(--chordPadTop));display:block;background:transparent;border:0;border-radius:0}
 #view-conn.gl-on #chord{opacity:0;pointer-events:none}
 #view-conn:not(.gl-on) #chordGl,#view-conn:not(.gl-on) #chordLabels{display:none}
-#chordLabels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+#chordLabels{position:absolute;left:0;top:var(--chordPadTop);width:100%;height:calc(100% - var(--chordPadTop));pointer-events:none;overflow:hidden}
 #chordLabels span{position:absolute;transform:translate(-50%,-50%);font:600 calc(10.5px*var(--fs)) var(--ui);color:var(--ink2);white-space:nowrap;text-shadow:0 0 10px var(--bg),0 0 4px var(--bg);pointer-events:auto;cursor:pointer;padding:6px 4px}
 #chordLabels span.cur{color:var(--gold);font-weight:700}
 #chordLabels span.is-hidden{opacity:0;pointer-events:none}
-#chordBar{position:absolute;top:10px;left:50%;transform:translateX(-50%);z-index:5;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px 6px;max-width:calc(100% - 16px);padding:6px 8px;background:color-mix(in srgb,var(--paper) 80%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:999px;box-shadow:0 6px 24px color-mix(in srgb,var(--ink) 10%,transparent)}
+#chordBar{position:absolute;top:10px;left:50%;transform:translateX(-50%);z-index:5;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px 6px;width:max-content;max-width:calc(100% - 24px);padding:6px 8px;background:color-mix(in srgb,var(--paper) 80%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:999px;box-shadow:0 6px 24px color-mix(in srgb,var(--ink) 10%,transparent)}
 #chordBar .seg{margin:0;gap:3px}
 #chordBar .seg button{min-height:36px;padding:4px 10px;font-size:12px;border:0;background:transparent;color:var(--ink2)}
 #chordBar .seg button[aria-pressed=true]{background:var(--accent);color:var(--paper);border-color:transparent}
 #chordBar .sel{min-height:36px;border:0;background:transparent;font-size:12px;max-width:42vw;padding:2px 4px}
-#xCount{position:absolute;top:58px;left:0;right:0;text-align:center;font-size:11px;color:var(--ink3);margin:0;pointer-events:none;text-shadow:0 0 8px var(--bg)}
+#xCount{position:absolute;top:calc(var(--chordPadTop) - 16px);left:0;right:0;text-align:center;font-size:11px;color:var(--ink3);margin:0;pointer-events:none;text-shadow:0 0 8px var(--bg);z-index:4}
 #view-conn .panel{position:absolute;left:12px;right:12px;bottom:10px;z-index:5;max-height:30vh;overflow:auto;margin:0;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:0;border-radius:16px;box-shadow:0 8px 28px color-mix(in srgb,var(--ink) 10%,transparent)}
 @media (min-width:760px){#view-conn .panel{left:auto;right:16px;width:min(360px,36vw);max-height:42vh;bottom:16px}}
 :root[data-dys] #chordLabels span,:root[data-dys] #chordBar,:root[data-dys] #xCount{letter-spacing:.04em;font-family:var(--ui)}
@@ -1713,6 +1715,8 @@ if('serviceWorker' in navigator && location.protocol!=='file:'){ addEventListene
   };
   const parseHsl = (str)=>{
     const c=new THREE.Color();
+    const m=/hsl\(\s*([\d.]+)\s*[,\s]\s*([\d.]+)%\s*[,\s]\s*([\d.]+)%\s*\)/i.exec(str||'');
+    if(m){ c.setHSL(+m[1]/360, +m[2]/100, +m[3]/100); return c; }
     try{ c.set(str); }catch(e){ c.set('#c98f12'); }
     return c;
   };
@@ -1732,11 +1736,18 @@ if('serviceWorker' in navigator && location.protocol!=='file:'){ addEventListene
   };
   const resetView = ()=>{ G.view={rotX: state.xShape==='sphere'?.15:.42, rotY:0, rotZ:0, zoom:1, panX:0, panY:0}; };
 
+  function fitDistance(){
+    const R=state.xShape==='sphere'?1.62:1.42;
+    const fov=(G.camera&&G.camera.fov||42)*Math.PI/180;
+    const aspect=Math.max(0.35, (G.camera&&G.camera.aspect)||1);
+    const th=Math.tan(fov/2);
+    return Math.max(R/th, R/(th*aspect));
+  }
   function applyView(){
     if(!G.root||!G.camera) return;
     G.root.rotation.set(G.view.rotX, G.view.rotY, G.view.rotZ);
     G.root.position.set(G.view.panX, G.view.panY, 0);
-    G.camera.position.z = (state.xShape==='sphere'?3.35:2.85)/G.view.zoom;
+    G.camera.position.z = fitDistance()/(G.view.zoom||1);
     G.camera.updateProjectionMatrix();
   }
 
@@ -1825,13 +1836,10 @@ if('serviceWorker' in navigator && location.protocol!=='file:'){ addEventListene
       }
       const geo=new THREE.BufferGeometry().setFromPoints(pts);
       const c = A.b==='__cur'?col.gold : (i%2?col.ink3:col.accent);
-      const mat=new THREE.LineBasicMaterial({color:c, transparent:true, opacity:A.b==='__cur'?0.95:0.55, blending: col.add?THREE.AdditiveBlending:THREE.NormalBlending, depthWrite:false});
+      const mat=new THREE.LineBasicMaterial({color:c, transparent:true, opacity:A.b==='__cur'?0.95:0.65, blending:THREE.NormalBlending, depthWrite:false, toneMapped:false});
       const line=new THREE.Line(geo, mat);
       line.userData={kind:'book', book:A.b};
       G.arcs.add(line);
-      // slightly wider soft glow
-      const mat2=new THREE.LineBasicMaterial({color:c, transparent:true, opacity:0.22, blending:THREE.AdditiveBlending, depthWrite:false});
-      G.arcs.add(new THREE.Line(geo.clone(), mat2));
     });
 
     const nodeP={};
@@ -1846,8 +1854,9 @@ if('serviceWorker' in navigator && location.protocol!=='file:'){ addEventListene
       const a=nodeP['S'+L.v], b=nodeP[L.ref]; if(!a||!b) return;
       const c=ctrlFor(a,b,mode);
       const colA=parseHsl(VCOL[L.v]||'#c98f12');
-      const colB=colA.clone().lerp(col.gold, 0.35);
-      const w=0.008 + Math.min(0.018, (L.votes||0)/8000);
+      const colB=colA.clone().lerp(col.gold, 0.18);
+      const px=1.15 + Math.min(1.35, (L.votes||0)/180);
+      const w=worldPerCssPx()*px;
       const base=positions.length/3;
       const pbase=pickPos.length/3;
       const pts=[];
@@ -1888,20 +1897,13 @@ if('serviceWorker' in navigator && location.protocol!=='file:'){ addEventListene
       g.setAttribute('color', new THREE.Float32BufferAttribute(colors,3));
       g.setIndex(idx);
       const mat=new THREE.MeshBasicMaterial({
-        vertexColors:true, transparent:true, opacity: col.add?0.85:0.72,
-        blending: col.add?THREE.AdditiveBlending:THREE.NormalBlending,
-        depthWrite:false, side:THREE.DoubleSide
+        vertexColors:true, transparent:true, opacity:0.48,
+        blending:THREE.NormalBlending,
+        depthWrite:false, side:THREE.DoubleSide, toneMapped:false
       });
       const mesh=new THREE.Mesh(g, mat);
       mesh.userData.kind='links';
       G.links.add(mesh);
-      // soft outer glow
-      const matG=new THREE.MeshBasicMaterial({
-        vertexColors:true, transparent:true, opacity:0.2,
-        blending:THREE.AdditiveBlending, depthWrite:false, side:THREE.DoubleSide
-      });
-      const glow=mesh.clone(); glow.material=matG; glow.scale.setScalar(1.0);
-      G.links.add(glow);
 
       const pg=new THREE.BufferGeometry();
       pg.setAttribute('position', new THREE.Float32BufferAttribute(pickPos,3));
@@ -1950,8 +1952,8 @@ if('serviceWorker' in navigator && location.protocol!=='file:'){ addEventListene
       g.setAttribute('position', new THREE.BufferAttribute(arr,3));
       g.setAttribute('color', new THREE.BufferAttribute(cols,3));
       G.pts=new THREE.Points(g, new THREE.PointsMaterial({
-        size:4, sizeAttenuation:false, vertexColors:true, transparent:true, opacity:0.95,
-        blending:THREE.AdditiveBlending, depthWrite:false
+        size:2, sizeAttenuation:false, vertexColors:true, transparent:true, opacity:0.7,
+        blending:THREE.NormalBlending, depthWrite:false, toneMapped:false
       }));
       G.root.add(G.pts);
     } else G.pts=null;
@@ -1965,10 +1967,9 @@ if('serviceWorker' in navigator && location.protocol!=='file:'){ addEventListene
   function paintSelection(){
     if(!G.links) return;
     const has=G.sel.size>0;
-    G.links.children.forEach((m,i)=>{
+    G.links.children.forEach((m)=>{
       if(!m.material) return;
-      if(!has){ m.material.opacity = i?0.2:(themeColors().add?0.85:0.72); }
-      else { m.material.opacity = i?0.06:0.18; }
+      m.material.opacity = has?0.18:0.48;
     });
     // We fade the whole ribbon mesh; overlay selected paths as bright tubes
     if(G.selGlow){ G.root.remove(G.selGlow); clearGroup(G.selGlow); G.selGlow=null; }
@@ -1981,7 +1982,7 @@ if('serviceWorker' in navigator && location.protocol!=='file:'){ addEventListene
       const pts=[];
       for(let i=0;i<=24;i++) pts.push(bez(P.a,P.b,P.c,i/24,tmp.clone()));
       const geo=new THREE.BufferGeometry().setFromPoints(pts);
-      grp.add(new THREE.Line(geo, new THREE.LineBasicMaterial({color:P.color, transparent:true, opacity:1, blending:THREE.AdditiveBlending, depthWrite:false})));
+      grp.add(new THREE.Line(geo, new THREE.LineBasicMaterial({color:P.color, transparent:true, opacity:0.95, blending:THREE.NormalBlending, depthWrite:false, toneMapped:false})));
     });
     G.selGlow=grp; G.root.add(grp);
   }
@@ -2079,16 +2080,25 @@ if('serviceWorker' in navigator && location.protocol!=='file:'){ addEventListene
   function resize(){
     const stage=$('#chordStage'), canvas=$('#chordGl');
     if(!stage||!G.renderer||!G.camera) return;
-    const w=Math.max(1, stage.clientWidth), h=Math.max(1, stage.clientHeight);
+    const sr=stage.getBoundingClientRect();
+    const pad=parseFloat(getComputedStyle(stage).getPropertyValue('--chordPadTop'))||0;
+    const w=Math.max(1, Math.round(sr.width||stage.clientWidth||1));
+    const h=Math.max(1, Math.round((sr.height||stage.clientHeight||1)-pad));
     const pr=Math.min(window.devicePixelRatio||1, 2);
     if(w===G.lastW && h===G.lastH && G.renderer.getPixelRatio()===pr) return;
     G.lastW=w; G.lastH=h;
     G.renderer.setPixelRatio(pr);
-    G.renderer.setSize(w,h,true);
+    G.renderer.setSize(w,h,false);
     G.camera.aspect=w/h;
     G.camera.updateProjectionMatrix();
     renderOnce();
     placeLabels(null, state.xShape||'ring');
+  }
+  function worldPerCssPx(){
+    if(!G.camera||!G.lastH) return 0.004;
+    const z=G.camera.position.z||2.85, fov=G.camera.fov||42;
+    const worldH=2*Math.tan((fov*Math.PI/180)/2)*z;
+    return worldH/G.lastH;
   }
 
   function init(){
@@ -2103,6 +2113,8 @@ if('serviceWorker' in navigator && location.protocol!=='file:'){ addEventListene
     }catch(e){ G.failed=true; return false; }
     renderer.setClearColor(0x000000, 0);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, 2));
+    if(THREE.SRGBColorSpace) renderer.outputColorSpace=THREE.SRGBColorSpace;
+    if(THREE.NoToneMapping!=null) renderer.toneMapping=THREE.NoToneMapping;
     const scene=new THREE.Scene();
     const camera=new THREE.PerspectiveCamera(42, 1, 0.1, 20);
     camera.position.set(0, 0.08, 2.85);
@@ -2222,6 +2234,34 @@ if('serviceWorker' in navigator && location.protocol!=='file:'){ addEventListene
     gl.readPixels(Math.max(0,(w>>1)-n/2), Math.max(0,(h>>1)-n/2), n, n, gl.RGBA, gl.UNSIGNED_BYTE, buf);
     return Array.from(buf);
   }
+  function sampleRing(){
+    if(!G.ready||!G.renderer) return {n:0, nearWhite:0, uniqueHues:0, pctWhite:1};
+    renderOnce();
+    const gl=G.renderer.getContext(), w=G.renderer.domElement.width, h=G.renderer.domElement.height;
+    if(!w||!h) return {n:0, nearWhite:0, uniqueHues:0, pctWhite:1};
+    const step=Math.max(1, Math.ceil(Math.max(w,h)/800));
+    const buf=new Uint8Array(w*h*4);
+    gl.readPixels(0,0,w,h, gl.RGBA, gl.UNSIGNED_BYTE, buf);
+    const cx=w/2, cy=h/2, min=Math.min(w,h), r0=min*0.10, r1=min*0.62;
+    let n=0, nearWhite=0; const hueSet={};
+    for(let y=0;y<h;y+=step){
+      for(let x=0;x<w;x+=step){
+        const dx=x-cx, dy=y-cy, rr=Math.hypot(dx,dy);
+        if(rr<r0||rr>r1) continue;
+        const i=(y*w+x)*4, A=buf[i+3], R=buf[i], Gv=buf[i+1], B=buf[i+2];
+        const mx=Math.max(R,Gv,B), mn=Math.min(R,Gv,B);
+        if(A<8 && mx<16) continue;
+        n++;
+        if(mx>=240 && mn>=220) nearWhite++;
+        if(mx-mn>=18 && mx>=30){
+          let hh=0, d=mx-mn;
+          if(d>0){ if(mx===R) hh=((Gv-B)/d)%6; else if(mx===Gv) hh=(B-R)/d+2; else hh=(R-Gv)/d+4; if(hh<0) hh+=6; }
+          hueSet[Math.floor(hh*3)]=1;
+        }
+      }
+    }
+    return {n, nearWhite, uniqueHues:Object.keys(hueSet).length, pctWhite:n?nearWhite/n:1};
+  }
 
   const api={
     mode:()=> (G.ready && !G.failed && $('#view-conn').classList.contains('gl-on'))?'webgl':'svg',
@@ -2245,6 +2285,7 @@ if('serviceWorker' in navigator && location.protocol!=='file:'){ addEventListene
     theme(){ if(G.ready){ build(); loop(true); } },
     reset: resetView,
     samplePixels,
+    sampleRing,
     linkCount:()=>LINKS.length
   };
   window.chordsGL=api;
