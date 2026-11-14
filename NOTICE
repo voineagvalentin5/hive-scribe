@@ -1,0 +1,140 @@
+NOTICE
+======
+
+Hive Scribe third-party data, text, and font attributions
+Codex Hive Labs — https://scribe.codex-hive.com
+
+This application redistributes the following works. Each remains under its
+own license. The short summaries below are for convenience; the official
+license text or URI is controlling.
+
+-------------------------------------------------------------------------------
+1. World English Bible (English, all 73 books)
+-------------------------------------------------------------------------------
+
+World English Bible, 2020 stable text, including the deuterocanonical books
+(eBible.org “eng-web”). Public domain.
+
+Chapter and verse numbers follow the WEB (English tradition). Esther uses the
+WEB’s Greek Esther (with the additions) and Daniel the WEB’s Greek Daniel
+(with the Prayer of Azariah and Song of the Three, Susanna, and Bel and the
+Dragon). Baruch 6 is the Letter of Jeremiah.
+
+-------------------------------------------------------------------------------
+2. STEPBible TAHOT, TAGNT, TBESH, and TBESG
+     © Tyndale House, Cambridge / STEPBible.org
+     Creative Commons Attribution 4.0 International (CC BY 4.0)
+-------------------------------------------------------------------------------
+
+License: https://creativecommons.org/licenses/by/4.0/
+Source:  https://github.com/STEPBible/STEPBible-Data
+         https://stepbible.org
+
+Used here:
+
+  • TAHOT (Translators Amalgamated Hebrew OT) — Hebrew and Aramaic Old
+    Testament word-level text, morphology (ETCBC parsing in OpenScriptures
+    / OSHB code format), extended Strong’s lemmas, English glosses,
+    transliteration, and Qere/Ketiv marks. The Hebrew base text is the
+    Westminster Leningrad Codex (WLC 4.20, public domain) via OpenScriptures,
+    with Tyndale corrections toward the Leningrad Codex. Words are regrouped
+    by WEB verse for display; slash separators are removed.
+
+  • TAGNT — English word glosses, transliteration, and Strong’s numbers for
+    the Greek New Testament, matched word by word to the SBLGNT text (words
+    TAGNT lists for the SBL edition only).
+
+  • TBESH (Hebrew/Aramaic) and TBESG (Greek) — brief lexicons. Definitions
+    are shortened to about 300 characters. Occurrence counts are computed
+    in this app from the Hebrew OT and Greek NT texts used here (not from
+    the LXX or Targum).
+
+Attribution: Data from STEPBible.org, Tyndale House, Cambridge, used under
+the Creative Commons Attribution 4.0 International License.
+
+-------------------------------------------------------------------------------
+3. SBL Greek New Testament (SBLGNT)
+     © 2010 Society of Biblical Literature and Logos Bible Software
+-------------------------------------------------------------------------------
+
+The Greek New Testament text is the SBL Greek New Testament, copyright
+© 2010 Society of Biblical Literature and Logos Bible Software, used under
+the SBLGNT license:
+
+    https://sblgnt.com/license/
+
+The official license page presents the Creative Commons Attribution 4.0
+International Public License (https://creativecommons.org/licenses/by/4.0/).
+
+The WEB English text follows the Majority Text in some places, so a few WEB
+verses (for example John 7:53–8:11 and Acts 8:37) have no SBLGNT text in
+this app.
+
+-------------------------------------------------------------------------------
+4. MorphGNT (morphology and lemmas of the SBLGNT)
+     Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)
+-------------------------------------------------------------------------------
+
+License: https://creativecommons.org/licenses/by-sa/3.0/
+Source:  https://github.com/morphgnt/sblgnt
+
+Morphology and lemmas for the SBL Greek New Testament. This app displays
+MorphGNT parsing codes and a plain-English decoding of them.
+
+-------------------------------------------------------------------------------
+5. Brenton’s Septuagint with Apocrypha
+-------------------------------------------------------------------------------
+
+Greek text of Brenton’s Septuagint with Apocrypha (eBible.org “grcbrent”).
+Public domain.
+
+This app includes the Greek text only: no lemmas, glosses, or morphological
+tagging. Verses are placed next to WEB English verses by automatic alignment
+with Brenton’s public-domain English translation of the same Greek; the LXX
+reference is always shown. Placement is least reliable in Jeremiah, 1 Kings
+(3 Kingdoms), Nehemiah, Proverbs 24–31, Exodus 35–40, and Sirach 30–36;
+about 2% of Old Testament verses have no LXX match.
+
+-------------------------------------------------------------------------------
+6. Targums (Sefaria public-domain editions)
+-------------------------------------------------------------------------------
+
+  • Targum Onkelos on the Torah (Sefaria “Onkelos Genesis…Deuteronomy”,
+    source toratemetfreeware.com), public domain.
+  • Targum Jonathan on the Prophets, Joshua–Kings and Isaiah–Malachi
+    (Sefaria “Mikraot Gedolot”), public domain.
+
+From the Sefaria API: https://www.sefaria.org
+
+Hebrew verse numbers were converted to English ones with TAHOT’s verse map.
+Text only: no glosses or parsing. No Targum is included for the Writings.
+
+-------------------------------------------------------------------------------
+7. OpenBible.info cross-references
+     Creative Commons Attribution 4.0 International (CC BY 4.0)
+-------------------------------------------------------------------------------
+
+License: https://creativecommons.org/licenses/by/4.0/
+Source:  https://www.openbible.info/labs/cross-references/
+Data file dated 2026-11-09.
+
+Top 10 links per verse by votes; zero and negative votes dropped.
+OpenBible.info has no data for the deuterocanonical books.
+
+Attribution: Bible cross-references from OpenBible.info, used under
+the Creative Commons Attribution 4.0 International License.
+
+-------------------------------------------------------------------------------
+8. Noto Serif and Noto Serif Hebrew fonts
+     SIL Open Font License, Version 1.1
+-------------------------------------------------------------------------------
+
+Copyright 2022 The Noto Project Authors
+https://github.com/notofonts/hebrew
+
+Licensed under the SIL Open Font License, Version 1.1.
+The full license text is included at fonts/OFL.txt
+and is also available at https://openfontlicense.org
+
+-------------------------------------------------------------------------------
+End of NOTICE

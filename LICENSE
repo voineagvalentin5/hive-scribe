@@ -1,0 +1,18 @@
+Hive Scribe
+Copyright (c) 2026 Codex Hive Labs / Valentin Voineag
+
+This repository contains the Hive Scribe application (interface, original
+code, and branding) together with third-party Bible texts, linguistic data,
+and fonts. Those third-party materials remain under their own licenses and
+copyright notices, which are set out in the NOTICE file and, for the bundled
+fonts, in fonts/OFL.txt. The third-party terms govern those materials and
+must be followed.
+
+Unless a file or directory is marked otherwise, the original Hive Scribe
+application code and branding in this repository are Copyright (c) 2026
+Codex Hive Labs / Valentin Voineag. Permission is granted to use the hosted
+app and to study this repository. Redistribution or reuse of the original
+application code or branding should be arranged with Codex Hive Labs.
+
+No license granted here limits or replaces the rights or obligations that
+apply to the third-party works listed in NOTICE.
