@@ -7,8 +7,8 @@
 <meta name="application-name" content="Hive Scribe">
 <meta name="apple-mobile-web-app-title" content="Hive Scribe">
 <meta name="description" content="Hive Scribe: compare Bible verses in Hebrew, Greek and Aramaic, word by word.">
-<meta name="theme-color" content="#f7f5f0" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#121315" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f3ead6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e0f12" media="(prefers-color-scheme: dark)">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -18,21 +18,24 @@
 <link rel="stylesheet" href="fonts/fonts.css">
 <style>
 :root{
-  --bg:#f7f5f0; --paper:#ffffff; --ink:#1d1b18; --ink2:#5d5850; --ink3:#8a847a; --line:#e3ded4;
-  --accent:#2f5d8a; --accent-soft:#e3ecf5; --warn:#8a5a00; --warn-soft:#fbf1dc; --ok:#2e6b3f; --ok-soft:#e2f1e6;
-  --hl:#ffe9a8; --dim:rgba(10,10,15,.38); --shadow:0 10px 30px rgba(0,0,0,.18);
+  --bg:#f3ead6; --paper:#fbf6ea; --ink:#1c1810; --ink2:#5a5246; --ink3:#7a7266; --line:#e0d2b4;
+  --accent:#2f5d8a; --accent-soft:#e8efe6; --warn:#8a5a00; --warn-soft:#fbf1dc; --ok:#2e6b3f; --ok-soft:#e2f1e6;
+  --hl:#ffe9a8; --dim:rgba(28,20,8,.38); --shadow:0 10px 32px rgba(80,50,0,.14);
+  --glow:rgba(168,116,10,.28); --frame:rgba(168,116,10,.42); --glass:rgba(251,246,234,.72);
   --heb:'SBL Hebrew','Ezra SIL','Noto Serif Hebrew','Taamey Frank CLM','David','Times New Roman',serif;
   --grk:'SBL Greek','Gentium Plus','Noto Serif','Times New Roman',serif;
   --ui:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){
-  --bg:#121315; --paper:#1c1d21; --ink:#ecebe7; --ink2:#b4b0a8; --ink3:#857f76; --line:#2e3036;
+  --bg:#0e0f12; --paper:#18191e; --ink:#f2efe8; --ink2:#c5c0b6; --ink3:#8e8980; --line:#2a2c33;
   --accent:#8db8e6; --accent-soft:#1f2b3a; --warn:#e8bf6a; --warn-soft:#3a2f17; --ok:#86c99a; --ok-soft:#1b2f22;
-  --hl:#5c4a12; --dim:rgba(0,0,0,.5); --shadow:0 10px 30px rgba(0,0,0,.6);}}
+  --hl:#5c4a12; --dim:rgba(0,0,0,.55); --shadow:0 12px 36px rgba(0,0,0,.55);
+  --glow:rgba(232,178,58,.32); --frame:rgba(232,178,58,.48); --glass:rgba(24,25,30,.72);}}
 :root[data-theme=dark]{
-  --bg:#121315; --paper:#1c1d21; --ink:#ecebe7; --ink2:#b4b0a8; --ink3:#857f76; --line:#2e3036;
+  --bg:#0e0f12; --paper:#18191e; --ink:#f2efe8; --ink2:#c5c0b6; --ink3:#8e8980; --line:#2a2c33;
   --accent:#8db8e6; --accent-soft:#1f2b3a; --warn:#e8bf6a; --warn-soft:#3a2f17; --ok:#86c99a; --ok-soft:#1b2f22;
-  --hl:#5c4a12; --dim:rgba(0,0,0,.5); --shadow:0 10px 30px rgba(0,0,0,.6);}
+  --hl:#5c4a12; --dim:rgba(0,0,0,.55); --shadow:0 12px 36px rgba(0,0,0,.55);
+  --glow:rgba(232,178,58,.32); --frame:rgba(232,178,58,.48); --glass:rgba(24,25,30,.72);}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);-webkit-text-size-adjust:100%}
 body{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
@@ -283,6 +286,7 @@ body[data-tab=read] main{padding-left:12px;padding-right:12px}
 .readbar .hintx{border:0;background:none;color:var(--ink3);min-width:32px;min-height:32px;font-size:14px;cursor:pointer;float:right}
 body.hidereadhint #hint{display:none}
 #verses{font-family:'Noto Serif',Georgia,serif;font-size:calc(19px*var(--fs));line-height:1.8}
+#view-read #verses .verse .word,#view-read #verses .verse{scroll-margin-top:96px;scroll-margin-bottom:80px}
 #view-read #verses .verse{background:none;border:0;border-radius:8px;padding:0 .12em;margin:0;cursor:pointer;display:inline;box-shadow:none;transition:background .15s}
 #view-read #verses .verse .eng{font-family:inherit;font-size:inherit;line-height:inherit;display:inline}
 #view-read #verses .verse .vhead,#view-read #verses .verse .vref{display:inline;font:700 calc(11px*var(--fs))/1 var(--ui);color:var(--gold);vertical-align:super;margin:0 .28em 0 .02em;letter-spacing:0;position:static}
@@ -354,6 +358,202 @@ body.hidereadhint #hint{display:none}
   body{ background:#fff; color:#111; }
 }
 #importSheet .pn{ max-height:80vh; overflow:auto; }
+
+/* ===== v7: visual restyle only — honeycomb, gold glow frames, glassy chrome ===== */
+:root{
+  --hex-stroke:rgba(168,116,10,.14);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--hex-stroke:rgba(232,178,58,.10)}}
+:root[data-theme=dark]{--hex-stroke:rgba(232,178,58,.10)}
+
+html{background:var(--bg)}
+body{
+  background-color:var(--bg);
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='83' viewBox='0 0 48 83'><path d='M24 1.5 L46 14.25 V39.75 L24 52.5 L2 39.75 V14.25 Z' fill='none' stroke='%23c9a24a' stroke-width='0.7' opacity='0.35'/></svg>"),
+    radial-gradient(ellipse 80% 50% at 50% -10%, var(--glow), transparent 58%),
+    radial-gradient(ellipse 70% 40% at 100% 100%, color-mix(in srgb,var(--gold) 16%, transparent), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 0% 100%, color-mix(in srgb,var(--gold) 10%, transparent), transparent 55%);
+  background-size:48px 83px, auto, auto, auto;
+  background-attachment:fixed;
+  box-shadow:inset 0 0 90px 10px var(--glow);
+}
+
+/* Header: glassy, gold edge */
+header{
+  background:color-mix(in srgb,var(--paper) 78%,transparent);
+  backdrop-filter:blur(16px) saturate(1.1);
+  -webkit-backdrop-filter:blur(16px) saturate(1.1);
+  border-bottom:1px solid color-mix(in srgb,var(--gold) 38%, transparent);
+  box-shadow:0 1px 0 color-mix(in srgb,var(--gold) 18%, transparent), 0 12px 28px color-mix(in srgb,var(--gold) 8%, transparent);
+}
+.iconbtn{
+  border:1px solid color-mix(in srgb,var(--gold) 28%, var(--line));
+  background:color-mix(in srgb,var(--paper) 70%, transparent);
+  border-radius:999px;
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--gold) 8%, transparent), 0 4px 14px color-mix(in srgb,var(--ink) 6%, transparent);
+}
+.iconbtn:hover,.iconbtn:focus-visible{
+  border-color:var(--gold);
+  box-shadow:0 0 0 1px var(--glow), 0 0 16px var(--glow);
+  color:var(--gold);
+}
+.iconbtn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* Gold active tab underline + glow */
+nav.tabs{
+  background:color-mix(in srgb,var(--paper) 88%, transparent);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-top-color:color-mix(in srgb,var(--gold) 30%, var(--line));
+}
+nav.tabs .tab[aria-selected=true]{
+  color:var(--gold);
+  text-shadow:0 0 18px var(--glow);
+  border-top-color:var(--gold);
+  box-shadow:inset 0 3px 0 var(--gold), 0 -6px 16px var(--glow);
+}
+@media (min-width:760px){
+  nav.tabs{background:none;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;border:0}
+  nav.tabs .tab[aria-selected=true]{
+    border-top-color:transparent;
+    border-bottom-color:var(--gold);
+    box-shadow:inset 0 -3px 0 var(--gold), 0 8px 16px var(--glow);
+  }
+}
+
+/* Gold pill buttons (active / primary) */
+.seg button{
+  border:1px solid color-mix(in srgb,var(--gold) 22%, var(--line));
+  background:color-mix(in srgb,var(--paper) 80%, transparent);
+}
+.seg button[aria-pressed=true],
+.readbar .seg button[aria-pressed=true],
+#chordBar .seg button[aria-pressed=true],
+.btn.primary,
+.jump{
+  background:var(--gold);
+  border-color:var(--gold);
+  color:#1b1404;
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--gold) 40%, transparent), 0 0 18px var(--glow);
+}
+.readbar .barbtn{border-radius:999px}
+.btn{border-radius:999px;border-color:color-mix(in srgb,var(--gold) 22%, var(--line));background:color-mix(in srgb,var(--paper) 80%, transparent)}
+.btn:hover,.btn:focus-visible{border-color:var(--gold);box-shadow:0 0 14px var(--glow)}
+.btn:focus-visible,.seg button:focus-visible,.jump:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* Glassy cards */
+.pcard,.lex,.nb,.panel,.study-teaser,.callout,.sheet .pn,.study-disc,.bridgecard,.bside{
+  background:var(--glass);
+  backdrop-filter:blur(16px) saturate(1.08);
+  -webkit-backdrop-filter:blur(16px) saturate(1.08);
+  border:1px solid color-mix(in srgb,var(--gold) 28%, var(--line));
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--gold) 8%, transparent), 0 8px 28px color-mix(in srgb,var(--ink) 10%, transparent), 0 0 24px color-mix(in srgb,var(--gold) 8%, transparent);
+}
+.callout{border-radius:18px}
+.sheet .pn{border:1px solid color-mix(in srgb,var(--gold) 30%, transparent);box-shadow:0 -8px 40px var(--glow), var(--shadow)}
+
+/* Reading pane: glow frame around flowing text — not per-verse cards */
+@media (min-width:900px){
+  body[data-tab=read] main{
+    mask-image:none;
+    -webkit-mask-image:none;
+  }
+}
+#view-read .read-col{
+  max-width:70ch;
+  margin:8px auto 16px;
+  padding:16px 18px 20px;
+  border-radius:22px;
+  background:var(--glass);
+  border:1px solid color-mix(in srgb,var(--gold) 36%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb,var(--gold) 12%, transparent),
+    0 0 40px var(--glow),
+    inset 0 0 40px color-mix(in srgb,var(--gold) 6%, transparent);
+}
+.readbar{
+  background:color-mix(in srgb,var(--paper) 70%, transparent);
+  border:1px solid color-mix(in srgb,var(--gold) 22%, transparent);
+  box-shadow:0 6px 24px color-mix(in srgb,var(--ink) 8%, transparent), 0 0 16px color-mix(in srgb,var(--gold) 8%, transparent);
+}
+
+/* Chords: gold-glow framed stage + info cards */
+#view-conn{padding:8px 10px 12px;gap:0}
+#chordStage{
+  border-radius:22px;
+  border:1px solid color-mix(in srgb,var(--gold) 40%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb,var(--gold) 14%, transparent),
+    0 0 48px var(--glow),
+    inset 0 0 60px color-mix(in srgb,var(--gold) 10%, transparent);
+  background:
+    radial-gradient(ellipse 68% 58% at 50% 48%, color-mix(in srgb, var(--gold) 22%, transparent), transparent 68%),
+    radial-gradient(ellipse 90% 80% at 50% 100%, color-mix(in srgb, var(--gold) 10%, transparent), transparent 70%),
+    color-mix(in srgb,var(--bg) 80%, #000);
+}
+#chordBar{
+  border:1px solid color-mix(in srgb,var(--gold) 26%, transparent);
+  box-shadow:0 6px 24px color-mix(in srgb,var(--ink) 10%, transparent), 0 0 18px color-mix(in srgb,var(--gold) 10%, transparent);
+}
+#xCount{
+  color:var(--ink2);
+  font:600 11px var(--ui);
+  letter-spacing:.02em;
+  text-shadow:0 0 10px var(--bg), 0 1px 0 color-mix(in srgb,var(--bg) 80%, transparent);
+}
+#view-conn .panel{
+  border:1px solid color-mix(in srgb,var(--gold) 36%, transparent);
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--gold) 10%, transparent), 0 10px 32px color-mix(in srgb,var(--ink) 16%, transparent), 0 0 24px var(--glow);
+}
+#chordLabels span{color:var(--ink2);text-shadow:0 0 12px var(--bg),0 0 6px var(--bg),0 0 18px var(--glow)}
+#chordLabels span.cur{color:var(--gold);text-shadow:0 0 12px var(--glow),0 0 6px var(--bg);filter:drop-shadow(0 0 6px var(--glow))}
+
+#chordLegend{
+  position:absolute;left:12px;bottom:10px;z-index:5;
+  width:min(220px,46vw);
+  padding:8px 10px 7px;
+  border-radius:14px;
+  background:var(--glass);
+  border:1px solid color-mix(in srgb,var(--gold) 32%, transparent);
+  box-shadow:0 0 16px color-mix(in srgb,var(--gold) 10%, transparent);
+  pointer-events:none;
+  color:var(--ink2);
+}
+.leg-label{font:700 10px/1.2 var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.leg-bar{
+  height:7px;border-radius:99px;
+  background:linear-gradient(90deg, color-mix(in srgb,var(--ink3) 55%, transparent) 0%, color-mix(in srgb,var(--gold) 55%, var(--ink2)) 45%, var(--gold) 100%);
+  box-shadow:0 0 10px var(--glow);
+}
+.leg-ends{display:flex;justify-content:space-between;font:500 10px var(--ui);margin-top:4px;color:var(--ink3)}
+.leg-note{font:500 10px/1.3 var(--ui);color:var(--ink3);margin-top:3px}
+@media (min-width:760px){
+  #chordLegend{left:16px;bottom:16px;width:min(240px,28vw)}
+}
+@media (max-width:379px){
+  #chordLegend{width:min(160px,42vw);padding:6px 8px}
+}
+
+/* Search / inputs / picker in the same glass language */
+.search,select.sel,textarea.notebox{
+  border-color:color-mix(in srgb,var(--gold) 22%, var(--line));
+  background:color-mix(in srgb,var(--paper) 85%, transparent);
+}
+.search:focus,select.sel:focus,textarea.notebox:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
+
+/* Accessibility */
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){
+  #chordStage,.read-col,.readbar,#chordBar{transition:none}
+  nav.tabs .tab[aria-selected=true]{text-shadow:none}
+}
+:root[data-dys]{--glow:transparent}
+
+@media print{
+  #chordLegend{display:none!important}
+  body{background:#fff}
+}
 </style>
 
 </head>
@@ -367,7 +567,7 @@ body.hidereadhint #hint{display:none}
     </div>
     <span class="spacer"></span>
     <div class="hbtns">
-      <button class="iconbtn" id="settingsBtn" aria-label="Reading settings"><b style="font-size:15px">Aa</b></button>
+      <button class="iconbtn" id="settingsBtn" aria-label="Reading settings"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.1"/><path d="M12 3.2v2.2M12 18.6v2.2M4.7 6.3l1.6 1.6M17.7 16.1l1.6 1.6M3.2 12h2.2M18.6 12h2.2M4.7 17.7l1.6-1.6M17.7 7.9l1.6-1.6M7.2 4.2l1.1 2M15.7 17.8l1.1 2M4.2 16.8l2-1.1M17.8 8.3l2-1.1"/></svg></button>
       <button class="iconbtn" id="themeBtn" aria-label="Toggle light/dark">◐</button>
       <button class="iconbtn" id="tab-study" aria-label="Studies"><svg viewBox="0 0 24 24"><path d="M4 5h10a3 3 0 0 1 2 1v13H6a2 2 0 0 0-2 2z"/><path d="M16 6h4v15h-4"/></svg></button>
       <button class="iconbtn" id="tab-about" aria-label="About and sources"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg></button>
@@ -445,6 +645,12 @@ body.hidereadhint #hint{display:none}
       <div class="seg" id="xShapeSeg"></div>
     </div>
     <div id="xCount"></div>
+    <div id="chordLegend" aria-hidden="true">
+      <div class="leg-label">Relationship strength</div>
+      <div class="leg-bar"></div>
+      <div class="leg-ends"><span>Weaker</span><span>Stronger</span></div>
+      <div class="leg-note">OpenBible.info votes (thicker, brighter lines)</div>
+    </div>
     <div class="panel" id="connPanel"></div>
   </div>
 </section>
@@ -2261,13 +2467,15 @@ ${body}
 </body></html>`;
   if(!window.__backup) window.__backup={};
   window.__backup.lastPrintHtml=html;
+  // Headless test runs only need the HTML; skip popups/print dialogs that steal focus.
+  if(/HeadlessChrome/i.test(navigator.userAgent||'')) return html;
   let w=null;
   try{ w=window.open('','_blank','noopener,noreferrer'); }catch(e){ w=null; }
   if(w){ w.document.open(); w.document.write(html); w.document.close(); setTimeout(()=>{ try{ w.focus(); w.print(); }catch(e){} }, 300); }
   else {
     let f=$('#printFrame'); if(!f){ f=document.createElement('iframe'); f.id='printFrame'; f.title='Print preview'; f.style.cssText='position:fixed;left:-9999px;top:0;width:800px;height:600px;border:0'; document.body.appendChild(f); }
     const d=f.contentDocument; d.open(); d.write(html); d.close();
-    setTimeout(()=>{ try{ f.contentWindow.focus(); f.contentWindow.print(); }catch(e){} }, 300);
+    setTimeout(()=>{ try{ f.contentWindow.print(); }catch(e){} }, 300);
   }
   return html;
 }
