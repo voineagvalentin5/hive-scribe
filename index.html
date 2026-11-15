@@ -593,6 +593,126 @@ nav.tabs .tab[aria-selected=true]{
   #chordLegend,body::before{display:none!important}
   body{background:#fff}
 }
+
+/* ===== v8: Read & Interlinear workspace — library sidebar, wide reading column, word-study panel ===== */
+#view-read .read-col{container-type:inline-size}
+/* English stays at a comfortable measure; opened interlinear verses bleed to the full column width */
+#verses{--measure:36em;padding-left:max(0px,calc((100cqw - var(--measure))/2));padding-right:max(0px,calc((100cqw - var(--measure))/2))}
+#view-read #verses .verse.open{margin-left:calc(-1*max(0px,calc((100cqw - var(--measure))/2)) - 6px);margin-right:calc(-1*max(0px,calc((100cqw - var(--measure))/2)) - 6px)}
+#view-read #verses .inter .word{cursor:pointer}
+@media (hover:hover){#view-read #verses .inter .word:hover{background:color-mix(in srgb,var(--gold) 12%,transparent)}}
+#view-read #verses .inter .word.wsel{background:color-mix(in srgb,var(--gold) 20%,transparent);box-shadow:0 0 0 2px var(--gold),0 0 18px var(--glow)}
+#view-read #verses .inter .word:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+
+/* Library toggle in the reading bar */
+.readbar .libbtn{display:inline-flex;align-items:center;gap:6px}
+.readbar .libbtn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linejoin:round}
+.readbar .libbtn[aria-expanded=true]{color:var(--gold)}
+@media (max-width:1023px){.readbar .libbtn span{display:none} .readbar .libbtn{padding:5px 9px}}
+
+/* Library sidebar */
+.libside{box-sizing:border-box;background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:blur(18px) saturate(1.08);-webkit-backdrop-filter:blur(18px) saturate(1.08);
+  border:1px solid color-mix(in srgb,var(--gold) 30%,transparent);border-radius:20px;padding:10px 10px 12px;overflow:auto;overscroll-behavior:contain;
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--gold) 8%,transparent),0 8px 28px color-mix(in srgb,var(--ink) 10%,transparent),0 0 24px color-mix(in srgb,var(--gold) 8%,transparent)}
+.lib-head{display:flex;align-items:center;gap:8px;padding:2px 2px 8px}
+.lib-title{flex:1;margin:0;font:700 11px var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.lib-x{min-width:38px;min-height:38px;font-size:15px;line-height:1}
+.libside .lib-q{min-height:38px;font-size:13px;margin:0 0 4px;padding:6px 12px;border-radius:999px;box-sizing:border-box}
+.lib-h{font:700 10px var(--ui);letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin:12px 6px 4px}
+.lb-name{width:100%;display:flex;align-items:center;gap:6px;border:0;background:none;color:var(--ink2);font:500 13.5px var(--ui);text-align:left;min-height:34px;padding:4px 8px;border-radius:10px;cursor:pointer}
+.lb-name:hover{background:color-mix(in srgb,var(--gold) 10%,transparent);color:var(--ink)}
+.lb.curbook>.lb-name{color:var(--gold);font-weight:700}
+.lb-n{margin-left:auto;font-size:11px;color:var(--ink3);font-weight:500}
+.lb-dc{font-size:9px;font-weight:700;border:1px solid color-mix(in srgb,var(--gold) 60%,transparent);color:var(--gold);border-radius:99px;padding:0 5px}
+.lb-ch{display:grid;grid-template-columns:repeat(auto-fill,minmax(34px,1fr));gap:4px;padding:4px 6px 10px}
+.lb-ch[hidden]{display:none}
+.lb-ch button{min-height:34px;border-radius:9px;border:1px solid color-mix(in srgb,var(--gold) 18%,var(--line));background:color-mix(in srgb,var(--paper) 70%,transparent);color:var(--ink);font:600 12px var(--ui);cursor:pointer;padding:0}
+.lb-ch button:hover{border-color:var(--gold)}
+.lb-ch button.cur{background:var(--gold);border-color:var(--gold);color:#1b1404;box-shadow:0 0 12px var(--glow)}
+.lb-ch button.na{opacity:.4}
+.libscrim{display:none}
+
+/* Word-study panel */
+.wpanel{box-sizing:border-box;display:flex;flex-direction:column;background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(18px) saturate(1.08);-webkit-backdrop-filter:blur(18px) saturate(1.08);
+  border:1px solid color-mix(in srgb,var(--gold) 36%,transparent);border-radius:20px;padding:12px 14px 14px;
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--gold) 10%,transparent),0 10px 32px color-mix(in srgb,var(--ink) 14%,transparent),0 0 28px var(--glow)}
+.wpanel[hidden]{display:none!important}
+.wp-grab{display:none}
+.wp-head{display:flex;align-items:flex-start;gap:8px;padding-bottom:8px;border-bottom:1px solid color-mix(in srgb,var(--gold) 22%,transparent)}
+.wp-headtxt{flex:1;min-width:0}
+.wp-kicker{font:700 10px var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.wp-title{margin:2px 0 0;font:600 14px/1.3 var(--ui);color:var(--ink)}
+.wp-title:focus{outline:none}
+.wp-x{min-width:38px;min-height:38px;font-size:14px;line-height:1}
+.wp-body{flex:1 1 auto;min-height:0;overflow:auto;overscroll-behavior:contain;padding:2px 2px 4px}
+.wp-word{font-size:calc(40px*var(--fs));line-height:1.35;color:var(--ink);text-align:center;margin:10px 0 2px;text-shadow:0 0 22px var(--glow)}
+.wp-word.heb,.wp-word.arc{font-size:calc(46px*var(--fs))}
+.wp-tr{text-align:center;font-style:italic;color:var(--ink2);font-size:15px}
+.wp-gloss{text-align:center;color:var(--gold);font:600 16px 'Noto Serif',Georgia,serif;margin-top:2px}
+.wp-grid{margin-top:12px;border-top:1px solid color-mix(in srgb,var(--gold) 22%,transparent)}
+.wp-row{display:grid;grid-template-columns:96px minmax(0,1fr);gap:10px;padding:7px 0;border-bottom:1px dashed color-mix(in srgb,var(--line) 90%,transparent);font-size:13px;align-items:baseline}
+.wp-lbl{font:700 10.5px var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.wp-val{color:var(--ink);line-height:1.45;overflow-wrap:anywhere}
+.wp-src{font:500 11px var(--ui);color:var(--ink3);text-transform:none;letter-spacing:0;margin-left:4px}
+.wp-strong{color:var(--gold);font-size:14px}
+.wp-heb{font-family:var(--heb);font-size:18px}
+.wp-grk{font-family:var(--grk);font-size:16px}
+.wp-lex .wp-row:first-child{border-top:0}
+.wp-def{margin-top:10px}
+.wp-def p{margin:4px 0 0;font-size:13.5px;line-height:1.55;color:var(--ink2)}
+.wp-sec{margin-top:14px}
+.wp-chips{display:flex;flex-wrap:wrap;align-items:center;margin-top:2px}
+.wp-occ.me{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 18%,transparent)}
+.wpanel .occ{cursor:pointer}
+.wpanel .occ:hover{border-color:var(--gold)}
+.wp-muted{color:var(--ink3);font-size:12.5px;line-height:1.45}
+.wp-nodata{margin-top:10px;padding:8px 10px;border-radius:12px;background:color-mix(in srgb,var(--warn) 9%,transparent)}
+.wp-ctx{font:15px/1.6 'Noto Serif',Georgia,serif;color:var(--ink2);margin:4px 0 0}
+.wpanel .notebox{min-height:64px;box-sizing:border-box}
+.wpanel .btnrow .btn{min-height:38px}
+.wp-badges .badge{margin-top:10px}
+
+@media (min-width:1024px){
+  body[data-tab=read] main{max-width:1760px;padding-left:20px;padding-right:20px}
+  #view-read:not([hidden]){display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:start}
+  #view-read .libside{grid-column:1;grid-row:1;width:224px;margin:8px 18px 16px 0;position:sticky;top:calc(var(--hdrH,120px) + 8px);max-height:calc(100dvh - var(--hdrH,120px) - 24px);display:none;flex-direction:column}
+  body.lib-open #view-read .libside{display:flex}
+  #view-read .read-col{grid-column:2;grid-row:1;width:100%;max-width:1160px;box-sizing:border-box;margin:8px auto 16px}
+  #view-read .wpanel{grid-column:3;grid-row:1;width:min(340px,28vw);margin:8px 0 16px 18px;position:sticky;top:calc(var(--hdrH,120px) + 8px);max-height:calc(100dvh - var(--hdrH,120px) - 24px)}
+}
+@media (max-width:1023px){
+  .libside{position:fixed;top:0;bottom:0;left:0;z-index:72;width:min(320px,86vw);border-radius:0 20px 20px 0;display:flex;flex-direction:column;
+    padding-top:calc(12px + env(safe-area-inset-top));padding-bottom:calc(12px + env(safe-area-inset-bottom));
+    background:color-mix(in srgb,var(--paper) 96%,transparent);transform:translateX(-105%);visibility:hidden;transition:transform .26s ease,visibility 0s linear .26s}
+  body.lib-drawer .libside{transform:none;visibility:visible;transition:transform .26s ease}
+  .libscrim{display:block;position:fixed;inset:0;z-index:71;background:var(--dim);opacity:0;pointer-events:none;transition:opacity .2s}
+  .libscrim.on{opacity:1;pointer-events:auto}
+  .libside .lb-name{min-height:44px}
+  .libside .lb-ch{grid-template-columns:repeat(auto-fill,minmax(44px,1fr))}
+  .libside .lb-ch button{min-height:44px}
+  .wpanel{position:fixed;left:0;right:0;bottom:var(--navH,0px);z-index:40;max-width:720px;margin:0 auto;max-height:min(54vh,520px);border-radius:22px 22px 0 0;padding:6px 16px 12px;border-bottom:0;animation:wpUp .22s ease}
+  .wp-grab{display:block;width:40px;height:4px;border-radius:99px;background:color-mix(in srgb,var(--ink3) 55%,transparent);margin:2px auto 6px}
+  .wp-word{font-size:calc(34px*var(--fs));margin-top:6px}
+  .wp-word.heb,.wp-word.arc{font-size:calc(40px*var(--fs))}
+  body.wp-open[data-tab=read] main{padding-bottom:calc(min(54vh,520px) + 40px)}
+}
+/* Reading bar: rounded panel (it wraps on narrow columns); sticks under the header on desktop, scrolls away on phones */
+.readbar{border-radius:20px}
+@media (min-width:1024px){.readbar{top:calc(var(--hdrH,0px) + 6px)}}
+@media (max-width:1023px){.readbar{position:relative;top:auto}}
+@keyframes wpUp{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.libside,.libscrim{transition:none!important}.wpanel{animation:none}}
+@media print{.libside,.libscrim,.wpanel,.libbtn{display:none!important}}
+/* Header glass moved to a pseudo-element: backdrop-filter on <header> itself made it the containing block
+   for the phone's fixed bottom tab bar, which then sat over the header buttons. */
+header{backdrop-filter:none;-webkit-backdrop-filter:none;background:transparent}
+header::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:color-mix(in srgb,var(--paper) 78%,transparent);backdrop-filter:blur(16px) saturate(1.1);-webkit-backdrop-filter:blur(16px) saturate(1.1)}
+/* Phone reading bar: Library button joins the verse/Flip All row */
+@media (max-width:1023px){
+  .readbar .libbtn{order:1} .readbar .libbtn span{display:inline}
+  .readbar #vfSel,.readbar #flipAll{order:1}
+  .readbar .hint{order:2}
+}
 </style>
 
 </head>
@@ -622,6 +742,12 @@ nav.tabs .tab[aria-selected=true]{
 </header>
 <main>
 <section id="view-read">
+  <aside class="libside" id="libSide" aria-label="Library: books and chapters">
+    <div class="lib-head"><h2 class="lib-title" id="libTitle">Library</h2><button type="button" class="iconbtn lib-x" id="libClose" aria-label="Collapse library" aria-controls="libSide">«</button></div>
+    <input type="search" class="search lib-q" id="libQ" placeholder="Find a book…" aria-label="Find a book" autocomplete="off">
+    <nav class="lib-list" id="libList" aria-labelledby="libTitle"></nav>
+  </aside>
+  <div class="libscrim" id="libScrim" aria-hidden="true"></div>
   <div class="read-col">
   <nav class="chapterhead">
     <button type="button" class="charr" id="prevCh" aria-label="Previous chapter">‹</button>
@@ -632,16 +758,22 @@ nav.tabs .tab[aria-selected=true]{
     <button type="button" class="charr" id="nextCh" aria-label="Next chapter">›</button>
   </nav>
   <div id="readBar" class="readbar">
+    <button type="button" class="barbtn libbtn" id="libToggle" aria-controls="libSide" aria-expanded="false" aria-label="Library: books and chapters"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h3v14H4zM9 5h3v14H9zM14.2 5.6l2.9-.8 3.6 13.5-2.9.8z"/></svg><span>Library</span></button>
     <div id="witnessWrap">
       <div class="seg" id="witSeg"></div>
     </div>
     <select class="sel" id="vfSel" aria-label="Show verses"></select>
     <button type="button" class="barbtn" id="flipAll">Flip All</button>
-    <p class="hint" id="hint">Tap a verse to flip it to the original language. Then <b>press and hold</b> any word for its details. Tap the dimmed area to close. <button type="button" class="hintx" id="hintDismiss" aria-label="Dismiss hint">✕</button></p>
+    <p class="hint" id="hint">Tap a verse to flip it to the original language. Then <b>tap a word</b> to study it, or <b>press and hold</b> for a quick card. Tap the dimmed area to close. <button type="button" class="hintx" id="hintDismiss" aria-label="Dismiss hint">✕</button></p>
   </div>
   <div id="verses"><div class="loading">Loading…</div></div>
   <div class="chapterfoot"><button type="button" class="textnav" id="prevCh2">‹ Previous chapter</button><button type="button" class="textnav" id="nextCh2">Next chapter ›</button></div>
   </div>
+  <aside class="wpanel" id="wordPanel" aria-labelledby="wpTitle" hidden>
+    <div class="wp-grab" aria-hidden="true"></div>
+    <div class="wp-head"><div class="wp-headtxt"><div class="wp-kicker">Word study</div><h2 class="wp-title" id="wpTitle" tabindex="-1"></h2></div><button type="button" class="iconbtn wp-x" id="wpClose" aria-label="Close word study">✕</button></div>
+    <div class="wp-body" id="wpBody"></div>
+  </aside>
 </section>
 
 <section id="view-poly" hidden>
@@ -1032,7 +1164,7 @@ async function gotoChapter(b,c,opts={}){
   if(!bookVisible(b) || !chapterVisible(b,c)){ const n=nearestVisible(b,c); b=n[0]; c=n[1]; }
   const seq=++loadSeq;
   if(!opts.keepScroll) saveScroll();
-  closePopup();
+  closePopup(); wpClose(false);
   state.book=b; state.ch=c;
   WITS=witnessesFor(b,c);
   if(!WITS.some(w=>w.id===state.wit)) state.wit = defaultWit(b,c);
@@ -1046,7 +1178,7 @@ async function gotoChapter(b,c,opts={}){
     const {ch,en} = await loadChapter(b,c);
     if(seq!==loadSeq) return;
     CH=ch; EN=en[String(c)]||{};
-    render();
+    render(); libRender();
     if(state.tab==='poly') renderPoly();
     if(state.tab==='conn') renderConn();
     if(state.tab==='lex') renderLex();
@@ -1110,7 +1242,7 @@ function interHTML(v){
   const rn=witRefNote(wit.id,v), lang=wit.cls==='grk'?'grc':wit.cls==='lat'?'la':(wit.cls==='heb'?'he':'arc');
   return (rn?`<div class="lxxref">${esc(rn)}</div>`:'')+
     `<div class="inter ${wit.cls}" dir="${wit.rtl?'rtl':'ltr'}" lang="${lang}">`+
-    ws.map((w,i)=>{ const hit=state.hl&&String(state.hl.v)===String(v)&&state.hl.strongs&&w.raw&&state.hl.strongs.some(s=>strongMatch(w.raw[3],s)); return `<div class="word${NOTES[`w|${state.book}|${state.ch}|${wit.id}|${v}|${i}`]?' noted':''}${hit?' hl':''}" data-v="${v}" data-i="${i}"><span class="o">${esc(view(w.w,wit.cls))}</span>${w.g?`<span class="g">${esc(w.g)}</span>`:''}</div>`; }).join('')+
+    ws.map((w,i)=>{ const hit=state.hl&&String(state.hl.v)===String(v)&&state.hl.strongs&&w.raw&&state.hl.strongs.some(s=>strongMatch(w.raw[3],s)); return `<div tabindex="0" role="button" aria-pressed="false" class="word${NOTES[`w|${state.book}|${state.ch}|${wit.id}|${v}|${i}`]?' noted':''}${hit?' hl':''}" data-v="${v}" data-i="${i}"><span class="o">${esc(view(w.w,wit.cls))}</span>${w.g?`<span class="g">${esc(w.g)}</span>`:''}</div>`; }).join('')+
     `</div><div>${BADGE[wit.id]}</div>`;
 }
 function renderVerses(){
@@ -1120,6 +1252,7 @@ function renderVerses(){
     const inter=open?`<div class="interwrap open"><div class="inter-inner">${interHTML(v)}</div></div>`:'';
     return `<article class="verse${open?' open':''}" id="v-${state.book}-${state.ch}-${v}" data-id="${id}" data-v="${v}"><span class="vhead vref" title="${esc(refName(state.book,state.ch,v))}">${esc(String(v))}</span><button class="vnote${NOTES[`v|${state.book}|${state.ch}|${v}`]?' has':''}" data-note="v|${state.book}|${state.ch}|${v}" aria-label="Note on ${esc(refName(state.book,state.ch,v))}">✎</button><div class="eng">${esc(EN[v]||'')}</div>${inter}</article>`;
   }).join('') || '<div class="loading">No verses.</div>';
+  wpSync();
 }
 function animateVerse(card, open){
   const v=card.dataset.v;
@@ -1171,12 +1304,14 @@ versesEl.addEventListener('click',e=>{
   if(press && (press.dragged || scrollY!==press.sy)){ press=null; return; }
   const nb=e.target.closest('.vnote'); if(nb){ openNoteSheet(nb.dataset.note); return; }
   if(e.target.closest('button,a')) return;
+  const wd=e.target.closest('.inter .word'); if(wd){ const sel0=getSelection(); if(!(sel0 && !sel0.isCollapsed && String(sel0).trim())){ wpOpen(wd); } return; }
   const card=e.target.closest('.verse'); if(!card||!WITS.length) return;
   const sel=getSelection(); if(sel && !sel.isCollapsed && String(sel).trim() && card.contains(sel.anchorNode)) return;
   const id=card.dataset.id, opening=!state.open.has(id);
   opening?state.open.add(id):state.open.delete(id);
   if(opening) preloadLex();
   persist(); animateVerse(card, opening);
+  if(!opening && wpState && wpState.v===String(card.dataset.v)) wpClose(false);
 });
 
 // ---------- lexicon files (lazy) ----------
@@ -1294,7 +1429,7 @@ callout.addEventListener('contextmenu',e=>{ if(!inForm(e)) e.preventDefault(); }
 let lastTap=0;
 callout.addEventListener('pointerup',e=>{ if(e.pointerType!=='touch'||inForm(e)) return; const now=Date.now(); if(now-lastTap<320){ closePopup(); lastTap=0; } else lastTap=now; });
 callout.addEventListener('click',e=>{ const b=e.target.closest('[data-conc]'); if(!b) return; const k=b.dataset.conc; closePopup(); openConcordance(k); });
-addEventListener('keydown',e=>{ if(e.key==='Escape'){ closePopup(); closeSheets(); } });
+addEventListener('keydown',e=>{ if(e.key==='Escape'){ escLayer(); } });
 addEventListener('resize',()=>{ if(popupOpen && popupEl && popupEl.isConnected) placePopup(false); else closePopup(); });
 function restorePopup(){
   const p=state.popup; if(!p || state.tab!=='read') return;
@@ -1339,6 +1474,7 @@ function settingsChanged(){
   if(state.vf!=='all' && !visibleVlabels(state.book,state.ch).includes(state.vf)) state.vf='all';
   render(); if(state.tab==='poly') renderPoly(); if(state.tab==='lex') renderLex();
   if(state.tab==='conn'){ renderConn(); if(window.chordsGL) chordsGL.relabel(); }
+  libRender();
 }
 $('#fsSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; state.settings.fs=b.dataset.fs; settingsChanged(); });
 $('#vowSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; state.settings.vow=b.dataset.vow; settingsChanged(); });
@@ -1405,7 +1541,7 @@ async function jumpTo(b,c,wit,v,i,opts){
   state.open.add(`${b}.${c}.${v}`); render(); if(state.tab!=='read') showTab('read');
   const el=document.getElementById(`v-${b}-${c}-${v}`); if(!el) return;
   el.scrollIntoView({block:'center'}); el.classList.add('flash'); setTimeout(()=>el.classList.remove('flash'),1600);
-  if(i!=null){ const w=el.querySelector(`.word[data-i="${i}"]`); if(w){ w.scrollIntoView({block:'center'}); if(!LEXF[state.wit==='heb'?'H':'G'] && (state.wit==='heb'||state.wit==='grk')) lexFile(state.wit==='heb'?'H':'G').catch(()=>{}); setTimeout(()=>openPopup(w,true),60); } }
+  if(i!=null){ const w=el.querySelector(`.word[data-i="${i}"]`); if(w){ w.scrollIntoView({block:'center'}); if(!LEXF[state.wit==='heb'?'H':'G'] && (state.wit==='heb'||state.wit==='grk')) lexFile(state.wit==='heb'?'H':'G').catch(()=>{}); setTimeout(()=>opts.panel?wpOpen(w):openPopup(w,true),60); } }
   persist();
 }
 
@@ -2703,6 +2839,232 @@ $('#studyBody').addEventListener('click',e=>{
 
 window.__backup={bundleAll,bundleStudy,allMarkdown,exportAll,exportStudy,importBackupText,previewImport,applyImport,parseBackup,openPrint,shareOrDownload,printBodyFromMarkdown};
 window.__studies={openStudy,renderStudy,prog:()=>STUDY_PROG, save:saveStudyProg, setProg:(p)=>{ STUDY_PROG=p||{}; saveStudyProg(); }};
+
+// ===================== v8: Read & Interlinear workspace =====================
+// Library sidebar (desktop: collapsible column, remembered; phone: slide-in drawer)
+// and a contextual word-study panel (desktop: right column; phone: bottom sheet).
+// Everything shown in the panel comes from data the app already loads
+// (chapter words, STEPBible lexicons, concordance); nothing is invented.
+var LIB_KEY='hiveScribe.ui.v1', LIB_READY=false, libUI={open:true}, drawerOpen=false, libExpanded=new Set(), libLastCur=null;
+var WIDE_MQ=matchMedia('(min-width:1024px)');
+var wpState=null, wpSeq=0;
+try{ var _ui=JSON.parse(localStorage.getItem(LIB_KEY)||'{}'); if(_ui && typeof _ui.libOpen==='boolean') libUI.open=_ui.libOpen; }catch(e){}
+function libSave(){ try{ localStorage.setItem(LIB_KEY, JSON.stringify({libOpen:libUI.open})); }catch(e){} }
+function isWide(){ return WIDE_MQ.matches; }
+function setChromeVars(){
+  const h=document.querySelector('header'), n=document.querySelector('nav.tabs'), r=document.documentElement.style;
+  if(h) r.setProperty('--hdrH', h.offsetHeight+'px');
+  r.setProperty('--navH', (n && getComputedStyle(n).position==='fixed') ? n.offsetHeight+'px' : '0px');
+}
+function libApply(){
+  const wide=isWide(), open=wide?libUI.open:drawerOpen, side=$('#libSide');
+  document.body.classList.toggle('lib-open', wide && libUI.open);
+  document.body.classList.toggle('lib-drawer', !wide && drawerOpen);
+  $('#libToggle').setAttribute('aria-expanded', String(open));
+  $('#libClose').setAttribute('aria-label', wide?'Collapse library':'Close library');
+  $('#libClose').textContent = wide?'«':'✕';
+  side.inert = !open;
+  if(wide){ side.removeAttribute('role'); side.removeAttribute('aria-modal'); }
+  else { side.setAttribute('role','dialog'); side.setAttribute('aria-modal', String(drawerOpen)); }
+  $('#libScrim').classList.toggle('on', !wide && drawerOpen);
+}
+function libSetOpen(open, focus){
+  if(isWide()){ libUI.open=open; libSave(); }
+  else drawerOpen=open;
+  libApply();
+  if(open){ libRender(true); if(focus!==false) setTimeout(()=>{ const c=$('#libList .lb-ch button.cur')||$('#libClose'); c.focus({preventScroll:true}); },30); }
+  else if(focus!==false) $('#libToggle').focus({preventScroll:true});
+  setTimeout(()=>{ if(popupOpen) placePopup(false); },260);
+}
+function libRender(scrollCur){
+  if(!LIB_READY || !BOOKS.length) return;
+  const q=stripMarks(($('#libQ').value||'').trim());
+  libExpanded.add(state.book);
+  const list=BOOKS.filter(b=>bookVisible(b.id) && (!q || stripMarks(b.name).includes(q) || b.id.toLowerCase().startsWith(q)));
+  let html='', lastNT=null;
+  list.forEach(b=>{
+    if(!!b.nt!==lastNT){ html+=`<h3 class="lib-h">${b.nt?'New Testament':'Old Testament'}</h3>`; lastNT=!!b.nt; }
+    const exp=libExpanded.has(b.id)||(q&&list.length<=3), chs=visibleChapters(b.id), cur=b.id===state.book;
+    html+=`<div class="lb${cur?' curbook':''}" data-book="${b.id}"><button type="button" class="lb-name" aria-expanded="${exp}" aria-controls="lbc-${b.id}"><span class="lb-t">${esc(b.name)}</span>${b.dc===1?'<span class="lb-dc" title="Deuterocanonical">DC</span>':''}<span class="lb-n">${chs.length}</span></button>`+
+      `<div class="lb-ch" id="lbc-${b.id}"${exp?'':' hidden'}>${exp?chs.map(c=>{ const on=cur&&c===state.ch, na=sampleOnly(b.id,c);
+        return `<button type="button" data-lgo="${b.id}" data-c="${c}" class="${on?'cur':''}${na?' na':''}"${on?' aria-current="page"':''} aria-label="${esc(b.name)} ${c}">${c}</button>`; }).join(''):''}</div></div>`;
+  });
+  $('#libList').innerHTML = html || '<div class="note">No book matches.</div>';
+  const key=state.book+'.'+state.ch;
+  if(scrollCur || key!==libLastCur){ libLastCur=key; const side=$('#libSide'), cur=$('#libList .lb.curbook');
+    if(cur && !q){ const top=cur.offsetTop-side.offsetTop; if(top<side.scrollTop+40 || top>side.scrollTop+side.clientHeight-120) side.scrollTop=Math.max(0,top-80); } }
+}
+function libInit(){
+  LIB_READY=true;
+  $('#libToggle').addEventListener('click',()=>libSetOpen(!(isWide()?libUI.open:drawerOpen)));
+  $('#libClose').addEventListener('click',()=>libSetOpen(false));
+  $('#libScrim').addEventListener('click',()=>libSetOpen(false));
+  $('#libQ').addEventListener('input',()=>libRender(false));
+  $('#libList').addEventListener('click',e=>{
+    const go=e.target.closest('[data-lgo]');
+    if(go){ const b=go.dataset.lgo, c=+go.dataset.c; if(!isWide() && drawerOpen) libSetOpen(false,false); state.vf='all';
+      gotoChapter(b,c).then(()=>{ scrollTo(0,0); const nb=$(`#libList [data-lgo="${b}"][data-c="${c}"]`); if(nb && isWide()) nb.focus({preventScroll:true}); }); return; }
+    const hb=e.target.closest('.lb-name'); if(!hb) return;
+    const id=hb.parentElement.dataset.book; libExpanded.has(id)&&id!==state.book?libExpanded.delete(id):libExpanded.add(id);
+    if(id===state.book && hb.getAttribute('aria-expanded')==='true'){ const g=hb.nextElementSibling; g.hidden=true; hb.setAttribute('aria-expanded','false'); return; }
+    libRender(false); const nb=$(`#libList .lb[data-book="${id}"] .lb-name`); if(nb) nb.focus({preventScroll:true});
+  });
+  WIDE_MQ.addEventListener('change',()=>{ drawerOpen=false; libApply(); setChromeVars(); wpPlace(); });
+  addEventListener('resize',setChromeVars);
+  setChromeVars(); libApply();
+}
+
+// ---------- word-study panel ----------
+function wpKeyOf(raw, witId){ if(!raw) return null; if(witId==='heb') return rootTag(raw[3]); if(witId==='grk') return (/G\d+[A-Za-z]?/.exec(raw[3]||'')||[])[0]||null; return null; }
+function wpRow(label, html){ return html?`<div class="wp-row"><div class="wp-lbl">${label}</div><div class="wp-val">${html}</div></div>`:''; }
+function wpChapterOcc(witId, key){
+  if(!CH || !key) return [];
+  const src=witId==='heb'?CH.heb:CH.grk, out=[];
+  for(const v of visibleVlabels(state.book,state.ch)){ const d=src&&src[v]; if(!d) continue;
+    d.w.forEach((a,i)=>{ if(wpKeyOf(a,witId)===key) out.push({v,i,w:a[0]}); }); }
+  return out;
+}
+function wpLexHTML(witId, raw){
+  const L=witId==='heb'?'H':'G', lex=LEXF[L];
+  if(!lex) return `<div class="wp-muted">Loading lexicon…</div>`;
+  const key=wpKeyOf(raw,witId), e=key&&lex[key];
+  let h='';
+  if(witId==='heb'){
+    const parts=String(raw[3]).split('/').map(t=>t.replace(/[{}]/g,'').replace(/\\.*$/,'').replace(/\+$/,'')).filter(Boolean);
+    const affix=parts.filter(t=>t!==key).map(t=>lex[t]?`<span class="wp-heb">${esc(view(lex[t][0],'heb'))}</span> “${esc(lex[t][3])}”`:esc(t));
+    if(e) h+=wpRow('Lemma',`<span class="wp-heb">${esc(view(e[0],'heb'))}</span> <i>${esc(e[1])}</i> · ${esc(e[3])}`);
+    if(affix.length) h+=wpRow('Prefix / suffix',affix.join(' + '));
+  } else if(e){ h+=wpRow('Lemma',`<span class="wp-grk">${esc(e[0])}</span> <i>${esc(e[1])}</i> · ${esc(e[3])}`); }
+  if(e && e[4]) h+=`<div class="wp-def"><div class="wp-lbl">Brief lexicon <span class="wp-src">STEPBible ${witId==='heb'?'TBESH':'TBESG'}</span></div><p>${esc(e[4])}</p></div>`;
+  if(!e) h+=`<div class="wp-muted">No lexicon entry for this word in the app's data.</div>`;
+  return h;
+}
+function wpOccHTML(witId, raw, v, i){
+  const key=wpKeyOf(raw,witId); if(!key) return '';
+  const lex=LEXF[witId==='heb'?'H':'G'], e=lex&&lex[key];
+  const occ=wpChapterOcc(witId,key), cls=witId==='grk'?'grk':'heb';
+  let h=`<div class="wp-sec"><div class="wp-lbl">In ${esc(refName(state.book,state.ch))} <span class="wp-src">${occ.length} time${occ.length===1?'':'s'}</span></div><div class="wp-chips">`+
+    occ.map(o=>{ const me=String(o.v)===String(v)&&o.i===i; return `<button type="button" class="occ wp-occ${me?' me':''}" data-wpv="${esc(o.v)}" data-wpi="${o.i}"${me?' aria-current="true"':''}>${esc(String(o.v))} <span class="f" style="font-family:${cls==='grk'?'var(--grk)':'var(--heb)'}">${esc(view(o.w,cls))}</span></button>`; }).join('')+`</div></div>`;
+  h+=`<div class="wp-sec"><div class="wp-lbl">Across the Bible <span class="wp-src">${e?`${e[5]} in the ${witId==='grk'?'Greek NT (SBLGNT)':'Hebrew Bible'}`:''}</span></div><div class="wp-chips" id="wpConc"><span class="wp-muted">Loading concordance…</span></div>`+
+    `<div class="btnrow"><button type="button" class="btn" data-conc="${esc(key)}">Full concordance →</button></div></div>`;
+  return h;
+}
+async function wpFillConc(seq, witId, key){
+  const el=$('#wpConc'); if(!el) return;
+  try{
+    const raw=await concFor(key); if(seq!==wpSeq) return;
+    const vids=raw.filter(x=>{ const r=vidToRef(x>>8); return r&&bookVisible(r.b)&&chapterVisible(r.b,r.c)&&verseVisible(r.b,r.c,r.v); });
+    const others=vids.map(x=>({r:vidToRef(x>>8),i:x&255})).filter(o=>!(o.r.b===state.book&&o.r.c===state.ch));
+    const shown=others.slice(0,12);
+    el.innerHTML=shown.length?shown.map(o=>`<button type="button" class="occ wp-jump" data-b="${o.r.b}" data-c="${o.r.c}" data-w="${witId}" data-v="${esc(o.r.v)}" data-i="${o.i}">${esc(BOOK[o.r.b]?BOOK[o.r.b].name:o.r.b)} ${o.r.c}:${esc(o.r.v)}</button>`).join('')+(others.length>shown.length?`<span class="wp-muted"> +${others.length-shown.length} more</span>`:''):'<span class="wp-muted">No other chapters.</span>';
+  }catch(e){ if(seq===wpSeq) el.innerHTML=`<span class="wp-muted">Concordance not available${navigator.onLine===false?' offline yet':''}.</span>`; }
+}
+function wpBodyHTML(wit, d, v, i, n){
+  const raw=d.raw, cls=wit.cls, dir=wit.rtl?'rtl':'ltr', font=cls==='grk'?'var(--grk)':cls==='lat'?"'Noto Serif',Georgia,serif":'var(--heb)';
+  const key=wkey(state.book,state.ch,wit.id,v,i), ref=refName(state.book,state.ch,v);
+  let h=`<div class="wp-word ${cls}" dir="${dir}" style="font-family:${font}">${esc(view(d.w,cls))}</div>`;
+  if(wit.id==='heb'||wit.id==='grk'){
+    h+=`<div class="wp-tr">${esc(raw[1]||'')}</div>`+(raw[2]?`<div class="wp-gloss">“${esc(raw[2])}”</div>`:'');
+    const strong=wit.id==='heb'?plainStrong(rootTag(raw[3])||''):plainStrong(raw[3]||'');
+    h+=`<div class="wp-grid">`+
+      wpRow("Strong's", strong?`<b class="wp-strong">${esc(strong)}</b> <span class="wp-src">${wit.id==='heb'?'extended '+esc(rootTag(raw[3])||raw[3]):'TAGNT '+esc(raw[3])}</span>`:`<span class="wp-muted">No TAGNT match for this word, so no Strong's number or gloss.</span>`)+
+      (wit.id==='grk'?wpRow('Dictionary form',`<span class="wp-grk">${esc(raw[5]||'')}</span>`):'')+
+      wpRow('Morphology', `${esc(wit.id==='heb'?decodeHeb(raw[4]):decodeGrk(raw[4]))} <span class="wp-src">${wit.id==='heb'?'':'MorphGNT '}${esc(raw[4]||'')}</span>`)+
+      (wit.id==='heb'&&raw[5]?wpRow('Text note',esc({Q:'Qere (the form read aloud); the written Ketiv differs',X:'Not in the Leningrad Codex: restored from the Septuagint',R:'Restored text (missing in the Leningrad Codex)',V:'Variant reading'}[raw[5]]||raw[5])):'')+
+      `</div><div class="wp-lex" id="wpLex">${wpLexHTML(wit.id,raw)}</div>`+wpOccHTML(wit.id,raw,v,i);
+  } else {
+    h+=`<div class="wp-grid">`+wpRow('Position',`word ${i+1} of ${n}`)+wpRow('Where',esc(witRefNote(wit.id,v)||ref))+`</div>`+
+      `<div class="wp-muted wp-nodata">${wit.id==='lxx'?'Brenton Septuagint text. No openly licensed lemma, gloss, Strong\'s number or parsing is available for the LXX, so none is shown.':wit.id==='tg'?'Targum text from Sefaria. The app has no sourced lemma, gloss, Strong\'s number or parsing for the Targum.':'Clementine Vulgate text. The app has no sourced lemma, gloss or parsing for the Latin.'}</div>`;
+  }
+  const val=(cls==='grk'||cls==='heb'||cls==='arc')?valueRow(d.w,cls):''; if(val) h+=`<div class="wp-sec wp-val2">${val}</div>`;
+  if(EN && EN[v]) h+=`<div class="wp-sec"><div class="wp-lbl">${esc(ref)} <span class="wp-src">WEB</span></div><p class="wp-ctx">${esc(EN[v])}</p></div>`;
+  h+=`<div class="wp-sec"><div class="wp-lbl">Personal Scribe note <span class="wp-src">saved on this device</span></div><textarea class="notebox" id="wpNote" placeholder="Your note on this word…">${esc((NOTES[key]||{}).text||'')}</textarea><div class="btnrow"><button type="button" class="btn primary" id="wpNoteSave">Save note</button><span class="saved" id="wpNoteMsg"></span></div></div>`;
+  h+=`<div class="wp-badges">${BADGE[wit.id]||''}</div>`;
+  return h;
+}
+function wpOpen(wEl, opts){
+  opts=opts||{};
+  const v=wEl.dataset.v, i=+wEl.dataset.i, wit=WITS.find(w=>w.id===state.wit); if(!wit) return;
+  const ws=verseWords(wit.id,v); const d=ws&&ws[i]; if(!d) return;
+  const seq=++wpSeq; wpState={book:state.book,ch:state.ch,wit:wit.id,v:String(v),i,w:d.w};
+  document.querySelectorAll('#verses .word.wsel').forEach(e=>{ e.classList.remove('wsel'); e.setAttribute('aria-pressed','false'); });
+  wEl.classList.add('wsel'); wEl.setAttribute('aria-pressed','true');
+  const panel=$('#wordPanel');
+  $('#wpTitle').textContent=`${refName(state.book,state.ch,v)} · ${wit.name}`;
+  $('#wpBody').innerHTML=wpBodyHTML(wit,d,v,i,ws.length); $('#wpBody').scrollTop=0; panel.scrollTop=0;
+  panel.dataset.wit=wit.id;
+  const key=wkey(state.book,state.ch,wit.id,v,i), ref=refName(state.book,state.ch,v);
+  $('#wpNoteSave').onclick=()=>{
+    const ok=setNote(key,$('#wpNote').value,{kind:'word',ref,word:d.w,wit:wit.name,book:state.book,ch:state.ch,witId:wit.id,v,i});
+    $('#wpNoteMsg').textContent=ok?($('#wpNote').value.trim()?'Saved ✓':'Note removed'):'Could not save (storage blocked)';
+    const el=document.querySelector(`#v-${state.book}-${state.ch}-${v} .word[data-i="${i}"]`); if(el) el.classList.toggle('noted',!!NOTES[key]);
+  };
+  panel.hidden=false; document.body.classList.add('wp-open');
+  const L=wit.id==='heb'?'H':wit.id==='grk'?'G':null;
+  if(L && !LEXF[L]) lexFile(L).then(()=>{ if(seq!==wpSeq) return; const el=$('#wpLex'); if(el) el.innerHTML=wpLexHTML(wit.id,d.raw); }).catch(()=>{ const el=$('#wpLex'); if(el&&seq===wpSeq) el.innerHTML='<div class="wp-muted">Lexicon not available offline yet.</div>'; });
+  const ck=wpKeyOf(d.raw,wit.id); if(ck) wpFillConc(seq,wit.id,ck);
+  wpPlace();
+  requestAnimationFrame(()=>{ wpReveal(wEl); if(opts.focus!==false) $('#wpTitle').focus({preventScroll:true}); });
+}
+function wpReveal(wEl){
+  if(!wEl||!wEl.isConnected) return;
+  const r=wEl.getBoundingClientRect(), panel=$('#wordPanel');
+  let bottomLimit=innerHeight-16;
+  if(!isWide() && !panel.hidden) bottomLimit=innerHeight-(parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--navH'))||0)-panel.offsetHeight-12;
+  let topLimit=(parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--hdrH'))||0)+12;
+  const rb=$('#readBar'); if(rb && getComputedStyle(rb).position==='sticky'){ const q=rb.getBoundingClientRect(); if(q.top<=topLimit+8) topLimit=Math.max(topLimit,q.bottom+8); }
+  if(r.bottom>bottomLimit) scrollBy(0, r.bottom-bottomLimit+8);
+  else if(r.top<topLimit) scrollBy(0, r.top-topLimit-8);
+}
+function wpPlace(){ setChromeVars(); }
+function wpClose(restoreFocus){
+  if(!wpState && $('#wordPanel').hidden) return;
+  wpState=null; wpSeq++;
+  const panel=$('#wordPanel'); const had=panel.contains(document.activeElement);
+  panel.hidden=true; document.body.classList.remove('wp-open');
+  const sel=document.querySelector('#verses .word.wsel');
+  document.querySelectorAll('#verses .word.wsel').forEach(e=>{ e.classList.remove('wsel'); e.setAttribute('aria-pressed','false'); });
+  if(restoreFocus && had && sel) sel.focus({preventScroll:true});
+}
+function wpSync(){
+  if(!wpState) return;
+  const p=wpState;
+  if(p.book!==state.book||p.ch!==state.ch||p.wit!==state.wit||!state.open.has(`${p.book}.${p.ch}.${p.v}`)){ wpClose(false); return; }
+  const el=document.querySelector(`#v-${p.book}-${p.ch}-${p.v} .word[data-i="${p.i}"]`);
+  if(!el){ wpClose(false); return; }
+  el.classList.add('wsel'); el.setAttribute('aria-pressed','true');
+}
+function wpOpenInChapter(v,i){
+  const id=`${state.book}.${state.ch}.${v}`;
+  if(state.vf!=='all' && state.vf!==String(v)) state.vf='all';
+  if(!state.open.has(id)){ state.open.add(id); persist(); }
+  renderVerses(); renderVF();
+  const el=document.querySelector(`#v-${state.book}-${state.ch}-${v} .word[data-i="${i}"]`);
+  if(el){ el.scrollIntoView({block:'center'}); wpOpen(el); }
+}
+function wpInit(){
+  $('#wpClose').addEventListener('click',()=>wpClose(true));
+  $('#wordPanel').addEventListener('click',e=>{
+    const c=e.target.closest('[data-conc]'); if(c){ const k=c.dataset.conc; wpClose(false); openConcordance(k); return; }
+    const o=e.target.closest('[data-wpv]'); if(o){ wpOpenInChapter(o.dataset.wpv,+o.dataset.wpi); return; }
+    const j=e.target.closest('.wp-jump'); if(j){ jumpTo(j.dataset.b,+j.dataset.c,j.dataset.w,j.dataset.v,+j.dataset.i,{panel:true}); return; }
+  });
+  $('#verses').addEventListener('keydown',e=>{
+    if(e.key!=='Enter' && e.key!==' ') return;
+    const w=e.target.closest('.word'); if(!w) return;
+    e.preventDefault(); e.stopPropagation(); wpOpen(w);
+  });
+}
+// Escape: close the top-most layer only (popup > sheet > drawer > word panel)
+function escLayer(){
+  if(popupOpen){ closePopup(); return true; }
+  if(document.querySelector('.sheet.on')){ closeSheets(); return true; }
+  if(!isWide() && drawerOpen){ libSetOpen(false); return true; }
+  if(wpState){ wpClose(true); return true; }
+  return false;
+}
+libInit(); wpInit();
+window.__ri={libSetOpen, libState:()=>({wide:isWide(), open:isWide()?libUI.open:drawerOpen}), wpOpen, wpClose, wpState:()=>wpState};
 
 </script>
 <script type="module">import * as THREE from "./vendor/three.module.min.js"; window.THREE=THREE; dispatchEvent(new Event("three-ready"));</script>
