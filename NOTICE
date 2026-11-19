@@ -207,5 +207,20 @@ computed transliteration are used. Verses are stored under WEB numbering,
 which matches RP's.
 
 -------------------------------------------------------------------------------
+13. Orthodox / Septuagint and appendix books
+     Public domain
+-------------------------------------------------------------------------------
+
+Prayer of Manasseh, 1 Esdras, 3 Maccabees, 4 Maccabees, Psalm 151 and
+2 Esdras. English: World English Bible (eBible.org "eng-web"); its about
+page states "The World English Bible is in the Public Domain." Greek:
+Brenton's Septuagint with Apocrypha (eBible.org "grcbrent"), marked
+Public Domain by eBible.org; Brenton has no 2 Esdras, so that book is
+English only. Greek verses are placed next to WEB verses verse by verse
+where the numbering is identical, otherwise by the same automatic
+English-to-English alignment as the rest of the Septuagint layer; the LXX
+reference is always shown. Text only: no glosses, lemmas or parsing.
+
+-------------------------------------------------------------------------------
 End of NOTICE
 

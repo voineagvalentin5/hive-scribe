@@ -755,6 +755,8 @@ header::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:no
 .lc-groups small{display:block;font-weight:400;font-size:11px;color:var(--ink3);margin-top:1px}
 .lc-note{font:11px/1.45 var(--ui);color:var(--ink3);margin:8px 2px 0}
 .lb-dc.add{border-style:dashed}
+.lb-dc.orth{border-style:double;border-width:3px;padding:0 4px}
+.lb-dc.app{border-style:dotted;border-width:2px}
 </style>
 
 </head>
@@ -889,6 +891,8 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
           <label class="toggle"><input type="checkbox" data-cg="nt"> <span>New Testament <small>27 books</small></span></label>
           <label class="toggle"><input type="checkbox" data-cg="dc"> <span>Deuterocanon <span class="lb-dc" aria-hidden="true">DC</span> <small>Tobit, Judith, 1–2 Maccabees, Wisdom, Sirach, Baruch + Letter of Jeremiah</small></span></label>
           <label class="toggle"><input type="checkbox" data-cg="add"> <span>Greek additions <span class="lb-dc add" aria-hidden="true">+Gk</span> <small>Esther 4:18–47, 10:4–14 · Daniel 3:24–90 (Azariah, Three Young Men), 13 (Susanna), 14 (Bel)</small></span></label>
+          <label class="toggle"><input type="checkbox" data-cg="orth"> <span>Orthodox books <span class="lb-dc orth" aria-hidden="true">Orth</span> <small>1 Esdras, Prayer of Manasseh, 3 Maccabees, Psalm 151</small></span></label>
+          <label class="toggle"><input type="checkbox" data-cg="app"> <span>Appendix books <span class="lb-dc app" aria-hidden="true">App</span> <small>4 Maccabees (Greek appendix) · 2 Esdras (Slavonic and Latin appendix; English only)</small></span></label>
         </fieldset>
         <p class="lc-note" id="canonNote" role="status" aria-live="polite"></p>
       </div>
@@ -979,7 +983,7 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
   <img class="brandimg" src="brand/brand-full-640.webp" alt="Hive Scribe logo">
   <div class="tagline">BIBLE STUDY • TRANSLATION COMPARE • NOTES</div>
   <h3>What this is</h3>
-  <p>Hive Scribe is a free interlinear Bible study app by Codex Hive Labs (formerly BIBLE SCOL). Logo and app icons: Valentin's Hive Scribe brand art. The whole 73-book Catholic canon, loaded chapter by chapter. Labels on each verse show where each piece of data comes from.</p>
+  <p>Hive Scribe is a free interlinear Bible study app by Codex Hive Labs (formerly BIBLE SCOL). Logo and app icons: Valentin's Hive Scribe brand art. The whole 73-book Catholic canon plus the Orthodox / Septuagint books (1 Esdras, Prayer of Manasseh, 3 Maccabees, Psalm 151) and the appendix books 4 Maccabees and 2 Esdras, loaded chapter by chapter. Use <b>Books shown</b> in the Library to pick a canon. Labels on each verse show where each piece of data comes from.</p>
   <h3>Coverage</h3>
   <ul id="covList"></ul>
   <h3>Data sources and licenses</h3>
@@ -989,6 +993,7 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
     <li><b>Greek NT (27 books):</b> SBL Greek New Testament text, © 2010 Society of Biblical Literature and Logos Bible Software, used under the <a href="https://sblgnt.com/license/">SBLGNT license</a>; morphology and lemmas from <a href="https://github.com/morphgnt/sblgnt">MorphGNT</a>, CC BY-SA 3.0. English word glosses, transliteration and Strong's numbers from STEPBible TAGNT (CC BY 4.0, Tyndale House / STEPBible.org), matched word by word to the SBLGNT text (words TAGNT lists for the SBL edition only). The WEB follows the Majority Text, so a few WEB verses (e.g. John 7:53–8:11, Acts 8:37) have no SBLGNT text.</li>
     <li><b>Greek NT, Byzantine Textform (27 books):</b> Maurice A. Robinson and William G. Pierpont, <i>The New Testament in the Original Greek: Byzantine Textform</i>, 2018 edition (RP2018), from the official repository <a href="https://github.com/byztxt/byzantine-majority-text">github.com/byztxt/byzantine-majority-text</a> (commit 788ffe7). Its license file states: “THIS REPOSITORY, INCLUDING CODE AND TEXTUAL CONTENTS, IS IN THE PUBLIC DOMAIN” (with the <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a> dedication). The accented text (CCAT files, main text without the variant apparatus) is paired word for word with Dr. Robinson's Strong's numbers and parsing codes; parsing is shown in Robinson's code system. English word glosses and transliterations are borrowed from STEPBible TAGNT (CC BY 4.0) where the same word appears in the SBLGNT layer; otherwise the TBESG brief gloss and a computed transliteration are used. Where RP's Strong's number differs from TAGNT's tagging of the same word (e.g. κἀγώ, πρῶτον), RP's number is shown and the lexicon follows TAGNT. Verse numbers in RP match the WEB, including Romans 14:24–26 (the doxology). RP has no text at Luke 17:36, Acts 8:37, 15:34 and 24:7, and does not include 1 John 5:7b–8a (the Johannine Comma); it does include Mark 16:9–20 and John 7:53–8:11. <b>Variant marks:</b> when both Greek NT witnesses are turned on, words that differ between SBLGNT and RP are marked with a dotted underline and a symbol (+ only in this text, ≈ different form or word, ‸ the other text has extra words here). Accents, breathings, capitals and punctuation are not compared.</li>
     <li><b>Septuagint Greek (OT and deuterocanonical books):</b> Greek text of Brenton's Septuagint with Apocrypha (eBible.org “grcbrent”), public domain. No openly licensed, morphologically tagged LXX was found: the tagged Rahlfs texts (CCAT-based, e.g. eliranwong/LXX-Rahlfs-1935) are CC BY-NC-SA or carry the CCAT user agreement, so they are not used. The LXX therefore has no word glosses, lemmas or parsing here. Because the Septuagint numbers and orders many chapters differently, each LXX verse was placed next to the WEB verse automatically by comparing the WEB with Brenton's public-domain English translation of the same Greek; the LXX reference is always shown. Placement is least reliable in Jeremiah, 1 Kings (3 Kingdoms), Nehemiah, Proverbs 24–31, Exodus 35–40 and Sirach 30–36; about 2% of OT verses have no LXX match.</li>
+    <li><b>Orthodox and appendix books (Prayer of Manasseh, 1 Esdras, 3 Maccabees, 4 Maccabees, Psalm 151, 2 Esdras):</b> English from the World English Bible (eBible.org “eng-web”), which states: “The World English Bible is in the Public Domain.” Greek from Brenton's Septuagint (eBible.org “grcbrent”, marked Public Domain by eBible.org) for every book except 2 Esdras, which has no Greek in Brenton (it survives mainly in Latin), so it is English only. Psalm 151's Greek is Brenton's Psalm 151. As for the rest of the Septuagint layer, each Greek verse was placed next to the WEB verse automatically by comparing the WEB with Brenton's public-domain English, and the LXX reference is always shown (e.g. 4 Maccabees 10:4 = LXX 10:3a). Text only: no glosses, lemmas or parsing. The Clementine Vulgate used here has no text for these books. In the Library they are tagged <i>Orth</i> (Orthodox) and <i>App</i> (appendix) and can be hidden with <b>Books shown</b>.</li>
     <li><b>Latin Vulgate (all 73 books, where a match was found):</b> Clementine Vulgate Latin text, public domain, from Michael Tweedale’s transcription (vulsearch), via the <a href="https://github.com/seven1m/open-bibles">Open Bibles</a> collection (<code>lat-clementine.usfx.xml</code>). Users are requested to acknowledge that source and to make any modifications clear: the wording of the Latin is unaltered; verses were grouped to the WEB by automatic alignment with the public-domain Douay-Rheims (same collection, <code>eng-dra.usfx.xml</code>). The Vulgate chapter and verse reference is always shown when it differs (for example in the Psalms). Text only: no glosses or parsing.</li>
     <li><b>Targum:</b> Targum Onkelos on the Torah (Sefaria “Onkelos Genesis…Deuteronomy”, source toratemetfreeware.com, public domain) and Targum Jonathan on the Prophets, Joshua–Kings and Isaiah–Malachi (Sefaria “Mikraot Gedolot”, public domain), from the <a href="https://www.sefaria.org">Sefaria</a> API. Hebrew verse numbers were converted to English ones with TAHOT's verse map. No Targum is included for the Writings (Ruth, Chronicles, Ezra–Nehemiah, Esther, Job, Psalms, Proverbs, Ecclesiastes, Song, Lamentations, Daniel): Sefaria's versions there are not clearly openly licensed or were not checked. Targum text only: no glosses or parsing.</li>
     <li><b>Lexicon:</b> STEPBible TBESH (Hebrew/Aramaic) and TBESG (Greek) brief lexicons, CC BY 4.0. Definitions are shortened to about 300 characters. Occurrence counts are computed from the Hebrew and Greek NT texts above (not the LXX or Targum, which are not lemmatized here).</li>
@@ -1090,13 +1095,18 @@ function getJSON(path){
 }
 let INDEX=null, BOOKS=[], BOOK={}, VID0={};   // VID0[bookId] = [first verse id of each chapter]
 function buildIndex(ix){
-  INDEX=ix; BOOKS=ix.books; BOOK=Object.fromEntries(BOOKS.map(b=>[b.id,b]));
-  let vid=0; BOOKS.forEach(b=>{ VID0[b.id]=[]; b.ch.forEach(c=>{ VID0[b.id].push(vid); vid+=c.n; }); });
+  INDEX=ix;
+  // verse ids follow the data order (concordance offsets depend on it); display order puts books with 'after' next to that book
+  let vid=0; ix.books.forEach(b=>{ VID0[b.id]=[]; b.ch.forEach(c=>{ VID0[b.id].push(vid); vid+=c.n; }); });
+  const main=ix.books.filter(b=>!b.after), extra=ix.books.filter(b=>b.after);
+  BOOKS=main.slice(); let guard=0;
+  while(extra.length && guard++<50){ for(let k=0;k<extra.length;k++){ const i=BOOKS.findIndex(x=>x.id===extra[k].after); if(i>=0){ BOOKS.splice(i+1,0,extra[k]); extra.splice(k,1); k--; } } }
+  BOOKS.push(...extra); BOOK=Object.fromEntries(BOOKS.map(b=>[b.id,b]));
 }
 const vlabels = (b,c)=>{ const m=BOOK[b].ch[c-1]; return m.v || Array.from({length:m.n},(_,i)=>String(i+1)); };
 function vidToRef(vid){ // -> {b,c,v}
   for(const b of BOOKS){ const a=VID0[b.id]; const last=a[a.length-1]+b.ch[b.ch.length-1].n;
-    if(vid<last){ let c=a.length-1; while(a[c]>vid) c--; return {b:b.id, c:c+1, v:vlabels(b.id,c+1)[vid-a[c]]}; } }
+    if(vid>=a[0] && vid<last){ let c=a.length-1; while(a[c]>vid) c--; return {b:b.id, c:c+1, v:vlabels(b.id,c+1)[vid-a[c]]}; } }
   return null;
 }
 const sampleOnly = (b,c)=> INLINE && !INLINE.files[`ch/${b}.${c}.json.gz`];
@@ -1198,8 +1208,8 @@ const FS = {S:.9, M:1, L:1.15, XL:1.3};
 const savedSet = (saved.settings && typeof saved.settings==='object') ? saved.settings : {};
 state.settings = { fs: FS[savedSet.fs]?savedSet.fs:'M', dys: !!savedSet.dys, vow: savedSet.vow==='cons'?'cons':'full', cant: savedSet.cant===undefined?true:!!savedSet.cant, hideHint: !!savedSet.hideHint, showDC: savedSet.showDC!==false, wits: Object.assign({heb:true,grk:true,byz:true,lxx:true,tg:true,vul:true}, (savedSet.wits&&typeof savedSet.wits==='object')?savedSet.wits:{}) };
 (function(){ const c=savedSet.canon, dc=savedSet.showDC!==false;
-  state.settings.canon = (c&&typeof c==='object') ? {ot:c.ot!==false, nt:c.nt!==false, dc:c.dc!==false, add:c.add!==false} : {ot:true, nt:true, dc:dc, add:dc};
-  if(!Object.values(state.settings.canon).some(Boolean)) state.settings.canon={ot:true,nt:true,dc:true,add:true};
+  state.settings.canon = (c&&typeof c==='object') ? {ot:c.ot!==false, nt:c.nt!==false, dc:c.dc!==false, add:c.add!==false, orth:c.orth===undefined?c.dc!==false:c.orth!==false, app:c.app===undefined?c.dc!==false:c.app!==false} : {ot:true, nt:true, dc:dc, add:dc, orth:dc, app:dc};
+  if(!Object.values(state.settings.canon).some(Boolean)) state.settings.canon={ot:true,nt:true,dc:true,add:true,orth:true,app:true};
   state.settings.canonPreset = ['all','prot','cath','orth'].includes(savedSet.canonPreset)?savedSet.canonPreset:null;
   state.settings.showDC = state.settings.canon.dc && state.settings.canon.add; })();
 const RE_POINTS = /[\u0591-\u05AF\u05B0-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7]/g;
@@ -1259,7 +1269,7 @@ function canonOn(g){ const c=state.settings.canon||{}; return c[g]!==false; }
 function showDC(){ return canonOn('dc') && canonOn('add'); }
 function witOn(id){ const w=state.settings.wits||{}; return w[id]!==false; }
 // canon group of a book: 'nt' New Testament, 'dc' deuterocanonical book, 'ot' Hebrew-canon OT book (Esther/Daniel: 'ot' + Greek-addition verses 'add')
-function canonGroup(b){ const B=BOOK[b]; if(!B) return 'ot'; return B.nt?'nt':B.dc===1?'dc':'ot'; }
+function canonGroup(b){ const B=BOOK[b]; if(!B) return 'ot'; return B.nt?'nt':B.dc===1?'dc':B.dc===3?'orth':B.dc===4?'app':'ot'; }
 function bookVisible(b){ if(!BOOK[b]) return true; const g=canonGroup(b); if(BOOK[b].dc===2) return canonOn('ot')||canonOn('add'); return canonOn(g); }
 function chapterVisible(b,c){ if(!bookVisible(b)) return false; if(BOOK[b].dc===2 && !(canonOn('ot')&&canonOn('add'))) return vlabels(b,c).some(v=>verseVisible(b,c,v)); return true; }
 function isGreekAddition(b,c,v){ v=+v; if(b==='Esth'&&c===4&&v>=18) return true; if(b==='Esth'&&c===10&&v>=4) return true; if(b==='Dan'&&c===3&&v>=24&&v<=90) return true; if(b==='Dan'&&(c===13||c===14)) return true; return false; }
@@ -1281,7 +1291,7 @@ function witnessesFor(b,c){
   if(m.h && witOn('heb')) ws.push({id:'heb',name:(b==='Dan'&&(c>=2&&c<=7))||(b==='Ezra'&&(c===4||c===5||c===6||c===7))?'Hebrew / Aramaic (WLC)':'Hebrew (WLC)',cls:'heb',rtl:true});
   if(m.l && witOn('lxx')) ws.push({id:'lxx',name:'Greek (LXX, Brenton)',cls:'grk',rtl:false});
   if(m.t && witOn('tg')) ws.push({id:'tg',name:['Gen','Exod','Lev','Num','Deut'].includes(b)?'Aramaic (Targum Onkelos)':'Aramaic (Targum Jonathan)',cls:'arc',rtl:true});
-  if((m.vlt||(CH&&CH.vul&&Object.keys(CH.vul).length)) && witOn('vul')) ws.push({id:'vul',name:'Latin Vulgate (Clementine)',cls:'lat',rtl:false});
+  if((m.vlt||(m.vlt===undefined&&CH&&CH.vul&&Object.keys(CH.vul).length)) && witOn('vul')) ws.push({id:'vul',name:'Latin Vulgate (Clementine)',cls:'lat',rtl:false});
   return ws;
 }
 function defaultWit(b,c){
@@ -1368,6 +1378,8 @@ function prefetchNeighbours(){ if(INLINE) return; const n=neighbour(1); if(n) se
 function dcBadge(b){
   if(b.dc===1) return ' <span class="dc">Deuterocanonical · Greek (Septuagint) original</span>';
   if(b.dc===2) return ' <span class="dc">includes Greek additions (LXX)</span>';
+  if(b.dc===3) return ' <span class="dc">Orthodox · Septuagint book</span>';
+  if(b.dc===4) return ' <span class="dc">Appendix (Orthodox / Slavonic / Latin Bibles)</span>';
   return '';
 }
 function renderCov(){
@@ -1400,7 +1412,7 @@ function strongMatch(field, code){
 }
 function interHTML(v){
   const wit=WITS.find(w=>w.id===state.wit);
-  if(!wit) return `<div class="missing">No original-language text is available for this verse with the witnesses you have turned on.</div>`;
+  if(!wit) return `<div class="missing">${state.book==='2Esd'?'2 Esdras is English only here: it survives mainly in Latin, and neither Brenton’s Septuagint nor the Clementine Vulgate used here contains it.':'No original-language text is available for this verse with the witnesses you have turned on.'}</div>`;
   const ws=verseWords(wit.id,v);
   if(!ws) return `<div class="missing">No ${esc(wit.name)} text for this verse${wit.id==='lxx'?' (not found in the Septuagint, or the automatic alignment found no match)':wit.id==='grk'?' (not in the SBLGNT; the WEB follows the Majority Text here)':wit.id==='byz'?' (not in the Robinson-Pierpont Byzantine text)':wit.id==='heb'?' (Greek addition (LXX): no Hebrew or Aramaic in the sources used)':wit.id==='vul'?' (not found in the Clementine Vulgate, or the automatic alignment found no match)':''}.</div>`;
   const rn=witRefNote(wit.id,v), lang=wit.cls==='grk'?'grc':wit.cls==='lat'?'la':(wit.cls==='heb'?'he':'arc');
@@ -1645,7 +1657,7 @@ $('#fsSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if
 $('#vowSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; state.settings.vow=b.dataset.vow; settingsChanged(); });
 $('#dysChk').onchange=e=>{ state.settings.dys=e.target.checked; settingsChanged(); };
 $('#cantChk').onchange=e=>{ state.settings.cant=e.target.checked; settingsChanged(); };
-$('#dcChk').onchange=e=>{ const on=e.target.checked; state.settings.canon=Object.assign({},state.settings.canon,{dc:on,add:on}); if(!Object.values(state.settings.canon).some(Boolean)) state.settings.canon.ot=true; state.settings.canonPreset=null; state.settings.showDC=showDC(); settingsChanged(); };
+$('#dcChk').onchange=e=>{ const on=e.target.checked; state.settings.canon=Object.assign({},state.settings.canon,{dc:on,add:on,orth:on,app:on}); if(!Object.values(state.settings.canon).some(Boolean)) state.settings.canon.ot=true; state.settings.canonPreset=null; state.settings.showDC=showDC(); settingsChanged(); };
 [['witHeb','heb'],['witGrk','grk'],['witByz','byz'],['witLxx','lxx'],['witTg','tg'],['witVul','vul']].forEach(([id,k])=>{
   const el=$('#'+id); if(!el) return;
   el.onchange=e=>{ state.settings.wits=state.settings.wits||{heb:true,grk:true,byz:true,lxx:true,tg:true,vul:true}; state.settings.wits[k]=e.target.checked; settingsChanged(); };
@@ -3312,24 +3324,27 @@ function varLegendHTML(d, witId){
 }
 
 // ---------- canon filter (Library: "Books shown") ----------
-const CANON_PRESETS={all:{ot:true,nt:true,dc:true,add:true},prot:{ot:true,nt:true,dc:false,add:false},cath:{ot:true,nt:true,dc:true,add:true},orth:{ot:true,nt:true,dc:true,add:true}};
+const CANON_PRESETS={all:{ot:true,nt:true,dc:true,add:true,orth:true,app:true},prot:{ot:true,nt:true,dc:false,add:false,orth:false,app:false},cath:{ot:true,nt:true,dc:true,add:true,orth:false,app:false},orth:{ot:true,nt:true,dc:true,add:true,orth:true,app:true}};
+const CANON_KEYS=['ot','nt','dc','add','orth','app'];
 const CANON_NAME={all:'All books',prot:'Protestant',cath:'Catholic',orth:'Orthodox'};
 function canonTag(b){
   if(b.dc===1) return '<span class="lb-dc" title="Deuterocanonical book (Catholic and Orthodox canons)">DC</span>';
   if(b.dc===2) return `<span class="lb-dc add" title="Includes the Greek additions (Catholic and Orthodox canons)${canonOn('add')?'':'; additions hidden'}">+Gk</span>`;
+  if(b.dc===3) return '<span class="lb-dc orth" title="Orthodox / Septuagint book (not in the Catholic or Protestant canon)">Orth</span>';
+  if(b.dc===4) return '<span class="lb-dc app" title="Appendix book (Greek, Slavonic or Latin Bible appendix)">App</span>';
   return '';
 }
-function samePreset(c,p){ return ['ot','nt','dc','add'].every(k=>!!c[k]===!!CANON_PRESETS[p][k]); }
+function samePreset(c,p){ return CANON_KEYS.every(k=>!!c[k]===!!CANON_PRESETS[p][k]); }
 function canonPresetNow(){
   const c=state.settings.canon||{}, p=state.settings.canonPreset;
   if(p && samePreset(c,p)) return p;
-  return ['all','prot'].find(k=>samePreset(c,k))||null;
+  return ['all','prot','cath'].find(k=>samePreset(c,k))||null;
 }
 function canonCounts(){ const bs=BOOKS.filter(b=>bookVisible(b.id)); return {books:bs.length, ch:bs.reduce((a,b)=>a+visibleChapters(b.id).length,0)}; }
 function canonSummary(){
   const p=canonPresetNow(), n=canonCounts().books;
   if(p) return `${CANON_NAME[p]} (${n} book${n===1?'':'s'})`;
-  const c=state.settings.canon, parts=[c.ot&&'OT',c.nt&&'NT',c.dc&&'Deuterocanon',c.add&&'Greek additions'].filter(Boolean);
+  const c=state.settings.canon, parts=[c.ot&&'OT',c.nt&&'NT',c.dc&&'Deuterocanon',c.add&&'Greek additions',c.orth&&'Orthodox',c.app&&'Appendix'].filter(Boolean);
   return `Custom: ${parts.join(' + ')} (${n} book${n===1?'':'s'})`;
 }
 function canonUI(){
@@ -3340,7 +3355,8 @@ function canonUI(){
   $('#canonSum').textContent=canonSummary();
   const k=canonCounts();
   let note=`${k.books} books · ${k.ch.toLocaleString()} chapters shown. Hidden books stay downloaded; they are skipped in the library, book picker, next/previous chapter, lexicon hits and cross-references.`;
-  if(p==='orth') note+=' Orthodox Bibles also include 1 Esdras, 3 Maccabees, the Prayer of Manasseh and Psalm 151 (4 Maccabees as an appendix). Hive Scribe does not contain those books yet, so this view shows the same 73 books as Catholic.';
+  if(p==='orth') note+=' Orthodox (Septuagint) books: the Catholic 73 plus 1 Esdras, the Prayer of Manasseh, 3 Maccabees and Psalm 151, with 4 Maccabees (Greek appendix) and 2 Esdras (Slavonic appendix). Orthodox churches differ on the appendix books.';
+  if(p==='all') note+=' Every book in Hive Scribe, including the Orthodox and appendix books.';
   if(p==='cath') note+=' The 73-book Catholic canon: Esther and Daniel include their Greek additions.';
   if(p==='prot') note+=' The 66-book Protestant canon: Esther and Daniel follow the Hebrew/Aramaic text, without the Greek additions.';
   if(c.add && !c.ot) note+=' Esther and Daniel show only their Greek-addition verses.';
