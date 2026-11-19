@@ -20,7 +20,7 @@ Chapters you open are cached automatically. In **Settings (Aa)** choose **Downlo
 
 ### Reading tools
 
-Text size (S–XL), a dyslexia-friendly reading mode, Hebrew vowel-point and cantillation toggles, a canon toggle and per-witness visibility (Hebrew WLC, Greek NT, Septuagint, Targum, Latin Vulgate), a Logos Bridge (Genesis 1 with John 1), a lexicon and concordance, guided Studies, and notes you can export and import.
+Text size (S–XL), a dyslexia-friendly reading mode, Hebrew vowel-point and cantillation toggles, a **Books shown** canon filter in the Library (presets All / Protestant / Catholic / Orthodox, plus Old Testament, New Testament, Deuterocanon and Greek-additions checkboxes, remembered on the device) and per-witness visibility (Hebrew WLC, Greek NT, Septuagint, Targum, Latin Vulgate), a Logos Bridge (Genesis 1 with John 1), a lexicon and concordance, guided Studies, and notes you can export and import.
 
 ## What’s included
 

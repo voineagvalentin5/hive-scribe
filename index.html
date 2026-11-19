@@ -734,6 +734,27 @@ header::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:no
 .varlegend .vl-i{white-space:nowrap}
 .varlegend .vk{display:inline-block;min-width:18px;font-size:15px;text-align:center;font-weight:700;color:var(--gold);border-bottom:2px dotted var(--gold);margin-right:2px;line-height:1.1}
 .varlegend .vk.gap{border-bottom:0}
+
+/* ---- Library: "Books shown" canon filter ---- */
+.lib-canon{margin:0 0 8px;border:1px solid var(--line);border-radius:14px;background:color-mix(in srgb,var(--paper) 70%,transparent)}
+.lib-canon>summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;padding:8px 12px;min-height:24px;font:12px/1.35 var(--ui);color:var(--ink2)}
+.lib-canon>summary::-webkit-details-marker{display:none}
+.lib-canon>summary::after{content:'▾';margin-left:auto;color:var(--gold);transition:transform .2s}
+.lib-canon[open]>summary::after{transform:rotate(180deg)}
+.lib-canon>summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:12px}
+.lib-canon .lc-k{font-weight:700;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)}
+.lib-canon .lc-sum{font-weight:650;color:var(--ink)}
+.lib-canon .lc-body{padding:0 10px 10px}
+.lc-presets{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:2px 0 8px}
+.lc-presets button{font:600 12px var(--ui);min-height:36px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.lc-presets button[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:#1a1405}
+.lc-presets button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.lc-groups{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.lc-groups .toggle{display:flex;align-items:flex-start;gap:8px;font:600 13px/1.3 var(--ui);color:var(--ink);padding:5px 2px;min-height:32px}
+.lc-groups .toggle input{margin-top:2px;flex:none;width:18px;height:18px;accent-color:var(--gold)}
+.lc-groups small{display:block;font-weight:400;font-size:11px;color:var(--ink3);margin-top:1px}
+.lc-note{font:11px/1.45 var(--ui);color:var(--ink3);margin:8px 2px 0}
+.lb-dc.add{border-style:dashed}
 </style>
 
 </head>
@@ -857,6 +878,21 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
 <section id="view-read">
   <aside class="libside" id="libSide" aria-label="Library: books and chapters">
     <div class="lib-head"><h2 class="lib-title" id="libTitle">Library</h2><button type="button" class="iconbtn lib-x" id="libClose" aria-label="Collapse library" aria-controls="libSide">«</button></div>
+    <details class="lib-canon" id="libCanon">
+      <summary><span class="lc-k">Books shown</span> <span class="lc-sum" id="canonSum">All books</span></summary>
+      <div class="lc-body">
+        <div class="lc-presets" role="group" aria-label="Canon presets">
+          <button type="button" data-cp="all" aria-pressed="false">All</button><button type="button" data-cp="prot" aria-pressed="false">Protestant</button><button type="button" data-cp="cath" aria-pressed="false">Catholic</button><button type="button" data-cp="orth" aria-pressed="false">Orthodox</button>
+        </div>
+        <fieldset class="lc-groups"><legend class="vsr">Book groups</legend>
+          <label class="toggle"><input type="checkbox" data-cg="ot"> <span>Old Testament <small>39 books (Hebrew canon)</small></span></label>
+          <label class="toggle"><input type="checkbox" data-cg="nt"> <span>New Testament <small>27 books</small></span></label>
+          <label class="toggle"><input type="checkbox" data-cg="dc"> <span>Deuterocanon <span class="lb-dc" aria-hidden="true">DC</span> <small>Tobit, Judith, 1–2 Maccabees, Wisdom, Sirach, Baruch + Letter of Jeremiah</small></span></label>
+          <label class="toggle"><input type="checkbox" data-cg="add"> <span>Greek additions <span class="lb-dc add" aria-hidden="true">+Gk</span> <small>Esther 4:18–47, 10:4–14 · Daniel 3:24–90 (Azariah, Three Young Men), 13 (Susanna), 14 (Bel)</small></span></label>
+        </fieldset>
+        <p class="lc-note" id="canonNote" role="status" aria-live="polite"></p>
+      </div>
+    </details>
     <input type="search" class="search lib-q" id="libQ" placeholder="Find a book…" aria-label="Find a book" autocomplete="off">
     <nav class="lib-list" id="libList" aria-labelledby="libTitle"></nav>
   </aside>
@@ -980,6 +1016,7 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
     <label class="toggle"><input type="checkbox" id="cantChk"> Show cantillation marks (te'amim)</label><div class="desc">Cantillation marks come with the Westminster Leningrad Codex Hebrew; the Targum texts have vowels but no cantillation. Consonants only also hides the vowels.</div></div>
   <div class="srow"><div class="lbl">Canon</div>
     <label class="toggle"><input type="checkbox" id="dcChk" checked> Show deuterocanonical books</label>
+    <div class="desc">For finer control (Old Testament, New Testament, deuterocanonical books, Greek additions to Esther and Daniel) and quick presets, use <b>Books shown</b> at the top of the Library.</div>
     <div class="desc">When this is on (the default), the app uses the 73-book Catholic canon. When it is off, you get a 66-book Protestant view: Tobit, Judith, Wisdom, Sirach, Baruch, 1–2 Maccabees, and the Greek additions to Esther and Daniel are hidden from the picker, chapter nav, lexicon hits and cross-references.</div></div>
   <div class="srow"><div class="lbl">Original-language witnesses</div>
     <label class="toggle"><input type="checkbox" id="witHeb" checked> Hebrew (WLC)</label>
@@ -1160,6 +1197,11 @@ function persist(){
 const FS = {S:.9, M:1, L:1.15, XL:1.3};
 const savedSet = (saved.settings && typeof saved.settings==='object') ? saved.settings : {};
 state.settings = { fs: FS[savedSet.fs]?savedSet.fs:'M', dys: !!savedSet.dys, vow: savedSet.vow==='cons'?'cons':'full', cant: savedSet.cant===undefined?true:!!savedSet.cant, hideHint: !!savedSet.hideHint, showDC: savedSet.showDC!==false, wits: Object.assign({heb:true,grk:true,byz:true,lxx:true,tg:true,vul:true}, (savedSet.wits&&typeof savedSet.wits==='object')?savedSet.wits:{}) };
+(function(){ const c=savedSet.canon, dc=savedSet.showDC!==false;
+  state.settings.canon = (c&&typeof c==='object') ? {ot:c.ot!==false, nt:c.nt!==false, dc:c.dc!==false, add:c.add!==false} : {ot:true, nt:true, dc:dc, add:dc};
+  if(!Object.values(state.settings.canon).some(Boolean)) state.settings.canon={ot:true,nt:true,dc:true,add:true};
+  state.settings.canonPreset = ['all','prot','cath','orth'].includes(savedSet.canonPreset)?savedSet.canonPreset:null;
+  state.settings.showDC = state.settings.canon.dc && state.settings.canon.add; })();
 const RE_POINTS = /[\u0591-\u05AF\u05B0-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7]/g;
 const RE_CANT = /[\u0591-\u05AF\u05BD]/g;
 function hebView(s){ s=String(s); if(state.settings.vow==='cons') return s.replace(RE_POINTS,''); if(!state.settings.cant) return s.replace(RE_CANT,''); return s; }
@@ -1170,7 +1212,7 @@ function applySettings(){
   if(state.settings.dys) r.dataset.dys='1'; else delete r.dataset.dys;
   document.body.classList.toggle('hidereadhint', !!state.settings.hideHint);
   const dc=$('#dcChk'), ww=state.settings.wits||{};
-  if(dc) dc.checked=!!state.settings.showDC;
+  if(dc) dc.checked=showDC();
   [['witHeb','heb'],['witGrk','grk'],['witByz','byz'],['witLxx','lxx'],['witTg','tg'],['witVul','vul']].forEach(([id,k])=>{ const el=$('#'+id); if(el) el.checked=ww[k]!==false; });
   document.querySelectorAll('#fsSeg button').forEach(b=>b.setAttribute('aria-pressed', b.dataset.fs===state.settings.fs));
   document.querySelectorAll('#vowSeg button').forEach(b=>b.setAttribute('aria-pressed', b.dataset.vow===state.settings.vow));
@@ -1213,12 +1255,15 @@ function flashMsg(m){ const el=$('#nbMsg'); if(el){ el.textContent=m; setTimeout
 // ---------- chapter data & witnesses ----------
 let CH=null, EN=null;     // current chapter originals, current book English
 const WNAME = {heb:'Hebrew (WLC)', grk:'Greek NT (SBLGNT)', byz:'Greek NT (Byzantine RP)', lxx:'Greek (LXX, Brenton)', tg:null, vul:'Latin Vulgate (Clementine)'};
-function showDC(){ return state.settings.showDC!==false; }
+function canonOn(g){ const c=state.settings.canon||{}; return c[g]!==false; }
+function showDC(){ return canonOn('dc') && canonOn('add'); }
 function witOn(id){ const w=state.settings.wits||{}; return w[id]!==false; }
-function bookVisible(b){ return !BOOK[b] || showDC() || BOOK[b].dc!==1; }
-function chapterVisible(b,c){ if(!bookVisible(b)) return false; if(!showDC() && b==='Dan' && c>=13) return false; return true; }
+// canon group of a book: 'nt' New Testament, 'dc' deuterocanonical book, 'ot' Hebrew-canon OT book (Esther/Daniel: 'ot' + Greek-addition verses 'add')
+function canonGroup(b){ const B=BOOK[b]; if(!B) return 'ot'; return B.nt?'nt':B.dc===1?'dc':'ot'; }
+function bookVisible(b){ if(!BOOK[b]) return true; const g=canonGroup(b); if(BOOK[b].dc===2) return canonOn('ot')||canonOn('add'); return canonOn(g); }
+function chapterVisible(b,c){ if(!bookVisible(b)) return false; if(BOOK[b].dc===2 && !(canonOn('ot')&&canonOn('add'))) return vlabels(b,c).some(v=>verseVisible(b,c,v)); return true; }
 function isGreekAddition(b,c,v){ v=+v; if(b==='Esth'&&c===4&&v>=18) return true; if(b==='Esth'&&c===10&&v>=4) return true; if(b==='Dan'&&c===3&&v>=24&&v<=90) return true; if(b==='Dan'&&(c===13||c===14)) return true; return false; }
-function verseVisible(b,c,v){ return showDC() || !isGreekAddition(b,c,v); }
+function verseVisible(b,c,v){ if(!BOOK[b]||BOOK[b].dc!==2) return true; return isGreekAddition(b,c,v)?canonOn('add'):canonOn('ot'); }
 function visibleVlabels(b,c){ return vlabels(b,c).filter(v=>verseVisible(b,c,v)); }
 function nearestVisible(b,c){
   if(bookVisible(b)&&chapterVisible(b,c)) return [b,c];
@@ -1226,7 +1271,7 @@ function nearestVisible(b,c){
   for(const dir of [-1,1]){
     for(let k=i+dir;k>=0&&k<BOOKS.length;k+=dir){ if(bookVisible(BOOKS[k].id)) return [BOOKS[k].id, dir<0?visibleChapters(BOOKS[k].id).slice(-1)[0]:visibleChapters(BOOKS[k].id)[0]]; }
   }
-  return ['Gen',1];
+  const f=BOOKS.find(x=>bookVisible(x.id)&&visibleChapters(x.id).length); return f?[f.id,visibleChapters(f.id)[0]]:['Gen',1];
 }
 function visibleChapters(b){ return Array.from({length:BOOK[b].ch.length},(_,i)=>i+1).filter(c=>chapterVisible(b,c)); }
 function witnessesFor(b,c){
@@ -1585,7 +1630,7 @@ document.querySelectorAll('.sheet').forEach(sh=>sh.addEventListener('click',e=>{
 $('#settingsBtn').onclick=()=>{ applySettings(); updateOfflineInfo(); openSheet('#settingsSheet'); };
 $('#openSources').onclick=()=>showTab('about');
 function settingsChanged(){
-  applySettings(); persist();
+  applySettings(); persist(); if(typeof canonUI==='function') canonUI();
   if(!bookVisible(state.book) || !chapterVisible(state.book,state.ch)){
     const n=nearestVisible(state.book,state.ch); gotoChapter(n[0],n[1]); return;
   }
@@ -1600,7 +1645,7 @@ $('#fsSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if
 $('#vowSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; state.settings.vow=b.dataset.vow; settingsChanged(); });
 $('#dysChk').onchange=e=>{ state.settings.dys=e.target.checked; settingsChanged(); };
 $('#cantChk').onchange=e=>{ state.settings.cant=e.target.checked; settingsChanged(); };
-$('#dcChk').onchange=e=>{ state.settings.showDC=e.target.checked; settingsChanged(); };
+$('#dcChk').onchange=e=>{ const on=e.target.checked; state.settings.canon=Object.assign({},state.settings.canon,{dc:on,add:on}); if(!Object.values(state.settings.canon).some(Boolean)) state.settings.canon.ot=true; state.settings.canonPreset=null; state.settings.showDC=showDC(); settingsChanged(); };
 [['witHeb','heb'],['witGrk','grk'],['witByz','byz'],['witLxx','lxx'],['witTg','tg'],['witVul','vul']].forEach(([id,k])=>{
   const el=$('#'+id); if(!el) return;
   el.onchange=e=>{ state.settings.wits=state.settings.wits||{heb:true,grk:true,byz:true,lxx:true,tg:true,vul:true}; state.settings.wits[k]=e.target.checked; settingsChanged(); };
@@ -1638,7 +1683,7 @@ function renderCanon(){
         return `<button class="avail${cur?' cur':''}${na?' na':''}" data-go="${b.id}" data-c="${c}" aria-label="${esc(b.name)} ${c}${na?', full app only':''}">${c}</button>`; }).join('')}</div></div>`;
   });
   const nch=list.reduce((a,b)=>a+visibleChapters(b.id).length,0);
-  $('#canonList').innerHTML=html+`<div class="note">${list.length} books · ${nch} chapters${showDC()?'':' · Protestant 66-book view'}.${INLINE?' This single-file sample opens Genesis 1 and John 1 only; faded chapters need the full app.':''}</div>`;
+  $('#canonList').innerHTML=html+`<div class="note">${list.length} books · ${nch} chapters · ${esc(canonSummary())}.${INLINE?' This single-file sample opens Genesis 1 and John 1 only; faded chapters need the full app.':''}</div>`;
 }
 $('#pickBtn').onclick=()=>{ renderCanon(); const cur=document.querySelector(`#canonList .bk[data-book="${state.book}"]`);
   if(cur){ cur.querySelector('.chgrid').hidden=false; cur.firstChild.setAttribute('aria-expanded','true'); } openSheet('#pickSheet');
@@ -3003,6 +3048,7 @@ function libSetOpen(open, focus){
 }
 function libRender(scrollCur){
   if(!LIB_READY || !BOOKS.length) return;
+  if(typeof canonUI==='function') canonUI();
   const q=stripMarks(($('#libQ').value||'').trim());
   libExpanded.add(state.book);
   const list=BOOKS.filter(b=>bookVisible(b.id) && (!q || stripMarks(b.name).includes(q) || b.id.toLowerCase().startsWith(q)));
@@ -3010,7 +3056,7 @@ function libRender(scrollCur){
   list.forEach(b=>{
     if(!!b.nt!==lastNT){ html+=`<h3 class="lib-h">${b.nt?'New Testament':'Old Testament'}</h3>`; lastNT=!!b.nt; }
     const exp=libExpanded.has(b.id)||(q&&list.length<=3), chs=visibleChapters(b.id), cur=b.id===state.book;
-    html+=`<div class="lb${cur?' curbook':''}" data-book="${b.id}"><button type="button" class="lb-name" aria-expanded="${exp}" aria-controls="lbc-${b.id}"><span class="lb-t">${esc(b.name)}</span>${b.dc===1?'<span class="lb-dc" title="Deuterocanonical">DC</span>':''}<span class="lb-n">${chs.length}</span></button>`+
+    html+=`<div class="lb${cur?' curbook':''}" data-book="${b.id}"><button type="button" class="lb-name" aria-expanded="${exp}" aria-controls="lbc-${b.id}"><span class="lb-t">${esc(b.name)}</span>${canonTag(b)}<span class="lb-n">${chs.length}</span></button>`+
       `<div class="lb-ch" id="lbc-${b.id}"${exp?'':' hidden'}>${exp?chs.map(c=>{ const on=cur&&c===state.ch, na=sampleOnly(b.id,c);
         return `<button type="button" data-lgo="${b.id}" data-c="${c}" class="${on?'cur':''}${na?' na':''}"${on?' aria-current="page"':''} aria-label="${esc(b.name)} ${c}">${c}</button>`; }).join(''):''}</div></div>`;
   });
@@ -3264,6 +3310,57 @@ function varLegendHTML(d, witId){
   if(!d.count) return `<div class="varlegend same" role="note">Same words as ${esc(o)} <span class="vl-note">(accents and punctuation not compared)</span></div>`;
   return `<div class="varlegend" role="note"><b>${d.count} difference${d.count===1?'':'s'} from ${esc(o)}:</b> <span class="vl-i"><span class="vk var-add">+</span> not in ${esc(o)}</span> <span class="vl-i"><span class="vk var-chg">≈</span> ${esc(o)} has a different form or word</span> <span class="vl-i"><span class="vk gap">‸</span> ${esc(o)} has extra words here</span></div>`;
 }
+
+// ---------- canon filter (Library: "Books shown") ----------
+const CANON_PRESETS={all:{ot:true,nt:true,dc:true,add:true},prot:{ot:true,nt:true,dc:false,add:false},cath:{ot:true,nt:true,dc:true,add:true},orth:{ot:true,nt:true,dc:true,add:true}};
+const CANON_NAME={all:'All books',prot:'Protestant',cath:'Catholic',orth:'Orthodox'};
+function canonTag(b){
+  if(b.dc===1) return '<span class="lb-dc" title="Deuterocanonical book (Catholic and Orthodox canons)">DC</span>';
+  if(b.dc===2) return `<span class="lb-dc add" title="Includes the Greek additions (Catholic and Orthodox canons)${canonOn('add')?'':'; additions hidden'}">+Gk</span>`;
+  return '';
+}
+function samePreset(c,p){ return ['ot','nt','dc','add'].every(k=>!!c[k]===!!CANON_PRESETS[p][k]); }
+function canonPresetNow(){
+  const c=state.settings.canon||{}, p=state.settings.canonPreset;
+  if(p && samePreset(c,p)) return p;
+  return ['all','prot'].find(k=>samePreset(c,k))||null;
+}
+function canonCounts(){ const bs=BOOKS.filter(b=>bookVisible(b.id)); return {books:bs.length, ch:bs.reduce((a,b)=>a+visibleChapters(b.id).length,0)}; }
+function canonSummary(){
+  const p=canonPresetNow(), n=canonCounts().books;
+  if(p) return `${CANON_NAME[p]} (${n} book${n===1?'':'s'})`;
+  const c=state.settings.canon, parts=[c.ot&&'OT',c.nt&&'NT',c.dc&&'Deuterocanon',c.add&&'Greek additions'].filter(Boolean);
+  return `Custom: ${parts.join(' + ')} (${n} book${n===1?'':'s'})`;
+}
+function canonUI(){
+  const box=$('#libCanon'); if(!box) return;
+  const c=state.settings.canon, p=canonPresetNow();
+  box.querySelectorAll('[data-cg]').forEach(i=>{ i.checked=!!c[i.dataset.cg]; });
+  box.querySelectorAll('[data-cp]').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.cp===p)));
+  $('#canonSum').textContent=canonSummary();
+  const k=canonCounts();
+  let note=`${k.books} books · ${k.ch.toLocaleString()} chapters shown. Hidden books stay downloaded; they are skipped in the library, book picker, next/previous chapter, lexicon hits and cross-references.`;
+  if(p==='orth') note+=' Orthodox Bibles also include 1 Esdras, 3 Maccabees, the Prayer of Manasseh and Psalm 151 (4 Maccabees as an appendix). Hive Scribe does not contain those books yet, so this view shows the same 73 books as Catholic.';
+  if(p==='cath') note+=' The 73-book Catholic canon: Esther and Daniel include their Greek additions.';
+  if(p==='prot') note+=' The 66-book Protestant canon: Esther and Daniel follow the Hebrew/Aramaic text, without the Greek additions.';
+  if(c.add && !c.ot) note+=' Esther and Daniel show only their Greek-addition verses.';
+  if(!c.add && c.ot) note+=' Esther 1:1 and 8:13 keep short Greek passages that the WEB prints inside those verses.';
+  $('#canonNote').textContent=note;
+}
+function canonSet(next, preset){
+  if(!Object.values(next).some(Boolean)){ canonUI(); $('#canonNote').textContent='Keep at least one group of books turned on.'; return false; }
+  state.settings.canon=next; state.settings.canonPreset=preset||null; state.settings.showDC=showDC();
+  settingsChanged(); return true;
+}
+function canonInit(){
+  const box=$('#libCanon'); if(!box) return;
+  box.addEventListener('change',e=>{ const i=e.target.closest('[data-cg]'); if(!i) return;
+    const next=Object.assign({},state.settings.canon,{[i.dataset.cg]:i.checked});
+    if(!canonSet(next,null)) i.checked=true; });
+  box.addEventListener('click',e=>{ const b=e.target.closest('[data-cp]'); if(!b) return; canonSet(Object.assign({},CANON_PRESETS[b.dataset.cp]), b.dataset.cp); });
+  canonUI();
+}
+canonInit();
 
 </script>
 <script type="module">import * as THREE from "./vendor/three.module.min.js"; window.THREE=THREE; dispatchEvent(new Event("three-ready"));</script>
