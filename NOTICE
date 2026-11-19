@@ -9,7 +9,7 @@ own license. The short summaries below are for convenience; the official
 license text or URI is controlling.
 
 -------------------------------------------------------------------------------
-1. World English Bible (English, all 73 books)
+1. World English Bible (English, all books; alternative English text)
 -------------------------------------------------------------------------------
 
 World English Bible, 2020 stable text, including the deuterocanonical books
@@ -220,6 +220,34 @@ English only. Greek verses are placed next to WEB verses verse by verse
 where the numbering is identical, otherwise by the same automatic
 English-to-English alignment as the rest of the Septuagint layer; the LXX
 reference is always shown. Text only: no glosses, lemmas or parsing.
+
+-------------------------------------------------------------------------------
+14. King James Version (1769) with the Apocrypha (default English text)
+     Public domain (outside the United Kingdom)
+-------------------------------------------------------------------------------
+
+Source: eBible.org "eng-kjv" (King James Version + Apocrypha),
+https://ebible.org/Scriptures/eng-kjv_vpl.zip, "The King James Version or
+Authorized Version of the Holy Bible, using the standardized text of 1769,
+with Apocrypha/Deuterocanon", brought "courtesy of the Crosswire Bible
+Society and eBible.org". eBible.org marks it "Public Domain" and states:
+"Letters patent issued by King James with no expiration date means that to
+print this translation in the United Kingdom or import printed copies into
+the UK, you need permission. Currently, the Cambridge University Press, the
+Oxford University Press, and Collins have the exclusive right to print this
+Bible translation in the UK. This royal decree has no effect outside of the
+UK, where this work is firmly in the Public Domain."
+
+The wording is unaltered. Words the translators supplied (bracketed in the
+source) are shown in italics. The KJV is placed on the app's verse labels
+(WEB numbering) so the original-language layers stay aligned; where the KJV
+numbers differently its own reference is shown (Romans 16:25-27 at
+14:24-26; the Rest of Esther in Greek Esther; the Song of the Three
+Children, Susanna and Bel in Daniel 3, 13 and 14; a few Sirach verses;
+2 Esdras 7). Placement in those books was done automatically by comparing
+the KJV with the WEB. 3 and 4 Maccabees and Psalm 151 are not in the KJV
+and are shown in the WEB. The WEB remains selectable in Settings and the
+reading bar.
 
 -------------------------------------------------------------------------------
 End of NOTICE

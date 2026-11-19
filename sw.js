@@ -1,7 +1,7 @@
 // Hive Scribe service worker.
 // App shell (HTML, fonts, icons) is precached. Bible data (data/...) goes to a separate cache ("hsdata")
 // as chapters are visited, or all at once via "Download whole Bible for offline".
-const CACHE = 'hive-scribe-4ca49ca9a6';
+const CACHE = 'hive-scribe-084e0b9497';
 const DATA = 'hsdata';
 const PRECACHE = ["./", "index.html", "manifest.webmanifest", "fonts/fonts.css", "fonts/NotoSerif-italic-latin.woff2", "fonts/NotoSerif-normal-greek-ext.woff2", "fonts/NotoSerif-normal-greek.woff2", "fonts/NotoSerif-normal-latin.woff2", "fonts/NotoSerifHebrew-normal-hebrew.woff2", "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-192.png", "icons/icon-maskable-512.png", "icons/apple-touch-icon.png", "icons/favicon-32.png", "icons/favicon-16.png", "brand/logo-dark-64.png", "brand/logo-light-64.png", "brand/brand-full-640.webp", "vendor/three.module.min.js", "studies/index.json", "studies/oneness-of-god.json"];
 self.addEventListener('install', e => {

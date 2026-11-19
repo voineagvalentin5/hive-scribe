@@ -757,6 +757,14 @@ header::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:no
 .lb-dc.add{border-style:dashed}
 .lb-dc.orth{border-style:double;border-width:3px;padding:0 4px}
 .lb-dc.app{border-style:dotted;border-width:2px}
+/* English version: KJV supplied words, pilcrows, own references */
+.eng .kit,.polytext .kit,.wp-ctx .kit,.pv .kit{font-style:italic}
+[data-dys] .kit{font-style:normal;text-decoration:underline dotted color-mix(in srgb,var(--ink) 35%,transparent);text-underline-offset:3px}
+.pil{color:var(--ink3);font-size:.85em}
+.kref{display:inline-block;margin-left:4px;padding:0 6px;border-radius:999px;font:600 10.5px var(--ui);color:var(--ink2);background:color-mix(in srgb,var(--accent) 12%,transparent);vertical-align:2px}
+.ennote{font:italic 13px var(--ui);color:var(--ink3)}
+.enfb{color:var(--ink3)}
+.readbar .ensel{font-weight:700;color:var(--ink)}
 </style>
 
 </head>
@@ -916,6 +924,7 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
       <div class="seg" id="witSeg"></div>
     </div>
     <select class="sel" id="vfSel" aria-label="Show verses"></select>
+    <select class="sel ensel" id="enSel" aria-label="English version"></select>
     <button type="button" class="barbtn" id="flipAll">Flip All</button>
     <p class="hint" id="hint">Tap a verse to flip it to the original language. Then <b>tap a word</b> to study it, or <b>press and hold</b> for a quick card. Tap the dimmed area to close. <button type="button" class="hintx" id="hintDismiss" aria-label="Dismiss hint">✕</button></p>
   </div>
@@ -988,7 +997,8 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
   <ul id="covList"></ul>
   <h3>Data sources and licenses</h3>
   <ul>
-    <li><b>English (all 73 books):</b> World English Bible, 2020 stable text, with the deuterocanonical books (eBible.org “eng-web”), public domain. Esther uses the WEB's Greek Esther (with the additions) and Daniel the WEB's Greek Daniel (with the Prayer of Azariah and Song of the Three, Susanna, and Bel and the Dragon), as in Catholic Bibles. Baruch 6 is the Letter of Jeremiah. <b>Chapter and verse numbers follow the WEB</b> (English tradition), so a few differ from the NABRE (e.g. Joel has 3 chapters and Malachi 4).</li>
+    <li><b>English, default: King James Version (KJV), with the Apocrypha:</b> the Authorized Version in the standardized text of 1769, with the Apocrypha of the 1611 KJV (Tobit, Judith, the Rest of Esther, Wisdom, Sirach, Baruch with the Epistle of Jeremy, the Song of the Three Children, Susanna, Bel and the Dragon, the Prayer of Manasses, 1–2 Maccabees, 1–2 Esdras), from eBible.org “eng-kjv” (<a href="https://ebible.org/Scriptures/eng-kjv_vpl.zip">eng-kjv_vpl.zip</a>), courtesy of the Crosswire Bible Society and eBible.org. eBible.org marks it “Public Domain” and notes: “Letters patent issued by King James with no expiration date means that to print this translation in the United Kingdom or import printed copies into the UK, you need permission … This royal decree has no effect outside of the UK, where this work is firmly in the Public Domain.” Words the translators supplied (italic in printed KJVs, bracketed in the source) are shown in italics. The KJV text is placed on the app's verse numbers (see the WEB below) so the original-language layers stay aligned; where the KJV numbers a verse differently its own reference is shown beside the verse: Romans 16:25–27 (shown at 14:24–26, where the Greek has the doxology), Greek Esther (the Rest of Esther chapters 10–16 placed where the Greek has them), Daniel 3 (the Song of the Three Children) and 13–14 (Susanna, Bel), a few verses of Sirach, and 2 Esdras 7 (the KJV lacks verses 36–105 of the modern text). Placement in those books was done automatically by comparing the KJV with the WEB. 3 and 4 Maccabees and Psalm 151 are not in the KJV, so they are shown in the WEB. Choose the English version in Settings or the reading bar.</li>
+    <li><b>English, alternative (all books):</b> World English Bible, 2020 stable text, with the deuterocanonical books (eBible.org “eng-web”), public domain. Esther uses the WEB's Greek Esther (with the additions) and Daniel the WEB's Greek Daniel (with the Prayer of Azariah and Song of the Three, Susanna, and Bel and the Dragon), as in Catholic Bibles. Baruch 6 is the Letter of Jeremiah. <b>Chapter and verse numbers in the app follow the WEB</b> (English tradition, essentially the same as the KJV's), so a few differ from the NABRE (e.g. Joel has 3 chapters and Malachi 4).</li>
     <li><b>Hebrew and Aramaic OT (39 books):</b> STEPBible TAHOT (Translators Amalgamated Hebrew OT), © Tyndale House Cambridge / STEPBible.org, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, from <a href="https://github.com/STEPBible/STEPBible-Data">STEPBible.github.io/STEPBible-Data</a>. Its Hebrew is the Westminster Leningrad Codex (WLC 4.20, public domain) via OpenScriptures, with Tyndale corrections toward the Leningrad Codex. Morphology is ETCBC parsing written in the OpenScriptures (OSHB) code format; lemmas are extended Strong's numbers; the small English under each word, the transliteration and the Qere/Ketiv marks are TAHOT's. Psalm titles (Hebrew verse 1, or 1–2) are shown with English verse 1, as the WEB prints them. Changes: words regrouped by WEB verse; slash separators removed for display.</li>
     <li><b>Greek NT (27 books):</b> SBL Greek New Testament text, © 2010 Society of Biblical Literature and Logos Bible Software, used under the <a href="https://sblgnt.com/license/">SBLGNT license</a>; morphology and lemmas from <a href="https://github.com/morphgnt/sblgnt">MorphGNT</a>, CC BY-SA 3.0. English word glosses, transliteration and Strong's numbers from STEPBible TAGNT (CC BY 4.0, Tyndale House / STEPBible.org), matched word by word to the SBLGNT text (words TAGNT lists for the SBL edition only). The WEB follows the Majority Text, so a few WEB verses (e.g. John 7:53–8:11, Acts 8:37) have no SBLGNT text.</li>
     <li><b>Greek NT, Byzantine Textform (27 books):</b> Maurice A. Robinson and William G. Pierpont, <i>The New Testament in the Original Greek: Byzantine Textform</i>, 2018 edition (RP2018), from the official repository <a href="https://github.com/byztxt/byzantine-majority-text">github.com/byztxt/byzantine-majority-text</a> (commit 788ffe7). Its license file states: “THIS REPOSITORY, INCLUDING CODE AND TEXTUAL CONTENTS, IS IN THE PUBLIC DOMAIN” (with the <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a> dedication). The accented text (CCAT files, main text without the variant apparatus) is paired word for word with Dr. Robinson's Strong's numbers and parsing codes; parsing is shown in Robinson's code system. English word glosses and transliterations are borrowed from STEPBible TAGNT (CC BY 4.0) where the same word appears in the SBLGNT layer; otherwise the TBESG brief gloss and a computed transliteration are used. Where RP's Strong's number differs from TAGNT's tagging of the same word (e.g. κἀγώ, πρῶτον), RP's number is shown and the lexicon follows TAGNT. Verse numbers in RP match the WEB, including Romans 14:24–26 (the doxology). RP has no text at Luke 17:36, Acts 8:37, 15:34 and 24:7, and does not include 1 John 5:7b–8a (the Johannine Comma); it does include Mark 16:9–20 and John 7:53–8:11. <b>Variant marks:</b> when both Greek NT witnesses are turned on, words that differ between SBLGNT and RP are marked with a dotted underline and a symbol (+ only in this text, ≈ different form or word, ‸ the other text has extra words here). Accents, breathings, capitals and punctuation are not compared.</li>
@@ -1017,6 +1027,8 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
   <h2>Typography &amp; reading <button class="iconbtn x" data-close aria-label="Close">✕</button></h2>
   <div class="srow"><div class="lbl">Text size</div><div class="seg" id="fsSeg"><button data-fs="S">S</button><button data-fs="M">M</button><button data-fs="L">L</button><button data-fs="XL">XL</button></div></div>
   <div class="srow"><label class="toggle"><input type="checkbox" id="dysChk"> Dyslexia reading mode</label><div class="desc">Sans-serif, extra letter and word spacing, higher contrast, no italics.</div></div>
+  <div class="srow"><div class="lbl">English version</div><div class="seg" id="enSeg" role="group" aria-label="English version"></div>
+    <div class="desc" id="enDesc">The English text shown in Read, Polyglot, Connections and the word panel. The original-language layers stay on the same verses whichever version you pick.</div></div>
   <div class="srow"><div class="lbl">Hebrew &amp; Aramaic vowels</div><div class="seg" id="vowSeg"><button data-vow="full">Full points</button><button data-vow="cons">Consonants only</button></div>
     <label class="toggle"><input type="checkbox" id="cantChk"> Show cantillation marks (te'amim)</label><div class="desc">Cantillation marks come with the Westminster Leningrad Codex Hebrew; the Targum texts have vowels but no cantillation. Consonants only also hides the vowels.</div></div>
   <div class="srow"><div class="lbl">Canon</div>
@@ -1030,7 +1042,7 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
     <label class="toggle"><input type="checkbox" id="witLxx" checked> Septuagint (LXX, Brenton)</label>
     <label class="toggle"><input type="checkbox" id="witTg" checked> Targum</label>
     <label class="toggle"><input type="checkbox" id="witVul" checked> Latin Vulgate (Clementine)</label>
-    <div class="desc">Turn a witness off to hide it from the chapter chips and the Polyglot matrix. English (WEB) is always shown.</div></div>
+    <div class="desc">Turn a witness off to hide it from the chapter chips and the Polyglot matrix. The English text (version chosen above) is always shown.</div></div>
   <div class="srow"><div class="lbl">Offline</div>
     <div class="desc" id="dlInfo">Chapters you open are kept for offline use.</div>
     <div class="progress" id="dlBar" hidden><div></div></div><div class="dlstat" id="dlStat"></div>
@@ -1206,7 +1218,7 @@ function persist(){
 // ---------- reading settings ----------
 const FS = {S:.9, M:1, L:1.15, XL:1.3};
 const savedSet = (saved.settings && typeof saved.settings==='object') ? saved.settings : {};
-state.settings = { fs: FS[savedSet.fs]?savedSet.fs:'M', dys: !!savedSet.dys, vow: savedSet.vow==='cons'?'cons':'full', cant: savedSet.cant===undefined?true:!!savedSet.cant, hideHint: !!savedSet.hideHint, showDC: savedSet.showDC!==false, wits: Object.assign({heb:true,grk:true,byz:true,lxx:true,tg:true,vul:true}, (savedSet.wits&&typeof savedSet.wits==='object')?savedSet.wits:{}) };
+state.settings = { fs: FS[savedSet.fs]?savedSet.fs:'M', dys: !!savedSet.dys, vow: savedSet.vow==='cons'?'cons':'full', cant: savedSet.cant===undefined?true:!!savedSet.cant, hideHint: !!savedSet.hideHint, showDC: savedSet.showDC!==false, enVer: (typeof savedSet.enVer==='string' && savedSet.enVer) ? savedSet.enVer : 'kjv', wits: Object.assign({heb:true,grk:true,byz:true,lxx:true,tg:true,vul:true}, (savedSet.wits&&typeof savedSet.wits==='object')?savedSet.wits:{}) };
 (function(){ const c=savedSet.canon, dc=savedSet.showDC!==false;
   state.settings.canon = (c&&typeof c==='object') ? {ot:c.ot!==false, nt:c.nt!==false, dc:c.dc!==false, add:c.add!==false, orth:c.orth===undefined?c.dc!==false:c.orth!==false, app:c.app===undefined?c.dc!==false:c.app!==false} : {ot:true, nt:true, dc:dc, add:dc, orth:dc, app:dc};
   if(!Object.values(state.settings.canon).some(Boolean)) state.settings.canon={ot:true,nt:true,dc:true,add:true,orth:true,app:true};
@@ -1263,7 +1275,23 @@ function copyText(text){ const done=()=>flashMsg('Copied');
 function flashMsg(m){ const el=$('#nbMsg'); if(el){ el.textContent=m; setTimeout(()=>el.textContent='',1800); } }
 
 // ---------- chapter data & witnesses ----------
-let CH=null, EN=null;     // current chapter originals, current book English
+let CH=null, EN=null, ENR={}, ENN={}, ENV=null;     // current chapter originals; current chapter English + its version's own refs/notes
+// ---------- English versions (extensible registry) ----------
+// The first entry is the default. Each version needs data/<dir>/<book>.json.gz keyed by the app's verse labels
+// ({"<c>":{"<v>":text}, optional "_r" own references and "_n" notes per chapter). `need` = only books whose index entry has b[id].
+// Copyrighted versions (e.g. NKJV, NLT) may only be added here once the publisher has granted permission.
+const EN_VERSIONS=[
+  {id:'kjv', abbr:'KJV', name:'King James Version', full:'King James Version (1769, with the Apocrypha)', dir:'kjv', need:true, lic:'public domain'},
+  {id:'web', abbr:'WEB', name:'World English Bible', full:'World English Bible (2020, with the deuterocanon)', dir:'en', need:false, lic:'public domain'}
+];
+function enPref(){ return EN_VERSIONS.find(x=>x.id===state.settings.enVer)||EN_VERSIONS[0]; }
+function enHas(ev,b){ return !ev.need || !!(BOOK[b]&&BOOK[b][ev.id]); }
+function enFor(b){ const p=enPref(); return enHas(p,b) ? p : (EN_VERSIONS.find(x=>enHas(x,b))||EN_VERSIONS[EN_VERSIONS.length-1]); }
+function enHTML(t){ return esc(t||'').replace(/\[([^\]]*)\]/g,'<i class="kit">$1</i>').replace(/¶\s*/g,'<span class="pil" aria-hidden="true">¶ </span>'); }
+function enPlain(t){ return String(t||'').replace(/[\[\]]/g,'').replace(/¶\s*/g,''); }
+function enVerseHTML(v){ const t=EN&&EN[v], r=ENR&&ENR[v], n=ENN&&ENN[v], ab=ENV?ENV.abbr:'';
+  return (t?enHTML(t):'')+(r?` <span class="kref" title="${esc(ab)} numbering">${esc(ab)} ${esc(r)}</span>`:'')+(!t&&n?`<span class="ennote">${esc(ab)}: ${esc(n)}</span>`:''); }
+function enFallbackNote(b){ const p=enPref(), e=enFor(b); return p.id===e.id?'':`${p.abbr} has no ${BOOK[b]?BOOK[b].name:b}; showing the ${e.abbr}`; }
 const WNAME = {heb:'Hebrew (WLC)', grk:'Greek NT (SBLGNT)', byz:'Greek NT (Byzantine RP)', lxx:'Greek (LXX, Brenton)', tg:null, vul:'Latin Vulgate (Clementine)'};
 function canonOn(g){ const c=state.settings.canon||{}; return c[g]!==false; }
 function showDC(){ return canonOn('dc') && canonOn('add'); }
@@ -1328,8 +1356,9 @@ const BADGE = {
   vul:'<span class="badge ok">Sourced: Clementine Vulgate (public domain; Tweedale / vulsearch transcription)</span><span class="badge warn">verse placement aligned automatically · no word data</span>'
 };
 async function loadChapter(b,c){
-  const [ch,en] = await Promise.all([getJSON(`ch/${b}.${c}.json.gz`), getJSON(`en/${b}.json.gz`)]);
-  return {ch,en};
+  const ev=enFor(b);
+  const [ch,en] = await Promise.all([getJSON(`ch/${b}.${c}.json.gz`), getJSON(`${ev.dir}/${b}.json.gz`)]);
+  return {ch,en,ev};
 }
 let loadSeq=0;
 async function gotoChapter(b,c,opts={}){
@@ -1348,9 +1377,9 @@ async function gotoChapter(b,c,opts={}){
   $('#verses').innerHTML = '<div class="loading">Loading '+esc(refName(b,c))+'…</div>';
   persist();
   try{
-    const {ch,en} = await loadChapter(b,c);
+    const {ch,en,ev} = await loadChapter(b,c);
     if(seq!==loadSeq) return;
-    CH=ch; EN=en[String(c)]||{};
+    CH=ch; EN=en[String(c)]||{}; ENR=(en._r||{})[String(c)]||{}; ENN=(en._n||{})[String(c)]||{}; ENV=ev; renderCov();
     render(); libRender();
     if(state.tab==='poly') renderPoly();
     if(state.tab==='conn') renderConn();
@@ -1359,7 +1388,7 @@ async function gotoChapter(b,c,opts={}){
     prefetchNeighbours();
   }catch(e){
     if(seq!==loadSeq) return;
-    CH=null; EN=null;
+    CH=null; EN=null; ENR={}; ENN={};
     $('#verses').innerHTML = e.message==='not-in-sample' ? `<div class="err">${esc(refName(b,c))} is not in this single-file sample (it has Genesis 1 and John 1). Open the full app (dist/) for the whole Bible.</div>`
       : `<div class="err">Could not load ${esc(refName(b,c))}: ${esc(e.message)}. ${navigator.onLine===false?'You are offline and this chapter has not been downloaded yet.':''}</div>`;
   }
@@ -1390,7 +1419,7 @@ function renderCov(){
   if(m.l) parts.push(`<b>LXX</b> ${m.l}/${m.n}`);
   if(m.t) parts.push(`<b>Targum</b> ${m.t}/${m.n}`);
   if(m.vlt) parts.push(`<b>Vulgate</b> ${m.vlt}/${m.n}`);
-  $('#covLine').innerHTML = `${n} verse${n===1?'':'s'} · English (WEB) · ${parts.join(' · ')||'no original-language text'}${dcBadge(B)}`;
+  $('#covLine').innerHTML = `${n} verse${n===1?'':'s'} · English (${esc(enFor(state.book).abbr)}${enFallbackNote(state.book)?` <span class="enfb">· ${esc(enPref().abbr)} lacks this book</span>`:''}) · ${parts.join(' · ')||'no original-language text'}${dcBadge(B)}`;
 }
 
 // ---------- Read view ----------
@@ -1427,7 +1456,7 @@ function renderVerses(){
   $('#verses').innerHTML = visibleVerses().map(v=>{
     const id=vid_(v), open=state.open.has(id);
     const inter=open?`<div class="interwrap open"><div class="inter-inner">${interHTML(v)}</div></div>`:'';
-    return `<article class="verse${open?' open':''}" id="v-${state.book}-${state.ch}-${v}" data-id="${id}" data-v="${v}"><span class="vhead vref" title="${esc(refName(state.book,state.ch,v))}">${esc(String(v))}</span><button class="vnote${NOTES[`v|${state.book}|${state.ch}|${v}`]?' has':''}" data-note="v|${state.book}|${state.ch}|${v}" aria-label="Note on ${esc(refName(state.book,state.ch,v))}">✎</button><div class="eng">${esc(EN[v]||'')}</div>${inter}</article>`;
+    return `<article class="verse${open?' open':''}" id="v-${state.book}-${state.ch}-${v}" data-id="${id}" data-v="${v}"><span class="vhead vref" title="${esc(refName(state.book,state.ch,v))}">${esc(String(v))}</span><button class="vnote${NOTES[`v|${state.book}|${state.ch}|${v}`]?' has':''}" data-note="v|${state.book}|${state.ch}|${v}" aria-label="Note on ${esc(refName(state.book,state.ch,v))}">✎</button><div class="eng">${enVerseHTML(v)}</div>${inter}</article>`;
   }).join('') || '<div class="loading">No verses.</div>';
   wpSync();
 }
@@ -1745,20 +1774,20 @@ function polyRows(ch, wits, v, hi={}){
   }
   return h;
 }
-const enRow=(t,extra='')=>`<div class="prow"><div class="plabel">English · WEB <span class="badge ok mini">public domain</span>${extra}</div><div class="polytext en">${esc(t||'')}</div></div>`;
+const enRow=(t,extra='',ev=ENV||enPref(),html=null)=>`<div class="prow"><div class="plabel">English · ${esc(ev.abbr)} <span class="badge ok mini">${esc(ev.lic)}</span>${extra}</div><div class="polytext en">${html!=null?html:enHTML(t)}</div></div>`;
 function renderPoly(){
   document.querySelectorAll('#polySeg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.pm===state.pm));
   if(state.pm==='matrix'){
     if(!CH){ $('#polyBody').innerHTML='<div class="loading">Loading…</div>'; return; }
     const vs=visibleVerses();
     $('#polyBody').innerHTML=`<div class="note" style="margin-top:0">${esc(refName(state.book,state.ch))}: every witness side by side${vs.length>1?` (${vs.length} verses; pick one verse in Read to narrow this down)`:''}.</div>`+
-      vs.map(v=>`<div class="pcard" id="pm-${state.book}-${state.ch}-${v}"><div class="vhead"><span class="vref">${esc(refName(state.book,state.ch,v))}</span></div>${polyRows(CH,WITS,v)}${enRow(EN[v])}<button class="jump" data-v="${v}">Open in Read →</button></div>`).join('');
+      vs.map(v=>`<div class="pcard" id="pm-${state.book}-${state.ch}-${v}"><div class="vhead"><span class="vref">${esc(refName(state.book,state.ch,v))}</span></div>${polyRows(CH,WITS,v)}${enRow(EN[v],'',ENV||enPref(),enVerseHTML(v))}<button class="jump" data-v="${v}">Open in Read →</button></div>`).join('');
   } else renderBridge();
 }
 async function renderBridge(){
   $('#polyBody').innerHTML='<div class="loading">Loading Genesis 1 and John 1…</div>';
   let G1,J1,EG,EJ;
-  try{ [G1,J1,EG,EJ]=await Promise.all([getJSON('ch/Gen.1.json.gz'),getJSON('ch/John.1.json.gz'),getJSON('en/Gen.json.gz'),getJSON('en/John.json.gz')]); }
+  try{ [G1,J1,EG,EJ]=await Promise.all([getJSON('ch/Gen.1.json.gz'),getJSON('ch/John.1.json.gz'),getJSON(`${enFor('Gen').dir}/Gen.json.gz`),getJSON(`${enFor('John').dir}/John.json.gz`)]); }
   catch(e){ $('#polyBody').innerHTML=`<div class="err">Could not load Genesis 1 / John 1: ${esc(e.message)}</div>`; return; }
   if(state.pm!=='bridge'||state.tab!=='poly') return;
   const S = re => w=> w.raw && re.test(w.raw[3]||'');
@@ -1769,7 +1798,7 @@ async function renderBridge(){
      n:'John opens with the same two Greek words as the Septuagint of Genesis 1:1, <b>Ἐν ἀρχῇ</b> (“in the beginning”). The Hebrew <b>בְּרֵאשִׁית</b> is the word the Septuagint renders this way. Where Genesis goes on to God creating, John goes on to the Word (<b>λόγος</b>) who “was in the beginning”.'},
     {t:'Creation by speech, creation through the Word', l:['Genesis 1:3', polyRows(G1,[W.heb,W.lxx,W.tg],'3',{heb:S(/H0?559\b/),lxx:N(['ειπεν','εγενετο']),tg:N(['ואמר'])})], r:['John 1:3', polyRows(J1,[W.grk],'3',{grk:S(/G1223|G1096/)})],
      n:'In Genesis each act of creation starts with speech: <b>וַיֹּאמֶר</b> / <b>εἶπεν</b>, “God said”. John 1:3 says all things came to be (<b>ἐγένετο</b>, the same verb as the Septuagint’s <b>ἐγένετο φῶς</b>) through the Word. The Septuagint does not use λόγος in Genesis 1:3; the link is thematic. Targum Onkelos has plain אֲמַר “said” here; its <i>memra</i> (“word”) expression does not occur in Genesis 1:1–3.'},
-    {t:'Light and darkness', l:['Genesis 1:2–3', polyRows(G1,[W.heb],'2',{heb:S(/H2822/)})+polyRows(G1,[W.heb,W.lxx],'3',{heb:S(/H0?216\b/),lxx:N(['φως'])})], r:['John 1:5', polyRows(J1,[W.grk],'5',{grk:S(/G5457|G4653/)})+enRow(EJ['1']['5'])],
+    {t:'Light and darkness', l:['Genesis 1:2–3', polyRows(G1,[W.heb],'2',{heb:S(/H2822/)})+polyRows(G1,[W.heb,W.lxx],'3',{heb:S(/H0?216\b/),lxx:N(['φως'])})], r:['John 1:5', polyRows(J1,[W.grk],'5',{grk:S(/G5457|G4653/)})+enRow(EJ['1']['5'],'',enFor('John'))],
      n:'Genesis moves from darkness (<b>חֹשֶׁךְ</b>) over the deep to God’s first word, “let there be light” (<b>אוֹר</b> / <b>φῶς</b>). John 1:4–5 picks up the same pair: the light (<b>φῶς</b>) shines in the darkness (<b>σκοτία</b>).'}
   ];
   $('#polyBody').innerHTML=`<div class="note" style="margin-top:0">Logos Bridge: Genesis 1:1–3 read next to John 1:1–5. Highlighted words share a Strong’s number or a word. The notes are hand-written study notes, not sourced data.</div>`+
@@ -1838,9 +1867,9 @@ function drawChord(){
   $('#xCount').textContent = CH && Object.keys(CH.x).length ? `${LINKS.length} links shown · ${nb} passages` : `No cross-references for ${refName(state.book,state.ch)} in the OpenBible.info data${BOOK[state.book].dc?' (it has none for the deuterocanonical books)':''}.`;
   if(window.chordsGL) chordsGL.sync();
 }
-async function refText(ref){ // WEB text of an OpenBible ref (ranges: first 4 verses)
+async function refText(ref){ // English text (chosen version) of an OpenBible ref (ranges: first 4 verses)
   const [a,b]=ref.split('-'); const p=a.split('.'), q=(b||a).split('.');
-  try{ const en=await getJSON(`en/${p[0]}.json.gz`); const out=[];
+  try{ const en=await getJSON(`${enFor(p[0]).dir}/${p[0]}.json.gz`); const out=[];
     let c=+p[1], v=+p[2]; const c2=+q[1], v2=+q[2];
     while(out.length<4 && (c<c2 || (c===c2 && v<=v2))){ const t=en[String(c)]&&en[String(c)][String(v)]; if(t){ out.push(t); v++; } else { c++; v=1; if(c>c2+1) break; } }
     return out.join(' ')+((c<c2||(c===c2&&v<=v2))?' …':'');
@@ -1854,8 +1883,8 @@ async function selectLinks(ks,title){
   const texts=await Promise.all(refs.map(refText));
   $('#connPanel').innerHTML=`<h3>${esc(title)}</h3>`+
     Ls.slice(0,20).map(L=>`<div class="note">${esc(refName(state.book,state.ch,L.v))} ↔ ${esc(shortRef(L.ref))} · ${L.votes} votes</div>`).join('')+
-    vs.map(v=>`<div class="pv"><div class="r">${esc(refName(state.book,state.ch,v))} <span style="color:var(--ink3);font-weight:400">(WEB)</span></div><div class="t">${esc(EN[v]||'')}</div></div>`).join('')+
-    refs.map((r,k)=>{ const t=parseRef(r); return `<div class="pv"><div class="r">${esc(shortRef(r))} <span style="color:var(--ink3);font-weight:400">(WEB)</span></div><div class="t">${esc(texts[k])}</div><button class="jump" data-b="${t.b}" data-c="${t.c}" data-v="${t.v}">Open ${esc(shortRef(r))} in Read →</button></div>`; }).join('')+
+    vs.map(v=>`<div class="pv"><div class="r">${esc(refName(state.book,state.ch,v))} <span style="color:var(--ink3);font-weight:400">(${esc((ENV||enPref()).abbr)})</span></div><div class="t">${enHTML(EN[v]||'')}</div></div>`).join('')+
+    refs.map((r,k)=>{ const t=parseRef(r); return `<div class="pv"><div class="r">${esc(shortRef(r))} <span style="color:var(--ink3);font-weight:400">(${esc(enFor(t.b).abbr)})</span></div><div class="t">${enHTML(texts[k])}</div><button class="jump" data-b="${t.b}" data-c="${t.c}" data-v="${t.v}">Open ${esc(shortRef(r))} in Read →</button></div>`; }).join('')+
     `<div class="note" style="font-size:11px">Cross-references: <a href="https://www.openbible.info/labs/cross-references/">OpenBible.info</a>, CC BY 4.0.</div>`;
 }
 $('#chord').addEventListener('click',e=>{
@@ -2005,7 +2034,8 @@ function renderCovList(){
   const sum=(bs,k)=>bs.reduce((a,b)=>a+b.ch.reduce((x,c)=>x+(c[k]||0),0),0), nv=bs=>bs.reduce((a,b)=>a+b.ch.reduce((x,c)=>x+c.n,0),0);
   const nt=BOOKS.filter(b=>b.nt);
   $('#covList').innerHTML=[
-    `English (WEB): all ${BOOKS.length} books, ${nv(BOOKS).toLocaleString()} verses.`,
+    `English (KJV 1769 with the Apocrypha): ${BOOKS.filter(b=>b.kjv).length} of ${BOOKS.length} books (not in the KJV: ${BOOKS.filter(b=>!b.kjv).map(b=>b.name).join(', ')||'none'}, shown in the WEB).`,
+    `English (WEB): all ${BOOKS.length} books, ${nv(BOOKS).toLocaleString()} verses. Verse numbers follow the WEB; the KJV is placed on the same verses.`,
     `Hebrew/Aramaic (TAHOT): ${ot.filter(b=>sum([b],'h')).length} books, ${sum(ot,'h').toLocaleString()} WEB verses (Esther and Daniel: the Hebrew/Aramaic parts only).`,
     `Greek NT (SBLGNT): ${nt.length} books, ${sum(nt,'g').toLocaleString()} of ${nv(nt).toLocaleString()} WEB verses.`,
     `Greek NT (Byzantine, Robinson-Pierpont 2018): ${nt.filter(b=>sum([b],'bz')).length} books, ${sum(nt,'bz').toLocaleString()} of ${nv(nt).toLocaleString()} WEB verses.`,
@@ -3161,7 +3191,7 @@ function wpBodyHTML(wit, d, v, i, n){
       `<div class="wp-muted wp-nodata">${wit.id==='lxx'?'Brenton Septuagint text. No openly licensed lemma, gloss, Strong\'s number or parsing is available for the LXX, so none is shown.':wit.id==='tg'?'Targum text from Sefaria. The app has no sourced lemma, gloss, Strong\'s number or parsing for the Targum.':'Clementine Vulgate text. The app has no sourced lemma, gloss or parsing for the Latin.'}</div>`;
   }
   const val=(cls==='grk'||cls==='heb'||cls==='arc')?valueRow(d.w,cls):''; if(val) h+=`<div class="wp-sec wp-val2">${val}</div>`;
-  if(EN && EN[v]) h+=`<div class="wp-sec"><div class="wp-lbl">${esc(ref)} <span class="wp-src">WEB</span></div><p class="wp-ctx">${esc(EN[v])}</p></div>`;
+  if(EN && EN[v]) h+=`<div class="wp-sec"><div class="wp-lbl">${esc(ref)} <span class="wp-src">${esc((ENV||enPref()).abbr)}</span></div><p class="wp-ctx">${enVerseHTML(v)}</p></div>`;
   h+=`<div class="wp-sec"><div class="wp-lbl">Personal Scribe note <span class="wp-src">saved on this device</span></div><textarea class="notebox" id="wpNote" placeholder="Your note on this word…">${esc((NOTES[key]||{}).text||'')}</textarea><div class="btnrow"><button type="button" class="btn primary" id="wpNoteSave">Save note</button><span class="saved" id="wpNoteMsg"></span></div></div>`;
   h+=`<div class="wp-badges">${BADGE[wit.id]||''}</div>`;
   return h;
@@ -3376,6 +3406,21 @@ function canonInit(){
   box.addEventListener('click',e=>{ const b=e.target.closest('[data-cp]'); if(!b) return; canonSet(Object.assign({},CANON_PRESETS[b.dataset.cp]), b.dataset.cp); });
   canonUI();
 }
+// ---------- English version switch (Settings + reading bar) ----------
+function enUI(){
+  const cur=enPref().id;
+  const seg=$('#enSeg'); if(seg) seg.innerHTML=EN_VERSIONS.map(x=>`<button type="button" data-env="${x.id}" aria-pressed="${x.id===cur}" title="${esc(x.full)}">${esc(x.abbr)}</button>`).join('');
+  const sel=$('#enSel'); if(sel){ sel.innerHTML=EN_VERSIONS.map(x=>`<option value="${x.id}"${x.id===cur?' selected':''}>${esc(x.abbr)}</option>`).join(''); sel.title='English version: '+enPref().full; }
+  const d=$('#enDesc'); if(d) d.innerHTML=`<b>${esc(enPref().full)}</b>, ${esc(enPref().lic)}. `+(cur==='kjv'?'Words the translators supplied (printed in italics in the KJV) are shown in italics. Books the KJV does not have (3 and 4 Maccabees, Psalm 151) are shown in the WEB. ':'')+'The original-language layers stay on the same verses whichever version you pick; where the KJV numbers a verse differently, its own reference is shown beside it.';
+}
+function setEnVer(id){
+  if(!EN_VERSIONS.some(x=>x.id===id) || id===state.settings.enVer) { enUI(); return; }
+  state.settings.enVer=id; persist(); enUI();
+  gotoChapter(state.book,state.ch,{keepScroll:true}).then(()=>{ if(state.tab==='poly'&&state.pm==='bridge') renderBridge(); });
+}
+document.addEventListener('click',e=>{ const b=e.target.closest('#enSeg [data-env]'); if(b) setEnVer(b.dataset.env); });
+{ const sel=$('#enSel'); if(sel) sel.addEventListener('change',()=>setEnVer(sel.value)); }
+enUI();
 canonInit();
 
 </script>
