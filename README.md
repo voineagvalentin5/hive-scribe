@@ -26,6 +26,7 @@ Text size (S–XL), a dyslexia-friendly reading mode, Hebrew vowel-point and can
 
 - **English:** World English Bible for all 73 books, including the deuterocanonical books.
 - **Hebrew and Greek, word by word:** every Protestant Old and New Testament book, with Strong’s numbers, morphology, glosses, and gematria.
+- **Byzantine Greek NT:** Robinson-Pierpont Byzantine Textform 2018, word by word with Strong’s numbers and Robinson parsing (public domain). When both Greek NT texts are on, words that differ from the SBLGNT are marked (+ only in this text, ≈ different form, ‸ the other text has extra words).
 - **Septuagint:** Brenton’s Greek text for most Old Testament and deuterocanonical verses (plain text; no word-level tagging).
 - **Targum:** Onkelos on the Torah and Jonathan on the Prophets (plain text).
 - **Latin Vulgate:** Clementine Vulgate (public domain; Tweedale / vulsearch transcription), automatically placed next to WEB verses; the Vulgate reference is shown when it differs.
@@ -52,6 +53,7 @@ Full attributions also appear on the app’s Sources page (the **i** button) and
 | Greek NT text | [SBL Greek New Testament](https://sblgnt.com/), © 2010 Society of Biblical Literature and Logos Bible Software | [SBLGNT license](https://sblgnt.com/license/) |
 | Greek NT morphology | [MorphGNT](https://github.com/morphgnt/sblgnt) | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) |
 | Greek NT glosses, transliteration, Strong’s | STEPBible TAGNT (Tyndale House / STEPBible.org) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
+| Byzantine Greek NT (RP2018), Strong’s and Robinson parsing | Maurice A. Robinson and William G. Pierpont, via [byztxt/byzantine-majority-text](https://github.com/byztxt/byzantine-majority-text) (commit 788ffe7) | Public domain ([CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)) |
 | Septuagint Greek | Brenton’s Septuagint with Apocrypha (eBible.org `grcbrent`) | Public domain |
 | Targum Onkelos and Targum Jonathan | [Sefaria](https://www.sefaria.org) public-domain editions | Public domain |
 | Latin Vulgate (Clementine) | Michael Tweedale (vulsearch) via [Open Bibles](https://github.com/seven1m/open-bibles) (`lat-clementine.usfx.xml`); aligned with the public-domain Douay-Rheims | Public domain |

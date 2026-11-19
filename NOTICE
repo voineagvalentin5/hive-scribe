@@ -185,5 +185,27 @@ Jeremiah (Baruch 6) is known as 7Q2. This app uses the Brenton Septuagint
 (and the Vulgate where aligned) for those books, not those fragments.
 
 -------------------------------------------------------------------------------
+12. Robinson-Pierpont Byzantine Textform 2018 (Greek NT, 27 books)
+     Public domain (CC0 1.0 Universal)
+-------------------------------------------------------------------------------
+
+Source:  https://github.com/byztxt/byzantine-majority-text (commit 788ffe7)
+License: https://creativecommons.org/publicdomain/zero/1.0/
+
+The repository's LICENSE file states: "THIS REPOSITORY, INCLUDING CODE AND
+TEXTUAL CONTENTS, IS IN THE PUBLIC DOMAIN." followed by the CC0 1.0
+Universal dedication. Maurice A. Robinson and William G. Pierpont, The New
+Testament in the Original Greek: Byzantine Textform (RP2018).
+
+Used here: the accented Unicode text (csv-unicode/ccat/no-variants, main
+text without the apparatus) paired word for word with Dr. Robinson's
+Strong's numbers and parsing codes (csv-unicode/strongs/with-parsing).
+English glosses and transliterations shown with this text are borrowed
+from STEPBible TAGNT (CC BY 4.0, see section 2) where the same word
+appears in the SBLGNT layer; otherwise the TBESG brief gloss and a
+computed transliteration are used. Verses are stored under WEB numbering,
+which matches RP's.
+
+-------------------------------------------------------------------------------
 End of NOTICE
 
