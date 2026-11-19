@@ -765,6 +765,58 @@ header::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:no
 .ennote{font:italic 13px var(--ui);color:var(--ink3)}
 .enfb{color:var(--ink3)}
 .readbar .ensel{font-weight:700;color:var(--ink)}
+/* ---------- Passage panel + verse highlights ---------- */
+:root{--hl-yellow:#e9c41f;--hl-green:#3fa45b;--hl-blue:#3b82d6;--hl-purple:#8a5cd0;--hl-pink:#d9548c;--hl-orange:#e7792b;--hla:24%}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--hl-yellow:#f0d054;--hl-green:#5fd07f;--hl-blue:#69a8f5;--hl-purple:#b38df2;--hl-pink:#f084b2;--hl-orange:#f7a062;--hla:26%}}
+:root[data-theme=dark]{--hl-yellow:#f0d054;--hl-green:#5fd07f;--hl-blue:#69a8f5;--hl-purple:#b38df2;--hl-pink:#f084b2;--hl-orange:#f7a062;--hla:26%}
+.hlc-yellow{--hlc:var(--hl-yellow)}.hlc-green{--hlc:var(--hl-green)}.hlc-blue{--hlc:var(--hl-blue)}.hlc-purple{--hlc:var(--hl-purple)}.hlc-pink{--hlc:var(--hl-pink)}.hlc-orange{--hlc:var(--hl-orange)}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+#view-read #verses .verse.hlc{background:color-mix(in srgb,var(--hlc) var(--hla),transparent);-webkit-box-decoration-break:clone;box-decoration-break:clone;border-radius:4px;box-shadow:inset 0 -2px 0 color-mix(in srgb,var(--hlc) 70%,transparent)}
+@media (hover:hover){#view-read #verses .verse.hlc:hover{background:color-mix(in srgb,var(--hlc) calc(var(--hla) + 10%),transparent)}}
+#view-read #verses .verse.open.hlc{box-shadow:inset 4px 0 0 var(--hlc);background:color-mix(in srgb,var(--hlc) 10%,transparent)}
+#view-read #verses .verse.psel{-webkit-box-decoration-break:clone;box-decoration-break:clone;border-radius:4px;box-shadow:inset 0 -3px 0 var(--gold),0 0 0 1px color-mix(in srgb,var(--gold) 45%,transparent)}
+#view-read #verses .verse.psel:not(.hlc){background:color-mix(in srgb,var(--gold) 13%,transparent)}
+#view-read #verses .verse .vhead:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:3px}
+#view-read #verses .verse .pnote{display:inline;border:0;background:none;color:var(--gold);font-size:13px;padding:0 2px;margin:0;min-height:0;min-width:0;line-height:1;vertical-align:super;cursor:pointer}
+.ppanel .pp-hint{margin:8px 0 0}
+.pp-sw{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.pp-swatch{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:44px;min-height:52px;padding:4px 2px;border:1px solid transparent;border-radius:12px;background:none;color:var(--ink2);font:600 10.5px var(--ui);cursor:pointer}
+.pp-swatch:hover{border-color:color-mix(in srgb,var(--gold) 40%,transparent)}
+.pp-swatch[aria-pressed=true]{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 12%,transparent);color:var(--ink)}
+.pp-swatch:focus-visible,.mine-chip:focus-visible,.mine-item:focus-visible,.lib-mine:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.pp-swatch:disabled{opacity:.4;cursor:default}
+.pp-dot{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--hlc);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ink) 18%,transparent);color:#1b1408;font:700 13px var(--ui)}
+.pp-dot.sm{width:12px;height:12px;font-size:0;flex:none}
+.pp-dot-clear{background:none;border:1.5px dashed var(--ink3);color:var(--ink3);box-shadow:none}
+.pp-vn{font:700 10px var(--ui);color:var(--gold);margin-right:2px}
+.ppanel .wp-ctx{max-height:220px;overflow:auto}
+.lib-mine{display:flex;align-items:center;gap:6px;width:100%;margin:2px 0 8px;padding:8px 10px;min-height:40px;border:1px solid color-mix(in srgb,var(--gold) 30%,transparent);border-radius:12px;background:color-mix(in srgb,var(--gold) 7%,transparent);color:var(--ink);font:600 12.5px var(--ui);cursor:pointer;text-align:left}
+.lib-mine-ic{color:var(--gold)}
+.mine-n{margin-left:auto;font:700 11px var(--ui);color:var(--ink3)}
+.mine-filter{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.mine-chip{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:4px 12px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink2);font:600 12px var(--ui);cursor:pointer}
+.mine-chip .mine-n{margin-left:2px}
+.mine-chip[aria-pressed=true]{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 16%,transparent);color:var(--ink)}
+.mine-list{display:flex;flex-direction:column;gap:8px}
+.mine-item{display:flex;flex-direction:column;align-items:flex-start;gap:4px;width:100%;text-align:left;padding:10px 12px;min-height:48px;border-radius:14px;border:1px solid var(--line);background:color-mix(in srgb,var(--paper) 92%,transparent);color:var(--ink);cursor:pointer}
+.mine-item:hover{border-color:var(--gold)}
+.mine-top{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font:600 12px var(--ui)}
+.mine-tag{font:700 10.5px var(--ui);letter-spacing:.04em;text-transform:uppercase;color:var(--ink3)}
+.mine-ref{font:600 14px var(--ui);color:var(--ink)}
+.mine-note{font:14px/1.45 'Noto Serif',Georgia,serif;color:var(--ink2)}
+@media (max-width:1023px){ body.pp-open[data-tab=read] main{padding-bottom:calc(min(54vh,520px) + 40px)} }
+/* Strong's numbers: real links to Lexicon & Notes */
+.slink{display:inline;appearance:none;-webkit-appearance:none;border:0;background:none;padding:0 1px;margin:0;min-height:0;min-width:0;font:inherit;font-weight:700;color:var(--slink,#9a6a00);text-decoration:underline dotted color-mix(in srgb,currentColor 55%,transparent);text-underline-offset:3px;cursor:pointer;border-radius:4px;transition:color .12s,background .12s}
+:root{--slink:#94620a;--slink-hi:#5a3a00}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--slink:#f0bf55;--slink-hi:#ffe3a3}}
+:root[data-theme=dark]{--slink:#f0bf55;--slink-hi:#ffe3a3}
+.slink:hover,.slink:focus-visible{color:var(--slink-hi);text-decoration:underline solid 2px currentColor;background:color-mix(in srgb,var(--gold) 16%,transparent)}
+.slink:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.slink:active{background:color-mix(in srgb,var(--gold) 32%,transparent);color:var(--slink-hi)}
+.slink.wp-strong{font-size:14px}
+.psup .slink.sm{font:700 10px var(--ui)}
+.study-strongs{margin:-4px 0 10px 12px;font:12.5px var(--ui);color:var(--ink3)}
+@media (max-width:1023px){ .wpanel.ppanel{max-height:min(42vh,420px)} body.pp-open[data-tab=read] main{padding-bottom:calc(min(42vh,420px) + 40px)} }
 </style>
 
 </head>
@@ -888,6 +940,7 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
 <section id="view-read">
   <aside class="libside" id="libSide" aria-label="Library: books and chapters">
     <div class="lib-head"><h2 class="lib-title" id="libTitle">Library</h2><button type="button" class="iconbtn lib-x" id="libClose" aria-label="Collapse library" aria-controls="libSide">«</button></div>
+    <button type="button" class="lib-mine" id="libMine" aria-haspopup="dialog"><span aria-hidden="true" class="lib-mine-ic">❡</span> My highlights &amp; notes <span class="mine-n" id="libMineN"></span></button>
     <details class="lib-canon" id="libCanon">
       <summary><span class="lc-k">Books shown</span> <span class="lc-sum" id="canonSum">All books</span></summary>
       <div class="lc-body">
@@ -936,6 +989,11 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
     <div class="wp-head"><div class="wp-headtxt"><div class="wp-kicker">Word study</div><h2 class="wp-title" id="wpTitle" tabindex="-1"></h2></div><button type="button" class="iconbtn wp-x" id="wpClose" aria-label="Close word study">✕</button></div>
     <div class="wp-body" id="wpBody"></div>
   </aside>
+  <aside class="wpanel ppanel" id="passPanel" aria-labelledby="ppTitle" hidden>
+    <div class="wp-grab" aria-hidden="true"></div>
+    <div class="wp-head"><div class="wp-headtxt"><div class="wp-kicker">Passage</div><h2 class="wp-title" id="ppTitle" tabindex="-1"></h2></div><button type="button" class="iconbtn wp-x" id="ppClose" aria-label="Close passage panel">✕</button></div>
+    <div class="wp-body" id="ppBody"></div>
+  </aside>
 </section>
 
 <section id="view-poly" hidden>
@@ -963,6 +1021,7 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
   <div class="btnrow"><button class="btn" id="expMd">Export notes (Markdown)</button><button class="btn" id="expJson">Export notes (JSON)</button><button class="btn" id="expNotesPrint">Print notes / save PDF</button><button class="btn" id="copyMd">Copy Markdown</button></div>
   <div class="btnrow"><button class="btn" id="expAllMd">Export everything (Markdown)</button><button class="btn" id="expAllJson">Export everything (JSON)</button><button class="btn" id="expAllPrint">Print everything / save PDF</button><button class="btn primary" id="impBtn">Import JSON</button><input type="file" id="impFile" accept="application/json,.json" hidden></div>
   <div class="note">“Export everything” includes the Scribe Notebook plus Studies progress and answers. On a phone, export may open the share sheet when the browser allows it; otherwise a file downloads. Import merges; if an item already exists with different text, you will be asked before anything is overwritten.</div>
+  <div class="btnrow"><button type="button" class="btn" id="nbMine">My highlights &amp; notes</button></div>
   <div id="nbList"></div>
 </section>
 
@@ -1071,6 +1130,13 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
     <button class="btn" data-close>Cancel</button>
     <span class="saved" id="impMsg"></span>
   </div>
+</div></div>
+
+<div class="sheet" id="mineSheet" role="dialog" aria-modal="true" aria-labelledby="mineTitle"><div class="bd"></div><div class="pn">
+  <h2><span id="mineTitle" tabindex="-1">My highlights &amp; notes</span> <button class="iconbtn x" data-close aria-label="Close">✕</button></h2>
+  <p class="note" style="margin-top:0">Highlights and passage notes are saved on this device and included in Notebook export / import. Tap one to open it in Read.</p>
+  <div class="mine-filter" id="mineFilter" role="group" aria-label="Filter by highlight color"></div>
+  <div class="mine-list" id="mineList"></div>
 </div></div>
 <div id="dim" aria-hidden="true"></div>
 <div id="lift" aria-hidden="true"><span class="o"></span><span class="g"></span></div>
@@ -1265,9 +1331,10 @@ function notesMarkdown(){
   const d=new Date(), pad=n=>String(n).padStart(2,'0');
   let md='# Hive Scribe notebook\n\nExported '+`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`+'\n';
   notesSorted().forEach(k=>{ const n=NOTES[k]; md+=`\n## ${n.ref}${n.word?` — ${n.word}`:''}${n.wit?` · ${n.wit}`:''}\n\n${n.text}\n`; });
+  if(typeof mineItems==='function'){ const hl=mineItems().filter(i=>i.col); if(hl.length){ md+='\n## Highlights\n\n'; hl.forEach(i=>{ md+=`- ${refName(i.b,i.c,i.a)}${i.z!==i.a?'–'+i.z:''} (${HL_NAME[i.col]})\n`; }); } }
   return md;
 }
-function notesJSON(){ return JSON.stringify({app:'Hive Scribe',format:'hiveScribe.notes.v1',exported:new Date().toISOString(),notes:notesSorted().map(k=>Object.assign({key:k},NOTES[k]))},null,2); }
+function notesJSON(){ return JSON.stringify({app:'Hive Scribe',format:'hiveScribe.notes.v1',exported:new Date().toISOString(),notes:notesSorted().map(k=>Object.assign({key:k},NOTES[k])),highlights:Object.assign({},typeof HLS==='object'?HLS:{})},null,2); }
 function download(name,text,type){ try{ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([text],{type})); a.download=name; document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href); a.remove();},1000); }catch(e){ copyText(text); } }
 function copyText(text){ const done=()=>flashMsg('Copied');
   if(navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done,()=>fallback()); else fallback();
@@ -1366,7 +1433,7 @@ async function gotoChapter(b,c,opts={}){
   if(!bookVisible(b) || !chapterVisible(b,c)){ const n=nearestVisible(b,c); b=n[0]; c=n[1]; }
   const seq=++loadSeq;
   if(!opts.keepScroll) saveScroll();
-  closePopup(); wpClose(false);
+  closePopup(); wpClose(false); ppClose(false);
   state.book=b; state.ch=c;
   WITS=witnessesFor(b,c);
   if(!WITS.some(w=>w.id===state.wit)) state.wit = defaultWit(b,c);
@@ -1456,7 +1523,7 @@ function renderVerses(){
   $('#verses').innerHTML = visibleVerses().map(v=>{
     const id=vid_(v), open=state.open.has(id);
     const inter=open?`<div class="interwrap open"><div class="inter-inner">${interHTML(v)}</div></div>`:'';
-    return `<article class="verse${open?' open':''}" id="v-${state.book}-${state.ch}-${v}" data-id="${id}" data-v="${v}"><span class="vhead vref" title="${esc(refName(state.book,state.ch,v))}">${esc(String(v))}</span><button class="vnote${NOTES[`v|${state.book}|${state.ch}|${v}`]?' has':''}" data-note="v|${state.book}|${state.ch}|${v}" aria-label="Note on ${esc(refName(state.book,state.ch,v))}">✎</button><div class="eng">${enVerseHTML(v)}</div>${inter}</article>`;
+    return `<article class="verse${open?' open':''}${vxClass(v)}" id="v-${state.book}-${state.ch}-${v}" data-id="${id}" data-v="${v}"><span class="vhead vref" tabindex="0" role="button" aria-label="${esc(refName(state.book,state.ch,v))}: open the passage panel (Shift+Enter extends the selection)" title="${esc(refName(state.book,state.ch,v))}">${esc(String(v))}</span><button class="vnote${NOTES[`v|${state.book}|${state.ch}|${v}`]?' has':''}" data-note="v|${state.book}|${state.ch}|${v}" aria-label="Note on ${esc(refName(state.book,state.ch,v))}">✎</button>${vxMarks(v)}<div class="eng">${enVerseHTML(v)}</div>${inter}</article>`;
   }).join('') || '<div class="loading">No verses.</div>';
   wpSync();
 }
@@ -1509,6 +1576,7 @@ versesEl.addEventListener('click',e=>{
   if(suppressClick){ suppressClick=false; e.preventDefault(); return; }
   if(press && (press.dragged || scrollY!==press.sy)){ press=null; return; }
   const nb=e.target.closest('.vnote'); if(nb){ openNoteSheet(nb.dataset.note); return; }
+  { const btn=e.target.closest('button,a'); if(ppClick(e, btn&&!btn.classList.contains('pnote')?null:e.target.closest('.verse'))) return; }
   if(e.target.closest('button,a')) return;
   const wd=e.target.closest('.inter .word'); if(wd){ const sel0=getSelection(); if(!(sel0 && !sel0.isCollapsed && String(sel0).trim())){ wpOpen(wd); } return; }
   const card=e.target.closest('.verse'); if(!card||!WITS.length) return;
@@ -1526,6 +1594,9 @@ function lexFile(L){ return getJSON(`lex/${L}.json.gz`).then(d=>(LEXF[L]=d)); }
 function preloadLex(){ const L=state.wit==='heb'?'H':isGkWit(state.wit)?'G':null; if(L && !LEXF[L]) setTimeout(()=>lexFile(L).catch(()=>{}),50); }
 const rootTag = ds => { const m=/\{(H\d+[A-Za-z]?)\}/.exec(ds||''); return m?m[1]:null; };
 const plainStrong = ds => { const m=/^([HG])0*(\d+)/.exec(ds||''); return m?m[1]+m[2]:''; };
+// Strong's number as a link to its Lexicon & Notes entry / concordance (handled by [data-conc] listeners and a global .slink listener)
+function strongLink(key,label,extra){ if(!key) return esc(label||''); const lb=label||plainStrong(key)||key;
+  return `<button type="button" class="slink${extra?' '+extra:''}" data-conc="${esc(key)}" aria-label="Strong's ${esc(lb)}: open in Lexicon &amp; Notes" title="Open Strong's ${esc(lb)} in Lexicon &amp; Notes">${esc(lb)}</button>`; }
 
 // ---------- popup ----------
 const dim=$('#dim'), lift=$('#lift'), callout=$('#callout'), arm=$('#arm');
@@ -1572,7 +1643,7 @@ function openPopup(wEl, animate){
     body = `<div class="c-lex" style="font-family:${font}" dir="${dir}">${esc(view(d.w,'heb'))}</div>`+
       `<div class="c-tr">${esc(raw[1])}</div><div class="c-gloss">${esc(raw[2])}</div>`+
       `<div class="c-row"><b>Grammar:</b> ${esc(decodeHeb(raw[4]))} <span style="color:var(--ink3)">[${esc(raw[4])}]</span></div>`+
-      `<div class="c-row"><b>Strong's:</b> ${esc(plainStrong(rootTag(raw[3])||''))} <span style="color:var(--ink3)">(extended ${esc(rootTag(raw[3])||raw[3])}; STEPBible TAHOT)</span></div>`+
+      `<div class="c-row"><b>Strong's:</b> ${rootTag(raw[3])?strongLink(rootTag(raw[3]),plainStrong(rootTag(raw[3]))):''} <span style="color:var(--ink3)">(extended ${esc(rootTag(raw[3])||raw[3])}; STEPBible TAHOT)</span></div>`+
       (T?`<div class="c-row"><b>Text:</b> ${esc(T)}</div>`:'')+
       `<div class="c-lexinfo">${lexInfoHTML('heb',raw)}</div>`+valueRow(d.w,'heb')+
       `<div>${BADGE.heb}</div>`;
@@ -1581,7 +1652,7 @@ function openPopup(wEl, animate){
       `<div class="c-tr">${esc(raw[1])}</div><div class="c-gloss">${esc(raw[2]||'')}</div>`+
       `<div class="c-row"><b>In this verse:</b> ${esc(d.w)}</div>`+
       `<div class="c-row"><b>Grammar:</b> ${esc(gkMorph(wit.id,raw[4]))} <span style="color:var(--ink3)">[${gkMorphSrc(wit.id)} ${esc(raw[4])}]</span></div>`+
-      (raw[3]?`<div class="c-row"><b>Strong's:</b> ${esc(wit.id==='byz'&&raw[6]?String(raw[6]):plainStrong(raw[3]))} <span style="color:var(--ink3)">(${wit.id==='byz'?(raw[6]?'Robinson; lexicon via TAGNT '+esc(raw[3]):'Robinson'):'STEPBible TAGNT '+esc(raw[3])})</span></div>`:'<div class="c-row" style="color:var(--ink3)">No TAGNT match for this word, so no gloss or Strong\'s.</div>')+
+      (raw[3]?`<div class="c-row"><b>Strong's:</b> ${strongLink(wpKeyOf(raw,wit.id)||(raw[6]?'G'+raw[6]:''), wit.id==='byz'&&raw[6]?'G'+raw[6]:plainStrong(raw[3]))} <span style="color:var(--ink3)">(${wit.id==='byz'?(raw[6]?'Robinson; lexicon via TAGNT '+esc(raw[3]):'Robinson'):'STEPBible TAGNT '+esc(raw[3])})</span></div>`:'<div class="c-row" style="color:var(--ink3)">No TAGNT match for this word, so no gloss or Strong\'s.</div>')+
       `<div class="c-lexinfo">${lexInfoHTML('grk',raw)}</div>`+valueRow(d.w,'grk')+`<div>${BADGE[wit.id]}</div>`;
   } else {
     body = `<div class="c-lex" style="font-family:${font}" dir="${dir}">${esc(view(d.w,wit.cls))}</div>`+
@@ -1756,7 +1827,7 @@ const NTSET = ()=>new Set(BOOKS.filter(b=>b.nt).map(b=>b.id));
 function rowHTML(label, badge, cls, words, hi, vd){
   const dir=(cls==='grk'||cls==='lat')?'ltr':'rtl', lang=cls==='grk'?'grc':cls==='lat'?'la':(cls==='heb'?'he':'arc');
   const gaps=(vd&&vd.gapsA)||{};
-  const t = words.map((w,i)=>{ let s=esc(view(w.w,cls)); if(hi&&hi(w)) s=`<b style="color:var(--gold)">${s}</b>`;
+  const t = words.map((w,i)=>{ let s=esc(view(w.w,cls)); if(hi&&hi(w)){ const sk=w.raw?(cls==='heb'?rootTag(w.raw[3]):(/G\d+[A-Za-z]?/.exec(w.raw[3]||'')||[])[0]):null; s=`<b style="color:var(--gold)">${s}</b>`+(sk?`<sup class="psup">${strongLink(sk,plainStrong(sk),'sm')}</sup>`:''); }
     const mk=vd&&vd.markA&&vd.markA[i]; if(mk){ const va=varWordAttrs(mk,vd.other); s=`<span class="pvar${va.cls}"${va.title}>${s}${va.sr}</span>`; }
     return (gaps[i]?varGapHTML(gaps[i],vd.other)+' ':'')+s; }).join(' ')+(gaps[words.length]?' '+varGapHTML(gaps[words.length],vd.other):'');
   return `<div class="prow"><div class="plabel">${label} ${badge}</div><div class="polytext ${cls}" dir="${dir}" lang="${lang}">${t}</div>${vd&&!vd.absent?varLegendHTML(vd):''}</div>`;
@@ -1923,7 +1994,7 @@ async function concFor(key){
 function entryHTML(key,e,extra){
   const lang=langOf(key,e), cls=lang==='grk'?'grk':'heb';
   return `<div class="lex" data-key="${esc(key)}"><div class="hw ${cls}" dir="${cls==='grk'?'ltr':'rtl'}" style="text-align:${cls==='grk'?'left':'right'}">${esc(view(e?e[0]:key,cls))}</div>`+
-    `<div class="meta">${e?`<i>${esc(e[1])}</i> · ${esc(e[3])} · `:''}<b>${esc(plainStrong(key))}</b> <span style="color:var(--ink3)">(${esc(key)})</span>${e?` · ${e[5]} occurrence${e[5]===1?'':'s'} in the ${key[0]==='G'?'NT':'Hebrew Bible'}`:''}</div>`+
+    `<div class="meta">${e?`<i>${esc(e[1])}</i> · ${esc(e[3])} · `:''}${strongLink(key, plainStrong(key), 'lex-strong')} <span style="color:var(--ink3)">(${esc(key)})</span>${e?` · ${e[5]} occurrence${e[5]===1?'':'s'} in the ${key[0]==='G'?'NT':'Hebrew Bible'}`:''}</div>`+
     (e&&e[4]&&lexOpen===key?`<div class="c-def">${esc(e[4])}</div>`:'')+(extra||'')+
     `<div class="btnrow" style="margin-top:4px"><button class="btn" data-occ="${esc(key)}" style="min-height:36px;padding:4px 10px">${lexOpen===key?'Hide':'All occurrences'}</button></div>`+
     (lexOpen===key?`<div class="occlist" id="occ-${esc(key)}"><div class="loading">Loading concordance…</div></div>`:'')+`</div>`;
@@ -1964,7 +2035,14 @@ async function fillOcc(){
       (vids.length>lexShown?`<div class="more"><button class="btn" data-more="1">Show more</button></div>`:'');
   }catch(e){ el.innerHTML=`<div class="err">Concordance not available: ${esc(e.message)}</div>`; }
 }
-function openConcordance(key){ showTab('lex'); $('#lexQ').value=plainStrong(key); state.lexLang='all'; lexOpen=key; lexShown=40; renderLex().then(()=>{ const el=document.querySelector(`.lex[data-key="${key}"]`); if(el) el.scrollIntoView({block:'start'}); }); }
+async function resolveStrong(key){
+  const m=/^([HG])0*(\d+)([A-Za-z]?)$/.exec(String(key||'')); if(!m) return key; const L=m[1];
+  try{ if(!LEXF[L]) await lexFile(L); }catch(e){ return key; }
+  const lex=LEXF[L]; if(lex[key]) return key; const base=L+m[2].padStart(4,'0');
+  if(lex[base+m[3]]) return base+m[3];
+  const cand=Object.keys(lex).filter(k=>k.startsWith(base)&&!/\d/.test(k.slice(base.length))); cand.sort((a,b)=>(lex[b][5]||0)-(lex[a][5]||0)); return cand[0]||key;
+}
+async function openConcordance(key){ key=await resolveStrong(key); showTab('lex'); $('#lexQ').value=plainStrong(key); state.lexLang='all'; lexOpen=key; lexShown=40; renderLex().then(()=>{ const el=document.querySelector(`.lex[data-key="${key}"]`); if(el) el.scrollIntoView({block:'start'}); }); }
 $('#lexSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; state.lexLang=b.dataset.lang; persist(); renderLex(); });
 let lexT=null; $('#lexQ').addEventListener('input',()=>{ clearTimeout(lexT); lexT=setTimeout(renderLex,200); });
 $('#lexList').addEventListener('click',e=>{
@@ -1986,7 +2064,7 @@ $('#nbList').addEventListener('click',e=>{
   if(b.dataset.act==='del'){ if(b.dataset.armed){ setNote(k,''); renderVerses(); } else { b.dataset.armed='1'; b.textContent='Tap again to delete'; } return; }
   const p=k.split('|');
   if(p[0]==='s'){ if(window.__studies) window.__studies.openStudy(p[1], p[2]); return; }
-  if(p[0]==='w') jumpTo(p[1],+p[2],p[3],p[4],+p[5]); else jumpTo(p[1],+p[2],null,p[3]).then(()=>openNoteSheet(k));
+  if(p[0]==='w') jumpTo(p[1],+p[2],p[3],p[4],+p[5]); else if(p[0]==='p') mineJump(p[1],+p[2],p[3],p[4]); else jumpTo(p[1],+p[2],null,p[3]).then(()=>openNoteSheet(k));
 });
 $('#expMd').onclick=()=>download('hive-scribe-notes.md',notesMarkdown(),'text/markdown');
 $('#expJson').onclick=()=>download('hive-scribe-notes.json',notesJSON(),'application/json');
@@ -2736,7 +2814,7 @@ function renderStudyDetail(s){
       <div class="label">Key verses</div>
       ${L.verses.map(v=>`<button type="button" class="vlink" data-sref="${esc(v.ref)}" data-shl="${esc((v.highlight||[]).map(h=>h.strong).filter(Boolean).join(','))}" data-swit="${esc((v.highlight||[]).map(h=>h.wit).find(Boolean)||'')}">
         <div class="r">${esc(v.ref.replace(/\./g,' '))}${v.highlight&&v.highlight.length?` · ${(v.highlight.map(h=>h.label||h.strong).join(', '))}`:''}</div>
-        <div class="n">${esc(v.note||'')}</div></button>`).join('')}
+        <div class="n">${esc(v.note||'')}</div></button>${(v.highlight||[]).some(h=>h.strong)?`<div class="study-strongs">Strong's: ${(v.highlight||[]).filter(h=>h.strong).map(h=>strongLink(h.strong,plainStrong(h.strong))+(h.label?` <i>${esc(h.label)}</i>`:'')).join(' · ')}</div>`:''}`).join('')}
       <div class="label">Reflection</div>
       <ol class="qlist">${L.questions.map(q=>`<li>${esc(q)}</li>`).join('')}</ol>
       ${L.furtherReading?`<div class="note">Further reading: ${esc(L.furtherReading)}</div>`:''}
@@ -2811,7 +2889,7 @@ function isoNow(){ return new Date().toISOString(); }
 function notesArray(){ return notesSorted().map(k=>Object.assign({key:k},NOTES[k])); }
 function studyNotesFor(id){ return notesArray().filter(n=>n.key===`s|${id}|`+(n.lessonId||'') || (n.key||'').startsWith('s|'+id+'|')); }
 function bundleAll(){
-  return {app:'Hive Scribe', format:'hiveScribe.backup.v1', exported:isoNow(), notes:notesArray(), studies:JSON.parse(JSON.stringify(STUDY_PROG||{}))};
+  return {app:'Hive Scribe', format:'hiveScribe.backup.v1', exported:isoNow(), notes:notesArray(), highlights:Object.assign({},HLS), studies:JSON.parse(JSON.stringify(STUDY_PROG||{}))};
 }
 function bundleStudy(id){
   const s=STUDY && STUDY.id===id ? STUDY : null;
@@ -2937,7 +3015,8 @@ function parseBackup(text){
   if(obj.format==='hiveScribe.study.v1' && obj.progress && obj.study && obj.study.id){
     studies=Object.assign({}, studies, {[obj.study.id]:obj.progress});
   }
-  return {obj, notes, studies, format:obj.format||''};
+  const highlights={}; if(obj.highlights&&typeof obj.highlights==='object'&&!Array.isArray(obj.highlights)) for(const [k,v] of Object.entries(obj.highlights)) if(HL_NAME[v]&&/^[^|]+\|\d+\|[^|]+$/.test(k)) highlights[k]=v;
+  return {obj, notes, studies, highlights, format:obj.format||''};
 }
 function previewImport(parsed){
   const conflicts=[], adds=[];
@@ -2947,6 +3026,9 @@ function previewImport(parsed){
     if(!cur || !String(cur.text||'').trim()){ if(text) adds.push({kind:'note', key:n.key, incoming:n, label:(n.ref||n.key)+' (note)'}); }
     else if(String(cur.text||'').trim()!==text) conflicts.push({kind:'note', key:n.key, incoming:n, current:cur, label:(n.ref||n.key)+' (note)'});
   });
+  Object.entries(parsed.highlights||{}).forEach(([k,col])=>{ const p=k.split('|'), lbl=(BOOK[p[0]]?refName(p[0],p[1],p[2]):k)+' (highlight)';
+    if(!HLS[k]) adds.push({kind:'hl', key:k, incoming:{text:HL_NAME[col]}, label:lbl});
+    else if(HLS[k]!==col) conflicts.push({kind:'hl', key:k, incoming:{text:HL_NAME[col]}, current:{text:HL_NAME[HLS[k]]}, label:lbl}); });
   Object.keys(parsed.studies||{}).forEach(id=>{
     const inc=parsed.studies[id]||{}; const cur=STUDY_PROG[id];
     if(!cur){ adds.push({kind:'study', key:id, incoming:inc, label:'Study '+id+' (new progress)'}); return; }
@@ -2976,6 +3058,8 @@ function applyImport(parsed, resolve){
     NOTES[n.key]=Object.assign({}, isConf?cur:{}, meta, {text:String(n.text).trim(), updated:n.updated||isoNow()});
   });
   saveNotes();
+  Object.entries(parsed.highlights||{}).forEach(([k,col])=>{ if(!HLS[k] || (HLS[k]!==col && take)) HLS[k]=col; });
+  saveHL(); if(typeof renderVerses==='function' && CH) renderVerses(); hlCount();
   Object.keys(parsed.studies||{}).forEach(id=>{
     const inc=JSON.parse(JSON.stringify(parsed.studies[id]||{}));
     if(!STUDY_PROG[id]){ STUDY_PROG[id]=inc; return; }
@@ -3180,7 +3264,7 @@ function wpBodyHTML(wit, d, v, i, n){
     h+=`<div class="wp-tr">${esc(raw[1]||'')}</div>`+(raw[2]?`<div class="wp-gloss">“${esc(raw[2])}”</div>`:'');
     const strong=wit.id==='heb'?plainStrong(rootTag(raw[3])||''):(wit.id==='byz'&&raw[6])?'G'+raw[6]:plainStrong(raw[3]||'');
     h+=`<div class="wp-grid">`+
-      wpRow("Strong's", strong?`<b class="wp-strong">${esc(strong)}</b> <span class="wp-src">${wit.id==='heb'?'extended '+esc(rootTag(raw[3])||raw[3]):wit.id==='byz'?(raw[6]?'Robinson · lexicon via TAGNT '+esc(raw[3]):'Robinson · '+esc(raw[3])):'TAGNT '+esc(raw[3])}</span>`:`<span class="wp-muted">No TAGNT match for this word, so no Strong's number or gloss.</span>`)+
+      wpRow("Strong's", strong?`${strongLink(wpKeyOf(raw,wit.id)||strong, strong, 'wp-strong')} <span class="wp-src">${wit.id==='heb'?'extended '+esc(rootTag(raw[3])||raw[3]):wit.id==='byz'?(raw[6]?'Robinson · lexicon via TAGNT '+esc(raw[3]):'Robinson · '+esc(raw[3])):'TAGNT '+esc(raw[3])}</span>`:`<span class="wp-muted">No TAGNT match for this word, so no Strong's number or gloss.</span>`)+
       (isGkWit(wit.id)?wpRow('Dictionary form',`<span class="wp-grk">${esc(raw[5]||'')}</span>`):'')+
       wpRow('Morphology', `${esc(wit.id==='heb'?decodeHeb(raw[4]):gkMorph(wit.id,raw[4]))} <span class="wp-src">${wit.id==='heb'?'':gkMorphSrc(wit.id)+' '}${esc(raw[4]||'')}</span>`)+
       (()=>{ const vd=varFor(wit.id,v), mk=vd&&vd.markA&&vd.markA[i]; return mk?wpRow('Variant', mk.t==='add'?`Not in ${esc(VAR_SHORT[vd.other])}`:`${esc(VAR_SHORT[vd.other])} reads <span class="wp-grk">${esc(mk.other)}</span>`):''; })()+
@@ -3197,7 +3281,7 @@ function wpBodyHTML(wit, d, v, i, n){
   return h;
 }
 function wpOpen(wEl, opts){
-  opts=opts||{};
+  opts=opts||{}; ppClose(false);
   const v=wEl.dataset.v, i=+wEl.dataset.i, wit=WITS.find(w=>w.id===state.wit); if(!wit) return;
   const ws=verseWords(wit.id,v); const d=ws&&ws[i]; if(!d) return;
   const seq=++wpSeq; wpState={book:state.book,ch:state.ch,wit:wit.id,v:String(v),i,w:d.w};
@@ -3274,6 +3358,7 @@ function escLayer(){
   if(popupOpen){ closePopup(); return true; }
   if(document.querySelector('.sheet.on')){ closeSheets(); return true; }
   if(!isWide() && drawerOpen){ libSetOpen(false); return true; }
+  if(PSEL){ ppClose(true); return true; }
   if(wpState){ wpClose(true); return true; }
   return false;
 }
@@ -3422,6 +3507,198 @@ document.addEventListener('click',e=>{ const b=e.target.closest('#enSeg [data-en
 { const sel=$('#enSel'); if(sel) sel.addEventListener('change',()=>setEnVer(sel.value)); }
 enUI();
 canonInit();
+
+// ---------- Passage panel: verse highlights, passage notes, copy; "My highlights & notes" ----------
+var HL_KEY='hiveScribe.highlights.v1';
+var HL_COLORS=[{id:'yellow',name:'Yellow'},{id:'green',name:'Green'},{id:'blue',name:'Blue'},{id:'purple',name:'Purple'},{id:'pink',name:'Pink'},{id:'orange',name:'Orange'}];
+var HL_NAME=Object.fromEntries(HL_COLORS.map(c=>[c.id,c.name]));
+var HLS={};
+try{ const o=JSON.parse(localStorage.getItem(HL_KEY)||'{}'); if(o&&typeof o==='object') for(const [k,v] of Object.entries(o)) if(HL_NAME[v]) HLS[k]=v; }catch(e){ HLS={}; }
+function saveHL(){ try{ localStorage.setItem(HL_KEY, JSON.stringify(HLS)); return true; }catch(e){ return false; } }
+const hlKey=(b,c,v)=>`${b}|${c}|${v}`;
+function hlOf(b,c,v){ return (HLS||{})[b+'|'+c+'|'+v]||null; }
+var PSEL=null, ANCHOR=null, ppSaveT=null, ppLastPointer='mouse';
+
+function ppLabels(b,c,a,z){ const L=visibleVlabels(b,c); let i=L.indexOf(String(a)), j=L.indexOf(String(z)); if(i<0) i=j; if(j<0) j=i; if(i<0) return []; if(i>j) [i,j]=[j,i]; return L.slice(i,j+1); }
+function ppRange(){ return PSEL ? ppLabels(PSEL.b,PSEL.c,PSEL.a,PSEL.z) : []; }
+function passRef(b,c,vs){ return vs.length? refName(b,c,vs[0])+(vs.length>1?'–'+vs[vs.length-1]:'') : refName(b,c); }
+function passKey(b,c,vs){ return vs.length===1 ? `v|${b}|${c}|${vs[0]}` : `p|${b}|${c}|${vs[0]}|${vs[vs.length-1]}`; }
+function passText(vs){ return vs.filter(v=>EN&&EN[v]).map(v=>`${v} ${enPlain(EN[v])}`).join(' '); }
+function passCopyText(b,c,vs){ return `${passText(vs)}\n— ${passRef(b,c,vs)} (${(ENV||enPref()).abbr})`; }
+
+// classes + marks used by renderVerses()
+function vxClass(v){ let s=''; const h=hlOf(state.book,state.ch,v); if(h) s+=` hlc hlc-${h}`; if(PSEL&&PSEL.b===state.book&&PSEL.c===state.ch&&ppRange().includes(String(v))) s+=' psel'; return s; }
+function vxMarks(v){
+  const h=hlOf(state.book,state.ch,v); let s=h?`<span class="sr-only">Highlighted ${esc(HL_NAME[h])}.</span>`:'';
+  if(PSEL&&PSEL.b===state.book&&PSEL.c===state.ch&&ppRange().includes(String(v))) s+='<span class="sr-only">Selected.</span>';
+  const pre=`p|${state.book}|${state.ch}|${v}|`;
+  for(const k of Object.keys(NOTES)) if(k.startsWith(pre)){ const z=k.split('|')[4]; s+=`<button type="button" class="pnote" data-pnote="${esc(k)}" aria-label="Passage note on ${esc(refName(state.book,state.ch,v))}–${esc(z)}" title="Passage note ${esc(v)}–${esc(z)}">❡</button>`; }
+  return s;
+}
+function ppMarkDom(){
+  document.querySelectorAll('#verses .verse.psel').forEach(e=>e.classList.remove('psel'));
+  if(!PSEL||PSEL.b!==state.book||PSEL.c!==state.ch) return;
+  ppRange().forEach(v=>{ const el=document.getElementById(`v-${state.book}-${state.ch}-${v}`); if(el) el.classList.add('psel'); });
+}
+
+function ppBodyHTML(){
+  const vs=ppRange(), {b,c}=PSEL, ref=passRef(b,c,vs), ev=ENV||enPref();
+  const cols=vs.map(v=>hlOf(b,c,v)); const all=cols.every(x=>x&&x===cols[0])?cols[0]:null; const any=cols.some(Boolean);
+  const key=passKey(b,c,vs), note=(NOTES[key]||{}).text||'';
+  const preview=vs.slice(0,40).map(v=>EN&&EN[v]?`<sup class="pp-vn">${esc(v)}</sup>${enHTML(EN[v])} `:'').join('')+(vs.length>40?' …':'');
+  return `<p class="wp-muted pp-hint">${vs.length} verse${vs.length===1?'':'s'} selected. Tap another verse${isWide()?' (or Shift-click)':''} to extend the selection. Close this panel to go back to tapping verses to flip them.</p>`+
+    `<div class="wp-sec"><div class="wp-lbl" id="ppHlLbl">Highlight</div><div class="pp-sw" role="group" aria-labelledby="ppHlLbl">`+
+    HL_COLORS.map(x=>`<button type="button" class="pp-swatch" data-hl="${x.id}" aria-pressed="${all===x.id}" aria-label="Highlight ${x.name}"><span class="pp-dot hlc-${x.id}" aria-hidden="true">${all===x.id?'✓':''}</span><span class="pp-swl">${x.name}</span></button>`).join('')+
+    `<button type="button" class="pp-swatch pp-clear" data-hl="" aria-label="Clear highlight"${any?'':' disabled'}><span class="pp-dot pp-dot-clear" aria-hidden="true">⌀</span><span class="pp-swl">Clear</span></button></div>`+
+    `<div class="wp-muted" id="ppHlState" aria-live="polite">${all?`Highlighted ${esc(HL_NAME[all])}`:any?'Mixed highlights':'Not highlighted'}</div></div>`+
+    `<div class="wp-sec"><label class="wp-lbl" for="ppNote">${vs.length===1?'Verse note':'Passage note'} <span class="wp-src" id="ppNoteRef">${esc(ref)} · saved on this device</span></label>`+
+    `<textarea class="notebox" id="ppNote" placeholder="Your note on ${esc(ref)}…">${esc(note)}</textarea><div class="wp-muted" id="ppNoteMsg" aria-live="polite">${vs.length===1?'Same note as the ✎ verse note. ':''}Saves as you type.</div></div>`+
+    `<div class="wp-sec"><div class="wp-lbl">${esc(ref)} <span class="wp-src">${esc(ev.abbr)}</span></div><p class="wp-ctx" id="ppText">${preview||'<span class="wp-muted">No English text for these verses.</span>'}</p></div>`+
+    `<div class="btnrow"><button type="button" class="btn primary" id="ppCopy">Copy passage</button><button type="button" class="btn" id="ppMine">My highlights &amp; notes</button></div><div class="wp-muted" id="ppCopyMsg" aria-live="polite"></div>`;
+}
+function ppRender(focus){
+  if(!PSEL) return; const vs=ppRange(); if(!vs.length){ ppClose(false); return; }
+  $('#ppTitle').textContent=`${passRef(PSEL.b,PSEL.c,vs)} · ${(ENV||enPref()).abbr}`;
+  const keepNote=document.activeElement&&document.activeElement.id==='ppNote';
+  $('#ppBody').innerHTML=ppBodyHTML(); ppMarkDom();
+  if(keepNote){ const t=$('#ppNote'); t.focus({preventScroll:true}); t.setSelectionRange(t.value.length,t.value.length); }
+  if(focus) requestAnimationFrame(()=>$('#ppTitle').focus({preventScroll:true}));
+}
+function ppOpen(b,c,a,z,opts){
+  opts=opts||{};
+  if(b!==state.book||c!==state.ch) return;
+  ppFlush(); wpClose(false); closePopup();
+  PSEL={b,c,a:String(a),z:String(z==null?a:z)}; ANCHOR={b,c,v:PSEL.a};
+  const p=$('#passPanel'); p.hidden=false; document.body.classList.add('pp-open');
+  ppRender(opts.focus!==false); setChromeVars();
+  const first=document.getElementById(`v-${b}-${c}-${ppRange()[0]}`); if(first&&opts.reveal!==false) requestAnimationFrame(()=>wpReveal(first));
+}
+function ppExtend(v){ if(!PSEL) return; PSEL.z=String(v); ppFlush(); ppRender(false); }
+function ppClose(restoreFocus){
+  if(!PSEL && $('#passPanel').hidden) return;
+  ppFlush(); const had=$('#passPanel').contains(document.activeElement), sel=PSEL;
+  PSEL=null; $('#passPanel').hidden=true; document.body.classList.remove('pp-open'); ppMarkDom();
+  if(restoreFocus&&had&&sel){ const h=document.querySelector(`#v-${sel.b}-${sel.c}-${sel.a} .vhead`); if(h) h.focus({preventScroll:true}); }
+}
+function ppSaveNote(){
+  if(!PSEL) return; const t=$('#ppNote'); if(!t) return; const vs=ppRange(), {b,c}=PSEL, key=passKey(b,c,vs);
+  const meta=vs.length===1?{kind:'verse',ref:refName(b,c,vs[0]),book:b,ch:+c,v:vs[0]}:{kind:'passage',ref:passRef(b,c,vs),book:b,ch:+c,v:vs[0],v2:vs[vs.length-1]};
+  const had=!!NOTES[key], ok=setNote(key,t.value,meta), m=$('#ppNoteMsg');
+  if(m) m.textContent=ok?(t.value.trim()?'Saved ✓':'Note removed'):'Could not save (storage blocked)';
+  if(had!==!!NOTES[key]){ renderVerses(); }
+  hlCount();
+}
+function ppFlush(){ if(ppSaveT){ clearTimeout(ppSaveT); ppSaveT=null; ppSaveNote(); } }
+function ppSetHL(id){
+  if(!PSEL) return; const vs=ppRange(), {b,c}=PSEL;
+  vs.forEach(v=>{ const k=hlKey(b,c,v); if(id) HLS[k]=id; else delete HLS[k]; });
+  const ok=saveHL(); renderVerses(); ppRender(false);
+  const s=$('#ppHlState'); if(s) s.textContent=(ok?'':'Could not save (storage blocked). ')+(id?`Highlighted ${HL_NAME[id]}: ${vs.length} verse${vs.length===1?'':'s'}`:'Highlight cleared');
+  const btn=document.querySelector(`#ppBody [data-hl="${id}"]`); if(btn) btn.focus({preventScroll:true});
+  hlCount();
+}
+function ppFromVerse(card,extend){
+  const v=card.dataset.v;
+  if(extend && PSEL && PSEL.b===state.book && PSEL.c===state.ch){ ppExtend(v); return; }
+  if(extend && ANCHOR && ANCHOR.b===state.book && ANCHOR.c===state.ch && ANCHOR.v!==v){ ppOpen(state.book,state.ch,ANCHOR.v,v); return; }
+  ppOpen(state.book,state.ch,v,v);
+}
+
+// ---- reading-view gestures (word gestures in app3 keep priority) ----
+(function(){
+  const vEl=$('#verses'); let vhold=null, start=null;
+  const clear=()=>{ if(vhold){ clearTimeout(vhold); vhold=null; } };
+  vEl.addEventListener('pointerdown',e=>{
+    ppLastPointer=e.pointerType||'mouse'; clear(); start=null;
+    if(e.target.closest('.word,button,a,textarea,input,select')) return;
+    if(e.pointerType==='mouse' && e.button!==0) return;
+    const card=e.target.closest('.verse'); if(!card) return;
+    start={card,x:e.clientX,y:e.clientY,sy:scrollY,moved:false};
+    if(performance.now()-lastScrollAt<MOMENTUM_MS) return;
+    vhold=setTimeout(()=>{ vhold=null; if(!start||start.moved||scrollY!==start.sy) return;
+      suppressClick=true; if(navigator.vibrate) navigator.vibrate(12); ppFromVerse(start.card, !!PSEL); start=null; },HOLD_MS);
+  });
+  vEl.addEventListener('pointermove',e=>{ if(start&&Math.hypot(e.clientX-start.x,e.clientY-start.y)>MOVE_TOL){ start.moved=true; clear(); } },{passive:true});
+  addEventListener('scroll',clear,{passive:true,capture:true});
+  vEl.addEventListener('pointercancel',()=>{ clear(); start=null; });
+  vEl.addEventListener('pointerup',e=>{ clear();
+    if(start && start.moved && e.pointerType==='mouse'){ // mouse drag across verses selects the range
+      const end=document.elementFromPoint(e.clientX,e.clientY); const card=end&&end.closest&&end.closest('#verses .verse');
+      if(card && card!==start.card){
+        const s=getSelection(); if(s) s.removeAllRanges();
+        ppOpen(state.book,state.ch,start.card.dataset.v,card.dataset.v); suppressClick=true; setTimeout(()=>{ suppressClick=false; },400);
+      }
+    }
+    start=null; });
+  vEl.addEventListener('contextmenu',e=>{ if(ppLastPointer!=='mouse') return; if(e.target.closest('.word')) return; const card=e.target.closest('.verse'); if(!card) return; ppFromVerse(card, !!PSEL); });
+  vEl.addEventListener('keydown',e=>{
+    const h=e.target.closest('.vhead'); if(!h) return;
+    if(e.key==='Enter'||e.key===' '||e.key==='ContextMenu'||(e.key==='F10'&&e.shiftKey)){ e.preventDefault(); e.stopPropagation(); ppFromVerse(h.closest('.verse'), e.shiftKey && e.key!=='F10'); }
+  });
+})();
+// called from the #verses click handler (app3) before flipping; returns true when handled
+function ppClick(e,card){
+  const pn=e.target.closest('.pnote'); if(pn){ const p=pn.dataset.pnote.split('|'); ppOpen(p[1],+p[2],p[3],p[4]); return true; }
+  if(!card || e.target.closest('.inter .word')) return false;
+  if(e.shiftKey){ ppFromVerse(card,true); const s=getSelection(); if(s) s.removeAllRanges(); return true; }
+  if(PSEL && PSEL.b===state.book && PSEL.c===state.ch && !e.target.closest('.inter .word')){ ppExtend(card.dataset.v); return true; }
+  ANCHOR={b:state.book,c:state.ch,v:card.dataset.v};
+  return false;
+}
+
+$('#ppClose').addEventListener('click',()=>ppClose(true));
+$('#passPanel').addEventListener('click',e=>{
+  const s=e.target.closest('[data-hl]'); if(s){ ppSetHL(s.dataset.hl); return; }
+  if(e.target.closest('#ppCopy')){ const vs=ppRange(); copyText(passCopyText(PSEL.b,PSEL.c,vs)); const m=$('#ppCopyMsg'); if(m){ m.textContent=`Copied ${passRef(PSEL.b,PSEL.c,vs)} (${(ENV||enPref()).abbr})`; setTimeout(()=>{ if(m.isConnected) m.textContent=''; },2500); } return; }
+  if(e.target.closest('#ppMine')){ openMine(); return; }
+});
+$('#passPanel').addEventListener('input',e=>{ if(e.target.id!=='ppNote') return; clearTimeout(ppSaveT); const m=$('#ppNoteMsg'); if(m) m.textContent='Saving…'; ppSaveT=setTimeout(()=>{ ppSaveT=null; ppSaveNote(); },500); });
+$('#passPanel').addEventListener('focusout',e=>{ if(e.target.id==='ppNote') ppFlush(); });
+
+// ---- My highlights & notes ----
+var MINE_FILTER='all';
+function mineItems(){
+  const bi=b=>{ const i=BOOKS.findIndex(x=>x.id===b); return i<0?999:i; };
+  const items=new Map();
+  const groups={}; // b|c -> [{v,col}]
+  for(const [k,col] of Object.entries(HLS)){ const p=k.split('|'); (groups[p[0]+'|'+p[1]]=groups[p[0]+'|'+p[1]]||[]).push({v:p[2],col}); }
+  for(const [bc,arr] of Object.entries(groups)){
+    const [b,c]=bc.split('|'); if(!BOOK[b]) continue; const L=vlabels(b,+c); arr.sort((x,y)=>L.indexOf(x.v)-L.indexOf(y.v));
+    let run=null;
+    const push=()=>{ if(!run) return; const id=`${b}|${c}|${run.a}|${run.z}`; items.set(id,{b,c:+c,a:run.a,z:run.z,col:run.col}); run=null; };
+    arr.forEach(x=>{ if(run && run.col===x.col && L.indexOf(x.v)===L.indexOf(run.z)+1) run.z=x.v; else { push(); run={a:x.v,z:x.v,col:x.col}; } }); push();
+  }
+  for(const [k,n] of Object.entries(NOTES)){ const p=k.split('|'); if((p[0]!=='v'&&p[0]!=='p')||!BOOK[p[1]]) continue;
+    const a=p[3], z=p[0]==='p'?p[4]:p[3], id=`${p[1]}|${p[2]}|${a}|${z}`;
+    const it=items.get(id)||{b:p[1],c:+p[2],a,z,col:null}; it.note=n.text; it.key=k; items.set(id,it); }
+  return [...items.values()].sort((x,y)=>bi(x.b)-bi(y.b)||x.c-y.c||parseInt(x.a)-parseInt(y.a)||parseInt(x.z)-parseInt(y.z));
+}
+function hlCount(){ const el=$('#libMineN'); if(el){ const n=mineItems().length; el.textContent=n?String(n):''; } }
+function renderMine(){
+  const all=mineItems(), cnt={all:all.length,notes:all.filter(i=>i.note).length}; HL_COLORS.forEach(x=>cnt[x.id]=all.filter(i=>i.col===x.id).length);
+  $('#mineFilter').innerHTML=[['all','All'],...HL_COLORS.map(x=>[x.id,x.name]),['notes','Notes']].map(([id,l])=>`<button type="button" class="mine-chip" data-mf="${id}" aria-pressed="${MINE_FILTER===id}">${HL_NAME[id]?`<span class="pp-dot sm hlc-${id}" aria-hidden="true"></span>`:id==='notes'?'<span aria-hidden="true">✎</span>':''}${l} <span class="mine-n">${cnt[id]||0}</span></button>`).join('');
+  const list=all.filter(i=>MINE_FILTER==='all'||(MINE_FILTER==='notes'?!!i.note:i.col===MINE_FILTER));
+  $('#mineList').innerHTML=list.length?list.map(i=>{ const ref=refName(i.b,i.c,i.a)+(i.z!==i.a?'–'+i.z:'');
+    return `<button type="button" class="mine-item" data-b="${esc(i.b)}" data-c="${i.c}" data-a="${esc(i.a)}" data-z="${esc(i.z)}">`+
+      `<span class="mine-top">${i.col?`<span class="pp-dot sm hlc-${i.col}" aria-hidden="true"></span><span class="mine-tag">${esc(HL_NAME[i.col])}</span>`:''}${i.note?'<span class="mine-tag">✎ Note</span>':''}<span class="mine-ref">${esc(ref)}</span></span>`+
+      (i.note?`<span class="mine-note">${esc(i.note.length>160?i.note.slice(0,160)+'…':i.note)}</span>`:'')+`</button>`; }).join('')
+    : `<div class="note">${all.length?'Nothing with this filter.':'No highlights or passage notes yet. Press and hold a verse (or select verses) in Read to add one.'}</div>`;
+}
+function openMine(){ ppFlush(); renderMine(); openSheet('#mineSheet'); requestAnimationFrame(()=>{ const t=$('#mineTitle'); if(t) t.focus({preventScroll:true}); }); }
+async function mineJump(b,c,a,z){
+  closeSheets(); if(state.tab!=='read') showTab('read');
+  if(b!==state.book||c!==state.ch||!CH){ state.vf='all'; await gotoChapter(b,c); } else if(state.vf!=='all'){ state.vf='all'; renderVF(); renderVerses(); }
+  const el=document.getElementById(`v-${b}-${c}-${a}`); if(el){ el.scrollIntoView({block:'center'}); el.classList.add('flash'); setTimeout(()=>el.classList.remove('flash'),1600); }
+  ppOpen(b,c,a,z);
+}
+$('#mineFilter').addEventListener('click',e=>{ const b=e.target.closest('[data-mf]'); if(!b) return; MINE_FILTER=b.dataset.mf; renderMine(); const n=document.querySelector(`#mineFilter [data-mf="${MINE_FILTER}"]`); if(n) n.focus(); });
+$('#mineList').addEventListener('click',e=>{ const b=e.target.closest('.mine-item'); if(!b) return; mineJump(b.dataset.b,+b.dataset.c,b.dataset.a,b.dataset.z); });
+{ const lb=$('#libMine'); if(lb) lb.addEventListener('click',()=>{ if(!isWide()&&typeof libSetOpen==='function') libSetOpen(false); openMine(); }); }
+{ const nb=$('#nbMine'); if(nb) nb.addEventListener('click',openMine); }
+// Strong's links outside the quick card / word panel (those have their own [data-conc] handlers)
+document.addEventListener('click',e=>{ const a=e.target.closest('.slink'); if(!a||a.closest('#callout,#wordPanel')) return; e.preventDefault(); closePopup(); wpClose(false); ppClose(false); closeSheets(); openConcordance(a.dataset.conc); });
+hlCount();
+window.__pp={open:ppOpen,close:ppClose,setHL:ppSetHL,sel:()=>PSEL&&Object.assign({vs:ppRange()},PSEL),copyText:()=>PSEL&&passCopyText(PSEL.b,PSEL.c,ppRange()),HLS:()=>HLS,items:mineItems,openMine};
 
 </script>
 <script type="module">import * as THREE from "./vendor/three.module.min.js"; window.THREE=THREE; dispatchEvent(new Event("three-ready"));</script>

@@ -20,6 +20,8 @@ Chapters you open are cached automatically. In **Settings (Aa)** choose **Downlo
 
 ### Reading tools
 
+**Passage panel:** press and hold a verse (touch or mouse), right-click it, drag across verses with a mouse, Shift-click a second verse, or press Enter on a verse number to select a passage. The panel (right side on desktop, bottom sheet on phones) offers six labelled highlight colours plus Clear, an autosaving note for the passage (a single verse shares the ✎ verse note), and Copy passage with reference and version. **My highlights & notes** (Library, Notebook, or the panel) lists them all, filterable by colour, tap to jump. Saved on the device and included in Notebook / backup export and import. Every Strong's number (word panel, quick card, lexicon, studies, Logos Bridge) is a link to its Lexicon & Notes entry and concordance.
+
 Text size (S–XL), a dyslexia-friendly reading mode, Hebrew vowel-point and cantillation toggles, a **Books shown** canon filter in the Library (presets All / Protestant / Catholic / Orthodox, plus Old Testament, New Testament, Deuterocanon and Greek-additions checkboxes, remembered on the device) and per-witness visibility (Hebrew WLC, Greek NT, Septuagint, Targum, Latin Vulgate), a Logos Bridge (Genesis 1 with John 1), a lexicon and concordance, guided Studies, and notes you can export and import.
 
 ## What’s included
