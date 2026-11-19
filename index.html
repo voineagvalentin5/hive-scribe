@@ -819,6 +819,67 @@ header::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:no
 @media (max-width:1023px){ .wpanel.ppanel{max-height:min(42vh,420px)} body.pp-open[data-tab=read] main{padding-bottom:calc(min(42vh,420px) + 40px)} }
 </style>
 
+
+<style id="refinements-2026-11-19">
+/* 1. Quiet reading surface: plain cream behind Scripture; honeycomb stays in the margins and header */
+#view-read .read-col{background:var(--paper);box-shadow:0 0 0 1px color-mix(in srgb,var(--gold) 12%,transparent),0 0 32px var(--glow)}
+#view-read .readbar{background:var(--paper)}
+.pcard{background:var(--paper)}
+/* 3. Central promise */
+.subtitle.promise{margin:2px 0 0;font:italic 500 14px/1.35 'Noto Serif',Georgia,serif;color:var(--ink2);letter-spacing:.01em}
+@media (max-width:759px){.subtitle.promise{font-size:13px}}
+/* 2. Plain-language mode descriptions */
+nav.tabs .tabtxt{display:flex;flex-direction:column;align-items:center;min-width:0}
+nav.tabs .tabdesc{display:none}
+@media (min-width:1024px){
+  nav.tabs .tab{min-height:50px}
+  nav.tabs .tabtxt{align-items:flex-start;text-align:left}
+  nav.tabs .tabdesc{display:block;max-width:100%;font:500 11px/1.25 var(--ui);color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+  nav.tabs .tab[aria-selected=true] .tabdesc{color:var(--ink2);text-shadow:none}
+}
+.modeintro{margin:6px 2px 12px;padding:9px 13px;border-radius:14px;font-size:13px;line-height:1.5;color:var(--ink2);background:var(--paper);border:1px solid color-mix(in srgb,var(--gold) 22%,transparent)}
+.modeintro b{color:var(--ink)}
+#view-conn .modeintro{margin:2px 2px 8px;padding:6px 12px;font-size:12px;line-height:1.4}
+/* First-visit welcome (replaces the old one-line tap hint) */
+.hint.welcome{position:relative;margin:0 0 14px;padding:12px 44px 12px 16px;border-radius:16px;background:color-mix(in srgb,var(--gold) 7%,var(--paper));border:1px solid color-mix(in srgb,var(--gold) 30%,transparent);font-size:13px;color:var(--ink2)}
+.hint.welcome .wl-title{margin:0 0 4px;font:500 15px/1.35 'Noto Serif',Georgia,serif;color:var(--ink)}
+.hint.welcome .wl-steps{margin:4px 0 8px;padding-left:20px;line-height:1.5}
+.hint.welcome .wl-steps li{margin:2px 0}
+.hint.welcome .wl-foot{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.hint.welcome .wl-foot .btn{min-height:36px}
+.hint.welcome .wl-note{font-size:12px;color:var(--ink3)}
+@media (max-width:759px){.hint.welcome{padding:10px 40px 10px 12px;font-size:12.5px}.hint.welcome .wl-title{font-size:14px}.hint.welcome .wl-steps{margin:2px 0 6px;padding-left:18px;line-height:1.42}.hint.welcome .wl-foot .btn{min-height:34px;padding:4px 14px}.hint.welcome .wl-note{display:none}
+  .readbar{gap:4px 2px;padding:6px 6px}.readbar .barbtn,.readbar .seg button{padding:5px 8px}.readbar .sel{padding:4px 2px}}
+.hint.welcome .hintx{position:absolute;top:6px;right:6px;border:0;background:none;color:var(--ink3);min-width:36px;min-height:36px;font-size:14px;cursor:pointer}
+@media (min-width:1024px){ body.wp-open .hint.welcome{display:none} }
+/* 4. Compact reading bar: one row on desktop, witnesses scroll sideways, short names when the column is narrow */
+.readbar .wshort{display:none}
+@container (max-width:860px){ .readbar .wfull{display:none} .readbar .wshort{display:inline} }
+.readbar #witnessWrap[hidden]{display:none!important}
+@media (min-width:1024px){
+  .readbar{flex-wrap:nowrap;gap:4px 6px;padding:5px 8px}
+  .readbar #witnessWrap{display:flex;flex:1 1 auto;min-width:0}
+  .readbar #witSeg{flex-wrap:nowrap;overflow-x:auto;min-width:0;scrollbar-width:thin;white-space:nowrap}
+  .readbar #witSeg button,.readbar .barbtn,.readbar .sel{flex:0 0 auto;white-space:nowrap}
+  .readbar .seg button,.readbar .barbtn,.readbar .sel{min-height:36px}
+}
+@media (max-width:1023px){
+  .readbar #witnessWrap{display:block;flex:1 1 100%;min-width:0;order:0}
+  .readbar #witSeg{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;white-space:nowrap;-webkit-overflow-scrolling:touch}
+  .readbar #witSeg::-webkit-scrollbar{display:none}
+  .readbar #witSeg button{flex:0 0 auto}
+}
+/* 5. Backup reminders */
+.backup-remind{margin:4px 0 10px;padding:10px 13px;border-radius:14px;background:color-mix(in srgb,var(--gold) 9%,var(--paper));border:1px solid color-mix(in srgb,var(--gold) 34%,transparent);font-size:13px;line-height:1.5;color:var(--ink2)}
+.backup-remind b{color:var(--ink)}
+.br-last{display:inline-block;color:var(--ink3);font-size:12px}
+.wp-backup{margin:8px 0 0;font-size:12px;line-height:1.5;color:var(--ink3)}
+.linkbtn{border:0;background:none;padding:0;font:600 12px var(--ui);color:var(--gold);text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+.linkbtn:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:3px}
+#backupToast{position:fixed;left:50%;bottom:calc(var(--navH,0px) + 18px);transform:translate(-50%,20px);z-index:120;background:var(--ink);color:var(--paper);font:600 13px var(--ui);padding:9px 14px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+#backupToast.on{opacity:1;transform:translate(-50%,0)}
+@media print{.backup-remind,.wp-backup,.modeintro,#backupToast{display:none!important}}
+</style>
 </head>
 <body>
 <!-- chl-lab-nav -->
@@ -928,12 +989,12 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
       <button class="iconbtn" id="tab-about" aria-label="About and sources"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg></button>
     </div>
   </div>
-  <div class="subrow"><span class="subtitle">Biblical Philology &amp; Interlinear Workbench</span></div>
+  <div class="subrow"><p class="subtitle promise">Read a verse. Explore its words. Follow the connections.</p></div>
   <nav class="tabs" role="tablist">
-    <button class="tab" role="tab" id="tab-read" aria-selected="true"><svg viewBox="0 0 24 24"><path d="M3 5h7a3 3 0 0 1 2 1v13a3 3 0 0 0-2-1H3zM21 5h-7a3 3 0 0 0-2 1v13a3 3 0 0 1 2-1h7z"/></svg>Read &amp; Interlinear</button>
-    <button class="tab" role="tab" id="tab-poly" aria-selected="false"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="16" rx="1.5"/><rect x="14" y="4" width="7" height="16" rx="1.5"/><path d="M10 12h4"/></svg>Polyglot &amp; Logos</button>
-    <button class="tab" role="tab" id="tab-conn" aria-selected="false"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M5 8c6 2 9 6 10 12M19 8c-6 2-9 6-10 12"/></svg>Canonical Chords</button>
-    <button class="tab" role="tab" id="tab-lex" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M5 3h11l3 3v15H5z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>Lexicon &amp; Notes</button>
+    <button title="Biblical philology: tap a verse to see its Hebrew, Aramaic, Greek or Latin, then tap a word for its form, Strong&#39;s number and lexicon entry." class="tab" role="tab" id="tab-read" aria-selected="true"><svg viewBox="0 0 24 24"><path d="M3 5h7a3 3 0 0 1 2 1v13a3 3 0 0 0-2-1H3zM21 5h-7a3 3 0 0 0-2 1v13a3 3 0 0 1 2-1h7z"/></svg><span class="tabtxt"><span class="tabname">Read &amp; Interlinear</span><small class="tabdesc">Biblical philology: the original words under each verse</small></span></button>
+    <button title="Polyglot: one verse in every text the app carries (Hebrew, Greek, Aramaic, Latin, English) side by side. Logos Bridge: Genesis 1 read next to John 1." class="tab" role="tab" id="tab-poly" aria-selected="false"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="16" rx="1.5"/><rect x="14" y="4" width="7" height="16" rx="1.5"/><path d="M10 12h4"/></svg><span class="tabtxt"><span class="tabname">Polyglot &amp; Logos</span><small class="tabdesc">Every ancient text of a verse, side by side</small></span></button>
+    <button title="Canonical Chords: a ring or sphere map of this chapter&#39;s cross-references (OpenBible.info). Tap a line to read both passages." class="tab" role="tab" id="tab-conn" aria-selected="false"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M5 8c6 2 9 6 10 12M19 8c-6 2-9 6-10 12"/></svg><span class="tabtxt"><span class="tabname">Canonical Chords</span><small class="tabdesc">This chapter&#39;s cross-references, drawn as a map</small></span></button>
+    <button title="Lexicon: search Hebrew, Aramaic and Greek words by lemma, gloss or Strong&#39;s number. Notes: your notebook, with export and backup." class="tab" role="tab" id="tab-lex" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M5 3h11l3 3v15H5z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg><span class="tabtxt"><span class="tabname">Lexicon &amp; Notes</span><small class="tabdesc">Search words by Strong&#39;s; keep and back up notes</small></span></button>
   </nav>
 </header>
 <main>
@@ -979,7 +1040,16 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
     <select class="sel" id="vfSel" aria-label="Show verses"></select>
     <select class="sel ensel" id="enSel" aria-label="English version"></select>
     <button type="button" class="barbtn" id="flipAll">Flip All</button>
-    <p class="hint" id="hint">Tap a verse to flip it to the original language. Then <b>tap a word</b> to study it, or <b>press and hold</b> for a quick card. Tap the dimmed area to close. <button type="button" class="hintx" id="hintDismiss" aria-label="Dismiss hint">✕</button></p>
+  </div>
+  <div class="hint welcome" id="hint" role="note" aria-labelledby="hintTitle">
+    <button type="button" class="hintx" id="hintDismiss" aria-label="Dismiss these tips">✕</button>
+    <p class="wl-title" id="hintTitle"><b>New here?</b> Three steps to start:</p>
+    <ol class="wl-steps">
+      <li><b>Tap a verse</b> to flip it to the original language chosen above.</li>
+      <li><b>Tap a word</b> to study it: form, Strong&#39;s number, lexicon entry, other occurrences, your note. <b>Hold</b> for a quick card.</li>
+      <li><b>Follow the connections</b> in <b>Polyglot &amp; Logos</b> (every text side by side) and <b>Canonical Chords</b> (a cross-reference map).</li>
+    </ol>
+    <div class="wl-foot"><button type="button" class="btn primary" id="hintGotIt">Got it</button><span class="wl-note">Your notes stay in this browser. Back them up from Lexicon &amp; Notes.</span></div>
   </div>
   <div id="verses"><div class="loading">Loading…</div></div>
   <div class="chapterfoot"><button type="button" class="textnav" id="prevCh2">‹ Previous chapter</button><button type="button" class="textnav" id="nextCh2">Next chapter ›</button></div>
@@ -997,6 +1067,7 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
 </section>
 
 <section id="view-poly" hidden>
+  <p class="modeintro"><b>Polyglot &amp; Logos.</b> <b>Parallel matrix</b> shows each verse in every text the app carries for this chapter (Hebrew, Greek, Aramaic Targum, Latin Vulgate and English), side by side. <b>Logos Bridge</b> reads Genesis 1:1–3 next to John 1:1–5, with shared words highlighted and hand-written study notes.</p>
   <div class="seg" id="polySeg"><button data-pm="matrix" aria-pressed="true">Parallel matrix</button><button data-pm="bridge" aria-pressed="false">Logos Bridge</button></div>
   <div id="polyBody"></div>
 </section>
@@ -1006,6 +1077,7 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
 </section>
 
 <section id="view-lex" hidden>
+  <p class="modeintro"><b>Lexicon &amp; Notes.</b> Search the Hebrew, Aramaic and Greek lexicon by lemma, English gloss or Strong's number, and see where each word occurs. Below that is your Scribe Notebook, with export and backup.</p>
   <div class="study-teaser" id="studyTeaser">
     <h2 class="sec" style="margin-top:0">Studies</h2>
     <p class="note" style="margin-top:0">Guided topical studies that open verses here in Read, with original-language highlights. Progress is saved only on this device.</p>
@@ -1017,15 +1089,17 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
   <div id="lexCount" class="note" style="margin:0 2px 4px"></div>
   <div id="lexList"></div>
   <h2 class="sec">Scribe Notebook</h2>
+  <div class="backup-remind" id="backupRemind" role="note"><b>Back up your notes.</b> Notes, highlights and study answers are kept only in this browser on this device. Clearing your browsing data deletes them, and a private window or another device will not have them. Export a backup now and then. <span class="br-last" data-backup-last></span><div class="btnrow"><button type="button" class="btn primary" data-backup="json">Back up now (JSON)</button><button type="button" class="btn" data-backup="md">Readable copy (Markdown)</button></div></div>
   <div class="note" style="margin-top:0">Your personal notes on words, verses and studies. Saved on this device only (never uploaded). Add notes from a word’s popup, the ✎ button on a verse, or a study lesson. Export and import let you move them to another device.</div>
   <div class="btnrow"><button class="btn" id="expMd">Export notes (Markdown)</button><button class="btn" id="expJson">Export notes (JSON)</button><button class="btn" id="expNotesPrint">Print notes / save PDF</button><button class="btn" id="copyMd">Copy Markdown</button></div>
-  <div class="btnrow"><button class="btn" id="expAllMd">Export everything (Markdown)</button><button class="btn" id="expAllJson">Export everything (JSON)</button><button class="btn" id="expAllPrint">Print everything / save PDF</button><button class="btn primary" id="impBtn">Import JSON</button><input type="file" id="impFile" accept="application/json,.json" hidden></div>
+  <div class="btnrow"><button class="btn" id="expAllMd">Export everything (Markdown)</button><button class="btn" id="expAllJson">Export everything (JSON)</button><button class="btn" id="expAllPrint">Print everything / save PDF</button><button class="btn primary" id="impBtn">Import / restore backup (JSON)</button><input type="file" id="impFile" accept="application/json,.json" hidden></div>
   <div class="note">“Export everything” includes the Scribe Notebook plus Studies progress and answers. On a phone, export may open the share sheet when the browser allows it; otherwise a file downloads. Import merges; if an item already exists with different text, you will be asked before anything is overwritten.</div>
   <div class="btnrow"><button type="button" class="btn" id="nbMine">My highlights &amp; notes</button></div>
   <div id="nbList"></div>
 </section>
 
 <section id="view-conn" hidden>
+  <p class="modeintro"><b>Canonical Chords.</b> A map of this chapter's cross-references from OpenBible.info: each line joins a verse here to a related passage elsewhere in the Bible, and thicker lines have more votes. Tap a line, dot or book name to read both passages.</p>
   <div id="chordStage">
     <canvas id="chordGl" aria-label="Cross-reference visualization"></canvas>
     <svg id="chord" viewBox="0 0 360 360" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Circular cross-reference diagram"></svg>
@@ -1120,13 +1194,15 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
 </div></div>
 
 <div class="sheet" id="importSheet" role="dialog" aria-modal="true" aria-label="Import conflicts"><div class="bd"></div><div class="pn">
-  <h2>Import conflicts <button class="iconbtn x" data-close aria-label="Close">✕</button></h2>
+  <h2><span id="impTitle">Import conflicts</span> <button class="iconbtn x" data-close aria-label="Close">✕</button></h2>
   <p class="note" id="impCount">Some items already exist with different text.</p>
-  <p class="note">New items with no match are always added. Choose what to do with the conflicts. Nothing is overwritten until you pick.</p>
+  <p class="note" id="impExplain">New items with no match are always added. Choose what to do with the conflicts. Nothing is overwritten until you pick.</p>
+  <p class="note"><button type="button" class="btn" id="impSafety">Download a backup of this device first</button></p>
   <div id="impConflicts"></div>
   <div class="btnrow">
     <button class="btn" id="impKeep">Keep mine (skip conflicts)</button>
     <button class="btn primary" id="impUse">Use imported on conflicts</button>
+    <button class="btn primary" id="impAdd" hidden>Add these items</button>
     <button class="btn" data-close>Cancel</button>
     <span class="saved" id="impMsg"></span>
   </div>
@@ -1319,6 +1395,18 @@ try{ NOTES = JSON.parse(localStorage.getItem(NOTES_KEY)||'{}') || {}; }catch(e){
   if(ch) saveNotes();
 })();
 function saveNotes(){ try{ localStorage.setItem(NOTES_KEY, JSON.stringify(NOTES)); return true; }catch(e){ return false; } }
+
+// ---------- backup reminders (notes live only in this browser) ----------
+const BACKUP_KEY='hiveScribe.lastBackup';
+function markBackup(name){ if(!/^hive-scribe-(export|notes)\./.test(String(name||''))) return; try{ localStorage.setItem(BACKUP_KEY,new Date().toISOString()); }catch(e){} refreshBackupLast(); }
+function lastBackupText(){ let t=null; try{ t=localStorage.getItem(BACKUP_KEY); }catch(e){} if(!t) return 'No backup exported from this browser yet.'; const d=new Date(t); return isNaN(d)?'':'Last backup exported '+d.toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'})+'.'; }
+function refreshBackupLast(){ document.querySelectorAll('[data-backup-last]').forEach(el=>el.textContent=lastBackupText()); }
+function backupNudgeHTML(){ return `<p class="wp-backup">Saved only in this browser. <button type="button" class="linkbtn" data-backup="json">Back up notes</button> · <button type="button" class="linkbtn" data-backup="md">Readable copy</button> · <button type="button" class="linkbtn" data-backup="import">Restore</button> <span class="br-last" data-backup-last>${esc(lastBackupText())}</span></p>`; }
+function backupToast(t){ let el=document.getElementById('backupToast'); if(!el){ el=document.createElement('div'); el.id='backupToast'; el.setAttribute('role','status'); el.setAttribute('aria-live','polite'); document.body.appendChild(el); } el.textContent=t; el.classList.add('on'); clearTimeout(el._t); el._t=setTimeout(()=>el.classList.remove('on'),3200); }
+document.addEventListener('click',e=>{ const b=e.target.closest('[data-backup]'); if(!b) return; const k=b.dataset.backup;
+  if(k==='json') exportAll('json').then(r=>{ if(r==='download'||r==='share') backupToast('Backup saved: hive-scribe-export.json'); });
+  else if(k==='md') exportAll('md').then(r=>{ if(r==='download'||r==='share') backupToast('Readable copy saved: hive-scribe-export.md'); });
+  else if(k==='import'){ const f=document.getElementById('impFile'); if(f) f.click(); } });
 function setNote(key, text, meta){
   text=String(text||'').trim();
   if(!text) delete NOTES[key]; else NOTES[key]=Object.assign({},NOTES[key]||{},meta,{text,updated:new Date().toISOString()});
@@ -1492,7 +1580,8 @@ function renderCov(){
 // ---------- Read view ----------
 function renderWitSeg(){
   $('#witnessWrap').hidden = !WITS.length;
-  $('#witSeg').innerHTML = WITS.map(w=>`<button data-wit="${w.id}" aria-pressed="${w.id===state.wit}">${esc(w.name)}</button>`).join('');
+  const WSHORT={heb:'Hebrew',grk:'SBLGNT',byz:'Byzantine',lxx:'LXX',tg:'Targum',vul:'Vulgate'};
+  $('#witSeg').innerHTML = WITS.map(w=>`<button data-wit="${w.id}" aria-pressed="${w.id===state.wit}" aria-label="${esc(w.name)}" title="${esc(w.name)}"><span class="wfull">${esc(w.name)}</span><span class="wshort" aria-hidden="true">${esc(WSHORT[w.id]||w.name)}</span></button>`).join('');
 }
 function visibleVerses(){ const all=visibleVlabels(state.book,state.ch); return state.vf==='all'?all:all.filter(v=>v===state.vf); }
 function renderVF(){
@@ -1733,7 +1822,7 @@ function showTab(name, init){
   restoreScroll(); persist();
 }
 TABS.forEach(n=>$('#tab-'+n).onclick=()=>showTab(n));
-$('#hintDismiss').onclick=()=>{ state.settings.hideHint=true; applySettings(); persist(); };
+$('#hintDismiss').onclick=$('#hintGotIt').onclick=()=>{ state.settings.hideHint=true; applySettings(); persist(); };
 
 // ---------- sheets ----------
 function openSheet(id){ closePopup(); $(id).classList.add('on'); }
@@ -2066,8 +2155,8 @@ $('#nbList').addEventListener('click',e=>{
   if(p[0]==='s'){ if(window.__studies) window.__studies.openStudy(p[1], p[2]); return; }
   if(p[0]==='w') jumpTo(p[1],+p[2],p[3],p[4],+p[5]); else if(p[0]==='p') mineJump(p[1],+p[2],p[3],p[4]); else jumpTo(p[1],+p[2],null,p[3]).then(()=>openNoteSheet(k));
 });
-$('#expMd').onclick=()=>download('hive-scribe-notes.md',notesMarkdown(),'text/markdown');
-$('#expJson').onclick=()=>download('hive-scribe-notes.json',notesJSON(),'application/json');
+$('#expMd').onclick=()=>{ markBackup('hive-scribe-notes.md'); download('hive-scribe-notes.md',notesMarkdown(),'text/markdown'); };
+$('#expJson').onclick=()=>{ markBackup('hive-scribe-notes.json'); download('hive-scribe-notes.json',notesJSON(),'application/json'); };
 $('#copyMd').onclick=()=>copyText(notesMarkdown());
 window.__notes={notesMarkdown,notesJSON};
 
@@ -2984,6 +3073,7 @@ ${body}
   return html;
 }
 async function shareOrDownload(name, text, type){
+  markBackup(name);
   const blob=new Blob([text],{type:type||'text/plain'});
   if(!window.__forceDownload && navigator.share && navigator.canShare){
     try{
@@ -3088,13 +3178,21 @@ function showImportConflicts(prev, parsed){
   const el=$('#impConflicts');
   if(el) el.innerHTML=prev.conflicts.map(c=>`<div class="nb"><div class="r">${esc(c.label)}</div><div class="t"><b>On this device:</b> ${esc(((c.current&&(c.current.text||(c.current.notes&&JSON.stringify(c.current.notes))))||'—')+'').slice(0,400)}</div><div class="t"><b>Imported:</b> ${esc((c.incoming&&(c.incoming.text||JSON.stringify(c.incoming))).toString().slice(0,400))}</div></div>`).join('');
   const n=$('#impCount'); if(n) n.textContent=`${prev.conflicts.length} conflict${prev.conflicts.length===1?'':'s'} · ${prev.adds.length} new item${prev.adds.length===1?'':'s'} will be added.`;
+  const none=!prev.conflicts.length;
+  const t=$('#impTitle'); if(t) t.textContent=none?'Confirm import':'Import conflicts';
+  const ex=$('#impExplain'); if(ex) ex.textContent=none?(prev.adds.length?'Nothing on this device will be changed or replaced. These items will be added alongside your current notes.':'This backup has nothing new for this device. Nothing will change.'):'New items with no match are always added. Choose what to do with the conflicts. Nothing is overwritten until you pick.';
+  const sh=(id,on)=>{ const b=$(id); if(b) b.hidden=!on; };
+  sh('#impKeep',!none); sh('#impUse',!none); sh('#impAdd',none && prev.adds.length>0);
+  const ad=$('#impAdd'); if(ad) ad.textContent=`Add ${prev.adds.length} item${prev.adds.length===1?'':'s'}`;
+  if(none && el) el.innerHTML=prev.adds.slice(0,30).map(c=>`<div class="nb"><div class="r">${esc(c.label)}</div></div>`).join('')+(prev.adds.length>30?`<div class="note">+${prev.adds.length-30} more</div>`:'');
   openSheet('#importSheet');
 }
 function finishImport(resolve){
   if(!IMP_PENDING) return;
   const r=applyImport(IMP_PENDING.parsed, resolve);
   IMP_PENDING=null; closeSheets();
-  const msg=$('#nbMsg')||$('#impMsg'); if(msg) msg.textContent=resolve==='import'?'Imported, including replacements for conflicts.':'Imported; existing notes on this device were kept where they differed.';
+  const txt=resolve==='add'?`Imported ${r.adds.length} new item${r.adds.length===1?'':'s'}.`:resolve==='import'?'Imported, including replacements for conflicts.':'Imported; existing notes on this device were kept where they differed.';
+  const msg=$('#nbMsg')||$('#impMsg'); if(msg) msg.textContent=txt; backupToast(txt); if(typeof wpState!=='undefined' && wpState && typeof wpSync==='function') try{ wpSync(); }catch(e){}
   return r;
 }
 function importBackupText(text, resolve){
@@ -3117,11 +3215,13 @@ function bindExportUi(){
   const file=$('#impFile');
   if(file && !file._bound){ file._bound=1; file.addEventListener('change', async ev=>{
     const f=ev.target.files&&ev.target.files[0]; ev.target.value=''; if(!f) return;
-    try{ const r=importBackupText(await f.text()); if(r.applied){ const msg=$('#nbMsg'); if(msg) msg.textContent=`Imported ${r.adds.length} new item${r.adds.length===1?'':'s'}.`; } }
+    try{ const parsed=parseBackup(await f.text()); showImportConflicts(previewImport(parsed), parsed); }
     catch(e){ const msg=$('#nbMsg'); if(msg) msg.textContent='Could not import: '+(e.message||e); }
   }); }
   hook('#impKeep', ()=>finishImport('keep'));
   hook('#impUse', ()=>finishImport('import'));
+  hook('#impAdd', ()=>finishImport('add'));
+  hook('#impSafety', ()=>exportAll('json'));
 }
 bindExportUi();
 // Rebind after study list/detail redraws for buttons inside studyBody
@@ -3276,7 +3376,7 @@ function wpBodyHTML(wit, d, v, i, n){
   }
   const val=(cls==='grk'||cls==='heb'||cls==='arc')?valueRow(d.w,cls):''; if(val) h+=`<div class="wp-sec wp-val2">${val}</div>`;
   if(EN && EN[v]) h+=`<div class="wp-sec"><div class="wp-lbl">${esc(ref)} <span class="wp-src">${esc((ENV||enPref()).abbr)}</span></div><p class="wp-ctx">${enVerseHTML(v)}</p></div>`;
-  h+=`<div class="wp-sec"><div class="wp-lbl">Personal Scribe note <span class="wp-src">saved on this device</span></div><textarea class="notebox" id="wpNote" placeholder="Your note on this word…">${esc((NOTES[key]||{}).text||'')}</textarea><div class="btnrow"><button type="button" class="btn primary" id="wpNoteSave">Save note</button><span class="saved" id="wpNoteMsg"></span></div></div>`;
+  h+=`<div class="wp-sec"><div class="wp-lbl">Personal Scribe note <span class="wp-src">saved on this device</span></div><textarea class="notebox" id="wpNote" placeholder="Your note on this word…">${esc((NOTES[key]||{}).text||'')}</textarea><div class="btnrow"><button type="button" class="btn primary" id="wpNoteSave">Save note</button><span class="saved" id="wpNoteMsg"></span></div>${backupNudgeHTML()}</div>`;
   h+=`<div class="wp-badges">${BADGE[wit.id]||''}</div>`;
   return h;
 }
@@ -3552,7 +3652,7 @@ function ppBodyHTML(){
     `<button type="button" class="pp-swatch pp-clear" data-hl="" aria-label="Clear highlight"${any?'':' disabled'}><span class="pp-dot pp-dot-clear" aria-hidden="true">⌀</span><span class="pp-swl">Clear</span></button></div>`+
     `<div class="wp-muted" id="ppHlState" aria-live="polite">${all?`Highlighted ${esc(HL_NAME[all])}`:any?'Mixed highlights':'Not highlighted'}</div></div>`+
     `<div class="wp-sec"><label class="wp-lbl" for="ppNote">${vs.length===1?'Verse note':'Passage note'} <span class="wp-src" id="ppNoteRef">${esc(ref)} · saved on this device</span></label>`+
-    `<textarea class="notebox" id="ppNote" placeholder="Your note on ${esc(ref)}…">${esc(note)}</textarea><div class="wp-muted" id="ppNoteMsg" aria-live="polite">${vs.length===1?'Same note as the ✎ verse note. ':''}Saves as you type.</div></div>`+
+    `<textarea class="notebox" id="ppNote" placeholder="Your note on ${esc(ref)}…">${esc(note)}</textarea><div class="wp-muted" id="ppNoteMsg" aria-live="polite">${vs.length===1?'Same note as the ✎ verse note. ':''}Saves as you type.</div>${backupNudgeHTML()}</div>`+
     `<div class="wp-sec"><div class="wp-lbl">${esc(ref)} <span class="wp-src">${esc(ev.abbr)}</span></div><p class="wp-ctx" id="ppText">${preview||'<span class="wp-muted">No English text for these verses.</span>'}</p></div>`+
     `<div class="btnrow"><button type="button" class="btn primary" id="ppCopy">Copy passage</button><button type="button" class="btn" id="ppMine">My highlights &amp; notes</button></div><div class="wp-muted" id="ppCopyMsg" aria-live="polite"></div>`;
 }
