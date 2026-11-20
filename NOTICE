@@ -67,8 +67,9 @@ The official license page presents the Creative Commons Attribution 4.0
 International Public License (https://creativecommons.org/licenses/by/4.0/).
 
 The WEB English text follows the Majority Text in some places, so a few WEB
-verses (for example John 7:53–8:11 and Acts 8:37) have no SBLGNT text in
-this app.
+verses (for example John 7:53–8:11 and Acts 8:37) have no SBLGNT text. In
+those verses the SBLGNT card shows the RP2018 or TR text instead, labelled
+as a textual variant (see items 12 and 15).
 
 -------------------------------------------------------------------------------
 4. MorphGNT (morphology and lemmas of the SBLGNT)
@@ -248,6 +249,57 @@ Children, Susanna and Bel in Daniel 3, 13 and 14; a few Sirach verses;
 the KJV with the WEB. 3 and 4 Maccabees and Psalm 151 are not in the KJV
 and are shown in the WEB. The WEB remains selectable in Settings and the
 reading bar.
+
+-------------------------------------------------------------------------------
+15. Scrivener's 1894 Textus Receptus (4 Greek NT verses)
+     Dr. Maurice A. Robinson's transcription — Public domain
+-------------------------------------------------------------------------------
+
+Source:  https://github.com/byztxt/greektext-scrivener (commit 6049a43,
+         textonly/LU.SCV and AC.SCV)
+License: the repository README states "License? Public Domain. Copy freely."
+
+Used only for Luke 17:36, Acts 8:37, Acts 15:34 and Acts 24:7, which are in
+the KJV but in neither the SBLGNT nor RP2018. The transcription is unaccented
+and uses Latin letters; it was converted letter for letter to Greek script
+(final sigma kept as written). These verses are labelled "Textual Variant:
+TR". Where the SBLGNT lacks a verse that RP2018 has (e.g. John 7:53-8:11),
+the SBLGNT card shows the RP2018 text labelled "Textual Variant: Byzantine".
+
+-------------------------------------------------------------------------------
+16. William Whitaker's WORDS (Latin stems, endings and meanings)
+     Copyright William A. Whitaker (1936-2010)
+-------------------------------------------------------------------------------
+
+Source:  https://github.com/mk270/whitakers-words (commit fb7fb6f;
+         DICTLINE.GEN, INFLECTS.LAT, UNIQUES.LAT)
+License (LICENCE.txt): "This is a free program, which means it is proper to
+copy it and pass it on to your friends. Consider it a developmental item for
+which there is no charge. However, just for form, it is Copyrighted (c).
+Permission is hereby freely given for any and all use of program and data.
+You can sell it as your own, but at least tell me. ... All parts of the
+WORDS system, source code and data files, are made freely available to
+anyone who wishes to use them, for whatever purpose."
+
+Stored in data/morph/lat.json.gz: stems, part of speech and class, frequency
+code and a shortened English meaning for each entry (rare entries outside
+ecclesiastical Latin are left out), plus the ending table and the irregular
+forms list. The app uses them to suggest possible dictionary entries and
+parses for words of the Clementine Vulgate. These are labelled "approximate
+match"; they are not an exact parse of the Vulgate text.
+
+-------------------------------------------------------------------------------
+17. Approximate word-matching tables (derived in this app)
+-------------------------------------------------------------------------------
+
+data/morph/gform.json.gz and data/morph/hform.json.gz list spellings that are
+word-tagged in the app's own data (SBLGNT text with STEPBible TAGNT Strong's
+numbers, RP2018, and STEPBible TAHOT) with the Strong's keys they are tagged
+with. They are derived from items 2, 3 and 12 above, under the same terms
+(CC BY 4.0 / public domain). The Septuagint, Targum, Vulgate and TR verses
+use them, together with the TBESG/TBESH headwords, to suggest a lexicon
+entry for an untagged word. Every such suggestion carries an "approximate
+match" label and a confidence level.
 
 -------------------------------------------------------------------------------
 End of NOTICE
