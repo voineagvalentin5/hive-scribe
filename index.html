@@ -817,6 +817,55 @@ header::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:no
 .psup .slink.sm{font:700 10px var(--ui)}
 .study-strongs{margin:-4px 0 10px 12px;font:12.5px var(--ui);color:var(--ink3)}
 @media (max-width:1023px){ .wpanel.ppanel{max-height:min(42vh,420px)} body.pp-open[data-tab=read] main{padding-bottom:calc(min(42vh,420px) + 40px)} }
+
+/* ---- flagship 2026-11-19: approximate word study, textual-variant fill, read-aloud, command palette ---- */
+.approx-head{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:10px 0 2px}
+.approx-tag{font:700 10.5px var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--warn);background:var(--warn-soft);border-radius:999px;padding:3px 9px}
+.approx-conf{font:600 11px var(--ui);border-radius:999px;padding:3px 9px;border:1px solid var(--line);color:var(--ink2)}
+.approx-high{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 45%,transparent)}
+.approx-med{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+.approx-low,.approx-none{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 45%,transparent)}
+.approx-how{font-size:12.5px;color:var(--ink2);margin:4px 0 6px;line-height:1.45}
+.approx-ent{border-top:1px solid color-mix(in srgb,var(--gold) 18%,transparent);margin-top:4px}
+.approx-note{font-size:12px;color:var(--ink3);margin:8px 0 0;line-height:1.45}
+.wp-lat{font-family:'Noto Serif',Georgia,serif}
+.varfill{font-size:12.5px;color:var(--ink2);margin:2px 0 6px;line-height:1.5}
+.badge.varbadge{margin:0 4px 0 0;color:var(--paper);background:var(--warn);font-weight:700}
+.wp-varfill{text-align:center;margin-top:6px}
+.inter-foot{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:6px;align-items:center;margin-top:4px}
+.wp-say{display:flex;justify-content:center;flex-wrap:wrap;gap:6px;align-items:center;margin:2px 0 4px}
+.saybtn{display:inline-flex;align-items:center;gap:5px;min-height:34px;border:1px solid var(--line);background:transparent;color:var(--ink2);border-radius:999px;padding:3px 11px 3px 9px;font:600 12px var(--ui);cursor:pointer}
+.saybtn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.saybtn:hover,.saybtn:focus-visible{border-color:var(--gold);color:var(--ink)}
+.saybtn.speaking{border-color:var(--gold);color:var(--gold);box-shadow:0 0 12px var(--glow)}
+.say-note{font-size:11.5px;color:var(--ink3);max-width:340px}
+.wp-share{margin-top:10px}
+body.cmdk-on{overflow:hidden}
+.cmdk{position:fixed;inset:0;z-index:95}
+.cmdk[hidden]{display:none}
+.cmdk-bd{position:absolute;inset:0;background:var(--dim,rgba(0,0,0,.45))}
+.cmdk-pn{position:relative;margin:min(12vh,96px) auto 0;width:min(680px,calc(100vw - 20px));max-height:min(72vh,640px);display:flex;flex-direction:column;background:var(--paper);border:1px solid color-mix(in srgb,var(--gold) 30%,transparent);border-radius:18px;box-shadow:0 10px 50px var(--glow),var(--shadow);overflow:hidden}
+.cmdk-top{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line)}
+.cmdk-top svg{width:20px;height:20px;stroke:var(--ink3);fill:none;stroke-width:2;flex:none}
+#cmdkQ{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:500 17px var(--ui);outline:none;min-height:40px}
+.cmdk-kbd{font:600 11px var(--ui);color:var(--ink3);border:1px solid var(--line);border-radius:6px;padding:2px 6px}
+.cmdk-opts{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 12px;font-size:12px;color:var(--ink3);border-bottom:1px solid var(--line)}
+.cmdk-en button{min-height:30px;padding:2px 10px;font-size:12px}
+.cmdk:not([data-kind=text]) .cmdk-en{visibility:hidden}
+@media (hover:none){ .cmdk-it:hover{background:transparent} .cmdk-it.sel{background:var(--accent-soft)} }
+.cmdk-list{overflow:auto;padding:4px 6px 8px;flex:1}
+.cmdk-g{font:700 10.5px var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);padding:10px 8px 4px}
+.cmdk-it{padding:8px 10px;border-radius:10px;cursor:pointer}
+.cmdk-it.sel,.cmdk-it:hover{background:var(--accent-soft)}
+.cmdk-t{font:600 14px var(--ui);color:var(--ink)}
+.cmdk-s{font-size:12.5px;color:var(--ink2);margin-top:2px;line-height:1.45}
+.cmdk-s mark{background:color-mix(in srgb,var(--gold) 35%,transparent);color:inherit;border-radius:3px;padding:0 1px}
+.cmdk-heb{font-family:var(--heb);font-size:17px}
+.cmdk-grk{font-family:var(--grk)}
+.cmdk-k{font:600 11px var(--ui);color:var(--accent);margin-left:4px}
+.cmdk-status{font-size:12.5px;color:var(--ink3);padding:10px}
+.cmdk-foot{display:flex;justify-content:space-between;gap:8px;padding:8px 12px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink3)}
+@media (max-width:600px){ .cmdk-pn{margin-top:8px;max-height:calc(100vh - 16px);border-radius:14px} .cmdk-foot span{display:none} .cmdk-opts .cmdk-hint{font-size:11px} }
 </style>
 
 
@@ -983,6 +1032,7 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
     </div>
     <span class="spacer"></span>
     <div class="hbtns">
+      <button class="iconbtn" id="searchBtn" aria-label="Search and jump (Ctrl+K or ⌘K)" title="Search: references, Strong's, Hebrew/Greek words, English (Ctrl+K / ⌘K)" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></button>
       <button class="iconbtn" id="settingsBtn" aria-label="Reading settings"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.1"/><path d="M12 3.2v2.2M12 18.6v2.2M4.7 6.3l1.6 1.6M17.7 16.1l1.6 1.6M3.2 12h2.2M18.6 12h2.2M4.7 17.7l1.6-1.6M17.7 7.9l1.6-1.6M7.2 4.2l1.1 2M15.7 17.8l1.1 2M4.2 16.8l2-1.1M17.8 8.3l2-1.1"/></svg></button>
       <button class="iconbtn" id="themeBtn" aria-label="Toggle light/dark">◐</button>
       <button class="iconbtn" id="tab-study" aria-label="Studies"><svg viewBox="0 0 24 24"><path d="M4 5h10a3 3 0 0 1 2 1v13H6a2 2 0 0 0-2 2z"/><path d="M16 6h4v15h-4"/></svg></button>
@@ -1135,11 +1185,14 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
     <li><b>Hebrew and Aramaic OT (39 books):</b> STEPBible TAHOT (Translators Amalgamated Hebrew OT), © Tyndale House Cambridge / STEPBible.org, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, from <a href="https://github.com/STEPBible/STEPBible-Data">STEPBible.github.io/STEPBible-Data</a>. Its Hebrew is the Westminster Leningrad Codex (WLC 4.20, public domain) via OpenScriptures, with Tyndale corrections toward the Leningrad Codex. Morphology is ETCBC parsing written in the OpenScriptures (OSHB) code format; lemmas are extended Strong's numbers; the small English under each word, the transliteration and the Qere/Ketiv marks are TAHOT's. Psalm titles (Hebrew verse 1, or 1–2) are shown with English verse 1, as the WEB prints them. Changes: words regrouped by WEB verse; slash separators removed for display.</li>
     <li><b>Greek NT (27 books):</b> SBL Greek New Testament text, © 2010 Society of Biblical Literature and Logos Bible Software, used under the <a href="https://sblgnt.com/license/">SBLGNT license</a>; morphology and lemmas from <a href="https://github.com/morphgnt/sblgnt">MorphGNT</a>, CC BY-SA 3.0. English word glosses, transliteration and Strong's numbers from STEPBible TAGNT (CC BY 4.0, Tyndale House / STEPBible.org), matched word by word to the SBLGNT text (words TAGNT lists for the SBL edition only). The WEB follows the Majority Text, so a few WEB verses (e.g. John 7:53–8:11, Acts 8:37) have no SBLGNT text.</li>
     <li><b>Greek NT, Byzantine Textform (27 books):</b> Maurice A. Robinson and William G. Pierpont, <i>The New Testament in the Original Greek: Byzantine Textform</i>, 2018 edition (RP2018), from the official repository <a href="https://github.com/byztxt/byzantine-majority-text">github.com/byztxt/byzantine-majority-text</a> (commit 788ffe7). Its license file states: “THIS REPOSITORY, INCLUDING CODE AND TEXTUAL CONTENTS, IS IN THE PUBLIC DOMAIN” (with the <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a> dedication). The accented text (CCAT files, main text without the variant apparatus) is paired word for word with Dr. Robinson's Strong's numbers and parsing codes; parsing is shown in Robinson's code system. English word glosses and transliterations are borrowed from STEPBible TAGNT (CC BY 4.0) where the same word appears in the SBLGNT layer; otherwise the TBESG brief gloss and a computed transliteration are used. Where RP's Strong's number differs from TAGNT's tagging of the same word (e.g. κἀγώ, πρῶτον), RP's number is shown and the lexicon follows TAGNT. Verse numbers in RP match the WEB, including Romans 14:24–26 (the doxology). RP has no text at Luke 17:36, Acts 8:37, 15:34 and 24:7, and does not include 1 John 5:7b–8a (the Johannine Comma); it does include Mark 16:9–20 and John 7:53–8:11. <b>Variant marks:</b> when both Greek NT witnesses are turned on, words that differ between SBLGNT and RP are marked with a dotted underline and a symbol (+ only in this text, ≈ different form or word, ‸ the other text has extra words here). Accents, breathings, capitals and punctuation are not compared.</li>
-    <li><b>Septuagint Greek (OT and deuterocanonical books):</b> Greek text of Brenton's Septuagint with Apocrypha (eBible.org “grcbrent”), public domain. No openly licensed, morphologically tagged LXX was found: the tagged Rahlfs texts (CCAT-based, e.g. eliranwong/LXX-Rahlfs-1935) are CC BY-NC-SA or carry the CCAT user agreement, so they are not used. The LXX therefore has no word glosses, lemmas or parsing here. Because the Septuagint numbers and orders many chapters differently, each LXX verse was placed next to the WEB verse automatically by comparing the WEB with Brenton's public-domain English translation of the same Greek; the LXX reference is always shown. Placement is least reliable in Jeremiah, 1 Kings (3 Kingdoms), Nehemiah, Proverbs 24–31, Exodus 35–40 and Sirach 30–36; about 2% of OT verses have no LXX match.</li>
+    <li><b>Septuagint Greek (OT and deuterocanonical books):</b> Greek text of Brenton's Septuagint with Apocrypha (eBible.org “grcbrent”), public domain. No openly licensed, morphologically tagged LXX was found: the tagged Rahlfs texts (CCAT-based, e.g. eliranwong/LXX-Rahlfs-1935) are CC BY-NC-SA or carry the CCAT user agreement, so they are not used. The LXX therefore has no tagged word glosses, lemmas or parsing here; tapping a word shows an approximate lexicon match instead (see “Approximate word study” below). Because the Septuagint numbers and orders many chapters differently, each LXX verse was placed next to the WEB verse automatically by comparing the WEB with Brenton's public-domain English translation of the same Greek; the LXX reference is always shown. Placement is least reliable in Jeremiah, 1 Kings (3 Kingdoms), Nehemiah, Proverbs 24–31, Exodus 35–40 and Sirach 30–36; about 2% of OT verses have no LXX match.</li>
     <li><b>Orthodox and appendix books (Prayer of Manasseh, 1 Esdras, 3 Maccabees, 4 Maccabees, Psalm 151, 2 Esdras):</b> English from the World English Bible (eBible.org “eng-web”), which states: “The World English Bible is in the Public Domain.” Greek from Brenton's Septuagint (eBible.org “grcbrent”, marked Public Domain by eBible.org) for every book except 2 Esdras, which has no Greek in Brenton (it survives mainly in Latin), so it is English only. Psalm 151's Greek is Brenton's Psalm 151. As for the rest of the Septuagint layer, each Greek verse was placed next to the WEB verse automatically by comparing the WEB with Brenton's public-domain English, and the LXX reference is always shown (e.g. 4 Maccabees 10:4 = LXX 10:3a). Text only: no glosses, lemmas or parsing. The Clementine Vulgate used here has no text for these books. In the Library they are tagged <i>Orth</i> (Orthodox) and <i>App</i> (appendix) and can be hidden with <b>Books shown</b>.</li>
-    <li><b>Latin Vulgate (all 73 books, where a match was found):</b> Clementine Vulgate Latin text, public domain, from Michael Tweedale’s transcription (vulsearch), via the <a href="https://github.com/seven1m/open-bibles">Open Bibles</a> collection (<code>lat-clementine.usfx.xml</code>). Users are requested to acknowledge that source and to make any modifications clear: the wording of the Latin is unaltered; verses were grouped to the WEB by automatic alignment with the public-domain Douay-Rheims (same collection, <code>eng-dra.usfx.xml</code>). The Vulgate chapter and verse reference is always shown when it differs (for example in the Psalms). Text only: no glosses or parsing.</li>
-    <li><b>Targum:</b> Targum Onkelos on the Torah (Sefaria “Onkelos Genesis…Deuteronomy”, source toratemetfreeware.com, public domain) and Targum Jonathan on the Prophets, Joshua–Kings and Isaiah–Malachi (Sefaria “Mikraot Gedolot”, public domain), from the <a href="https://www.sefaria.org">Sefaria</a> API. Hebrew verse numbers were converted to English ones with TAHOT's verse map. No Targum is included for the Writings (Ruth, Chronicles, Ezra–Nehemiah, Esther, Job, Psalms, Proverbs, Ecclesiastes, Song, Lamentations, Daniel): Sefaria's versions there are not clearly openly licensed or were not checked. Targum text only: no glosses or parsing.</li>
+    <li><b>Latin Vulgate (all 73 books, where a match was found):</b> Clementine Vulgate Latin text, public domain, from Michael Tweedale’s transcription (vulsearch), via the <a href="https://github.com/seven1m/open-bibles">Open Bibles</a> collection (<code>lat-clementine.usfx.xml</code>). Users are requested to acknowledge that source and to make any modifications clear: the wording of the Latin is unaltered; verses were grouped to the WEB by automatic alignment with the public-domain Douay-Rheims (same collection, <code>eng-dra.usfx.xml</code>). The Vulgate chapter and verse reference is always shown when it differs (for example in the Psalms). Text only: no tagged glosses or parsing; tapping a word shows an approximate match (see “Approximate word study” below).</li>
+    <li><b>Targum:</b> Targum Onkelos on the Torah (Sefaria “Onkelos Genesis…Deuteronomy”, source toratemetfreeware.com, public domain) and Targum Jonathan on the Prophets, Joshua–Kings and Isaiah–Malachi (Sefaria “Mikraot Gedolot”, public domain), from the <a href="https://www.sefaria.org">Sefaria</a> API. Hebrew verse numbers were converted to English ones with TAHOT's verse map. No Targum is included for the Writings (Ruth, Chronicles, Ezra–Nehemiah, Esther, Job, Psalms, Proverbs, Ecclesiastes, Song, Lamentations, Daniel): Sefaria's versions there are not clearly openly licensed or were not checked. Targum text only: no tagged glosses or parsing; tapping a word shows an approximate match (see “Approximate word study” below).</li>
     <li><b>Lexicon:</b> STEPBible TBESH (Hebrew/Aramaic) and TBESG (Greek) brief lexicons, CC BY 4.0. Definitions are shortened to about 300 characters. Occurrence counts are computed from the Hebrew and Greek NT texts above (not the LXX or Targum, which are not lemmatized here).</li>
+    <li><b>Greek NT, Textus Receptus (4 verses only):</b> Luke 17:36, Acts 8:37, Acts 15:34 and Acts 24:7 are in the KJV but in neither the SBLGNT nor RP2018. Their Greek is shown from F. H. A. Scrivener's 1894 Textus Receptus in Dr. Maurice A. Robinson's transcription, from the official repository <a href="https://github.com/byztxt/greektext-scrivener">github.com/byztxt/greektext-scrivener</a> (commit 6049a43), whose README states “License? Public Domain. Copy freely.” The transcription is unaccented, so these verses are shown without accents, converted letter for letter from its Latin-letter encoding. They are marked “Textual Variant: TR”. Where the SBLGNT lacks a verse that RP2018 has (e.g. John 7:53–8:11), the Greek NT card shows the Byzantine text marked “Textual Variant: Byzantine”, so no Greek card is empty.</li>
+    <li><b>Approximate word study (Septuagint, Targum, Vulgate, TR verses):</b> these texts are not word-tagged, so tapping a word shows an <i>approximate match</i> with a confidence label, never an exact parse. Greek and Aramaic words are compared with spellings that are tagged in the app's own SBLGNT/TAGNT, RP2018 and TAHOT data, then with the TBESG/TBESH headwords after stripping common prefixes and endings (computed in the app; no outside data). Latin words are analysed with the stems, endings and English meanings of <b>William Whitaker's WORDS</b> (DICTLINE.GEN, INFLECTS.LAT, UNIQUES.LAT, from <a href="https://github.com/mk270/whitakers-words">github.com/mk270/whitakers-words</a>, commit fb7fb6f), whose licence reads: “Copyright William A. Whitaker (1936–2010) … Permission is hereby freely given for any and all use of program and data.” Meanings are shortened, and rare non-ecclesiastical entries are left out to keep the download small.</li>
+    <li><b>Read aloud:</b> uses the speech voices already on your device (Web Speech API); nothing is downloaded or sent anywhere by the app. Voices use modern pronunciation: they are not cantillation, and not a reconstruction of ancient pronunciation. Aramaic is read with a Hebrew voice, and Latin with an Italian voice when no Latin voice is installed.</li>
     <li><b>Cross-references:</b> <a href="https://www.openbible.info/labs/cross-references/">OpenBible.info</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> (data file dated 2026-11-09). Top 10 per verse by votes, zero and negative votes dropped. OpenBible.info has no data for the deuterocanonical books.</li>
     <li><b>Gematria / isopsephy:</b> computed in the app with the standard letter values (Hebrew: final letters same as regular; Greek: accents, breathings and iota subscript ignored after Unicode decomposition).</li>
     <li><b>Logos Bridge</b> notes are hand-written study notes, not sourced data.</li>
@@ -1152,6 +1205,7 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
     <li>Your view and notes are saved on this device when the browser allows it.</li>
     <li>Dyslexia reading mode uses wider spacing, a sans-serif face and higher contrast (OpenDyslexic is not bundled).</li>
     <li>Guided Studies present a named author’s position in original lesson notes; they do not reproduce copyrighted book text. See each study’s source note.</li>
+    <li>Links: the address bar follows what you are reading (for example <code>#gen.1.2?wit=tg&amp;word=H7307</code> or <code>#conn/john.1.1</code>), so Back and Forward work and a copied link opens the same verse, text and word.</li>
   </ul>
 </section>
 </main>
@@ -1178,8 +1232,8 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
     <div class="desc">Turn a witness off to hide it from the chapter chips and the Polyglot matrix. The English text (version chosen above) is always shown.</div></div>
   <div class="srow"><div class="lbl">Offline</div>
     <div class="desc" id="dlInfo">Chapters you open are kept for offline use.</div>
-    <div class="progress" id="dlBar" hidden><div></div></div><div class="dlstat" id="dlStat"></div>
-    <div class="btnrow"><button class="btn primary" id="dlBtn">Download whole Bible for offline</button><button class="btn" id="dlClear">Remove offline data</button></div></div>
+    <div class="progress" id="dlBar" role="progressbar" aria-label="Offline download" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden><div></div></div><div class="dlstat" id="dlStat" role="status" aria-live="polite"></div>
+    <div class="btnrow"><button class="btn primary" id="dlBtn">Download entire canon for offline</button><button class="btn" id="dlPause" hidden>Pause</button><button class="btn" id="dlCancel" hidden>Cancel</button><button class="btn" id="dlClear">Remove offline data</button></div></div>
   <div class="srow"><button class="btn" id="openSources">About &amp; sources</button></div>
 </div></div>
 <div class="sheet" id="pickSheet" role="dialog" aria-modal="true" aria-label="Choose a book and chapter"><div class="bd"></div><div class="pn">
@@ -1218,6 +1272,7 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
 <div id="lift" aria-hidden="true"><span class="o"></span><span class="g"></span></div>
 <div class="arm" id="arm"></div>
 <div class="callout" id="callout" role="dialog" aria-modal="true"></div>
+<script src="js/plus.js"></script>
 <script>
 // ===================== Hive Scribe: full-Bible app =====================
 // Data: data/index.json + per-book English (data/en/*.json.gz) + per-chapter originals (data/ch/*.json.gz),
@@ -1487,8 +1542,12 @@ let WITS=[];
 function verseWords(wit, v){
   if(!CH) return null;
   if(wit==='heb'){ const d=CH.heb[v]; return d? d.w.map(a=>({w:a[0],g:a[2],raw:a})) : null; }
-  if(wit==='grk'){ const d=CH.grk[v]; return d? d.w.map(a=>({w:a[0],g:a[2],raw:a})) : null; }
-  if(wit==='byz'){ const d=CH.byz&&CH.byz[v]; return d? d.w.map(a=>({w:a[0],g:a[2],raw:a})) : null; }
+  if(wit==='grk'||wit==='byz'){
+    const d=(wit==='grk'?CH.grk:CH.byz||{})[v]; if(d) return d.w.map(a=>({w:a[0],g:a[2],raw:a}));
+    // no empty Greek card: SBLGNT gap -> Byzantine (RP2018); in neither -> Scrivener 1894 TR (labelled as a textual variant)
+    const bz=wit==='grk'&&CH.byz&&CH.byz[v]; if(bz){ const r=bz.w.map(a=>({w:a[0],g:a[2],raw:a,fill:'byz'})); r.fill='byz'; return r; }
+    const tr=CH.tr&&CH.tr[v]; if(tr){ const r=tr.t.split(/\s+/).filter(Boolean).map(t=>({w:t,g:'',fill:'tr'})); r.fill='tr'; return r; }
+    return null; }
   if(wit==='lxx'){ const d=CH.lxx[v]; return d? d.t.split(/\s+/).filter(Boolean).map(t=>({w:t,g:''})) : null; }
   if(wit==='tg'){ const d=CH.tg[v]; return d? d.t.split(/\s+/).filter(Boolean).map(t=>({w:t,g:''})) : null; }
   if(wit==='vul'){ const d=CH.vul&&CH.vul[v]; return d? d.t.split(/\s+/).filter(Boolean).map(t=>({w:t,g:''})) : null; }
@@ -1506,9 +1565,10 @@ const BADGE = {
   heb:'<span class="badge ok">Sourced: WLC text, ETCBC morphology, glosses &amp; Strong\'s via STEPBible TAHOT (CC BY 4.0)</span>',
   grk:'<span class="badge ok">Sourced: SBLGNT text + MorphGNT parsing; glosses &amp; Strong\'s from STEPBible TAGNT (CC BY 4.0)</span>',
   byz:'<span class="badge ok">Sourced: Robinson-Pierpont Byzantine Textform 2018, Strong\'s &amp; Robinson parsing (public domain)</span><span class="badge warn">glosses borrowed from TAGNT where the word matches</span>',
-  lxx:'<span class="badge ok">Sourced: Brenton LXX Greek (public domain)</span><span class="badge warn">verse placement aligned automatically · no word data</span>',
-  tg:'<span class="badge ok">Sourced: Sefaria, public domain edition</span><span class="badge warn">text only · no word data</span>',
-  vul:'<span class="badge ok">Sourced: Clementine Vulgate (public domain; Tweedale / vulsearch transcription)</span><span class="badge warn">verse placement aligned automatically · no word data</span>'
+  lxx:'<span class="badge ok">Sourced: Brenton LXX Greek (public domain)</span><span class="badge warn">verse placement aligned automatically · words matched approximately</span>',
+  tg:'<span class="badge ok">Sourced: Sefaria, public domain edition</span><span class="badge warn">untagged text · words matched approximately</span>',
+  vul:'<span class="badge ok">Sourced: Clementine Vulgate (public domain; Tweedale / vulsearch transcription)</span><span class="badge warn">verse placement aligned automatically · words matched approximately (Whitaker\'s WORDS)</span>',
+  tr:'<span class="badge ok">Sourced: Scrivener 1894 Textus Receptus, Robinson transcription (public domain)</span><span class="badge warn">unaccented · words matched approximately</span>'
 };
 async function loadChapter(b,c){
   const ev=enFor(b);
@@ -1541,6 +1601,7 @@ async function gotoChapter(b,c,opts={}){
     if(state.tab==='lex') renderLex();
     if(!opts.keepScroll) restoreScroll();
     prefetchNeighbours();
+    HSP.focus=null; HSP.sync('push');
   }catch(e){
     if(seq!==loadSeq) return;
     CH=null; EN=null; ENR={}; ENN={};
@@ -1601,11 +1662,13 @@ function interHTML(v){
   const ws=verseWords(wit.id,v);
   if(!ws) return `<div class="missing">No ${esc(wit.name)} text for this verse${wit.id==='lxx'?' (not found in the Septuagint, or the automatic alignment found no match)':wit.id==='grk'?' (not in the SBLGNT; the WEB follows the Majority Text here)':wit.id==='byz'?' (not in the Robinson-Pierpont Byzantine text)':wit.id==='heb'?' (Greek addition (LXX): no Hebrew or Aramaic in the sources used)':wit.id==='vul'?' (not found in the Clementine Vulgate, or the automatic alignment found no match)':''}.</div>`;
   const rn=witRefNote(wit.id,v), lang=wit.cls==='grk'?'grc':wit.cls==='lat'?'la':(wit.cls==='heb'?'he':'arc');
-  const vd=varFor(wit.id,v), gaps=(vd&&vd.gapsA)||{};
-  return (rn?`<div class="lxxref">${esc(rn)}</div>`:'')+
+  const vd=ws.fill?null:varFor(wit.id,v), gaps=(vd&&vd.gapsA)||{};
+  const fillNote=ws.fill==='byz'?`<div class="varfill"><span class="badge varbadge">Textual Variant: Byzantine</span> ${wit.id==='grk'?'Not in the SBLGNT. ':''}Shown from the Robinson-Pierpont Byzantine Textform 2018.</div>`:ws.fill==='tr'?`<div class="varfill"><span class="badge varbadge">Textual Variant: TR</span> In neither the SBLGNT nor the Byzantine text (RP2018). Shown from Scrivener's 1894 Textus Receptus (unaccented transcription).</div>`:'';
+  const sayTxt=ws.map(w=>w.w).join(' ');
+  return fillNote+(rn?`<div class="lxxref">${esc(rn)}</div>`:'')+
     `<div class="inter ${wit.cls}" dir="${wit.rtl?'rtl':'ltr'}" lang="${lang}">`+
     ws.map((w,i)=>{ const hit=state.hl&&String(state.hl.v)===String(v)&&state.hl.strongs&&w.raw&&state.hl.strongs.some(s=>strongMatch(w.raw[3],s)); const va=varWordAttrs(vd&&vd.markA&&vd.markA[i],vd&&vd.other); return (gaps[i]?varGapHTML(gaps[i],vd.other):'')+`<div tabindex="0" role="button" aria-pressed="false" class="word${NOTES[`w|${state.book}|${state.ch}|${wit.id}|${v}|${i}`]?' noted':''}${hit?' hl':''}${va.cls}"${va.title} data-v="${v}" data-i="${i}"><span class="o">${esc(view(w.w,wit.cls))}</span>${w.g?`<span class="g">${esc(w.g)}</span>`:''}${va.sr}</div>`; }).join('')+(gaps[ws.length]?varGapHTML(gaps[ws.length],vd.other):'')+
-    `</div>${vd?varLegendHTML(vd,wit.id):''}<div>${BADGE[wit.id]}</div>`;
+    `</div>${vd?varLegendHTML(vd,wit.id):''}<div class="inter-foot">${HSP.sayBtn(sayTxt,HSP.kindOf(wit.cls),'Listen to this verse in '+(wit.cls==='grk'?'Greek':wit.cls==='lat'?'Latin':wit.cls==='arc'?'Aramaic':'Hebrew'))}</div><div>${ws.fill==='byz'?BADGE.byz:ws.fill==='tr'?BADGE.tr:BADGE[wit.id]}</div>`;
 }
 function renderVerses(){
   if(!CH){ return; }
@@ -1629,7 +1692,7 @@ function animateVerse(card, open){
   }
 }
 function render(){ renderWitSeg(); renderVF(); renderVerses(); }
-$('#witSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; state.wit=b.dataset.wit; persist(); render(); preloadLex(); });
+$('#witSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; state.wit=b.dataset.wit; persist(); render(); preloadLex(); HSP.sync('push'); });
 $('#vfSel').addEventListener('change',e=>{ state.vf=e.target.value; persist(); renderVerses(); if(state.vf!=='all') scrollTo(0,0); });
 $('#flipAll').addEventListener('click',()=>{
   const ids=visibleVerses().map(vid_); const anyClosed=ids.some(id=>!state.open.has(id));
@@ -1718,6 +1781,7 @@ function lexInfoHTML(wit, raw){
 function openPopup(wEl, animate){
   const v=wEl.dataset.v, i=+wEl.dataset.i;
   const wit=WITS.find(w=>w.id===state.wit); const ws=verseWords(wit.id,v); const d=ws[i];
+  if(!d || d.fill || !(wit.id==='heb'||isGkWit(wit.id))){ wpOpen(wEl); return; }
   const key=wkey(state.book,state.ch,wit.id,v,i); popupKey=key;
   lift.className='on '+wit.cls;
   lift.querySelector('.o').textContent=view(d.w,wit.cls);
@@ -1820,6 +1884,7 @@ function showTab(name, init){
   if(name==='study') renderStudy();
   if(window.chordsGL) chordsGL.setActive(name==='conn');
   restoreScroll(); persist();
+  if(!init) HSP.sync('push');
 }
 TABS.forEach(n=>$('#tab-'+n).onclick=()=>showTab(n));
 $('#hintDismiss').onclick=$('#hintGotIt').onclick=()=>{ state.settings.hideHint=true; applySettings(); persist(); };
@@ -1830,6 +1895,7 @@ function closeSheets(){ document.querySelectorAll('.sheet.on').forEach(s=>s.clas
 document.querySelectorAll('.sheet').forEach(sh=>sh.addEventListener('click',e=>{ if(e.target.classList.contains('bd')||e.target.closest('[data-close]')) sh.classList.remove('on'); }));
 $('#settingsBtn').onclick=()=>{ applySettings(); updateOfflineInfo(); openSheet('#settingsSheet'); };
 $('#openSources').onclick=()=>showTab('about');
+$('#searchBtn').onclick=()=>HSP.openPalette();
 function settingsChanged(){
   applySettings(); persist(); if(typeof canonUI==='function') canonUI();
   if(!bookVisible(state.book) || !chapterVisible(state.book,state.ch)){
@@ -1905,6 +1971,7 @@ async function jumpTo(b,c,wit,v,i,opts){
   if(wit && WITS.some(w=>w.id===wit)) state.wit=wit;
   else if(opts.preferWit && WITS.some(w=>w.id===opts.preferWit)) state.wit=opts.preferWit;
   state.open.add(`${b}.${c}.${v}`); render(); if(state.tab!=='read') showTab('read');
+  HSP.focus={v:String(v)}; if(i==null) HSP.sync('push');
   const el=document.getElementById(`v-${b}-${c}-${v}`); if(!el) return;
   el.scrollIntoView({block:'center'}); el.classList.add('flash'); setTimeout(()=>el.classList.remove('flash'),1600);
   if(i!=null){ const w=el.querySelector(`.word[data-i="${i}"]`); if(w){ w.scrollIntoView({block:'center'}); if(!LEXF[state.wit==='heb'?'H':'G'] && (state.wit==='heb'||isGkWit(state.wit))) lexFile(state.wit==='heb'?'H':'G').catch(()=>{}); setTimeout(()=>opts.panel?wpOpen(w):openPopup(w,true),60); } }
@@ -1927,6 +1994,7 @@ function polyRows(ch, wits, v, hi={}){
   for(const w of wits){
     const ws = (()=>{ const d=ch[w.id]&&ch[w.id][v]; if(!d) return null;
       if(w.id==='heb'||isGkWit(w.id)) return d.w.map(a=>({w:a[0],raw:a})); return d.t.split(/\s+/).filter(Boolean).map(t=>({w:t})); })();
+    if(!ws && w.id==='grk' && !(ch.byz&&ch.byz[v]) && ch.tr && ch.tr[v]){ h+=rowHTML('Greek NT (Scrivener 1894 TR)', '<span class="badge varbadge mini">Textual Variant: TR</span>', 'grk', ch.tr[v].t.split(/\s+/).filter(Boolean).map(t=>({w:t})), null, null); continue; }
     if(!ws){ h+=`<div class="prow"><div class="plabel">${esc(w.name)}</div><div class="missing">no text for this verse${w.id==='byz'?' in the Robinson-Pierpont Byzantine text':w.id==='grk'?' in the SBLGNT':''}</div></div>`; continue; }
     const d=ch[w.id][v]; const rn = w.id==='lxx'?' · LXX '+d.r.join(', '):(d.r?' · Heb. '+d.r:'');
     const vd = isGkWit(w.id) && wits.some(x=>x.id===otherGk(w.id)) && ch[otherGk(w.id)] && ch[otherGk(w.id)][v] ? (()=>{ const r=gkDiff(d.w.map(a=>a[0]), ch[otherGk(w.id)][v].w.map(a=>a[0])); r.other=otherGk(w.id); return r; })() : null;
@@ -2131,12 +2199,12 @@ async function resolveStrong(key){
   if(lex[base+m[3]]) return base+m[3];
   const cand=Object.keys(lex).filter(k=>k.startsWith(base)&&!/\d/.test(k.slice(base.length))); cand.sort((a,b)=>(lex[b][5]||0)-(lex[a][5]||0)); return cand[0]||key;
 }
-async function openConcordance(key){ key=await resolveStrong(key); showTab('lex'); $('#lexQ').value=plainStrong(key); state.lexLang='all'; lexOpen=key; lexShown=40; renderLex().then(()=>{ const el=document.querySelector(`.lex[data-key="${key}"]`); if(el) el.scrollIntoView({block:'start'}); }); }
+async function openConcordance(key){ key=await resolveStrong(key); lexOpen=key; showTab('lex'); $('#lexQ').value=plainStrong(key); state.lexLang='all'; lexOpen=key; lexShown=40; HSP.sync('replace'); renderLex().then(()=>{ const el=document.querySelector(`.lex[data-key="${key}"]`); if(el) el.scrollIntoView({block:'start'}); }); }
 $('#lexSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; state.lexLang=b.dataset.lang; persist(); renderLex(); });
 let lexT=null; $('#lexQ').addEventListener('input',()=>{ clearTimeout(lexT); lexT=setTimeout(renderLex,200); });
 $('#lexList').addEventListener('click',e=>{
   const o=e.target.closest('.occ'); if(o){ jumpTo(o.dataset.b,+o.dataset.c,o.dataset.w,o.dataset.v,+o.dataset.i); return; }
-  const t=e.target.closest('[data-occ]'); if(t){ lexOpen = lexOpen===t.dataset.occ?null:t.dataset.occ; lexShown=40; renderLex(); return; }
+  const t=e.target.closest('[data-occ]'); if(t){ lexOpen = lexOpen===t.dataset.occ?null:t.dataset.occ; lexShown=40; renderLex(); HSP.sync('replace'); return; }
   const m=e.target.closest('[data-more]'); if(m){ lexShown+=200; fillOcc(); }
 });
 
@@ -2163,34 +2231,62 @@ window.__notes={notesMarkdown,notesJSON};
 // ---------- offline: whole-Bible download into the data cache ----------
 const DATA_CACHE='hsdata';
 const fmtMB=b=>(b/1048576).toFixed(1)+' MB';
+// Sizes come from data/index.json, which lists every data file with its real byte size (written by the data build).
+const DL={state:'idle', run:0, done:0, bytes:0, failed:0, total:0, totalBytes:0, msg:''};
 let dlRunning=false;
+async function dlHave(c){ return new Set((await c.keys()).map(r=>new URL(r.url).pathname.split('/data/')[1])); }
 async function updateOfflineInfo(){
-  const info=$('#dlInfo'), btn=$('#dlBtn'), clr=$('#dlClear');
+  const info=$('#dlInfo'), btn=$('#dlBtn'), clr=$('#dlClear'), pause=$('#dlPause'), cancel=$('#dlCancel');
   if(INLINE){ info.textContent='This single-file sample has Genesis 1 and John 1 built in. The whole Bible needs the full app (dist/ served over http).'; btn.hidden=true; clr.hidden=true; return; }
   if(!('caches' in window)){ info.textContent='This browser does not allow offline storage here.'; btn.disabled=true; return; }
-  const c=await caches.open(DATA_CACHE); const have=new Set((await c.keys()).map(r=>new URL(r.url).pathname.split('/data/')[1]));
-  const n=INDEX.files.filter(f=>have.has(f[0])), bytes=n.reduce((a,f)=>a+f[1],0);
-  info.textContent=`Whole Bible: ${INDEX.files.length} files, ${fmtMB(INDEX.bytes)} download. Stored now: ${n.length} files (${fmtMB(bytes)}). Chapters you open are kept automatically.`;
-  btn.textContent = n.length===INDEX.files.length?'Whole Bible downloaded ✓':`Download whole Bible for offline (${fmtMB(INDEX.bytes-bytes)})`;
-  btn.disabled = n.length===INDEX.files.length || dlRunning;
-  window.__offline={have:n.length,total:INDEX.files.length,bytes};
+  const c=await caches.open(DATA_CACHE); const have=await dlHave(c);
+  const n=INDEX.files.filter(f=>have.has(f[0])), bytes=n.reduce((a,f)=>a+f[1],0), all=n.length===INDEX.files.length;
+  let quota='';
+  try{ if(navigator.storage&&navigator.storage.estimate){ const e=await navigator.storage.estimate(); if(e&&e.quota) quota=` Space this browser allows the app: about ${fmtMB(Math.max(0,e.quota-(e.usage||0)))} free.`; } }catch(e){}
+  info.textContent=`Entire canon with lexicons, concordance, word-matching data and both English versions: ${INDEX.files.length.toLocaleString()} files, ${fmtMB(INDEX.bytes)} (exact size of the files listed in the app's data index). Stored now: ${n.length.toLocaleString()} files (${fmtMB(bytes)}). Chapters you open are kept automatically.${quota}`;
+  const running=DL.state==='running', paused=DL.state==='paused';
+  btn.textContent = all?'Entire canon downloaded ✓':paused?`Resume download (${fmtMB(INDEX.bytes-bytes)} left)`:running?'Downloading…':`Download entire canon for offline (${fmtMB(INDEX.bytes-bytes)})`;
+  btn.disabled = all || running;
+  pause.hidden=!running; cancel.hidden=!(running||paused);
+  window.__offline={have:n.length,total:INDEX.files.length,bytes,totalBytes:INDEX.bytes,state:DL.state};
+}
+function dlTick(){
+  const pct=DL.totalBytes?100*DL.bytes/DL.totalBytes:0;
+  $('#dlBar>div').style.width=pct.toFixed(1)+'%'; $('#dlBar').setAttribute('aria-valuenow',Math.round(pct));
+  $('#dlStat').textContent=`${DL.done.toLocaleString()} / ${DL.total.toLocaleString()} files · ${fmtMB(DL.bytes)} of ${fmtMB(DL.totalBytes)}${DL.failed?` · ${DL.failed} failed`:''}${DL.state==='paused'?' · paused':''}`;
 }
 async function downloadAll(){
-  if(dlRunning) return; dlRunning=true; $('#dlBtn').disabled=true; $('#dlBar').hidden=false;
-  const c=await caches.open(DATA_CACHE); const have=new Set((await c.keys()).map(r=>r.url));
-  const todo=[{url:new URL(DATA_BASE+'index.json',location.href).href,size:0,force:true}].concat(INDEX.files.map(f=>({url:new URL(DATA_BASE+f[0],location.href).href,size:f[1]})));
-  let done=0, bytes=0, failed=0; const total=todo.reduce((a,f)=>a+f.size,0);
-  const tick=()=>{ $('#dlBar>div').style.width=(100*bytes/total).toFixed(1)+'%'; $('#dlStat').textContent=`${done} / ${todo.length} files · ${fmtMB(bytes)} of ${fmtMB(total)}${failed?` · ${failed} failed`:''}`; };
-  let next=0;
-  async function worker(){ while(next<todo.length){ const f=todo[next++];
-    try{ if(f.force||!have.has(f.url)){ const r=await fetch(f.url,{cache:'no-cache'}); if(!r.ok) throw 0; await c.put(f.url,r); } }catch(e){ failed++; }
-    done++; bytes+=f.size; tick(); } }
-  tick(); await Promise.all(Array.from({length:6},worker));
-  dlRunning=false; $('#dlStat').textContent+= failed?' — try again for the rest':' — done, the whole Bible works offline'; updateOfflineInfo();
+  if(DL.state==='running') return;
+  const c=await caches.open(DATA_CACHE); const have=await dlHave(c);
+  const todo=INDEX.files.filter(f=>!have.has(f[0])).map(f=>({path:f[0],url:new URL(DATA_BASE+f[0],location.href).href,size:f[1]}));
+  const need=todo.reduce((a,f)=>a+f.size,0);
+  // check the space first, so the download does not fail half way
+  try{ if(navigator.storage&&navigator.storage.estimate){ const e=await navigator.storage.estimate(); if(e&&e.quota&&e.quota-(e.usage||0)<need*1.05){ $('#dlBar').hidden=false; $('#dlStat').textContent=`Not enough storage: this needs ${fmtMB(need)} but the browser allows about ${fmtMB(Math.max(0,e.quota-(e.usage||0)))} more for this site. Free some space, or keep using chapter-by-chapter caching.`; return; } } }catch(e){}
+  try{ if(navigator.storage&&navigator.storage.persist) navigator.storage.persist().catch(()=>{}); }catch(e){}
+  const run=++DL.run; Object.assign(DL,{state:'running', done:INDEX.files.length-todo.length, total:INDEX.files.length, totalBytes:INDEX.bytes, bytes:INDEX.bytes-need, failed:0}); dlRunning=true;
+  $('#dlBar').hidden=false; updateOfflineInfo(); dlTick();
+  let next=0, quotaHit=false;
+  const live=()=>DL.run===run && DL.state==='running';
+  async function worker(){ while(live() && next<todo.length){ const f=todo[next++];
+    try{ const r=await fetch(f.url,{cache:'no-cache'}); if(!r.ok) throw new Error('HTTP '+r.status); if(!live()) return; await c.put(f.url,r); DL.bytes+=f.size; }
+    catch(e){ if(e && (e.name==='QuotaExceededError' || /quota/i.test(e.message||''))){ quotaHit=true; DL.state='stopped'; } else DL.failed++; }
+    DL.done++; dlTick(); } }
+  // index.json is refreshed too (network first in the service worker)
+  try{ const r=await fetch(new URL(DATA_BASE+'index.json',location.href).href,{cache:'no-cache'}); if(r.ok) await c.put(new URL(DATA_BASE+'index.json',location.href).href,r); }catch(e){}
+  await Promise.all(Array.from({length:6},worker));
+  if(DL.run!==run) return;
+  dlRunning=false;
+  if(quotaHit){ $('#dlStat').textContent=`Storage is full: the browser refused more data after ${fmtMB(DL.bytes)}. Everything already stored still works offline. Free some space and press Resume, or use Remove offline data.`; DL.state='paused'; }
+  else if(DL.state==='paused'){ dlTick(); }
+  else if(DL.state==='cancelled'){ $('#dlStat').textContent=`Stopped. ${fmtMB(DL.bytes)} is stored and keeps working offline; use Remove offline data to free it.`; DL.state='idle'; }
+  else { DL.state='idle'; $('#dlStat').textContent+= DL.failed?' — some files failed; press the button again for the rest':' — done: the entire canon works offline'; }
+  updateOfflineInfo();
 }
 $('#dlBtn').onclick=downloadAll;
-$('#dlClear').onclick=async()=>{ if('caches' in window){ await caches.delete(DATA_CACHE); memo.clear(); } $('#dlStat').textContent='Offline data removed.'; updateOfflineInfo(); };
-window.__downloadAll=downloadAll;
+$('#dlPause').onclick=()=>{ if(DL.state!=='running') return; DL.state='paused'; DL.run++; dlRunning=false; dlTick(); updateOfflineInfo(); };
+$('#dlCancel').onclick=()=>{ const was=DL.state; DL.state='idle'; DL.run++; dlRunning=false; $('#dlStat').textContent=was==='running'||was==='paused'?`Cancelled. ${fmtMB(DL.bytes)} already stored stays available offline; use Remove offline data to free it.`:''; updateOfflineInfo(); };
+$('#dlClear').onclick=async()=>{ DL.run++; DL.state='idle'; dlRunning=false; if('caches' in window){ await caches.delete(DATA_CACHE); memo.clear(); } $('#dlBar').hidden=true; $('#dlStat').textContent='Offline data removed.'; updateOfflineInfo(); };
+window.__downloadAll=downloadAll; window.__DL=DL;
 
 // ---------- theme ----------
 $('#themeBtn').onclick=()=>{ const cur=document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
@@ -2237,9 +2333,13 @@ if('serviceWorker' in navigator && location.protocol!=='file:'){ addEventListene
   if(!BOOK[state.book]){ state.book='Gen'; state.ch=1; }
   if(INLINE && !INLINE.files[`ch/${state.book}.${state.ch}.json.gz`]){ state.book='Gen'; state.ch=1; }
   applySettings(); renderNotebook();
+  const route=HSP.parse(location.hash);
+  if(route && route.b){ state.book=route.b; state.ch=route.c; if(route.wit) state.wit=route.wit; state.popup=null; }
+  if(route) state.tab=route.tab;
   await gotoChapter(state.book,state.ch,{keepScroll:true});
   showTab(state.tab,true);
-  (document.fonts&&document.fonts.ready?Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,1500))]):Promise.resolve()).then(()=>requestAnimationFrame(finishRestore));
+  if(route){ state.popup=null; await HSP.apply(route,{initial:true}); restored=true; window.__restored=true; HSP.sync('replace'); window.__routed=true; }
+  else (document.fonts&&document.fonts.ready?Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,1500))]):Promise.resolve()).then(()=>requestAnimationFrame(()=>{ finishRestore(); HSP.sync('replace'); }));
 })();
 
 // ---------- Canonical Chords: three.js ring/sphere (SVG fallback in app5) ----------
@@ -3356,10 +3456,11 @@ async function wpFillConc(seq, witId, key){
     el.innerHTML=shown.length?shown.map(o=>`<button type="button" class="occ wp-jump" data-b="${o.r.b}" data-c="${o.r.c}" data-w="${witId==='byz'?'grk':witId}" data-v="${esc(o.r.v)}" data-i="${o.i}">${esc(BOOK[o.r.b]?BOOK[o.r.b].name:o.r.b)} ${o.r.c}:${esc(o.r.v)}</button>`).join('')+(others.length>shown.length?`<span class="wp-muted"> +${others.length-shown.length} more</span>`:''):'<span class="wp-muted">No other chapters.</span>';
   }catch(e){ if(seq===wpSeq) el.innerHTML=`<span class="wp-muted">Concordance not available${navigator.onLine===false?' offline yet':''}.</span>`; }
 }
-function wpBodyHTML(wit, d, v, i, n){
+function wpBodyHTML(wit, d, v, i, n, noteWit){
   const raw=d.raw, cls=wit.cls, dir=wit.rtl?'rtl':'ltr', font=cls==='grk'?'var(--grk)':cls==='lat'?"'Noto Serif',Georgia,serif":'var(--heb)';
-  const key=wkey(state.book,state.ch,wit.id,v,i), ref=refName(state.book,state.ch,v);
-  let h=`<div class="wp-word ${cls}" dir="${dir}" style="font-family:${font}">${esc(view(d.w,cls))}</div>`;
+  const key=wkey(state.book,state.ch,(noteWit||wit).id,v,i), ref=refName(state.book,state.ch,v);
+  let h=`<div class="wp-word ${cls}" dir="${dir}" style="font-family:${font}">${esc(view(d.w,cls))}</div><div class="wp-say">${HSP.sayBtn(d.w,HSP.kindOf(cls),'Listen to this word')}</div>`;
+  if(d.fill) h+=`<div class="varfill wp-varfill"><span class="badge varbadge">Textual Variant: ${d.fill==='byz'?'Byzantine':'TR'}</span> ${d.fill==='byz'?'This verse is not in the SBLGNT; the word is from the Byzantine text (RP2018).':"In neither the SBLGNT nor RP2018; from Scrivener's 1894 Textus Receptus."}</div>`;
   if(wit.id==='heb'||isGkWit(wit.id)){
     h+=`<div class="wp-tr">${esc(raw[1]||'')}</div>`+(raw[2]?`<div class="wp-gloss">“${esc(raw[2])}”</div>`:'');
     const strong=wit.id==='heb'?plainStrong(rootTag(raw[3])||''):(wit.id==='byz'&&raw[6])?'G'+raw[6]:plainStrong(raw[3]||'');
@@ -3371,29 +3472,33 @@ function wpBodyHTML(wit, d, v, i, n){
       (wit.id==='heb'&&raw[5]?wpRow('Text note',esc({Q:'Qere (the form read aloud); the written Ketiv differs',X:'Not in the Leningrad Codex: restored from the Septuagint',R:'Restored text (missing in the Leningrad Codex)',V:'Variant reading'}[raw[5]]||raw[5])):'')+
       `</div><div class="wp-lex" id="wpLex">${wpLexHTML(wit.id,raw)}</div>`+wpOccHTML(wit.id,raw,v,i);
   } else {
-    h+=`<div class="wp-grid">`+wpRow('Position',`word ${i+1} of ${n}`)+wpRow('Where',esc(witRefNote(wit.id,v)||ref))+`</div>`+
-      `<div class="wp-muted wp-nodata">${wit.id==='lxx'?'Brenton Septuagint text. No openly licensed lemma, gloss, Strong\'s number or parsing is available for the LXX, so none is shown.':wit.id==='tg'?'Targum text from Sefaria. The app has no sourced lemma, gloss, Strong\'s number or parsing for the Targum.':'Clementine Vulgate text. The app has no sourced lemma, gloss or parsing for the Latin.'}</div>`;
+    h+=HSP.approxSectionHTML(wit,d,v,i,n);
   }
   const val=(cls==='grk'||cls==='heb'||cls==='arc')?valueRow(d.w,cls):''; if(val) h+=`<div class="wp-sec wp-val2">${val}</div>`;
   if(EN && EN[v]) h+=`<div class="wp-sec"><div class="wp-lbl">${esc(ref)} <span class="wp-src">${esc((ENV||enPref()).abbr)}</span></div><p class="wp-ctx">${enVerseHTML(v)}</p></div>`;
   h+=`<div class="wp-sec"><div class="wp-lbl">Personal Scribe note <span class="wp-src">saved on this device</span></div><textarea class="notebox" id="wpNote" placeholder="Your note on this word…">${esc((NOTES[key]||{}).text||'')}</textarea><div class="btnrow"><button type="button" class="btn primary" id="wpNoteSave">Save note</button><span class="saved" id="wpNoteMsg"></span></div>${backupNudgeHTML()}</div>`;
   h+=`<div class="wp-badges">${BADGE[wit.id]||''}</div>`;
+  h+=`<div class="btnrow wp-share"><button type="button" class="btn" data-copylink>Copy link to this word</button></div>`;
   return h;
 }
 function wpOpen(wEl, opts){
   opts=opts||{}; ppClose(false);
-  const v=wEl.dataset.v, i=+wEl.dataset.i, wit=WITS.find(w=>w.id===state.wit); if(!wit) return;
-  const ws=verseWords(wit.id,v); const d=ws&&ws[i]; if(!d) return;
-  const seq=++wpSeq; wpState={book:state.book,ch:state.ch,wit:wit.id,v:String(v),i,w:d.w};
+  const v=wEl.dataset.v, i=+wEl.dataset.i, wit0=WITS.find(w=>w.id===state.wit); if(!wit0) return;
+  const ws=verseWords(wit0.id,v); const d=ws&&ws[i]; if(!d) return;
+  const wit=d.fill==='byz'?{id:'byz',name:'Greek NT (Byzantine RP) · textual variant',cls:'grk',rtl:false}:d.fill==='tr'?{id:'tr',name:'Greek NT (Scrivener 1894 TR) · textual variant',cls:'grk',rtl:false}:wit0;
+  const seq=++wpSeq; wpState={book:state.book,ch:state.ch,wit:wit0.id,v:String(v),i,w:d.w,key:null};
+  HSP.focus={v:String(v)};
   document.querySelectorAll('#verses .word.wsel').forEach(e=>{ e.classList.remove('wsel'); e.setAttribute('aria-pressed','false'); });
   wEl.classList.add('wsel'); wEl.setAttribute('aria-pressed','true');
   const panel=$('#wordPanel');
   $('#wpTitle').textContent=`${refName(state.book,state.ch,v)} · ${wit.name}`;
-  $('#wpBody').innerHTML=wpBodyHTML(wit,d,v,i,ws.length); $('#wpBody').scrollTop=0; panel.scrollTop=0;
+  $('#wpBody').innerHTML=wpBodyHTML(wit,d,v,i,ws.length,wit0); $('#wpBody').scrollTop=0; panel.scrollTop=0;
   panel.dataset.wit=wit.id;
-  const key=wkey(state.book,state.ch,wit.id,v,i), ref=refName(state.book,state.ch,v);
+  const key=wkey(state.book,state.ch,wit0.id,v,i), ref=refName(state.book,state.ch,v);
+  if(!(wit.id==='heb'||isGkWit(wit.id))) HSP.fillApprox(()=>seq===wpSeq, wit, d);
+  { const st=wpState; (opts.linkKey?Promise.resolve(opts.linkKey):HSP.wordKeyFor(wit0.id,d)).then(k=>{ if(seq!==wpSeq) return; st.key=k||null; HSP.sync(opts.fromLink?'replace':'push'); }); }
   $('#wpNoteSave').onclick=()=>{
-    const ok=setNote(key,$('#wpNote').value,{kind:'word',ref,word:d.w,wit:wit.name,book:state.book,ch:state.ch,witId:wit.id,v,i});
+    const ok=setNote(key,$('#wpNote').value,{kind:'word',ref,word:d.w,wit:wit0.name,book:state.book,ch:state.ch,witId:wit0.id,v,i});
     $('#wpNoteMsg').textContent=ok?($('#wpNote').value.trim()?'Saved ✓':'Note removed'):'Could not save (storage blocked)';
     const el=document.querySelector(`#v-${state.book}-${state.ch}-${v} .word[data-i="${i}"]`); if(el) el.classList.toggle('noted',!!NOTES[key]);
   };
@@ -3418,6 +3523,7 @@ function wpPlace(){ setChromeVars(); }
 function wpClose(restoreFocus){
   if(!wpState && $('#wordPanel').hidden) return;
   wpState=null; wpSeq++;
+  HSP.sync('replace');
   const panel=$('#wordPanel'); const had=panel.contains(document.activeElement);
   panel.hidden=true; document.body.classList.remove('wp-open');
   const sel=document.querySelector('#verses .word.wsel');
@@ -3444,6 +3550,7 @@ function wpInit(){
   $('#wpClose').addEventListener('click',()=>wpClose(true));
   $('#wordPanel').addEventListener('click',e=>{
     const c=e.target.closest('[data-conc]'); if(c){ const k=c.dataset.conc; wpClose(false); openConcordance(k); return; }
+    if(e.target.closest('[data-copylink]')){ HSP.copyLink(); return; }
     const o=e.target.closest('[data-wpv]'); if(o){ wpOpenInChapter(o.dataset.wpv,+o.dataset.wpi); return; }
     const j=e.target.closest('.wp-jump'); if(j){ jumpTo(j.dataset.b,+j.dataset.c,j.dataset.w,j.dataset.v,+j.dataset.i,{panel:true}); return; }
   });
@@ -3654,7 +3761,7 @@ function ppBodyHTML(){
     `<div class="wp-sec"><label class="wp-lbl" for="ppNote">${vs.length===1?'Verse note':'Passage note'} <span class="wp-src" id="ppNoteRef">${esc(ref)} · saved on this device</span></label>`+
     `<textarea class="notebox" id="ppNote" placeholder="Your note on ${esc(ref)}…">${esc(note)}</textarea><div class="wp-muted" id="ppNoteMsg" aria-live="polite">${vs.length===1?'Same note as the ✎ verse note. ':''}Saves as you type.</div>${backupNudgeHTML()}</div>`+
     `<div class="wp-sec"><div class="wp-lbl">${esc(ref)} <span class="wp-src">${esc(ev.abbr)}</span></div><p class="wp-ctx" id="ppText">${preview||'<span class="wp-muted">No English text for these verses.</span>'}</p></div>`+
-    `<div class="btnrow"><button type="button" class="btn primary" id="ppCopy">Copy passage</button><button type="button" class="btn" id="ppMine">My highlights &amp; notes</button></div><div class="wp-muted" id="ppCopyMsg" aria-live="polite"></div>`;
+    `<div class="btnrow"><button type="button" class="btn primary" id="ppCopy">Copy passage</button><button type="button" class="btn" id="ppMine">My highlights &amp; notes</button><button type="button" class="btn" data-copylink>Copy link</button></div><div class="wp-muted" id="ppCopyMsg" aria-live="polite"></div>`;
 }
 function ppRender(focus){
   if(!PSEL) return; const vs=ppRange(); if(!vs.length){ ppClose(false); return; }
@@ -3668,7 +3775,7 @@ function ppOpen(b,c,a,z,opts){
   opts=opts||{};
   if(b!==state.book||c!==state.ch) return;
   ppFlush(); wpClose(false); closePopup();
-  PSEL={b,c,a:String(a),z:String(z==null?a:z)}; ANCHOR={b,c,v:PSEL.a};
+  PSEL={b,c,a:String(a),z:String(z==null?a:z)}; ANCHOR={b,c,v:PSEL.a}; HSP.focus={v:PSEL.a}; HSP.sync('replace');
   const p=$('#passPanel'); p.hidden=false; document.body.classList.add('pp-open');
   ppRender(opts.focus!==false); setChromeVars();
   const first=document.getElementById(`v-${b}-${c}-${ppRange()[0]}`); if(first&&opts.reveal!==false) requestAnimationFrame(()=>wpReveal(first));
@@ -3749,6 +3856,7 @@ function ppClick(e,card){
 $('#ppClose').addEventListener('click',()=>ppClose(true));
 $('#passPanel').addEventListener('click',e=>{
   const s=e.target.closest('[data-hl]'); if(s){ ppSetHL(s.dataset.hl); return; }
+  if(e.target.closest('[data-copylink]')){ HSP.copyLink(); return; }
   if(e.target.closest('#ppCopy')){ const vs=ppRange(); copyText(passCopyText(PSEL.b,PSEL.c,vs)); const m=$('#ppCopyMsg'); if(m){ m.textContent=`Copied ${passRef(PSEL.b,PSEL.c,vs)} (${(ENV||enPref()).abbr})`; setTimeout(()=>{ if(m.isConnected) m.textContent=''; },2500); } return; }
   if(e.target.closest('#ppMine')){ openMine(); return; }
 });
