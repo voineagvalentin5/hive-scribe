@@ -903,6 +903,8 @@ nav.tabs .tabdesc{display:none}
 @media (min-width:1024px){ body.wp-open .hint.welcome{display:none} }
 /* 4. Compact reading bar: one row on desktop, witnesses scroll sideways, short names when the column is narrow */
 .readbar .wshort{display:none}
+.readbar .wtiny{display:none}
+@media (max-width:379px){ .readbar .wshort .wlong{display:none} .readbar .wshort .wtiny{display:inline} }
 @container (max-width:860px){ .readbar .wfull{display:none} .readbar .wshort{display:inline} }
 .readbar #witnessWrap[hidden]{display:none!important}
 @media (min-width:1024px){
@@ -1188,7 +1190,7 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
     <li><b>Septuagint Greek (OT and deuterocanonical books):</b> Greek text of Brenton's Septuagint with Apocrypha (eBible.org “grcbrent”), public domain. No openly licensed, morphologically tagged LXX was found: the tagged Rahlfs texts (CCAT-based, e.g. eliranwong/LXX-Rahlfs-1935) are CC BY-NC-SA or carry the CCAT user agreement, so they are not used. The LXX therefore has no tagged word glosses, lemmas or parsing here; tapping a word shows an approximate lexicon match instead (see “Approximate word study” below). Because the Septuagint numbers and orders many chapters differently, each LXX verse was placed next to the WEB verse automatically by comparing the WEB with Brenton's public-domain English translation of the same Greek; the LXX reference is always shown. Placement is least reliable in Jeremiah, 1 Kings (3 Kingdoms), Nehemiah, Proverbs 24–31, Exodus 35–40 and Sirach 30–36; about 2% of OT verses have no LXX match.</li>
     <li><b>Orthodox and appendix books (Prayer of Manasseh, 1 Esdras, 3 Maccabees, 4 Maccabees, Psalm 151, 2 Esdras):</b> English from the World English Bible (eBible.org “eng-web”), which states: “The World English Bible is in the Public Domain.” Greek from Brenton's Septuagint (eBible.org “grcbrent”, marked Public Domain by eBible.org) for every book except 2 Esdras, which has no Greek in Brenton (it survives mainly in Latin), so it is English only. Psalm 151's Greek is Brenton's Psalm 151. As for the rest of the Septuagint layer, each Greek verse was placed next to the WEB verse automatically by comparing the WEB with Brenton's public-domain English, and the LXX reference is always shown (e.g. 4 Maccabees 10:4 = LXX 10:3a). Text only: no glosses, lemmas or parsing. The Clementine Vulgate used here has no text for these books. In the Library they are tagged <i>Orth</i> (Orthodox) and <i>App</i> (appendix) and can be hidden with <b>Books shown</b>.</li>
     <li><b>Latin Vulgate (all 73 books, where a match was found):</b> Clementine Vulgate Latin text, public domain, from Michael Tweedale’s transcription (vulsearch), via the <a href="https://github.com/seven1m/open-bibles">Open Bibles</a> collection (<code>lat-clementine.usfx.xml</code>). Users are requested to acknowledge that source and to make any modifications clear: the wording of the Latin is unaltered; verses were grouped to the WEB by automatic alignment with the public-domain Douay-Rheims (same collection, <code>eng-dra.usfx.xml</code>). The Vulgate chapter and verse reference is always shown when it differs (for example in the Psalms). Text only: no tagged glosses or parsing; tapping a word shows an approximate match (see “Approximate word study” below).</li>
-    <li><b>Targum:</b> Targum Onkelos on the Torah (Sefaria “Onkelos Genesis…Deuteronomy”, source toratemetfreeware.com, public domain) and Targum Jonathan on the Prophets, Joshua–Kings and Isaiah–Malachi (Sefaria “Mikraot Gedolot”, public domain), from the <a href="https://www.sefaria.org">Sefaria</a> API. Hebrew verse numbers were converted to English ones with TAHOT's verse map. No Targum is included for the Writings (Ruth, Chronicles, Ezra–Nehemiah, Esther, Job, Psalms, Proverbs, Ecclesiastes, Song, Lamentations, Daniel): Sefaria's versions there are not clearly openly licensed or were not checked. Targum text only: no tagged glosses or parsing; tapping a word shows an approximate match (see “Approximate word study” below).</li>
+    <li><b>Targum (Aramaic):</b> Targum Onkelos on the Torah (Sefaria “Onkelos Genesis…Deuteronomy”, source toratemetfreeware.com, public domain) and Targum Jonathan on the Prophets, Joshua–Kings and Isaiah–Malachi (Sefaria “Mikraot Gedolot”, public domain), from the <a href="https://www.sefaria.org">Sefaria</a> API. Hebrew verse numbers were converted to English ones with TAHOT's verse map. No Targum is included for the Writings (Ruth, Chronicles, Ezra–Nehemiah, Esther, Job, Psalms, Proverbs, Ecclesiastes, Song, Lamentations, Daniel): Sefaria's versions there are not clearly openly licensed or were not checked. Targum text only: no tagged glosses or parsing; tapping a word shows an approximate match (see “Approximate word study” below).</li>
     <li><b>Lexicon:</b> STEPBible TBESH (Hebrew/Aramaic) and TBESG (Greek) brief lexicons, CC BY 4.0. Definitions are shortened to about 300 characters. Occurrence counts are computed from the Hebrew and Greek NT texts above (not the LXX or Targum, which are not lemmatized here).</li>
     <li><b>Greek NT, Textus Receptus (4 verses only):</b> Luke 17:36, Acts 8:37, Acts 15:34 and Acts 24:7 are in the KJV but in neither the SBLGNT nor RP2018. Their Greek is shown from F. H. A. Scrivener's 1894 Textus Receptus in Dr. Maurice A. Robinson's transcription, from the official repository <a href="https://github.com/byztxt/greektext-scrivener">github.com/byztxt/greektext-scrivener</a> (commit 6049a43), whose README states “License? Public Domain. Copy freely.” The transcription is unaccented, so these verses are shown without accents, converted letter for letter from its Latin-letter encoding. They are marked “Textual Variant: TR”. Where the SBLGNT lacks a verse that RP2018 has (e.g. John 7:53–8:11), the Greek NT card shows the Byzantine text marked “Textual Variant: Byzantine”, so no Greek card is empty.</li>
     <li><b>Approximate word study (Septuagint, Targum, Vulgate, TR verses):</b> these texts are not word-tagged, so tapping a word shows an <i>approximate match</i> with a confidence label, never an exact parse. Greek and Aramaic words are compared with spellings that are tagged in the app's own SBLGNT/TAGNT, RP2018 and TAHOT data, then with the TBESG/TBESH headwords after stripping common prefixes and endings (computed in the app; no outside data). Latin words are analysed with the stems, endings and English meanings of <b>William Whitaker's WORDS</b> (DICTLINE.GEN, INFLECTS.LAT, UNIQUES.LAT, from <a href="https://github.com/mk270/whitakers-words">github.com/mk270/whitakers-words</a>, commit fb7fb6f), whose licence reads: “Copyright William A. Whitaker (1936–2010) … Permission is hereby freely given for any and all use of program and data.” Meanings are shortened, and rare non-ecclesiastical entries are left out to keep the download small.</li>
@@ -1227,7 +1229,7 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
     <label class="toggle"><input type="checkbox" id="witGrk" checked> Greek NT (SBLGNT)</label>
     <label class="toggle"><input type="checkbox" id="witByz" checked> Greek NT (Byzantine, Robinson-Pierpont)</label>
     <label class="toggle"><input type="checkbox" id="witLxx" checked> Septuagint (LXX, Brenton)</label>
-    <label class="toggle"><input type="checkbox" id="witTg" checked> Targum</label>
+    <label class="toggle"><input type="checkbox" id="witTg" checked> Targum (Aramaic)</label>
     <label class="toggle"><input type="checkbox" id="witVul" checked> Latin Vulgate (Clementine)</label>
     <div class="desc">Turn a witness off to hide it from the chapter chips and the Polyglot matrix. The English text (version chosen above) is always shown.</div></div>
   <div class="srow"><div class="lbl">Offline</div>
@@ -1633,7 +1635,7 @@ function renderCov(){
   if(B.nt && m.bz) parts.push(`<b>Byzantine</b> ${m.bz}/${m.n}`);
   if(m.h) parts.push(`<b>Hebrew</b> ${m.h}/${m.n}`);
   if(m.l) parts.push(`<b>LXX</b> ${m.l}/${m.n}`);
-  if(m.t) parts.push(`<b>Targum</b> ${m.t}/${m.n}`);
+  if(m.t) parts.push(`<b>Targum (Aramaic)</b> ${m.t}/${m.n}`);
   if(m.vlt) parts.push(`<b>Vulgate</b> ${m.vlt}/${m.n}`);
   $('#covLine').innerHTML = `${n} verse${n===1?'':'s'} · English (${esc(enFor(state.book).abbr)}${enFallbackNote(state.book)?` <span class="enfb">· ${esc(enPref().abbr)} lacks this book</span>`:''}) · ${parts.join(' · ')||'no original-language text'}${dcBadge(B)}`;
 }
@@ -1641,8 +1643,8 @@ function renderCov(){
 // ---------- Read view ----------
 function renderWitSeg(){
   $('#witnessWrap').hidden = !WITS.length;
-  const WSHORT={heb:'Hebrew',grk:'SBLGNT',byz:'Byzantine',lxx:'LXX',tg:'Targum',vul:'Vulgate'};
-  $('#witSeg').innerHTML = WITS.map(w=>`<button data-wit="${w.id}" aria-pressed="${w.id===state.wit}" aria-label="${esc(w.name)}" title="${esc(w.name)}"><span class="wfull">${esc(w.name)}</span><span class="wshort" aria-hidden="true">${esc(WSHORT[w.id]||w.name)}</span></button>`).join('');
+  const WSHORT={heb:'Hebrew',grk:'SBLGNT',byz:'Byzantine',lxx:'LXX',tg:'Targum (Aramaic)',vul:'Vulgate'}, WTINY={tg:'Aramaic'};
+  $('#witSeg').innerHTML = WITS.map(w=>`<button data-wit="${w.id}" aria-pressed="${w.id===state.wit}" aria-label="${esc(w.name)}" title="${esc(w.name)}"><span class="wfull">${esc(w.name)}</span><span class="wshort" aria-hidden="true">${WTINY[w.id]?`<span class="wlong">${esc(WSHORT[w.id])}</span><span class="wtiny">${esc(WTINY[w.id])}</span>`:esc(WSHORT[w.id]||w.name)}</span></button>`).join('');
 }
 function visibleVerses(){ const all=visibleVlabels(state.book,state.ch); return state.vf==='all'?all:all.filter(v=>v===state.vf); }
 function renderVF(){
@@ -1809,7 +1811,7 @@ function openPopup(wEl, animate){
       `<div class="c-lexinfo">${lexInfoHTML('grk',raw)}</div>`+valueRow(d.w,'grk')+`<div>${BADGE[wit.id]}</div>`;
   } else {
     body = `<div class="c-lex" style="font-family:${font}" dir="${dir}">${esc(view(d.w,wit.cls))}</div>`+
-      `<div class="c-row">${wit.id==='lxx'?'Brenton Septuagint text. No openly licensed lemma, gloss or parsing is available for the LXX, so none is shown.':'Targum text from Sefaria. No sourced lemma, gloss or parsing is included.'}</div>`+
+      `<div class="c-row">${wit.id==='lxx'?'Brenton Septuagint text. No openly licensed lemma, gloss or parsing is available for the LXX, so none is shown.':'Aramaic Targum text from Sefaria. No sourced lemma, gloss or parsing is included.'}</div>`+
       `<div class="c-row"><b>Where:</b> ${esc(witRefNote(wit.id,v)||ref)}</div>`+valueRow(d.w,wit.cls)+`<div>${BADGE[wit.id]}</div>`;
   }
   callout.innerHTML = body +
@@ -1933,7 +1935,7 @@ function covText(b){
   if(b.nt) out.push(`Greek NT ${pc('g')}%`);
   if(sum('h')) out.push(`Hebrew ${pc('h')}%`);
   if(sum('l')) out.push(`LXX ${pc('l')}%`);
-  if(sum('t')) out.push(`Targum ${pc('t')}%`);
+  if(sum('t')) out.push(`Targum (Aramaic) ${pc('t')}%`);
   if(sum('vlt')) out.push(`Vulgate ${pc('vlt')}%`);
   return out;
 }
@@ -2161,7 +2163,7 @@ async function renderLex(){
   const q=stripMarks($('#lexQ').value.trim()).replace(/[.ʼʾʿ'’]/g,'');
   if(!q){
     const items=chapterLemmas().filter(it=>state.lexLang==='all'||langOf(it.key, (LEXF[it.key[0]]||{})[it.key])===state.lexLang);
-    $('#lexCount').textContent = CH ? (items.length?`${items.length} lemmas in ${refName(state.book,state.ch)}. Search to look across the whole Bible.`:`No lemma data for ${refName(state.book,state.ch)}: the Septuagint and Targum texts here are not lemmatized. Search to look across the Hebrew Bible and NT.`) : '';
+    $('#lexCount').textContent = CH ? (items.length?`${items.length} lemmas in ${refName(state.book,state.ch)}. Search to look across the whole Bible.`:`No lemma data for ${refName(state.book,state.ch)}: the Septuagint and Aramaic Targum texts here are not lemmatized. Search to look across the Hebrew Bible and NT.`) : '';
     const need=[...new Set(items.map(it=>it.key[0]))].filter(L=>!LEXF[L]);
     if(need.length){ $('#lexList').innerHTML='<div class="loading">Loading lexicon…</div>'; try{ await Promise.all(need.map(lexFile)); }catch(e){ $('#lexList').innerHTML=`<div class="err">Lexicon not available: ${esc(e.message)}</div>`; return; } return renderLex(); }
     $('#lexList').innerHTML=items.slice(0,300).map(it=>{ const e=LEXF[it.key[0]][it.key]; const cls=it.key[0]==='G'?'grk':'heb';
@@ -2303,7 +2305,7 @@ function renderCovList(){
     `Greek NT (SBLGNT): ${nt.length} books, ${sum(nt,'g').toLocaleString()} of ${nv(nt).toLocaleString()} WEB verses.`,
     `Greek NT (Byzantine, Robinson-Pierpont 2018): ${nt.filter(b=>sum([b],'bz')).length} books, ${sum(nt,'bz').toLocaleString()} of ${nv(nt).toLocaleString()} WEB verses.`,
     `Septuagint (Brenton): ${ot.filter(b=>sum([b],'l')).length} books, ${sum(ot,'l').toLocaleString()} of ${nv(ot).toLocaleString()} OT verses placed (${dc.length} deuterocanonical books in Greek only).`,
-    `Targum: ${ot.filter(b=>sum([b],'t')).length} books (Onkelos: Torah; Jonathan: Joshua–Kings, Isaiah–Malachi), ${sum(ot,'t').toLocaleString()} verses.`,
+    `Targum (Aramaic): ${ot.filter(b=>sum([b],'t')).length} books (Onkelos: Torah; Jonathan: Joshua–Kings, Isaiah–Malachi), ${sum(ot,'t').toLocaleString()} verses.`,
     `Latin Vulgate (Clementine): ${BOOKS.filter(b=>sum([b],'vlt')).length} books, ${sum(BOOKS,'vlt').toLocaleString()} of ${nv(BOOKS).toLocaleString()} WEB verses placed.`,
     `Cross-references: ${INDEX.xrefVerses?INDEX.xrefVerses.toLocaleString():'—'} verses with links (none for the deuterocanon).`,
     `Download size for offline use: ${fmtMB(INDEX.bytes)} (${INDEX.files.length} files).`

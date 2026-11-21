@@ -159,7 +159,7 @@ function approxHTML(witId, word, r){
     return `<div class="approx-ent">${wpRow(ix?'Or':'Lemma',`<span class="${cls}">${E(L==='H'?view(e[0],'heb'):e[0])}</span> <i>${E(e[1])}</i> · ${E(e[3])}${String(e[2]).startsWith('A:')?' <span class="wp-src">Aramaic</span>':''}`)}`+
       wpRow("Strong's", `${strongLink(k, strongNum(k), 'wp-strong')}${k!==strongNum(k)?` <span class="wp-src">extended ${E(k)}</span>`:''}`)+
       (ix===0&&e[4]?`<div class="wp-def"><div class="wp-lbl">Brief lexicon <span class="wp-src">STEPBible ${L==='H'?'TBESH':'TBESG'}</span></div><p>${E(e[4])}</p></div>`:'')+`</div>`; }).join('');
-  h+=`<p class="approx-note">Not an exact parse: ${witId==='tg'?'the Targum':witId==='tr'?'this Textus Receptus verse':'the Septuagint'} text here has no word tagging, so this entry is a spelling-based guess. Check it against the context.</p>`;
+  h+=`<p class="approx-note">Not an exact parse: ${witId==='tg'?'the Aramaic Targum':witId==='tr'?'this Textus Receptus verse':'the Septuagint'} text here has no word tagging, so this entry is a spelling-based guess. Check it against the context.</p>`;
   return h;
 }
 HSP.approxSectionHTML = function(wit, d, v, i, n){
