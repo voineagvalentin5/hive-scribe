@@ -938,96 +938,61 @@ nav.tabs .tabdesc{display:none}
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DW4D6JPPB4');</script>
 </head>
 <body>
-<!-- chl-lab-nav -->
-<style>
-:root{--chl-nav-h:calc(48px + env(safe-area-inset-top,0px))}
-#chl-lab-nav,#chl-lab-nav *{box-sizing:border-box}
-#chl-lab-nav{
-  position:sticky;top:0;z-index:40;
-  background:#141414;
-  border-bottom:1px solid rgba(224,165,38,.42);
-  color:#e9e6df;
-  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  -webkit-text-size-adjust:100%;
-  padding-top:env(safe-area-inset-top,0px);
-}
-#chl-lab-nav .chl-lab-nav__bar{
-  height:48px;display:flex;align-items:center;gap:12px;
-  padding:0 16px;max-width:1600px;margin:0 auto;position:relative;
-}
-#chl-lab-nav a.chl-lab-nav__brand{
-  display:flex;align-items:center;gap:9px;min-width:0;
-  color:#f3f0ea;text-decoration:none;flex:0 1 auto;
-}
-#chl-lab-nav a.chl-lab-nav__brand:hover{color:#fff}
-#chl-lab-nav a.chl-lab-nav__brand picture,#chl-lab-nav a.chl-lab-nav__brand img{display:block;flex-shrink:0}#chl-lab-nav a.chl-lab-nav__brand img{width:auto;height:32px}
-#chl-lab-nav .chl-lab-nav__name{
-  font-size:14px;font-weight:700;letter-spacing:.02em;line-height:1.15;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
-#chl-lab-nav .chl-lab-nav__labs{color:#e0a526;font-weight:700}
-#chl-lab-nav .chl-lab-nav__check{
-  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
-  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
-}
-#chl-lab-nav .chl-lab-nav__toggle{
-  display:none;flex:0 0 auto;cursor:pointer;margin-left:auto;
-  width:40px;height:40px;place-items:center;
-  border:1px solid rgba(224,165,38,.4);border-radius:8px;color:#e0a526;background:transparent;
-}
-#chl-lab-nav .chl-lab-nav__toggle::after{content:"☰";font-size:20px;line-height:1}
-#chl-lab-nav .chl-lab-nav__check:checked + .chl-lab-nav__toggle::after{content:"✕";font-size:18px}
-#chl-lab-nav .chl-lab-nav__links{display:flex;align-items:center;gap:2px;margin-left:auto}
-#chl-lab-nav .chl-lab-nav__links a{
-  display:inline-flex;align-items:center;color:#e0a526;text-decoration:none;
-  font-size:12px;font-weight:650;letter-spacing:.12em;text-transform:uppercase;
-  padding:7px 11px;border-radius:6px;line-height:1;white-space:nowrap;
-}
-#chl-lab-nav .chl-lab-nav__links a:hover{color:#ffd36b;background:rgba(224,165,38,.08)}
-#chl-lab-nav .chl-lab-nav__links a[aria-current="page"]{
-  color:#ffd36b;box-shadow:inset 0 -2px 0 #e0a526;
-}
-#chl-lab-nav .chl-lab-nav__sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-#chl-lab-nav a:focus-visible,#chl-lab-nav .chl-lab-nav__toggle:focus-visible,
-#chl-lab-nav .chl-lab-nav__check:focus-visible + .chl-lab-nav__toggle{
-  outline:2px solid #e0a526;outline-offset:2px;
-}
-@media (max-width:700px){
-  #chl-lab-nav .chl-lab-nav__bar{padding:0 12px}
-  #chl-lab-nav .chl-lab-nav__toggle{display:grid}
-  #chl-lab-nav .chl-lab-nav__links{
-    display:none;position:absolute;top:100%;right:0;left:auto;margin-left:0;
-    min-width:min(220px,calc(100vw - 24px));
-    flex-direction:column;align-items:stretch;gap:0;
-    background:#141414;border:1px solid rgba(224,165,38,.42);
-    border-radius:0 0 10px 10px;padding:8px 0;box-shadow:0 12px 28px rgba(0,0,0,.45);
-  }
-  #chl-lab-nav .chl-lab-nav__check:checked ~ .chl-lab-nav__links{display:flex}
-  #chl-lab-nav .chl-lab-nav__links a{padding:12px 16px;border-radius:0}
-  #chl-lab-nav .chl-lab-nav__links a[aria-current="page"]{box-shadow:inset 3px 0 0 #e0a526}
+<!-- chl-bc -->
+<style id="chl-bc">
+:root{--chl-nav-h:calc(52px + env(safe-area-inset-top,0px))}
+.bc,.bc *{box-sizing:border-box}
+.bc__badge{display:inline-block;font:700 10px/1 "Montserrat",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;background:linear-gradient(180deg,#e2b768,#c99a4b);color:#16130d;padding:5px 9px;border-radius:999px;flex:none}
+.bc{position:sticky;top:0;z-index:40;background:#141414;border-bottom:1px solid rgba(224,165,38,.42);padding-top:env(safe-area-inset-top,0px);color:#e9e6df;-webkit-text-size-adjust:100%;overflow:hidden}
+.bc__in{max-width:1600px;margin:0 auto;padding:0 16px;height:52px;display:flex;align-items:center;gap:12px;min-width:0}
+.bc__list{display:flex;align-items:center;min-width:0;flex:1;list-style:none;margin:0;padding:0;font:650 15px/1.2 "Montserrat",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;white-space:nowrap}
+.bc__item{display:flex;align-items:center;min-width:0;flex:none}
+.bc__item+.bc__item::before{content:"›";content:"›"/"";color:#8f8778;font-size:20px;line-height:1;margin:0 10px;flex:none}
+.bc__item a,.bc__item span.cur{display:inline-flex;align-items:center;gap:9px;min-height:44px;color:#e0a526;text-decoration:none;border-radius:6px;padding:0 2px}
+.bc__item a:hover{color:#ffd36b;text-decoration:underline;text-underline-offset:4px}
+.bc__item [aria-current="page"],.bc__item span.cur{color:#f3f0ea}
+.bc__item a[aria-current="page"]:hover{color:#fff}
+.bc__item a:focus-visible{outline:2px solid #e0a526;outline-offset:2px}
+.bc__item--home a{color:#f3f0ea}
+.bc__item--home img{height:28px;width:auto;display:block;max-width:none}
+.bc__labs{color:#e0a526}
+.bc__dots{display:none}
+.bc__item--module,.bc__item--extra{flex:0 1 auto}
+.bc__item--module a,.bc__item--extra a,.bc__item--extra span.cur{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:44px}
+.bc__item--extra:last-child{flex-shrink:1;min-width:3em}
+.bc__item--module{flex-shrink:3;min-width:2.5em}
+@media (max-width:560px){
+  .bc__in{padding:0 12px;gap:8px}
+  .bc__list{font-size:14px}
+  .bc__item+.bc__item::before{margin:0 6px}
+  .bc__item--home .bc__t{display:none}
+  .bc--deep .bc__item--academy .bc__t{display:none}
+  .bc--deep .bc__item--academy .bc__dots{display:inline;padding:0 6px;font-size:18px}
+  .bc--deep .bc__badge{display:none}
+  .bc__badge{font-size:9px;padding:4px 7px;letter-spacing:.12em}
+  .bc__item--module{flex-shrink:0}
+  .bc__item--academy{flex:0 1 auto;min-width:2.2em}
+  .bc__item--academy a{min-width:0;overflow:hidden}
+  .bc__item--academy .bc__t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .bc--deep .bc__item--module{flex-shrink:0}
+  .bc--deeper .bc__item--module{display:none}
 }
 </style>
-<nav id="chl-lab-nav" aria-label="Codex Hive Labs">
-  <div class="chl-lab-nav__bar">
-    <a class="chl-lab-nav__brand" href="https://codex-hive.com">
-      <picture><source type="image/webp" srcset="/chl-assets/codex-hive-mark-1x.webp 1x, /chl-assets/codex-hive-mark-2x.webp 2x, /chl-assets/codex-hive-mark-3x.webp 3x"><img src="/chl-assets/codex-hive-mark-1x.png" srcset="/chl-assets/codex-hive-mark-1x.png 1x, /chl-assets/codex-hive-mark-2x.png 2x, /chl-assets/codex-hive-mark-3x.png 3x" width="26" height="32" alt="Codex Hive" decoding="async"></picture>
-      <span class="chl-lab-nav__name">Codex Hive <span class="chl-lab-nav__labs">Labs</span></span>
-    </a>
-    <input type="checkbox" id="chl-lab-nav-toggle" class="chl-lab-nav__check" autocomplete="off">
-    <label class="chl-lab-nav__toggle" for="chl-lab-nav-toggle"><span class="chl-lab-nav__sr">Open Codex Hive Labs menu</span></label>
-    <div class="chl-lab-nav__links">
-      <a href="https://codex-hive.com">Home</a>
-      <a href="https://codex-hive.com/apps-1">Apps</a>
-      <a href="https://newz.codex-hive.com">Newz</a>
-      <a href="https://www.patreon.com/c/Codex_Hive_Labs" target="_blank" rel="noopener noreferrer">Patreon</a>
-    </div>
+<nav class="bc" aria-label="Breadcrumb">
+  <div class="bc__in">
+    <ol class="bc__list" id="bc">
+      <li class="bc__item bc__item--home"><a href="https://codex-hive.com" aria-label="Codex Hive Labs, codex-hive.com"><picture><source type="image/webp" srcset="/chl-assets/codex-hive-mark-1x.webp 1x, /chl-assets/codex-hive-mark-2x.webp 2x, /chl-assets/codex-hive-mark-3x.webp 3x"><img src="/chl-assets/codex-hive-mark-1x.png" srcset="/chl-assets/codex-hive-mark-1x.png 1x, /chl-assets/codex-hive-mark-2x.png 2x, /chl-assets/codex-hive-mark-3x.png 3x" width="26" height="32" alt="" decoding="async"></picture><span class="bc__t">Codex Hive <span class="bc__labs">Labs</span></span></a></li>
+      <li class="bc__item bc__item--academy"><a href="https://academy.codex-hive.com/" aria-label="Hive Academy"><span class="bc__t">Hive Academy</span><span class="bc__dots" aria-hidden="true">…</span></a></li>
+      <li class="bc__item bc__item--module"><a href="https://scribe.codex-hive.com/" aria-current="page">Hive Scribe</a></li>
+    </ol>
+    
   </div>
 </nav>
-<!-- /chl-lab-nav -->
+<!-- /chl-bc -->
 
 <style id="chl-lab-nav-scribe">
-/* Keep Scribe's own sticky header and reading chrome below the Labs bar. */
-header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
+/* Keep Scribe's own sticky header and reading chrome below the Labs breadcrumb. */
+header.noselect{top:var(--chl-nav-h,52px);padding-top:10px}
 </style>
 
 <header class="noselect">
