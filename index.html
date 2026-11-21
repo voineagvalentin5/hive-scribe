@@ -59,6 +59,9 @@ main{max-width:640px;margin:0 auto;padding:14px 14px 40px}
 .seg{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 10px}
 .seg button{border:1px solid var(--line);background:var(--paper);color:var(--ink2);border-radius:999px;padding:7px 12px;min-height:44px;font:500 13px var(--ui)}
 .seg button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+.seg button.soon{opacity:.55;border-style:dashed;cursor:default}
+.seg button.soon .soontag{display:inline-block;margin-left:4px;padding:1px 6px;border-radius:999px;background:var(--warn-soft);color:var(--warn);font-size:10.5px;font-weight:600;vertical-align:1px}
+.ensoonmsg{font-size:13px;color:var(--ink2);margin:-4px 0 8px}
 .label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);margin:12px 2px 4px}
 .hint{font-size:13px;color:var(--ink2);background:var(--accent-soft);border-radius:12px;padding:9px 12px;margin:6px 0 12px}
 .verse{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px 14px 12px;margin:10px 0;cursor:pointer;transition:box-shadow .2s, border-color .2s}
@@ -1216,7 +1219,7 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
   <h2>Typography &amp; reading <button class="iconbtn x" data-close aria-label="Close">✕</button></h2>
   <div class="srow"><div class="lbl">Text size</div><div class="seg" id="fsSeg"><button data-fs="S">S</button><button data-fs="M">M</button><button data-fs="L">L</button><button data-fs="XL">XL</button></div></div>
   <div class="srow"><label class="toggle"><input type="checkbox" id="dysChk"> Dyslexia reading mode</label><div class="desc">Sans-serif, extra letter and word spacing, higher contrast, no italics.</div></div>
-  <div class="srow"><div class="lbl">English version</div><div class="seg" id="enSeg" role="group" aria-label="English version"></div>
+  <div class="srow"><div class="lbl">English version</div><div class="seg" id="enSeg" role="group" aria-label="English version"></div><div class="ensoonmsg" id="enSoonMsg" role="status" aria-live="polite" hidden></div>
     <div class="desc" id="enDesc">The English text shown in Read, Polyglot, Connections and the word panel. The original-language layers stay on the same verses whichever version you pick.</div></div>
   <div class="srow"><div class="lbl">Hebrew &amp; Aramaic vowels</div><div class="seg" id="vowSeg"><button data-vow="full">Full points</button><button data-vow="cons">Consonants only</button></div>
     <label class="toggle"><input type="checkbox" id="cantChk"> Show cantillation marks (te'amim)</label><div class="desc">Cantillation marks come with the Westminster Leningrad Codex Hebrew; the Targum texts have vowels but no cantillation. Consonants only also hides the vowels.</div></div>
@@ -3716,10 +3719,16 @@ function canonInit(){
   canonUI();
 }
 // ---------- English version switch (Settings + reading bar) ----------
+// Versions announced but not available yet: listed greyed out with a "Coming soon" tag (no text, no requests).
+// An entry drops out of this list automatically once a real version with the same id is in EN_VERSIONS.
+const EN_SOON=[{id:'nlt',abbr:'NLT',full:'New Living Translation'},{id:'nkjv',abbr:'NKJV',full:'New King James Version'}];
+function enSoon(){ return EN_SOON.filter(x=>!EN_VERSIONS.some(e=>e.id===x.id)); }
 function enUI(){
   const cur=enPref().id;
-  const seg=$('#enSeg'); if(seg) seg.innerHTML=EN_VERSIONS.map(x=>`<button type="button" data-env="${x.id}" aria-pressed="${x.id===cur}" title="${esc(x.full)}">${esc(x.abbr)}</button>`).join('');
-  const sel=$('#enSel'); if(sel){ sel.innerHTML=EN_VERSIONS.map(x=>`<option value="${x.id}"${x.id===cur?' selected':''}>${esc(x.abbr)}</option>`).join(''); sel.title='English version: '+enPref().full; }
+  const seg=$('#enSeg'); if(seg) seg.innerHTML=EN_VERSIONS.map(x=>`<button type="button" data-env="${x.id}" aria-pressed="${x.id===cur}" title="${esc(x.full)}">${esc(x.abbr)}</button>`).join('')
+    +enSoon().map(x=>`<button type="button" class="soon" data-ensoon="${x.id}" aria-disabled="true" title="${esc(x.full)}: coming soon">${esc(x.abbr)} <span class="soontag">Coming soon</span></button>`).join('');
+  const sel=$('#enSel'); if(sel){ sel.innerHTML=EN_VERSIONS.map(x=>`<option value="${x.id}"${x.id===cur?' selected':''}>${esc(x.abbr)}</option>`).join('')
+    +enSoon().map(x=>`<option value="soon:${x.id}" disabled>${esc(x.abbr)} · Coming soon</option>`).join(''); sel.title='English version: '+enPref().full; }
   const d=$('#enDesc'); if(d) d.innerHTML=`<b>${esc(enPref().full)}</b>, ${esc(enPref().lic)}. `+(cur==='kjv'?'Words the translators supplied (printed in italics in the KJV) are shown in italics. Books the KJV does not have (3 and 4 Maccabees, Psalm 151) are shown in the WEB. ':'')+'The original-language layers stay on the same verses whichever version you pick; where the KJV numbers a verse differently, its own reference is shown beside it.';
 }
 function setEnVer(id){
@@ -3728,6 +3737,9 @@ function setEnVer(id){
   gotoChapter(state.book,state.ch,{keepScroll:true}).then(()=>{ if(state.tab==='poly'&&state.pm==='bridge') renderBridge(); });
 }
 document.addEventListener('click',e=>{ const b=e.target.closest('#enSeg [data-env]'); if(b) setEnVer(b.dataset.env); });
+document.addEventListener('click',e=>{ const b=e.target.closest('#enSeg [data-ensoon]'); if(!b) return; e.preventDefault();
+  const x=EN_SOON.find(v=>v.id===b.dataset.ensoon), m=$('#enSoonMsg'); if(!x||!m) return;
+  m.textContent=`The ${x.full} (${x.abbr}) is coming soon to Hive Scribe.`; m.hidden=false; clearTimeout(m._t); m._t=setTimeout(()=>{ m.hidden=true; },4000); });
 { const sel=$('#enSel'); if(sel) sel.addEventListener('change',()=>setEnVer(sel.value)); }
 enUI();
 canonInit();
