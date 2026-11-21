@@ -869,6 +869,10 @@ body.cmdk-on{overflow:hidden}
 .cmdk-status{font-size:12.5px;color:var(--ink3);padding:10px}
 .cmdk-foot{display:flex;justify-content:space-between;gap:8px;padding:8px 12px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink3)}
 @media (max-width:600px){ .cmdk-pn{margin-top:8px;max-height:calc(100vh - 16px);border-radius:14px} .cmdk-foot span{display:none} .cmdk-opts .cmdk-hint{font-size:11px} }
+/* API.Bible live translations: copyright line under the text / offline notice */
+.livecopy{margin:14px 4px 4px;padding:10px 12px;border-top:1px solid var(--line,rgba(127,127,127,.25));font-size:.82rem;line-height:1.45;color:var(--ink2,inherit)}
+.livecopy a{color:inherit;text-decoration:underline}
+.livecopy .lc-msg{font-weight:600}
 </style>
 
 
@@ -1074,6 +1078,7 @@ header.noselect{top:var(--chl-nav-h,52px);padding-top:10px}
     <div class="wl-foot"><button type="button" class="btn primary" id="hintGotIt">Got it</button><span class="wl-note">Your notes stay in this browser. Back them up from Lexicon &amp; Notes.</span></div>
   </div>
   <div id="verses"><div class="loading">Loading…</div></div>
+  <div class="livecopy" id="liveCopyRead" hidden></div>
   <div class="chapterfoot"><button type="button" class="textnav" id="prevCh2">‹ Previous chapter</button><button type="button" class="textnav" id="nextCh2">Next chapter ›</button></div>
   </div>
   <aside class="wpanel" id="wordPanel" aria-labelledby="wpTitle" hidden>
@@ -1092,6 +1097,7 @@ header.noselect{top:var(--chl-nav-h,52px);padding-top:10px}
   <p class="modeintro"><b>Polyglot &amp; Logos.</b> <b>Parallel matrix</b> shows each verse in every text the app carries for this chapter (Hebrew, Greek, Aramaic Targum, Latin Vulgate and English), side by side. <b>Logos Bridge</b> reads Genesis 1:1–3 next to John 1:1–5, with shared words highlighted and hand-written study notes.</p>
   <div class="seg" id="polySeg"><button data-pm="matrix" aria-pressed="true">Parallel matrix</button><button data-pm="bridge" aria-pressed="false">Logos Bridge</button></div>
   <div id="polyBody"></div>
+  <div class="livecopy" id="liveCopyPoly" hidden></div>
 </section>
 
 <section id="view-study" hidden>
@@ -1171,6 +1177,8 @@ header.noselect{top:var(--chl-nav-h,52px);padding-top:10px}
     <li>Fonts: Noto Serif and Noto Serif Hebrew (© The Noto Project Authors, SIL Open Font License 1.1), bundled so the app works offline.</li>
     <li><b>Hebrew and Aramaic fragments not included:</b> this app does not invent text for sources it does not carry. Sirach (Ecclesiasticus) is known in Hebrew for about two-thirds of the book (Cairo Geniza, Masada, and related finds), but no openly packaged, clearly licensed Hebrew Sirach was included here, so Sirach is Greek (LXX) and Latin only. Tobit is attested in Aramaic and Hebrew fragments from Qumran; those fragments are not in this app. A Greek fragment of the Letter of Jeremiah (Baruch 6) is known as 7Q2; the text here is the Brenton Septuagint (and the Vulgate where aligned), not a transcription of 7Q2. These are notes about what exists, not additional readings.</li>
   </ul>
+  <h3 id="copyright" hidden>Copyright notices (live translations)</h3>
+  <div id="liveCopyAbout" hidden></div>
   <h3>Known limits</h3>
   <ul>
     <li>The full Bible needs the app served over http(s) (it loads chapters on demand). The single-file version contains Genesis 1 and John 1 only.</li>
@@ -1244,6 +1252,7 @@ header.noselect{top:var(--chl-nav-h,52px);padding-top:10px}
 <div id="lift" aria-hidden="true"><span class="o"></span><span class="g"></span></div>
 <div class="arm" id="arm"></div>
 <div class="callout" id="callout" role="dialog" aria-modal="true"></div>
+<script src="js/apibible.config.js"></script>
 <script src="js/plus.js"></script>
 <script>
 // ===================== Hive Scribe: full-Bible app =====================
@@ -1477,15 +1486,16 @@ let CH=null, EN=null, ENR={}, ENN={}, ENV=null;     // current chapter originals
 // The first entry is the default. Each version needs data/<dir>/<book>.json.gz keyed by the app's verse labels
 // ({"<c>":{"<v>":text}, optional "_r" own references and "_n" notes per chapter). `need` = only books whose index entry has b[id].
 // Copyrighted versions (e.g. NKJV, NLT) may only be added here once the publisher has granted permission.
+// NLT and NKJV are instead loaded live from API.Bible (js/apibible.config.js + the live module below); appended only when configured.
 const EN_VERSIONS=[
   {id:'kjv', abbr:'KJV', name:'King James Version', full:'King James Version (1769, with the Apocrypha)', dir:'kjv', need:true, lic:'public domain'},
   {id:'web', abbr:'WEB', name:'World English Bible', full:'World English Bible (2020, with the deuterocanon)', dir:'en', need:false, lic:'public domain'}
 ];
 function enPref(){ return EN_VERSIONS.find(x=>x.id===state.settings.enVer)||EN_VERSIONS[0]; }
-function enHas(ev,b){ return !ev.need || !!(BOOK[b]&&BOOK[b][ev.id]); }
+function enHas(ev,b){ if(ev.live) return liveHas(b); return !ev.need || !!(BOOK[b]&&BOOK[b][ev.id]); }
 function enFor(b){ const p=enPref(); return enHas(p,b) ? p : (EN_VERSIONS.find(x=>enHas(x,b))||EN_VERSIONS[EN_VERSIONS.length-1]); }
-function enHTML(t){ return esc(t||'').replace(/\[([^\]]*)\]/g,'<i class="kit">$1</i>').replace(/¶\s*/g,'<span class="pil" aria-hidden="true">¶ </span>'); }
-function enPlain(t){ return String(t||'').replace(/[\[\]]/g,'').replace(/¶\s*/g,''); }
+function enHTML(t){ if(ENV&&ENV.live) return esc(t||''); return esc(t||'').replace(/\[([^\]]*)\]/g,'<i class="kit">$1</i>').replace(/¶\s*/g,'<span class="pil" aria-hidden="true">¶ </span>'); }
+function enPlain(t){ if(ENV&&ENV.live) return String(t||''); return String(t||'').replace(/[\[\]]/g,'').replace(/¶\s*/g,''); }
 function enVerseHTML(v){ const t=EN&&EN[v], r=ENR&&ENR[v], n=ENN&&ENN[v], ab=ENV?ENV.abbr:'';
   return (t?enHTML(t):'')+(r?` <span class="kref" title="${esc(ab)} numbering">${esc(ab)} ${esc(r)}</span>`:'')+(!t&&n?`<span class="ennote">${esc(ab)}: ${esc(n)}</span>`:''); }
 function enFallbackNote(b){ const p=enPref(), e=enFor(b); return p.id===e.id?'':`${p.abbr} has no ${BOOK[b]?BOOK[b].name:b}; showing the ${e.abbr}`; }
@@ -1559,6 +1569,7 @@ const BADGE = {
 };
 async function loadChapter(b,c){
   const ev=enFor(b);
+  if(ev.live) return liveLoadChapter(ev,b,c);
   const [ch,en] = await Promise.all([getJSON(`ch/${b}.${c}.json.gz`), getJSON(`${ev.dir}/${b}.json.gz`)]);
   return {ch,en,ev};
 }
@@ -1582,7 +1593,7 @@ async function gotoChapter(b,c,opts={}){
     const {ch,en,ev} = await loadChapter(b,c);
     if(seq!==loadSeq) return;
     CH=ch; EN=en[String(c)]||{}; ENR=(en._r||{})[String(c)]||{}; ENN=(en._n||{})[String(c)]||{}; ENV=ev; renderCov();
-    render(); libRender();
+    render(); libRender(); liveAfterLoad();
     if(state.tab==='poly') renderPoly();
     if(state.tab==='conn') renderConn();
     if(state.tab==='lex') renderLex();
@@ -1591,7 +1602,7 @@ async function gotoChapter(b,c,opts={}){
     HSP.focus=null; HSP.sync('push');
   }catch(e){
     if(seq!==loadSeq) return;
-    CH=null; EN=null; ENR={}; ENN={};
+    CH=null; EN=null; ENR={}; ENN={}; liveAfterLoad();
     $('#verses').innerHTML = e.message==='not-in-sample' ? `<div class="err">${esc(refName(b,c))} is not in this single-file sample (it has Genesis 1 and John 1). Open the full app (dist/) for the whole Bible.</div>`
       : `<div class="err">Could not load ${esc(refName(b,c))}: ${esc(e.message)}. ${navigator.onLine===false?'You are offline and this chapter has not been downloaded yet.':''}</div>`;
   }
@@ -1622,8 +1633,180 @@ function renderCov(){
   if(m.l) parts.push(`<b>LXX</b> ${m.l}/${m.n}`);
   if(m.t) parts.push(`<b>Targum (Aramaic)</b> ${m.t}/${m.n}`);
   if(m.vlt) parts.push(`<b>Vulgate</b> ${m.vlt}/${m.n}`);
-  $('#covLine').innerHTML = `${n} verse${n===1?'':'s'} · English (${esc(enFor(state.book).abbr)}${enFallbackNote(state.book)?` <span class="enfb">· ${esc(enPref().abbr)} lacks this book</span>`:''}) · ${parts.join(' · ')||'no original-language text'}${dcBadge(B)}`;
+  const lfb=ENV&&ENV._fallbackFor&&ENV._b===state.book&&ENV._c===state.ch;
+  $('#covLine').innerHTML = `${n} verse${n===1?'':'s'} · English (${esc(lfb?ENV.abbr:enFor(state.book).abbr)}${lfb?` <span class="enfb">· ${esc(ENV._fallbackFor.abbr)} unavailable</span>`:enFallbackNote(state.book)?` <span class="enfb">· ${esc(enPref().abbr)} lacks this book</span>`:''}) · ${parts.join(' · ')||'no original-language text'}${dcBadge(B)}`;
 }
+
+// ===================== API.Bible live translations (NLT, NKJV) =====================
+// Config: apibible.config.js (APIBIBLE_CONFIG). Nothing here is active unless a proxy address is set there.
+// Rules followed (API.Bible terms + docs, checked 2026-11-20):
+//  - the API key never reaches the browser (requests go to the proxy, which adds the key);
+//  - no copy of the text is stored on the device: chapters live in memory for this tab only (< 500 verses total),
+//    requests go cross-origin so the service worker never caches them, nothing goes to localStorage;
+//  - the version name is shown with the text, its copyright line is under every chapter, the full notice and a
+//    link to api.bible are in About (Starter plan attribution), and every view is reported to FUMS;
+//  - text is shown unchanged (no italics/brackets processing), at most copyMax verses per copy.
+var APIB = (function(){
+  const c = Object.assign({bibles:[],memVerses:480,copyMax:100,timeoutMs:12000}, (typeof APIBIBLE_CONFIG!=='undefined' && APIBIBLE_CONFIG) || {}, (typeof window!=='undefined' && window.HS_APIBIBLE) || {});
+  c.proxy = String(c.proxy||'').trim().replace(/\/+$/,'');
+  c.on = /^https:\/\/[^\s/]+/.test(c.proxy) && !INLINE;
+  return c;
+})();
+// app book id (OSIS) -> USFM book code used by API.Bible (66-book Protestant canon carried by NLT and NKJV)
+var APIB_USFM = {Gen:'GEN',Exod:'EXO',Lev:'LEV',Num:'NUM',Deut:'DEU',Josh:'JOS',Judg:'JDG',Ruth:'RUT','1Sam':'1SA','2Sam':'2SA','1Kgs':'1KI','2Kgs':'2KI',
+  '1Chr':'1CH','2Chr':'2CH',Ezra:'EZR',Neh:'NEH',Esth:'EST',Job:'JOB',Ps:'PSA',Prov:'PRO',Eccl:'ECC',Song:'SNG',Isa:'ISA',Jer:'JER',Lam:'LAM',
+  Ezek:'EZK',Dan:'DAN',Hos:'HOS',Joel:'JOL',Amos:'AMO',Obad:'OBA',Jonah:'JON',Mic:'MIC',Nah:'NAM',Hab:'HAB',Zeph:'ZEP',Hag:'HAG',Zech:'ZEC',Mal:'MAL',
+  Matt:'MAT',Mark:'MRK',Luke:'LUK',John:'JHN',Acts:'ACT',Rom:'ROM','1Cor':'1CO','2Cor':'2CO',Gal:'GAL',Eph:'EPH',Phil:'PHP',Col:'COL','1Thess':'1TH',
+  '2Thess':'2TH','1Tim':'1TI','2Tim':'2TI',Titus:'TIT',Phlm:'PHM',Heb:'HEB',Jas:'JAS','1Pet':'1PE','2Pet':'2PE','1John':'1JN','2John':'2JN','3John':'3JN',
+  Jude:'JUD',Rev:'REV'};
+if(APIB.on){
+  for(const x of (APIB.bibles||[])){
+    if(!x || !x.id || !x.bibleId || EN_VERSIONS.some(e=>e.id===x.id)) continue;
+    EN_VERSIONS.push({id:x.id, abbr:x.abbr, name:x.name, full:x.full, live:true, bibleId:x.bibleId, owner:x.owner, ownerUrl:x.ownerUrl, notice:x.notice,
+      lic:'© '+x.owner.replace(/\s*\(.*\)$/,'')+' · live', dir:null, need:false});
+  }
+}
+function liveHas(b){ return !!APIB_USFM[b] && !!(BOOK[b] && BOOK[b].kjv); }
+function liveKjv(){ return EN_VERSIONS.find(x=>x.id==='kjv') || EN_VERSIONS[0]; }
+
+// ---- in-memory chapter cache (this tab only; total verses kept under APIB.memVerses) ----
+var LIVE_MEM = new Map();
+function liveMemPut(k,v){ LIVE_MEM.delete(k); LIVE_MEM.set(k,v);
+  let tot=0; for(const x of LIVE_MEM.values()) tot+=x.n;
+  for(const kk of LIVE_MEM.keys()){ if(tot<=APIB.memVerses || LIVE_MEM.size<=1) break; tot-=LIVE_MEM.get(kk).n; LIVE_MEM.delete(kk); } }
+
+// ---- parse API.Bible content-type=json into {"c:v": text}, plus combined-verse spans ----
+function liveParse(content){
+  const out={}, span={}; let cur=null;
+  const add=(id,t)=>{ const m=/^[1-4A-Z]{3}\.(\d+)\.(\d+)$/.exec(id||''); if(!m) return; const k=m[1]+':'+m[2]; out[k]=(out[k]||'')+t; cur=k; };
+  (function walk(items, inPara){
+    for(const it of (items||[])){
+      if(!it || typeof it!=='object') continue;
+      if(it.type==='text'){ const a=it.attrs||{}; if(a.verseId){ add(a.verseId, it.text||'');
+          const org=Array.isArray(a.verseOrgIds)?a.verseOrgIds:[]; if(org.length>1){ const f=org[0].split('.'), first=f[1]+':'+f[2];
+            for(const o of org.slice(1)){ const p=o.split('.'); const k=p[1]+':'+p[2]; if(k!==first && !(k in out)) span[k]=first; } } }
+        continue; }
+      if(it.type==='tag'){
+        if(it.name==='verse' || it.name==='note') continue;          // verse numbers and footnotes are not verse text
+        if(it.name==='para'){ if(cur) out[cur]+=' '; walk(it.items,true); if(cur) out[cur]+=' '; }
+        else walk(it.items,inPara);
+      }
+    }
+  })(Array.isArray(content)?content:[], false);
+  for(const k of Object.keys(out)) out[k]=out[k].replace(/\s+/g,' ').trim();
+  for(const k of Object.keys(out)) if(!out[k]) delete out[k];
+  for(const k of Object.keys(span)) if(k in out) delete span[k];
+  return {verses:out, span};
+}
+
+// ---- which live verse goes on each of the app's verse labels (uses the KJV's own references) ----
+// The app numbers verses like the WEB; the KJV file records where its numbering differs (_r). NLT/NKJV follow the
+// same Protestant numbering as the KJV, so the KJV reference tells us which live verse belongs on each label.
+function liveTargets(kj,b,c){
+  const R=(kj._r||{})[String(c)]||{}, K=kj[String(c)]||{}, T={};
+  for(const v of vlabels(b,c)){
+    const r=R[v];
+    if(r==null){ T[v]={c:c, v:[String(parseInt(v,10))].filter(x=>x!=='NaN'), ref:null}; continue; }
+    const parts=String(r).split(';').map(s=>s.trim()).filter(Boolean); let hit=null, other=false;
+    for(const p of parts){ const m=/^(?:(\d+):)?(\d+)(?:[–-](\d+))?$/.exec(p);
+      if(m){ const cc=m[1]?+m[1]:c, a=+m[2], z=m[3]?+m[3]:a; hit={c:cc, v:Array.from({length:Math.max(1,z-a+1)},(_,i)=>String(a+i)), ref:p}; }
+      else other=true; }
+    T[v]= hit ? Object.assign(hit,{other}) : {c:null, v:[], ref:String(r), apoc:true};
+  }
+  return T;
+}
+function liveMap(ev,b,c,kj,parsed){
+  const T=liveTargets(kj,b,c), L=parsed.verses, used=new Set(), txt={}, refs={}, notes={};
+  for(const [v,t] of Object.entries(T)){
+    if(t.apoc){ notes[v]=`Not in the ${ev.abbr} (${t.ref}).`; continue; }
+    if(t.c!==c){ notes[v]=`The ${ev.abbr} has this at ${t.c}:${t.v[0]}${t.v.length>1?'–'+t.v[t.v.length-1]:''}.`; continue; }
+    const got=t.v.map(x=>{ const k=c+':'+x; if(L[k]!=null && !used.has(k)){ used.add(k); return L[k]; } return null; }).filter(Boolean);
+    if(got.length){ txt[v]=got.join(' '); if(t.ref) refs[v]=t.ref; }
+    else { const k=c+':'+(t.v[0]||''); if(parsed.span[k]) notes[v]=`The ${ev.abbr} combines this verse with ${parsed.span[k].split(':')[1]}.`;
+      else if(!used.has(k)) notes[v]=`Not in the ${ev.abbr}.`; }
+  }
+  // live verses that no app label claimed (numbering differences): keep them, after the nearest earlier verse
+  const labels=Object.keys(T), byTarget={};
+  for(const v of labels){ const t=T[v]; if(t.c===c && t.v.length) byTarget[+t.v[0]]=v; }
+  for(const k of Object.keys(L).sort((x,y)=>(+x.split(':')[1])-(+y.split(':')[1]))){
+    if(used.has(k) || +k.split(':')[0]!==c) continue; const n=+k.split(':')[1];
+    let host=null; for(let i=n;i>=1&&!host;i--) if(byTarget[i] && txt[byTarget[i]]!=null) host=byTarget[i];
+    if(!host) host=labels.find(v=>txt[v]!=null); if(!host) continue;
+    txt[host]+=` (${n}) ${L[k]}`; refs[host]=(refs[host]?refs[host]+', ':'')+`${c}:${n}`; delete notes[host]; used.add(k);
+  }
+  return {txt,refs,notes};
+}
+
+// ---- fetch one chapter through the proxy ----
+async function liveFetch(ev,b,c){
+  const chapterId=`${APIB_USFM[b]}.${c}`, key=ev.bibleId+'|'+chapterId;
+  if(LIVE_MEM.has(key)){ const hit=LIVE_MEM.get(key); liveMemPut(key,hit); return hit; }
+  if(typeof navigator!=='undefined' && navigator.onLine===false) throw Object.assign(new Error('offline'),{kind:'offline'});
+  const q='content-type=json&include-notes=false&include-titles=false&include-chapter-numbers=false&include-verse-numbers=false&include-verse-spans=false';
+  const url=`${APIB.proxy}/v1/bibles/${encodeURIComponent(ev.bibleId)}/chapters/${encodeURIComponent(chapterId)}?${q}`;
+  const ctl=typeof AbortController!=='undefined'?new AbortController():null; const to=ctl?setTimeout(()=>ctl.abort(),APIB.timeoutMs):0;
+  let r;
+  try{ r=await fetch(url,{method:'GET',credentials:'omit',cache:'no-store',referrerPolicy:'strict-origin',signal:ctl?ctl.signal:undefined}); }
+  catch(e){ throw Object.assign(new Error('network'),{kind:navigator.onLine===false?'offline':'network'}); }
+  finally{ if(to) clearTimeout(to); }
+  if(!r.ok) throw Object.assign(new Error('HTTP '+r.status),{kind:r.status===429?'limit':(r.status===401||r.status===403)?'auth':'http', status:r.status});
+  const j=await r.json(); const d=(j&&j.data)||{}, meta=(j&&j.meta)||{};
+  const parsed=liveParse(d.content);
+  const rec={parsed, n:Object.keys(parsed.verses).length, copyright:String(d.copyright||'').trim(), token:meta.fumsToken||meta.fumsId||null};
+  liveMemPut(key,rec);
+  return rec;
+}
+function liveMsg(ev,kind){
+  if(kind==='offline') return `The ${ev.abbr} loads live from API.Bible and needs an internet connection. Showing the KJV.`;
+  if(kind==='limit') return `The ${ev.abbr} is not available right now (API.Bible usage limit reached). Showing the KJV.`;
+  if(kind==='auth') return `The ${ev.abbr} is not available right now (API.Bible access problem). Showing the KJV.`;
+  if(kind==='none') return `The ${ev.abbr} has no text for this chapter. Showing the KJV.`;
+  return `The ${ev.abbr} could not be loaded from API.Bible. Showing the KJV.`;
+}
+// called by loadChapter() for a live version; returns the same shape as a stored English book file
+async function liveLoadChapter(ev,b,c){
+  const kev=liveKjv();
+  const [ch,kj]=await Promise.all([getJSON(`ch/${b}.${c}.json.gz`), getJSON(`${kev.dir}/${b}.json.gz`)]);
+  const fall=(kind)=>({ch, en:kj, ev:Object.assign({},kev,{_fallbackFor:ev, _msg:liveMsg(ev,kind), _b:b, _c:c})});
+  const T=liveTargets(kj,b,c);
+  if(!Object.values(T).some(t=>t.c===c && t.v.length)) return fall('none');      // e.g. Susanna, Bel: no API call needed
+  let rec; try{ rec=await liveFetch(ev,b,c); }catch(e){ return fall(e.kind||'network'); }
+  if(!rec.n) return fall('none');
+  const m=liveMap(ev,b,c,kj,rec.parsed);
+  const live=Object.assign({},ev,{_b:b,_c:c,_copyright:rec.copyright,_token:rec.token});
+  return {ch, en:{[String(c)]:m.txt, _r:{[String(c)]:m.refs}, _n:{[String(c)]:m.notes}}, ev:live};
+}
+
+// ---- FUMS (Fair Use Management System): required for web apps; loaded only when a live chapter is shown ----
+var FUMS_LOADED=false;
+function fumsReport(token){
+  if(!token || typeof document==='undefined') return;
+  window.fumsData = window.fumsData || []; window.fums = window.fums || function(){ window.fumsData.push(arguments); };
+  if(!FUMS_LOADED && APIB.fumsScript){ FUMS_LOADED=true; const s=document.createElement('script'); s.src=APIB.fumsScript; s.async=true; s.id='fumsJs'; document.head.appendChild(s); }
+  try{ window.fums('trackView', token); }catch(e){}
+}
+
+// ---- copyright line under the text + About notices ----
+function liveCopyHTML(){
+  const ev=ENV;
+  if(ev && ev._fallbackFor && ev._b===state.book && ev._c===state.ch) return `<div class="lc-msg" role="status">${esc(ev._msg)}</div>`;
+  if(!ev || !ev.live || ev._b!==state.book || ev._c!==state.ch) return '';
+  const line=ev._copyright || ev.notice;
+  return `<div class="lc-line"><b>${esc(ev.abbr)}</b> · ${esc(line)} <a href="#copyright" data-livecopy="1">Copyright notices</a> · Text via <a href="https://api.bible" target="_blank" rel="noopener">API.Bible</a></div>`;
+}
+function liveAfterLoad(){
+  const h=liveCopyHTML();
+  document.querySelectorAll('.livecopy').forEach(e=>{ e.innerHTML=h; e.hidden=!h; });
+  if(ENV && ENV.live && ENV._b===state.book && ENV._c===state.ch) fumsReport(ENV._token);
+}
+function liveAboutHTML(){
+  const L=EN_VERSIONS.filter(x=>x.live); if(!L.length) return '';
+  return '<ul>'+L.map(x=>`<li>Scripture quotations marked (${esc(x.abbr)}) are taken from the ${esc(x.notice)} Used by permission. <a href="${esc(x.ownerUrl)}" target="_blank" rel="noopener">${esc(x.ownerUrl.replace(/^https?:\/\//,''))}</a></li>`).join('')+
+    `<li>The ${L.map(x=>esc(x.abbr)).join(' and ')} ${L.length>1?'are':'is'} loaded live, chapter by chapter, from <a href="https://api.bible" target="_blank" rel="noopener">API.Bible</a> (American Bible Society) for non-commercial use. ${L.length>1?'They are':'It is'} not stored in the app, so ${L.length>1?'they need':'it needs'} an internet connection and ${L.length>1?'are':'is'} not part of the offline download. Views are counted anonymously by API.Bible's Fair Use Management System, as its terms require.</li></ul>`;
+}
+function liveAboutInit(){ const box=$('#liveCopyAbout'); if(!box) return; const h=liveAboutHTML(); box.innerHTML=h; const hd=$('#copyright'); if(hd) hd.hidden=!h; box.hidden=!h; }
+document.addEventListener('click',e=>{ const a=e.target.closest('[data-livecopy]'); if(!a) return; e.preventDefault(); showTab('about'); requestAnimationFrame(()=>{ const h=$('#copyright'); if(h) h.scrollIntoView({block:'start'}); }); });
+function liveCopyLimit(vs){ const ev=ENV; return (ev && ev.live && vs.length>APIB.copyMax) ? vs.slice(0,APIB.copyMax) : vs; }
 
 // ---------- Read view ----------
 function renderWitSeg(){
@@ -3696,7 +3879,8 @@ function enUI(){
     +enSoon().map(x=>`<button type="button" class="soon" data-ensoon="${x.id}" aria-disabled="true" title="${esc(x.full)}: coming soon">${esc(x.abbr)} <span class="soontag">Coming soon</span></button>`).join('');
   const sel=$('#enSel'); if(sel){ sel.innerHTML=EN_VERSIONS.map(x=>`<option value="${x.id}"${x.id===cur?' selected':''}>${esc(x.abbr)}</option>`).join('')
     +enSoon().map(x=>`<option value="soon:${x.id}" disabled>${esc(x.abbr)} · Coming soon</option>`).join(''); sel.title='English version: '+enPref().full; }
-  const d=$('#enDesc'); if(d) d.innerHTML=`<b>${esc(enPref().full)}</b>, ${esc(enPref().lic)}. `+(cur==='kjv'?'Words the translators supplied (printed in italics in the KJV) are shown in italics. Books the KJV does not have (3 and 4 Maccabees, Psalm 151) are shown in the WEB. ':'')+'The original-language layers stay on the same verses whichever version you pick; where the KJV numbers a verse differently, its own reference is shown beside it.';
+  const d=$('#enDesc'); if(d && enPref().live){ const p=enPref(); d.innerHTML=`<b>${esc(p.full)}</b>, © ${esc(p.owner)}. Loaded live from <a href="https://api.bible" target="_blank" rel="noopener">API.Bible</a> one chapter at a time, so it needs an internet connection and is not part of the offline download (offline, the KJV is shown). Not in the ${esc(p.abbr)}: the deuterocanonical and Orthodox books, shown in the KJV or WEB. <a href="#copyright" data-livecopy="1">Copyright notices</a>.`; return; }
+  if(d) d.innerHTML=`<b>${esc(enPref().full)}</b>, ${esc(enPref().lic)}. `+(cur==='kjv'?'Words the translators supplied (printed in italics in the KJV) are shown in italics. Books the KJV does not have (3 and 4 Maccabees, Psalm 151) are shown in the WEB. ':'')+'The original-language layers stay on the same verses whichever version you pick; where the KJV numbers a verse differently, its own reference is shown beside it.';
 }
 function setEnVer(id){
   if(!EN_VERSIONS.some(x=>x.id===id) || id===state.settings.enVer) { enUI(); return; }
@@ -3709,6 +3893,7 @@ document.addEventListener('click',e=>{ const b=e.target.closest('#enSeg [data-en
   m.textContent=`The ${x.full} (${x.abbr}) is coming soon to Hive Scribe.`; m.hidden=false; clearTimeout(m._t); m._t=setTimeout(()=>{ m.hidden=true; },4000); });
 { const sel=$('#enSel'); if(sel) sel.addEventListener('change',()=>setEnVer(sel.value)); }
 enUI();
+liveAboutInit();
 canonInit();
 
 // ---------- Passage panel: verse highlights, passage notes, copy; "My highlights & notes" ----------
@@ -3727,7 +3912,7 @@ function ppRange(){ return PSEL ? ppLabels(PSEL.b,PSEL.c,PSEL.a,PSEL.z) : []; }
 function passRef(b,c,vs){ return vs.length? refName(b,c,vs[0])+(vs.length>1?'–'+vs[vs.length-1]:'') : refName(b,c); }
 function passKey(b,c,vs){ return vs.length===1 ? `v|${b}|${c}|${vs[0]}` : `p|${b}|${c}|${vs[0]}|${vs[vs.length-1]}`; }
 function passText(vs){ return vs.filter(v=>EN&&EN[v]).map(v=>`${v} ${enPlain(EN[v])}`).join(' '); }
-function passCopyText(b,c,vs){ return `${passText(vs)}\n— ${passRef(b,c,vs)} (${(ENV||enPref()).abbr})`; }
+function passCopyText(b,c,vs){ const ev=ENV||enPref(); return `${passText(vs)}\n— ${passRef(b,c,vs)} (${ev.abbr})`+(ev.live?`\n${ev._copyright||ev.notice} Text via API.Bible.`:''); }
 
 // classes + marks used by renderVerses()
 function vxClass(v){ let s=''; const h=hlOf(state.book,state.ch,v); if(h) s+=` hlc hlc-${h}`; if(PSEL&&PSEL.b===state.book&&PSEL.c===state.ch&&ppRange().includes(String(v))) s+=' psel'; return s; }
@@ -3853,7 +4038,7 @@ $('#ppClose').addEventListener('click',()=>ppClose(true));
 $('#passPanel').addEventListener('click',e=>{
   const s=e.target.closest('[data-hl]'); if(s){ ppSetHL(s.dataset.hl); return; }
   if(e.target.closest('[data-copylink]')){ HSP.copyLink(); return; }
-  if(e.target.closest('#ppCopy')){ const vs=ppRange(); copyText(passCopyText(PSEL.b,PSEL.c,vs)); const m=$('#ppCopyMsg'); if(m){ m.textContent=`Copied ${passRef(PSEL.b,PSEL.c,vs)} (${(ENV||enPref()).abbr})`; setTimeout(()=>{ if(m.isConnected) m.textContent=''; },2500); } return; }
+  if(e.target.closest('#ppCopy')){ const all=ppRange(), vs=liveCopyLimit(all); copyText(passCopyText(PSEL.b,PSEL.c,vs)); const m=$('#ppCopyMsg'); if(m){ m.textContent=`Copied ${passRef(PSEL.b,PSEL.c,vs)} (${(ENV||enPref()).abbr})`+(vs.length<all.length?` · the ${(ENV||enPref()).abbr} allows up to ${APIB.copyMax} verses at a time`:''); setTimeout(()=>{ if(m.isConnected) m.textContent=''; },2500); } return; }
   if(e.target.closest('#ppMine')){ openMine(); return; }
 });
 $('#passPanel').addEventListener('input',e=>{ if(e.target.id!=='ppNote') return; clearTimeout(ppSaveT); const m=$('#ppNoteMsg'); if(m) m.textContent='Saving…'; ppSaveT=setTimeout(()=>{ ppSaveT=null; ppSaveNote(); },500); });

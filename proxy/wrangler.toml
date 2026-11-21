@@ -1,0 +1,11 @@
+# Cloudflare Worker for Hive Scribe's live NLT / NKJV (free Workers plan is enough: 100,000 requests/day).
+# Deploy:  npx wrangler deploy            (from this folder, after `npx wrangler login`)
+# Key:     npx wrangler secret put API_BIBLE_KEY   (paste the API.Bible key; it is never stored in the repo)
+name = "hive-scribe-bible"
+main = "apibible-worker.js"
+compatibility_date = "2026-11-01"
+workers_dev = true
+
+[vars]
+ALLOWED_ORIGINS = "https://scribe.codex-hive.com"
+ALLOWED_BIBLES = "d6e14a625393b4da-01,63097d2a0a2f7db3-01"
