@@ -1055,14 +1055,14 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
     <div class="lib-head"><h2 class="lib-title" id="libTitle">Library</h2><button type="button" class="iconbtn lib-x" id="libClose" aria-label="Collapse library" aria-controls="libSide">«</button></div>
     <button type="button" class="lib-mine" id="libMine" aria-haspopup="dialog"><span aria-hidden="true" class="lib-mine-ic">❡</span> My highlights &amp; notes <span class="mine-n" id="libMineN"></span></button>
     <details class="lib-canon" id="libCanon">
-      <summary><span class="lc-k">Books shown</span> <span class="lc-sum" id="canonSum">All books</span></summary>
+      <summary><span class="lc-k">Books shown</span> <span class="lc-sum" id="canonSum">Protestant (66 books)</span></summary>
       <div class="lc-body">
         <div class="lc-presets" role="group" aria-label="Canon presets">
-          <button type="button" data-cp="all" aria-pressed="false">All</button><button type="button" data-cp="prot" aria-pressed="false">Protestant</button><button type="button" data-cp="cath" aria-pressed="false">Catholic</button><button type="button" data-cp="orth" aria-pressed="false">Orthodox</button>
+          <button type="button" data-cp="all" aria-pressed="false">All</button><button type="button" data-cp="prot" aria-pressed="true">Protestant</button><button type="button" data-cp="cath" aria-pressed="false">Catholic</button><button type="button" data-cp="orth" aria-pressed="false">Orthodox</button>
         </div>
         <fieldset class="lc-groups"><legend class="vsr">Book groups</legend>
-          <label class="toggle"><input type="checkbox" data-cg="ot"> <span>Old Testament <small>39 books (Hebrew canon)</small></span></label>
-          <label class="toggle"><input type="checkbox" data-cg="nt"> <span>New Testament <small>27 books</small></span></label>
+          <label class="toggle"><input type="checkbox" data-cg="ot" checked> <span>Old Testament <small>39 books (Hebrew canon)</small></span></label>
+          <label class="toggle"><input type="checkbox" data-cg="nt" checked> <span>New Testament <small>27 books</small></span></label>
           <label class="toggle"><input type="checkbox" data-cg="dc"> <span>Deuterocanon <span class="lb-dc" aria-hidden="true">DC</span> <small>Tobit, Judith, 1–2 Maccabees, Wisdom, Sirach, Baruch + Letter of Jeremiah</small></span></label>
           <label class="toggle"><input type="checkbox" data-cg="add"> <span>Greek additions <span class="lb-dc add" aria-hidden="true">+Gk</span> <small>Esther 4:18–47, 10:4–14 · Daniel 3:24–90 (Azariah, Three Young Men), 13 (Susanna), 14 (Bel)</small></span></label>
           <label class="toggle"><input type="checkbox" data-cg="orth"> <span>Orthodox books <span class="lb-dc orth" aria-hidden="true">Orth</span> <small>1 Esdras, Prayer of Manasseh, 3 Maccabees, Psalm 151</small></span></label>
@@ -1221,9 +1221,9 @@ header.noselect{top:var(--chl-nav-h,48px);padding-top:10px}
   <div class="srow"><div class="lbl">Hebrew &amp; Aramaic vowels</div><div class="seg" id="vowSeg"><button data-vow="full">Full points</button><button data-vow="cons">Consonants only</button></div>
     <label class="toggle"><input type="checkbox" id="cantChk"> Show cantillation marks (te'amim)</label><div class="desc">Cantillation marks come with the Westminster Leningrad Codex Hebrew; the Targum texts have vowels but no cantillation. Consonants only also hides the vowels.</div></div>
   <div class="srow"><div class="lbl">Canon</div>
-    <label class="toggle"><input type="checkbox" id="dcChk" checked> Show deuterocanonical books</label>
+    <label class="toggle"><input type="checkbox" id="dcChk"> Show deuterocanonical books</label>
     <div class="desc">For finer control (Old Testament, New Testament, deuterocanonical books, Greek additions to Esther and Daniel) and quick presets, use <b>Books shown</b> at the top of the Library.</div>
-    <div class="desc">When this is on (the default), the app uses the 73-book Catholic canon. When it is off, you get a 66-book Protestant view: Tobit, Judith, Wisdom, Sirach, Baruch, 1–2 Maccabees, and the Greek additions to Esther and Daniel are hidden from the picker, chapter nav, lexicon hits and cross-references.</div></div>
+    <div class="desc">When this is off (the default), you get a 66-book Protestant view, the same books as the KJV: Tobit, Judith, Wisdom, Sirach, Baruch, 1–2 Maccabees, and the Greek additions to Esther and Daniel are hidden from the picker, chapter nav, lexicon hits and cross-references. When it is on, the app uses the 73-book Catholic canon.</div></div>
   <div class="srow"><div class="lbl">Original-language witnesses</div>
     <label class="toggle"><input type="checkbox" id="witHeb" checked> Hebrew (WLC)</label>
     <label class="toggle"><input type="checkbox" id="witGrk" checked> Greek NT (SBLGNT)</label>
@@ -1418,11 +1418,26 @@ function persist(){
 const FS = {S:.9, M:1, L:1.15, XL:1.3};
 const savedSet = (saved.settings && typeof saved.settings==='object') ? saved.settings : {};
 state.settings = { fs: FS[savedSet.fs]?savedSet.fs:'M', dys: !!savedSet.dys, vow: savedSet.vow==='cons'?'cons':'full', cant: savedSet.cant===undefined?true:!!savedSet.cant, hideHint: !!savedSet.hideHint, showDC: savedSet.showDC!==false, enVer: (typeof savedSet.enVer==='string' && savedSet.enVer) ? savedSet.enVer : 'kjv', wits: Object.assign({heb:true,grk:true,byz:true,lxx:true,tg:true,vul:true}, (savedSet.wits&&typeof savedSet.wits==='object')?savedSet.wits:{}) };
-(function(){ const c=savedSet.canon, dc=savedSet.showDC!==false;
-  state.settings.canon = (c&&typeof c==='object') ? {ot:c.ot!==false, nt:c.nt!==false, dc:c.dc!==false, add:c.add!==false, orth:c.orth===undefined?c.dc!==false:c.orth!==false, app:c.app===undefined?c.dc!==false:c.app!==false} : {ot:true, nt:true, dc:dc, add:dc, orth:dc, app:dc};
-  if(!Object.values(state.settings.canon).some(Boolean)) state.settings.canon={ot:true,nt:true,dc:true,add:true,orth:true,app:true};
-  state.settings.canonPreset = ['all','prot','cath','orth'].includes(savedSet.canonPreset)?savedSet.canonPreset:null;
-  state.settings.showDC = state.settings.canon.dc && state.settings.canon.add; })();
+(function(){
+  const PROT={ot:true,nt:true,dc:false,add:false,orth:false,app:false};
+  const KEYS=['ot','nt','dc','add','orth','app'];
+  const CANON_DEFAULT=2;
+  const c=savedSet.canon;
+  const preset=['all','prot','cath','orth'].includes(savedSet.canonPreset)?savedSet.canonPreset:null;
+  const stale=savedSet.canonDefault!==CANON_DEFAULT;
+  function parseCanon(o){
+    return {ot:o.ot!==false, nt:o.nt!==false, dc:o.dc!==false, add:o.add!==false, orth:o.orth===undefined?o.dc!==false:o.orth!==false, app:o.app===undefined?o.dc!==false:o.app!==false};
+  }
+  function allOn(o){ return KEYS.every(k=>!!o[k]); }
+  // Old factory default was all groups on. Anyone who never picked a canon (no All/Orthodox preset, and no canonDefault stamp) gets the new 66-book KJV/Protestant default. Explicit All, Orthodox, Catholic or custom choices are kept. canonDefault is stamped so later All + Settings-checkbox use is not re-migrated.
+  if(c&&typeof c==='object'){
+    const parsed=parseCanon(c);
+    if(stale && allOn(parsed) && preset!=='all' && preset!=='orth'){ state.settings.canon=Object.assign({},PROT); state.settings.canonPreset='prot'; }
+    else { state.settings.canon=parsed; if(!Object.values(state.settings.canon).some(Boolean)) state.settings.canon=Object.assign({},PROT); state.settings.canonPreset=preset; }
+  } else { state.settings.canon=Object.assign({},PROT); state.settings.canonPreset='prot'; }
+  state.settings.canonDefault=CANON_DEFAULT;
+  state.settings.showDC = state.settings.canon.dc && state.settings.canon.add;
+})();
 const RE_POINTS = /[\u0591-\u05AF\u05B0-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7]/g;
 const RE_CANT = /[\u0591-\u05AF\u05BD]/g;
 function hebView(s){ s=String(s); if(state.settings.vow==='cons') return s.replace(RE_POINTS,''); if(!state.settings.cant) return s.replace(RE_CANT,''); return s; }
