@@ -14,8 +14,8 @@ var APIBIBLE_CONFIG = {
     // bibleId: from api.bible/bibles (public list). Confirm in the API.Bible dashboard after sign-up.
     {id:'nlt',  abbr:'NLT',  bibleId:'d6e14a625393b4da-01', name:'New Living Translation', full:'New Living Translation (Tyndale House Publishers)',
      owner:'Tyndale House Publishers', ownerUrl:'https://tyndale.com',
-     // notice: API.Bible terms, Appendix B (verbatim). The copyright line API.Bible returns with each chapter is shown under the text.
-     notice:'Holy Bible, New Living Translation, Copyright © 2014, Tyndale House Publishers. All rights reserved.'},
+     // notice: full Tyndale credit line (About page). The copyright line API.Bible returns with each chapter is shown under the text.
+     notice:'Scripture quotations marked NLT are taken from the Holy Bible, New Living Translation, copyright © 1996, 2004, 2015 by Tyndale House Foundation. Used by permission of Tyndale House Publishers, Carol Stream, Illinois 60188. All rights reserved.'},
     {id:'nkjv', abbr:'NKJV', bibleId:'63097d2a0a2f7db3-01', name:'New King James Version', full:'New King James Version (Thomas Nelson / HarperCollins)',
      owner:'HarperCollins Christian Publishing (Thomas Nelson)', ownerUrl:'https://harpercollins.com',
      notice:'New King James Version®, Copyright © 1982, Thomas Nelson. All rights reserved.'}

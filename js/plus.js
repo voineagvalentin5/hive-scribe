@@ -319,11 +319,16 @@ HSP.parseRef = function(q){
   let v=m[3]||null; if(v && !vlabels(b,c).includes(String(v))) v=null; return {b,c,v};
 };
 let PAL=null, palSeq=0, palSel=0, palItems=[], palEn='web';
+function palVer(id){
+  if(id==='kjv') return {id:'kjv', dir:'kjv', abbr:'KJV', ok:b=>!!(b&&b.kjv)};
+  if(id==='rvr1909') return {id:'rvr1909', dir:'rvr1909', abbr:'RVR 1909', ok:b=>!!(b&&b.rvr1909)};
+  return {id:'web', dir:'en', abbr:'WEB', ok:()=>true};
+}
 function palEl(){
   if(PAL) return PAL;
   const d=document.createElement('div'); d.id='cmdk'; d.className='cmdk'; d.hidden=true; d.setAttribute('role','dialog'); d.setAttribute('aria-modal','true'); d.setAttribute('aria-label','Search and jump');
   d.innerHTML=`<div class="cmdk-bd" data-cmdk-close></div><div class="cmdk-pn"><div class="cmdk-top"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input id="cmdkQ" type="search" autocomplete="off" spellcheck="false" placeholder="Gen 1:2 · jn 3 16 · H7363 · ברא · λόγος · “hovering”" aria-label="Search: a reference, Strong's number, Hebrew or Greek word, or English phrase" aria-controls="cmdkList" aria-autocomplete="list"><kbd class="cmdk-kbd">Esc</kbd></div>
-  <div class="cmdk-opts"><span class="cmdk-hint" id="cmdkHint">References, Strong's numbers, Hebrew/Greek lemmas, or English words</span><span class="seg cmdk-en" role="group" aria-label="English text to search"><button type="button" data-en="web" aria-pressed="true">WEB</button><button type="button" data-en="kjv" aria-pressed="false">KJV</button></span></div>
+  <div class="cmdk-opts"><span class="cmdk-hint" id="cmdkHint">References, Strong's numbers, Hebrew/Greek lemmas, or a phrase in the text</span><span class="seg cmdk-en" role="group" aria-label="Bible text to search"><button type="button" data-en="web" aria-pressed="true">WEB</button><button type="button" data-en="kjv" aria-pressed="false">KJV</button><button type="button" data-en="rvr1909" aria-pressed="false">RVR 1909</button></span></div>
   <div class="cmdk-list" id="cmdkList" role="listbox" aria-label="Results"></div><div class="cmdk-foot"><span>↑↓ to choose · Enter to open</span><button type="button" class="linkbtn" id="cmdkCopy">Copy link to this view</button></div></div>`;
   document.body.appendChild(d); PAL=d;
   const q=d.querySelector('#cmdkQ'); let t=null;
@@ -366,7 +371,7 @@ HSP.paletteKind = function(q){
 async function palRun(raw){
   const seq=++palSeq, q=String(raw||'').trim(), kind=HSP.paletteKind(q); palSel=0;
   const hint=PAL.querySelector('#cmdkHint');
-  hint.textContent={empty:"References, Strong's numbers, Hebrew/Greek lemmas, or English words",strong:"Strong's number",ref:'Bible reference',heb:'Hebrew / Aramaic lemma',grk:'Greek lemma',text:`English phrase in the ${palEn==='kjv'?'KJV':'WEB'}`}[kind];
+  hint.textContent={empty:"References, Strong's numbers, Hebrew/Greek lemmas, or a phrase in the text",strong:"Strong's number",ref:'Bible reference',heb:'Hebrew / Aramaic lemma',grk:'Greek lemma',text:`Phrase in the ${palVer(palEn).abbr}`}[kind];
   PAL.dataset.kind=kind;
   if(kind==='empty'){ palRender([
       {group:'Try',title:'Gen 1:2',sub:'Go to a verse',go:()=>HSP.openPalette('Gen 1:2')},
@@ -381,7 +386,7 @@ async function palRun(raw){
     const items=[{group:'Go to',title:name,sub,go:()=>HSP.goRef(r)}];
     if(r.v) items.push({group:'Go to',title:`${name} in Canonical Chords`,sub:'Cross-references of this verse',go:()=>HSP.apply({tab:'conn',b:r.b,c:r.c,v:r.v})});
     palRender(items);
-    if(r.v){ try{ const en=await getJSON(`${palEn==='kjv'&&BOOK[r.b].kjv?'kjv':'en'}/${r.b}.json.gz`); if(seq!==palSeq) return; const t=(en[String(r.c)]||{})[r.v]; if(t){ items[0].sub=enPlain(t).slice(0,160); palRender(items); } }catch(e){} }
+    if(r.v){ try{ const pv=palVer(palEn), dir=pv.ok(BOOK[r.b])?pv.dir:'en'; const en=await getJSON(`${dir}/${r.b}.json.gz`); if(seq!==palSeq) return; const t=(en[String(r.c)]||{})[r.v]; if(t){ items[0].sub=enPlain(t).slice(0,160); palRender(items); } }catch(e){} }
     return;
   }
   if(kind==='strong'){
@@ -408,11 +413,11 @@ async function palRun(raw){
     return;
   }
   // English phrase search across one English version, loaded book by book (and cached for offline)
-  if(q.length<3){ palRender([],'Type at least 3 letters to search the English text.'); return; }
-  const dir=palEn==='kjv'?'kjv':'en', needle=q.toLowerCase().replace(/[“”"]/g,'').replace(/\s+/g,' ').trim();
-  const books=BOOKS.filter(b=>bookVisible(b.id) && (dir==='en'||b.kjv)); const items=[]; let done=0, total=0; const MAX=150;
+  if(q.length<3){ palRender([],`Type at least 3 letters to search the ${palVer(palEn).abbr}.`); return; }
+  const pv=palVer(palEn), dir=pv.dir, needle=q.toLowerCase().replace(/[“”"]/g,'').replace(/\s+/g,' ').trim();
+  const books=BOOKS.filter(b=>bookVisible(b.id) && pv.ok(b)); const items=[]; let done=0, total=0; const MAX=150;
   const strip=t=>enPlain(t).replace(/\s+/g,' ');
-  const tick=()=>{ if(seq!==palSeq) return; palRender(items.slice(0,MAX), done<books.length?`Searching ${dir==='kjv'?'KJV':'WEB'}… ${done}/${books.length} books · ${total} verse${total===1?'':'s'}`:`${total} verse${total===1?'':'s'} in the ${dir==='kjv'?'KJV':'WEB'}${total>MAX?` (first ${MAX} shown)`:''}${total?'':' — try fewer words'}`); };
+  const tick=()=>{ if(seq!==palSeq) return; palRender(items.slice(0,MAX), done<books.length?`Searching ${pv.abbr}… ${done}/${books.length} books · ${total} verse${total===1?'':'s'}`:`${total} verse${total===1?'':'s'} in the ${pv.abbr}${total>MAX?` (first ${MAX} shown)`:''}${total?'':' — try fewer words'}`); };
   palRender([],'Searching…');
   let idx=0;
   async function worker(){ while(idx<books.length){ const b=books[idx++]; let en; try{ en=await getJSON(`${dir}/${b.id}.json.gz`); }catch(e){ done++; continue; } if(seq!==palSeq) return;
@@ -422,7 +427,7 @@ async function palRun(raw){
     res.sort((x,y)=>x.c-y.c||parseInt(x.v)-parseInt(y.v));
     b._res=res; done++; total+=res.length;
     items.length=0; for(const bb of books){ if(bb._res) for(const r of bb._res){ if(items.length>=MAX) break; const a=Math.max(0,r.p-50); const pre=(a?'…':'')+r.s.slice(a,r.p), hit=r.s.slice(r.p,r.p+needle.length), post=r.s.slice(r.p+needle.length,r.p+needle.length+70)+(r.p+needle.length+70<r.s.length?'…':'');
-      items.push({group:`${dir==='kjv'?'KJV':'WEB'} text`,title:refName(r.b,r.c,r.v),sub:`${E(pre)}<mark>${E(hit)}</mark>${E(post)}`,subHtml:true,go:()=>HSP.goRef({b:r.b,c:r.c,v:r.v})}); } }
+      items.push({group:`${pv.abbr} text`,title:refName(r.b,r.c,r.v),sub:`${E(pre)}<mark>${E(hit)}</mark>${E(post)}`,subHtml:true,go:()=>HSP.goRef({b:r.b,c:r.c,v:r.v})}); } }
     tick(); } }
   await Promise.all(Array.from({length:6},worker));
   books.forEach(b=>delete b._res);

@@ -20,7 +20,7 @@ Chapters you open are cached automatically. In **Settings** choose **Download en
 
 ### Search, links and read-aloud
 
-- **Search (Ctrl+K / ⌘K, or the magnifier in the header):** type a reference (`Gen 1:2`, `jn 3 16`), a Strong's number (`H7363`, `G3056`), a Hebrew or Greek word (`ברא`, `λόγος`), or English words (`hovering`; WEB or KJV). Results jump straight to the verse or the lexicon entry.
+- **Search (Ctrl+K / ⌘K, or the magnifier in the header):** type a reference (`Gen 1:2`, `jn 3 16`), a Strong's number (`H7363`, `G3056`), a Hebrew or Greek word (`ברא`, `λόγος`), or words in the text (`hovering`; WEB, KJV, or RVR 1909). Results jump straight to the verse or the lexicon entry.
 - **Shareable links:** the address follows what you are reading, for example `#gen.1.2?wit=tg&word=H7307` (Genesis 1:2 in Targum Onkelos with the word study open on רוּחַ) or `#conn/john.1.1`. Back and Forward work, and **Copy link** in the word study and passage panels copies the current view.
 - **Listen:** a speaker button on each opened verse and in the word study reads the original-language text with a voice installed on the device (Web Speech API: Hebrew, Greek, Latin or Italian). If no matching voice is installed the app says so. This is modern machine pronunciation, not cantillation.
 
@@ -33,6 +33,7 @@ Text size (S–XL), a dyslexia-friendly reading mode, Hebrew vowel-point and can
 ## What’s included
 
 - **English:** the King James Version (1769) with its Apocrypha is the default; the World English Bible (all books) can be chosen in Settings or the reading bar, and the choice is remembered. The KJV is placed on the same verses as the original-language layers; where it numbers a verse differently (e.g. Romans 16:25–27, the Rest of Esther, Daniel 3/13/14) its own reference is shown. 3–4 Maccabees and Psalm 151 are not in the KJV and show the WEB.
+- **Spanish:** the Reina-Valera 1909 (RVR 1909 (Español)) is built in and works offline, like the KJV. It has the 66 Protestant books; where it numbers a verse differently (Romans 16:25–27, a few Esther verses, Daniel 3:24–30) its own reference is shown. Deuterocanonical and Orthodox books, and the Greek additions to Esther and Daniel, are shown in the KJV or WEB.
 - **Hebrew and Greek, word by word:** every Protestant Old and New Testament book, with Strong’s numbers, morphology, glosses, and gematria.
 - **Orthodox and appendix books:** Prayer of Manasseh, 1 Esdras, 3 Maccabees, Psalm 151, 4 Maccabees and 2 Esdras, in WEB English with Brenton's Septuagint Greek (2 Esdras is English only). Tagged Orth / App in the Library and shown or hidden with **Books shown**.
 - **Byzantine Greek NT:** Robinson-Pierpont Byzantine Textform 2018, word by word with Strong’s numbers and Robinson parsing (public domain). When both Greek NT texts are on, words that differ from the SBLGNT are marked (+ only in this text, ≈ different form, ‸ the other text has extra words).
@@ -61,6 +62,7 @@ Full attributions also appear on the app’s Sources page (the **i** button) and
 | --- | --- | --- |
 | English Bible, default | King James Version, 1769 text with the Apocrypha (eBible.org `eng-kjv`) | Public domain (outside the UK; Crown letters patent apply in the UK) |
 | English Bible, alternative (all books) | World English Bible, 2020 stable text (eBible.org `eng-web`) | Public domain |
+| Spanish Bible, 66 Protestant books | Reina-Valera 1909 (eBible.org `spaRV1909`) | Public domain / Dominio Público |
 | Hebrew / Aramaic OT (word-level) | STEPBible TAHOT (Tyndale House, Cambridge / STEPBible.org). Hebrew base: Westminster Leningrad Codex (WLC 4.20, public domain) via OpenScriptures | TAHOT: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
 | Greek NT text | [SBL Greek New Testament](https://sblgnt.com/), © 2010 Society of Biblical Literature and Logos Bible Software | [SBLGNT license](https://sblgnt.com/license/) |
 | Greek NT morphology | [MorphGNT](https://github.com/morphgnt/sblgnt) | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) |

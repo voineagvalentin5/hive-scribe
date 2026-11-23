@@ -877,6 +877,7 @@ body.cmdk-on{overflow:hidden}
 .newtag{display:inline-block;margin-left:2px;padding:1px 6px;border-radius:999px;background:var(--gold,#b07a10);color:#fff;font:700 10px/1.5 var(--ui);letter-spacing:.04em;text-transform:uppercase;vertical-align:1px}
 .seg button[aria-pressed=true] .newtag{background:var(--paper);color:var(--accent)}
 .hint.welcome.livenews .wl-title .newtag{margin:0 4px 0 0;vertical-align:2px}
+#enDesc a{color:var(--accent)}
 .hint.welcome.livenews .ln-body{margin:2px 0 8px;line-height:1.45}
 @media print{ #liveNews{display:none !important} }
 </style>
@@ -1070,13 +1071,13 @@ header.noselect{top:var(--chl-nav-h,52px);padding-top:10px}
       <div class="seg" id="witSeg"></div>
     </div>
     <select class="sel" id="vfSel" aria-label="Show verses"></select>
-    <select class="sel ensel" id="enSel" aria-label="English version"></select>
+    <select class="sel ensel" id="enSel" aria-label="Bible version"></select>
     <button type="button" class="barbtn" id="flipAll">Flip All</button>
   </div>
   <div class="hint welcome livenews" id="liveNews" role="region" aria-labelledby="liveNewsTitle" hidden>
     <button type="button" class="hintx" id="liveNewsX" aria-label="Dismiss this announcement">✕</button>
-    <p class="wl-title" id="liveNewsTitle"><span class="newtag">New</span> <b>Now with the NLT and NKJV</b></p>
-    <p class="ln-body">Hive Scribe now has the New Living Translation and the New King James Version next to the KJV and WEB. Pick them in the English version menu. They load live, with permission, from API.Bible, so they need an internet connection.</p>
+    <p class="wl-title" id="liveNewsTitle"><span class="newtag">New</span> <b>Now with the NLT, NKJV, and the Reina-Valera 1909</b></p>
+    <p class="ln-body">Hive Scribe now has the New Living Translation and the New King James Version, which load live, with permission, from API.Bible and need an internet connection, and the Reina-Valera 1909 (Español), which is built in and works offline. Pick them in the Bible version menu.</p>
     <div class="wl-foot"><button type="button" class="btn primary" id="liveNewsTry">Read in the NLT</button><button type="button" class="btn" id="liveNewsLater">Not now</button></div>
   </div>
   <div class="hint welcome" id="hint" role="note" aria-labelledby="hintTitle">
@@ -1172,6 +1173,7 @@ header.noselect{top:var(--chl-nav-h,52px);padding-top:10px}
   <ul>
     <li><b>English, default: King James Version (KJV), with the Apocrypha:</b> the Authorized Version in the standardized text of 1769, with the Apocrypha of the 1611 KJV (Tobit, Judith, the Rest of Esther, Wisdom, Sirach, Baruch with the Epistle of Jeremy, the Song of the Three Children, Susanna, Bel and the Dragon, the Prayer of Manasses, 1–2 Maccabees, 1–2 Esdras), from eBible.org “eng-kjv” (<a href="https://ebible.org/Scriptures/eng-kjv_vpl.zip">eng-kjv_vpl.zip</a>), courtesy of the Crosswire Bible Society and eBible.org. eBible.org marks it “Public Domain” and notes: “Letters patent issued by King James with no expiration date means that to print this translation in the United Kingdom or import printed copies into the UK, you need permission … This royal decree has no effect outside of the UK, where this work is firmly in the Public Domain.” Words the translators supplied (italic in printed KJVs, bracketed in the source) are shown in italics. The KJV text is placed on the app's verse numbers (see the WEB below) so the original-language layers stay aligned; where the KJV numbers a verse differently its own reference is shown beside the verse: Romans 16:25–27 (shown at 14:24–26, where the Greek has the doxology), Greek Esther (the Rest of Esther chapters 10–16 placed where the Greek has them), Daniel 3 (the Song of the Three Children) and 13–14 (Susanna, Bel), a few verses of Sirach, and 2 Esdras 7 (the KJV lacks verses 36–105 of the modern text). Placement in those books was done automatically by comparing the KJV with the WEB. 3 and 4 Maccabees and Psalm 151 are not in the KJV, so they are shown in the WEB. Choose the English version in Settings or the reading bar.</li>
     <li><b>English, alternative (all books):</b> World English Bible, 2020 stable text, with the deuterocanonical books (eBible.org “eng-web”), public domain. Esther uses the WEB's Greek Esther (with the additions) and Daniel the WEB's Greek Daniel (with the Prayer of Azariah and Song of the Three, Susanna, and Bel and the Dragon), as in Catholic Bibles. Baruch 6 is the Letter of Jeremiah. <b>Chapter and verse numbers in the app follow the WEB</b> (English tradition, essentially the same as the KJV's), so a few differ from the NABRE (e.g. Joel has 3 chapters and Malachi 4).</li>
+    <li><b>Spanish: RVR 1909 (Español) — Reina-Valera 1909:</b> the classic Spanish Bible, public domain, from eBible.org “spaRV1909” (<a href="https://ebible.org/Scriptures/spaRV1909_vpl.zip">spaRV1909_vpl.zip</a>; source files dated 10 Aug 2015, packaged 30 Oct 2026). eBible.org marks it “Public Domain / Dominio Público,” translated by Reina y Valera, dialect Castellano 1909. The 66 Protestant books are built into the app and work offline, like the KJV. The text is placed on the app's verse numbers so the original-language layers stay aligned; where the RVR 1909 numbers a verse differently its own reference is shown beside the verse: Romans 16:25–27 (shown at 14:24–26, where the Greek has the doxology), Esther 4:5–6, 9:4–5 and 9:29–30 (combined as in the KJV/WEB grid), and Daniel 3:24–30 (shown at 3:91–97, after the Song of the Three Children). The RVR 1909 does not include the Greek additions to Esther and Daniel, or Daniel 13–14 (Susanna, Bel and the Dragon); those verses note that they are not in the RVR 1909, and deuterocanonical or Orthodox books are shown in the KJV or WEB. Choose it in Settings or the reading bar.</li>
     <li><b>Hebrew and Aramaic OT (39 books):</b> STEPBible TAHOT (Translators Amalgamated Hebrew OT), © Tyndale House Cambridge / STEPBible.org, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, from <a href="https://github.com/STEPBible/STEPBible-Data">STEPBible.github.io/STEPBible-Data</a>. Its Hebrew is the Westminster Leningrad Codex (WLC 4.20, public domain) via OpenScriptures, with Tyndale corrections toward the Leningrad Codex. Morphology is ETCBC parsing written in the OpenScriptures (OSHB) code format; lemmas are extended Strong's numbers; the small English under each word, the transliteration and the Qere/Ketiv marks are TAHOT's. Psalm titles (Hebrew verse 1, or 1–2) are shown with English verse 1, as the WEB prints them. Changes: words regrouped by WEB verse; slash separators removed for display.</li>
     <li><b>Greek NT (27 books):</b> SBL Greek New Testament text, © 2010 Society of Biblical Literature and Logos Bible Software, used under the <a href="https://sblgnt.com/license/">SBLGNT license</a>; morphology and lemmas from <a href="https://github.com/morphgnt/sblgnt">MorphGNT</a>, CC BY-SA 3.0. English word glosses, transliteration and Strong's numbers from STEPBible TAGNT (CC BY 4.0, Tyndale House / STEPBible.org), matched word by word to the SBLGNT text (words TAGNT lists for the SBL edition only). The WEB follows the Majority Text, so a few WEB verses (e.g. John 7:53–8:11, Acts 8:37) have no SBLGNT text.</li>
     <li><b>Greek NT, Byzantine Textform (27 books):</b> Maurice A. Robinson and William G. Pierpont, <i>The New Testament in the Original Greek: Byzantine Textform</i>, 2018 edition (RP2018), from the official repository <a href="https://github.com/byztxt/byzantine-majority-text">github.com/byztxt/byzantine-majority-text</a> (commit 788ffe7). Its license file states: “THIS REPOSITORY, INCLUDING CODE AND TEXTUAL CONTENTS, IS IN THE PUBLIC DOMAIN” (with the <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a> dedication). The accented text (CCAT files, main text without the variant apparatus) is paired word for word with Dr. Robinson's Strong's numbers and parsing codes; parsing is shown in Robinson's code system. English word glosses and transliterations are borrowed from STEPBible TAGNT (CC BY 4.0) where the same word appears in the SBLGNT layer; otherwise the TBESG brief gloss and a computed transliteration are used. Where RP's Strong's number differs from TAGNT's tagging of the same word (e.g. κἀγώ, πρῶτον), RP's number is shown and the lexicon follows TAGNT. Verse numbers in RP match the WEB, including Romans 14:24–26 (the doxology). RP has no text at Luke 17:36, Acts 8:37, 15:34 and 24:7, and does not include 1 John 5:7b–8a (the Johannine Comma); it does include Mark 16:9–20 and John 7:53–8:11. <b>Variant marks:</b> when both Greek NT witnesses are turned on, words that differ between SBLGNT and RP are marked with a dotted underline and a symbol (+ only in this text, ≈ different form or word, ‸ the other text has extra words here). Accents, breathings, capitals and punctuation are not compared.</li>
@@ -1206,8 +1208,8 @@ header.noselect{top:var(--chl-nav-h,52px);padding-top:10px}
   <h2>Typography &amp; reading <button class="iconbtn x" data-close aria-label="Close">✕</button></h2>
   <div class="srow"><div class="lbl">Text size</div><div class="seg" id="fsSeg"><button data-fs="S">S</button><button data-fs="M">M</button><button data-fs="L">L</button><button data-fs="XL">XL</button></div></div>
   <div class="srow"><label class="toggle"><input type="checkbox" id="dysChk"> Dyslexia reading mode</label><div class="desc">Sans-serif, extra letter and word spacing, higher contrast, no italics.</div></div>
-  <div class="srow"><div class="lbl">English version</div><div class="seg" id="enSeg" role="group" aria-label="English version"></div><div class="ensoonmsg" id="enSoonMsg" role="status" aria-live="polite" hidden></div>
-    <div class="desc" id="enDesc">The English text shown in Read, Polyglot, Connections and the word panel. The original-language layers stay on the same verses whichever version you pick.</div></div>
+  <div class="srow"><div class="lbl">Bible version</div><div class="seg" id="enSeg" role="group" aria-label="Bible version"></div><div class="ensoonmsg" id="enSoonMsg" role="status" aria-live="polite" hidden></div>
+    <div class="desc" id="enDesc">The Bible text shown in Read, Polyglot, Connections and the word panel. The original-language layers stay on the same verses whichever version you pick.</div></div>
   <div class="srow"><div class="lbl">Hebrew &amp; Aramaic vowels</div><div class="seg" id="vowSeg"><button data-vow="full">Full points</button><button data-vow="cons">Consonants only</button></div>
     <label class="toggle"><input type="checkbox" id="cantChk"> Show cantillation marks (te'amim)</label><div class="desc">Cantillation marks come with the Westminster Leningrad Codex Hebrew; the Targum texts have vowels but no cantillation. Consonants only also hides the vowels.</div></div>
   <div class="srow"><div class="lbl">Canon</div>
@@ -1221,7 +1223,7 @@ header.noselect{top:var(--chl-nav-h,52px);padding-top:10px}
     <label class="toggle"><input type="checkbox" id="witLxx" checked> Septuagint (LXX, Brenton)</label>
     <label class="toggle"><input type="checkbox" id="witTg" checked> Targum (Aramaic)</label>
     <label class="toggle"><input type="checkbox" id="witVul" checked> Latin Vulgate (Clementine)</label>
-    <div class="desc">Turn a witness off to hide it from the chapter chips and the Polyglot matrix. The English text (version chosen above) is always shown.</div></div>
+    <div class="desc">Turn a witness off to hide it from the chapter chips and the Polyglot matrix. The Bible text (version chosen above) is always shown.</div></div>
   <div class="srow"><div class="lbl">Offline</div>
     <div class="desc" id="dlInfo">Chapters you open are kept for offline use.</div>
     <div class="progress" id="dlBar" role="progressbar" aria-label="Offline download" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden><div></div></div><div class="dlstat" id="dlStat" role="status" aria-live="polite"></div>
@@ -1501,7 +1503,8 @@ let CH=null, EN=null, ENR={}, ENN={}, ENV=null;     // current chapter originals
 // NLT and NKJV are instead loaded live from API.Bible (js/apibible.config.js + the live module below); appended only when configured.
 const EN_VERSIONS=[
   {id:'kjv', abbr:'KJV', name:'King James Version', full:'King James Version (1769, with the Apocrypha)', dir:'kjv', need:true, lic:'public domain'},
-  {id:'web', abbr:'WEB', name:'World English Bible', full:'World English Bible (2020, with the deuterocanon)', dir:'en', need:false, lic:'public domain'}
+  {id:'web', abbr:'WEB', name:'World English Bible', full:'World English Bible (2020, with the deuterocanon)', dir:'en', need:false, lic:'public domain'},
+  {id:'rvr1909', abbr:'RVR 1909', name:'RVR 1909 (Español)', full:'Reina-Valera 1909 (Español)', dir:'rvr1909', need:true, lic:'public domain', isNew:true}
 ];
 function enPref(){ return EN_VERSIONS.find(x=>x.id===state.settings.enVer)||EN_VERSIONS[0]; }
 function enHas(ev,b){ if(ev.live) return liveHas(b); return !ev.need || !!(BOOK[b]&&BOOK[b][ev.id]); }
@@ -1646,7 +1649,8 @@ function renderCov(){
   if(m.t) parts.push(`<b>Targum (Aramaic)</b> ${m.t}/${m.n}`);
   if(m.vlt) parts.push(`<b>Vulgate</b> ${m.vlt}/${m.n}`);
   const lfb=ENV&&ENV._fallbackFor&&ENV._b===state.book&&ENV._c===state.ch;
-  $('#covLine').innerHTML = `${n} verse${n===1?'':'s'} · English (${esc(lfb?ENV.abbr:enFor(state.book).abbr)}${lfb?` <span class="enfb">· ${esc(ENV._fallbackFor.abbr)} unavailable</span>`:enFallbackNote(state.book)?` <span class="enfb">· ${esc(enPref().abbr)} lacks this book</span>`:''}) · ${parts.join(' · ')||'no original-language text'}${dcBadge(B)}`;
+  const evShow=lfb?ENV:enFor(state.book);
+  $('#covLine').innerHTML = `${n} verse${n===1?'':'s'} · ${evShow.id==='rvr1909'?'Spanish':'English'} (${esc(evShow.abbr)}${lfb?` <span class="enfb">· ${esc(ENV._fallbackFor.abbr)} unavailable</span>`:enFallbackNote(state.book)?` <span class="enfb">· ${esc(enPref().abbr)} lacks this book</span>`:''}) · ${parts.join(' · ')||'no original-language text'}${dcBadge(B)}`;
 }
 
 // ===================== API.Bible live translations (NLT, NKJV) =====================
@@ -1813,14 +1817,15 @@ function liveAfterLoad(){
 }
 function liveAboutHTML(){
   const L=EN_VERSIONS.filter(x=>x.live); if(!L.length) return '';
-  return '<ul>'+L.map(x=>`<li>Scripture quotations marked (${esc(x.abbr)}) are taken from the ${esc(x.notice)} Used by permission. <a href="${esc(x.ownerUrl)}" target="_blank" rel="noopener">${esc(x.ownerUrl.replace(/^https?:\/\//,''))}</a></li>`).join('')+
+  return '<ul>'+L.map(x=>{ const body=/^\s*Scripture quotations/i.test(x.notice||'')?esc(x.notice):`Scripture quotations marked (${esc(x.abbr)}) are taken from the ${esc(x.notice)} Used by permission.`;
+    return `<li>${body} <a href="${esc(x.ownerUrl)}" target="_blank" rel="noopener">${esc(x.ownerUrl.replace(/^https?:\/\//,''))}</a></li>`; }).join('')+
     `<li>The ${L.map(x=>esc(x.abbr)).join(' and ')} ${L.length>1?'are':'is'} loaded live, chapter by chapter, from <a href="https://api.bible" target="_blank" rel="noopener">API.Bible</a> (American Bible Society) for non-commercial use. ${L.length>1?'They are':'It is'} not stored in the app, so ${L.length>1?'they need':'it needs'} an internet connection and ${L.length>1?'are':'is'} not part of the offline download. Views are counted anonymously by API.Bible's Fair Use Management System, as its terms require.</li></ul>`;
 }
 function liveAboutInit(){ const box=$('#liveCopyAbout'); if(!box) return; const h=liveAboutHTML(); box.innerHTML=h; const hd=$('#copyright'); if(hd) hd.hidden=!h; box.hidden=!h; }
 document.addEventListener('click',e=>{ const a=e.target.closest('[data-livecopy]'); if(!a) return; e.preventDefault(); showTab('about'); requestAnimationFrame(()=>{ const h=$('#copyright'); if(h) h.scrollIntoView({block:'start'}); }); });
 function liveCopyLimit(vs){ const ev=ENV; return (ev && ev.live && vs.length>APIB.copyMax) ? vs.slice(0,APIB.copyMax) : vs; }
 // ---- "New" badge + one-time announcement for the live versions ----
-function enIsNew(x){ if(!x || !x.live) return false; const u=APIB.newUntil; return !u || Date.now() < Date.parse(u+'T23:59:59'); }
+function enIsNew(x){ if(!x || !(x.live || x.isNew)) return false; const u=x.newUntil || APIB.newUntil; return !u || Date.now() < Date.parse(u+'T23:59:59'); }
 var NEWS_KEY='hiveScribe.news.nltNkjv.v1';
 function liveNewsInit(){
   const box=$('#liveNews'); if(!box) return;
@@ -2197,7 +2202,7 @@ function polyRows(ch, wits, v, hi={}){
   }
   return h;
 }
-const enRow=(t,extra='',ev=ENV||enPref(),html=null)=>`<div class="prow"><div class="plabel">English · ${esc(ev.abbr)} <span class="badge ok mini">${esc(ev.lic)}</span>${extra}</div><div class="polytext en">${html!=null?html:enHTML(t)}</div></div>`;
+const enRow=(t,extra='',ev=ENV||enPref(),html=null)=>`<div class="prow"><div class="plabel">${ev.id==='rvr1909'?'Spanish':'English'} · ${esc(ev.abbr)} <span class="badge ok mini">${esc(ev.lic)}</span>${extra}</div><div class="polytext en">${html!=null?html:enHTML(t)}</div></div>`;
 function renderPoly(){
   document.querySelectorAll('#polySeg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.pm===state.pm));
   if(state.pm==='matrix'){
@@ -2438,7 +2443,7 @@ async function updateOfflineInfo(){
   const n=INDEX.files.filter(f=>have.has(f[0])), bytes=n.reduce((a,f)=>a+f[1],0), all=n.length===INDEX.files.length;
   let quota='';
   try{ if(navigator.storage&&navigator.storage.estimate){ const e=await navigator.storage.estimate(); if(e&&e.quota) quota=` Space this browser allows the app: about ${fmtMB(Math.max(0,e.quota-(e.usage||0)))} free.`; } }catch(e){}
-  info.textContent=`Entire canon with lexicons, concordance, word-matching data and both English versions: ${INDEX.files.length.toLocaleString()} files, ${fmtMB(INDEX.bytes)} (exact size of the files listed in the app's data index). Stored now: ${n.length.toLocaleString()} files (${fmtMB(bytes)}). Chapters you open are kept automatically.${quota}`;
+  info.textContent=`Entire canon with lexicons, concordance, word-matching data, both English versions and the RVR 1909: ${INDEX.files.length.toLocaleString()} files, ${fmtMB(INDEX.bytes)} (exact size of the files listed in the app's data index). Stored now: ${n.length.toLocaleString()} files (${fmtMB(bytes)}). Chapters you open are kept automatically.${quota}`;
   const running=DL.state==='running', paused=DL.state==='paused';
   btn.textContent = all?'Entire canon downloaded ✓':paused?`Resume download (${fmtMB(INDEX.bytes-bytes)} left)`:running?'Downloading…':`Download entire canon for offline (${fmtMB(INDEX.bytes-bytes)})`;
   btn.disabled = all || running;
@@ -2493,6 +2498,7 @@ function renderCovList(){
   const nt=BOOKS.filter(b=>b.nt);
   $('#covList').innerHTML=[
     `English (KJV 1769 with the Apocrypha): ${BOOKS.filter(b=>b.kjv).length} of ${BOOKS.length} books (not in the KJV: ${BOOKS.filter(b=>!b.kjv).map(b=>b.name).join(', ')||'none'}, shown in the WEB).`,
+    `Spanish (Reina-Valera 1909): ${BOOKS.filter(b=>b.rvr1909).length} of ${BOOKS.length} books (the 66 Protestant books, built in and available offline; other books are shown in the KJV or WEB).`,
     `English (WEB): all ${BOOKS.length} books, ${nv(BOOKS).toLocaleString()} verses. Verse numbers follow the WEB; the KJV is placed on the same verses.`,
     `Hebrew/Aramaic (TAHOT): ${ot.filter(b=>sum([b],'h')).length} books, ${sum(ot,'h').toLocaleString()} WEB verses (Esther and Daniel: the Hebrew/Aramaic parts only).`,
     `Greek NT (SBLGNT): ${nt.length} books, ${sum(nt,'g').toLocaleString()} of ${nv(nt).toLocaleString()} WEB verses.`,
@@ -3902,9 +3908,10 @@ function enUI(){
   const cur=enPref().id;
   const seg=$('#enSeg'); if(seg) seg.innerHTML=EN_VERSIONS.map(x=>`<button type="button" data-env="${x.id}" aria-pressed="${x.id===cur}" title="${esc(x.full)}">${esc(x.abbr)}${enIsNew(x)?' <span class="newtag">New</span>':''}</button>`).join('')
     +enSoon().map(x=>`<button type="button" class="soon" data-ensoon="${x.id}" aria-disabled="true" title="${esc(x.full)}: coming soon">${esc(x.abbr)} <span class="soontag">Coming soon</span></button>`).join('');
-  const sel=$('#enSel'); if(sel){ sel.innerHTML=EN_VERSIONS.map(x=>`<option value="${x.id}"${x.id===cur?' selected':''}>${esc(x.abbr)}${enIsNew(x)?' · New':''}</option>`).join('')
-    +enSoon().map(x=>`<option value="soon:${x.id}" disabled>${esc(x.abbr)} · Coming soon</option>`).join(''); sel.title='English version: '+enPref().full; }
+  const sel=$('#enSel'); if(sel){ sel.innerHTML=EN_VERSIONS.map(x=>`<option value="${x.id}"${x.id===cur?' selected':''}>${esc(x.name||x.abbr)}${enIsNew(x)?' · New':''}</option>`).join('')
+    +enSoon().map(x=>`<option value="soon:${x.id}" disabled>${esc(x.abbr)} · Coming soon</option>`).join(''); sel.title='Bible version: '+enPref().full; }
   const d=$('#enDesc'); if(d && enPref().live){ const p=enPref(); d.innerHTML=`<b>${esc(p.full)}</b>, © ${esc(p.owner)}. Loaded live from <a href="https://api.bible" target="_blank" rel="noopener">API.Bible</a> one chapter at a time, so it needs an internet connection and is not part of the offline download (offline, the KJV is shown). Not in the ${esc(p.abbr)}: the deuterocanonical and Orthodox books, shown in the KJV or WEB. <a href="#copyright" data-livecopy="1">Copyright notices</a>.`; return; }
+  if(d && cur==='rvr1909'){ d.innerHTML=`<b>${esc(enPref().full)}</b>, ${esc(enPref().lic)}. The classic Spanish Bible, built into the app so it works offline, like the KJV. It has the 66 Protestant books; deuterocanonical and Orthodox books, and the Greek additions to Esther and Daniel, are shown in the KJV or WEB. The original-language layers stay on the same verses; where the RVR 1909 numbers a verse differently, its own reference is shown beside it.`; return; }
   if(d) d.innerHTML=`<b>${esc(enPref().full)}</b>, ${esc(enPref().lic)}. `+(cur==='kjv'?'Words the translators supplied (printed in italics in the KJV) are shown in italics. Books the KJV does not have (3 and 4 Maccabees, Psalm 151) are shown in the WEB. ':'')+'The original-language layers stay on the same verses whichever version you pick; where the KJV numbers a verse differently, its own reference is shown beside it.';
 }
 function setEnVer(id){
