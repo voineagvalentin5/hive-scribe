@@ -21,6 +21,7 @@ var APIBIBLE_CONFIG = {
      notice:'New King James Version®, Copyright © 1982, Thomas Nelson. All rights reserved.'}
   ],
   fumsScript: 'https://pkg.api.bible/fumsV3.min.js',   // API.Bible FUMS v3 tracker (required for web apps)
+  newUntil: '2027-01-31',   // show a 'New' badge on NLT/NKJV until this date ('' = always)
   copyMax: 100,          // most verses one "Copy passage" may take from a live version (terms: no printing over 100 verses)
   memVerses: 480,        // in-memory chapter cache, this tab only, kept under API.Bible's 500 consecutive verses; nothing is written to disk
   timeoutMs: 12000

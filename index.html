@@ -873,6 +873,12 @@ body.cmdk-on{overflow:hidden}
 .livecopy{margin:14px 4px 4px;padding:10px 12px;border-top:1px solid var(--line,rgba(127,127,127,.25));font-size:.82rem;line-height:1.45;color:var(--ink2,inherit)}
 .livecopy a{color:inherit;text-decoration:underline}
 .livecopy .lc-msg{font-weight:600}
+/* "New" badge + announcement for NLT / NKJV */
+.newtag{display:inline-block;margin-left:2px;padding:1px 6px;border-radius:999px;background:var(--gold,#b07a10);color:#fff;font:700 10px/1.5 var(--ui);letter-spacing:.04em;text-transform:uppercase;vertical-align:1px}
+.seg button[aria-pressed=true] .newtag{background:var(--paper);color:var(--accent)}
+.hint.welcome.livenews .wl-title .newtag{margin:0 4px 0 0;vertical-align:2px}
+.hint.welcome.livenews .ln-body{margin:2px 0 8px;line-height:1.45}
+@media print{ #liveNews{display:none !important} }
 </style>
 
 
@@ -1066,6 +1072,12 @@ header.noselect{top:var(--chl-nav-h,52px);padding-top:10px}
     <select class="sel" id="vfSel" aria-label="Show verses"></select>
     <select class="sel ensel" id="enSel" aria-label="English version"></select>
     <button type="button" class="barbtn" id="flipAll">Flip All</button>
+  </div>
+  <div class="hint welcome livenews" id="liveNews" role="region" aria-labelledby="liveNewsTitle" hidden>
+    <button type="button" class="hintx" id="liveNewsX" aria-label="Dismiss this announcement">✕</button>
+    <p class="wl-title" id="liveNewsTitle"><span class="newtag">New</span> <b>Now with the NLT and NKJV</b></p>
+    <p class="ln-body">Hive Scribe now has the New Living Translation and the New King James Version next to the KJV and WEB. Pick them in the English version menu. They load live, with permission, from API.Bible, so they need an internet connection.</p>
+    <div class="wl-foot"><button type="button" class="btn primary" id="liveNewsTry">Read in the NLT</button><button type="button" class="btn" id="liveNewsLater">Not now</button></div>
   </div>
   <div class="hint welcome" id="hint" role="note" aria-labelledby="hintTitle">
     <button type="button" class="hintx" id="hintDismiss" aria-label="Dismiss these tips">✕</button>
@@ -1807,6 +1819,19 @@ function liveAboutHTML(){
 function liveAboutInit(){ const box=$('#liveCopyAbout'); if(!box) return; const h=liveAboutHTML(); box.innerHTML=h; const hd=$('#copyright'); if(hd) hd.hidden=!h; box.hidden=!h; }
 document.addEventListener('click',e=>{ const a=e.target.closest('[data-livecopy]'); if(!a) return; e.preventDefault(); showTab('about'); requestAnimationFrame(()=>{ const h=$('#copyright'); if(h) h.scrollIntoView({block:'start'}); }); });
 function liveCopyLimit(vs){ const ev=ENV; return (ev && ev.live && vs.length>APIB.copyMax) ? vs.slice(0,APIB.copyMax) : vs; }
+// ---- "New" badge + one-time announcement for the live versions ----
+function enIsNew(x){ if(!x || !x.live) return false; const u=APIB.newUntil; return !u || Date.now() < Date.parse(u+'T23:59:59'); }
+var NEWS_KEY='hiveScribe.news.nltNkjv.v1';
+function liveNewsInit(){
+  const box=$('#liveNews'); if(!box) return;
+  let gone=false; try{ gone=localStorage.getItem(NEWS_KEY)==='dismissed'; }catch(e){}
+  box.hidden = gone || !EN_VERSIONS.some(x=>x.id==='nlt' && x.live);
+}
+function liveNewsDismiss(){ try{ localStorage.setItem(NEWS_KEY,'dismissed'); }catch(e){} const box=$('#liveNews'); if(box) box.hidden=true; }
+document.addEventListener('click',e=>{
+  if(e.target.closest('#liveNewsTry')){ liveNewsDismiss(); if(state.tab!=='read') showTab('read'); setEnVer('nlt'); return; }
+  if(e.target.closest('#liveNewsX,#liveNewsLater')) liveNewsDismiss();
+});
 
 // ---------- Read view ----------
 function renderWitSeg(){
@@ -3875,9 +3900,9 @@ const EN_SOON=[{id:'nlt',abbr:'NLT',full:'New Living Translation'},{id:'nkjv',ab
 function enSoon(){ return EN_SOON.filter(x=>!EN_VERSIONS.some(e=>e.id===x.id)); }
 function enUI(){
   const cur=enPref().id;
-  const seg=$('#enSeg'); if(seg) seg.innerHTML=EN_VERSIONS.map(x=>`<button type="button" data-env="${x.id}" aria-pressed="${x.id===cur}" title="${esc(x.full)}">${esc(x.abbr)}</button>`).join('')
+  const seg=$('#enSeg'); if(seg) seg.innerHTML=EN_VERSIONS.map(x=>`<button type="button" data-env="${x.id}" aria-pressed="${x.id===cur}" title="${esc(x.full)}">${esc(x.abbr)}${enIsNew(x)?' <span class="newtag">New</span>':''}</button>`).join('')
     +enSoon().map(x=>`<button type="button" class="soon" data-ensoon="${x.id}" aria-disabled="true" title="${esc(x.full)}: coming soon">${esc(x.abbr)} <span class="soontag">Coming soon</span></button>`).join('');
-  const sel=$('#enSel'); if(sel){ sel.innerHTML=EN_VERSIONS.map(x=>`<option value="${x.id}"${x.id===cur?' selected':''}>${esc(x.abbr)}</option>`).join('')
+  const sel=$('#enSel'); if(sel){ sel.innerHTML=EN_VERSIONS.map(x=>`<option value="${x.id}"${x.id===cur?' selected':''}>${esc(x.abbr)}${enIsNew(x)?' · New':''}</option>`).join('')
     +enSoon().map(x=>`<option value="soon:${x.id}" disabled>${esc(x.abbr)} · Coming soon</option>`).join(''); sel.title='English version: '+enPref().full; }
   const d=$('#enDesc'); if(d && enPref().live){ const p=enPref(); d.innerHTML=`<b>${esc(p.full)}</b>, © ${esc(p.owner)}. Loaded live from <a href="https://api.bible" target="_blank" rel="noopener">API.Bible</a> one chapter at a time, so it needs an internet connection and is not part of the offline download (offline, the KJV is shown). Not in the ${esc(p.abbr)}: the deuterocanonical and Orthodox books, shown in the KJV or WEB. <a href="#copyright" data-livecopy="1">Copyright notices</a>.`; return; }
   if(d) d.innerHTML=`<b>${esc(enPref().full)}</b>, ${esc(enPref().lic)}. `+(cur==='kjv'?'Words the translators supplied (printed in italics in the KJV) are shown in italics. Books the KJV does not have (3 and 4 Maccabees, Psalm 151) are shown in the WEB. ':'')+'The original-language layers stay on the same verses whichever version you pick; where the KJV numbers a verse differently, its own reference is shown beside it.';
@@ -3894,6 +3919,7 @@ document.addEventListener('click',e=>{ const b=e.target.closest('#enSeg [data-en
 { const sel=$('#enSel'); if(sel) sel.addEventListener('change',()=>setEnVer(sel.value)); }
 enUI();
 liveAboutInit();
+liveNewsInit();
 canonInit();
 
 // ---------- Passage panel: verse highlights, passage notes, copy; "My highlights & notes" ----------
