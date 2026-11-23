@@ -2,6 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>
+(function(){
+  try{
+    var s=localStorage.getItem('hiveScribe.uiLang');
+    if(s!=='es'&&s!=='en'){
+      var n=String((navigator.language||navigator.userLanguage||'en')).toLowerCase();
+      s=n.indexOf('es')===0?'es':'en';
+    }
+    document.documentElement.lang=s==='es'?'es':'en';
+  }catch(e){}
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Hive Scribe · by Codex Hive Labs</title>
 <meta name="application-name" content="Hive Scribe">
@@ -139,6 +151,23 @@ footer,.credits{font-size:12px;color:var(--ink2);line-height:1.5}
 .wordmark .w1{color:var(--ink)} .wordmark .w2{color:var(--gold);background:linear-gradient(180deg,var(--gold2),var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .subtitle{font-size:11px;color:var(--ink3);margin-top:3px;letter-spacing:.02em}
 .subrow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:4px 0 8px}
+/* Interface language toggle */
+.langtog{display:inline-flex;align-items:center;gap:0;margin-left:auto;border:1px solid var(--line);border-radius:999px;background:var(--paper);padding:1px;flex:0 0 auto}
+.langtog button{border:0;background:transparent;color:var(--ink3);font:700 11px/1 var(--ui);letter-spacing:.06em;padding:6px 9px;min-height:32px;min-width:36px;border-radius:999px;cursor:pointer}
+.langtog button[aria-pressed=true]{background:var(--accent);color:var(--paper)}
+.langtog-sep{color:var(--ink3);font:700 11px var(--ui);padding:0 1px;opacity:.4;user-select:none}
+.subrow .subtitle.promise{flex:1 1 auto;min-width:0}
+.langseg button{min-width:7.5em}
+@media (max-width:390px){
+  .subtitle.promise{font-size:12px;line-height:1.3}
+  nav.tabs .tab{font-size:9.5px;padding:6px 1px;gap:2px}
+  nav.tabs .tabname{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;line-height:1.15;max-width:100%}
+  .readbar #flipAll,.readbar .barbtn{font-size:12px;padding-left:8px;padding-right:8px}
+  .srow .lbl,.label{overflow-wrap:anywhere}
+  .chaptertitle,#pickLabel{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+}
+.i18n-orig-note{font-size:13px;color:var(--ink2);margin:0 0 8px}
+
 .hbtns{display:flex;gap:6px}
 .iconbtn svg{width:20px;height:20px;vertical-align:middle;stroke:currentColor;fill:none;stroke-width:2}
 /* bottom navigation on phones, top tabs on wide screens */
@@ -1015,148 +1044,153 @@ header.noselect{top:var(--chl-nav-h,52px);padding-top:10px}
     </div>
     <span class="spacer"></span>
     <div class="hbtns">
-      <button class="iconbtn" id="searchBtn" aria-label="Search and jump (Ctrl+K or ⌘K)" title="Search: references, Strong's, Hebrew/Greek words, English (Ctrl+K / ⌘K)" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></button>
-      <button class="iconbtn" id="settingsBtn" aria-label="Reading settings"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.1"/><path d="M12 3.2v2.2M12 18.6v2.2M4.7 6.3l1.6 1.6M17.7 16.1l1.6 1.6M3.2 12h2.2M18.6 12h2.2M4.7 17.7l1.6-1.6M17.7 7.9l1.6-1.6M7.2 4.2l1.1 2M15.7 17.8l1.1 2M4.2 16.8l2-1.1M17.8 8.3l2-1.1"/></svg></button>
-      <button class="iconbtn" id="themeBtn" aria-label="Toggle light/dark">◐</button>
-      <button class="iconbtn" id="tab-study" aria-label="Studies"><svg viewBox="0 0 24 24"><path d="M4 5h10a3 3 0 0 1 2 1v13H6a2 2 0 0 0-2 2z"/><path d="M16 6h4v15h-4"/></svg></button>
-      <button class="iconbtn" id="tab-about" aria-label="About and sources"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg></button>
+      <button class="iconbtn" id="searchBtn" data-i18n-aria="aria.search" data-i18n-title="aria.searchTitle" aria-label="Search and jump (Ctrl+K or ⌘K)" title="Search: references, Strong's, Hebrew/Greek words, English (Ctrl+K / ⌘K)" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></button>
+      <button class="iconbtn" id="settingsBtn" data-i18n-aria="aria.settings" aria-label="Reading settings"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.1"/><path d="M12 3.2v2.2M12 18.6v2.2M4.7 6.3l1.6 1.6M17.7 16.1l1.6 1.6M3.2 12h2.2M18.6 12h2.2M4.7 17.7l1.6-1.6M17.7 7.9l1.6-1.6M7.2 4.2l1.1 2M15.7 17.8l1.1 2M4.2 16.8l2-1.1M17.8 8.3l2-1.1"/></svg></button>
+      <button class="iconbtn" id="themeBtn" data-i18n-aria="aria.theme" aria-label="Toggle light/dark">◐</button>
+      <button class="iconbtn" id="tab-study" data-i18n-aria="aria.studies" aria-label="Studies"><svg viewBox="0 0 24 24"><path d="M4 5h10a3 3 0 0 1 2 1v13H6a2 2 0 0 0-2 2z"/><path d="M16 6h4v15h-4"/></svg></button>
+      <button class="iconbtn" id="tab-about" data-i18n-aria="aria.about" aria-label="About and sources"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg></button>
     </div>
   </div>
-  <div class="subrow"><p class="subtitle promise">Read a verse. Explore its words. Follow the connections.</p></div>
+  <div class="subrow"><p class="subtitle promise" data-i18n="tagline">Read a verse. Explore its words. Follow the connections.</p>
+    <div class="langtog" role="group" data-i18n-aria="aria.lang" aria-label="Interface language">
+      <button type="button" data-uilang="en" aria-pressed="true" title="English">EN</button>
+      <span class="langtog-sep" aria-hidden="true">|</span>
+      <button type="button" data-uilang="es" aria-pressed="false" title="Español">ES</button>
+    </div></div>
   <nav class="tabs" role="tablist">
-    <button title="Biblical philology: tap a verse to see its Hebrew, Aramaic, Greek or Latin, then tap a word for its form, Strong&#39;s number and lexicon entry." class="tab" role="tab" id="tab-read" aria-selected="true"><svg viewBox="0 0 24 24"><path d="M3 5h7a3 3 0 0 1 2 1v13a3 3 0 0 0-2-1H3zM21 5h-7a3 3 0 0 0-2 1v13a3 3 0 0 1 2-1h7z"/></svg><span class="tabtxt"><span class="tabname">Read &amp; Interlinear</span><small class="tabdesc">Biblical philology: the original words under each verse</small></span></button>
-    <button title="Polyglot: one verse in every text the app carries (Hebrew, Greek, Aramaic, Latin, English) side by side. Logos Bridge: Genesis 1 read next to John 1." class="tab" role="tab" id="tab-poly" aria-selected="false"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="16" rx="1.5"/><rect x="14" y="4" width="7" height="16" rx="1.5"/><path d="M10 12h4"/></svg><span class="tabtxt"><span class="tabname">Polyglot &amp; Logos</span><small class="tabdesc">Every ancient text of a verse, side by side</small></span></button>
-    <button title="Canonical Chords: a ring or sphere map of this chapter&#39;s cross-references (OpenBible.info). Tap a line to read both passages." class="tab" role="tab" id="tab-conn" aria-selected="false"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M5 8c6 2 9 6 10 12M19 8c-6 2-9 6-10 12"/></svg><span class="tabtxt"><span class="tabname">Canonical Chords</span><small class="tabdesc">This chapter&#39;s cross-references, drawn as a map</small></span></button>
-    <button title="Lexicon: search Hebrew, Aramaic and Greek words by lemma, gloss or Strong&#39;s number. Notes: your notebook, with export and backup." class="tab" role="tab" id="tab-lex" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M5 3h11l3 3v15H5z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg><span class="tabtxt"><span class="tabname">Lexicon &amp; Notes</span><small class="tabdesc">Search words by Strong&#39;s; keep and back up notes</small></span></button>
+    <button data-i18n-title="tab.readTitle" title="Biblical philology: tap a verse to see its Hebrew, Aramaic, Greek or Latin, then tap a word for its form, Strong&#39;s number and lexicon entry." class="tab" role="tab" id="tab-read" aria-selected="true"><svg viewBox="0 0 24 24"><path d="M3 5h7a3 3 0 0 1 2 1v13a3 3 0 0 0-2-1H3zM21 5h-7a3 3 0 0 0-2 1v13a3 3 0 0 1 2-1h7z"/></svg><span class="tabtxt"><span class="tabname" data-i18n="tab.read">Read &amp; Interlinear</span><small class="tabdesc" data-i18n="tab.readDesc">Biblical philology: the original words under each verse</small></span></button>
+    <button data-i18n-title="tab.polyTitle" title="Polyglot: one verse in every text the app carries (Hebrew, Greek, Aramaic, Latin, English) side by side. Logos Bridge: Genesis 1 read next to John 1." class="tab" role="tab" id="tab-poly" aria-selected="false"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="16" rx="1.5"/><rect x="14" y="4" width="7" height="16" rx="1.5"/><path d="M10 12h4"/></svg><span class="tabtxt"><span class="tabname" data-i18n="tab.poly">Polyglot &amp; Logos</span><small class="tabdesc" data-i18n="tab.polyDesc">Every ancient text of a verse, side by side</small></span></button>
+    <button data-i18n-title="tab.connTitle" title="Canonical Chords: a ring or sphere map of this chapter&#39;s cross-references (OpenBible.info). Tap a line to read both passages." class="tab" role="tab" id="tab-conn" aria-selected="false"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M5 8c6 2 9 6 10 12M19 8c-6 2-9 6-10 12"/></svg><span class="tabtxt"><span class="tabname" data-i18n="tab.conn">Canonical Chords</span><small class="tabdesc" data-i18n="tab.connDesc">This chapter&#39;s cross-references, drawn as a map</small></span></button>
+    <button data-i18n-title="tab.lexTitle" title="Lexicon: search Hebrew, Aramaic and Greek words by lemma, gloss or Strong&#39;s number. Notes: your notebook, with export and backup." class="tab" role="tab" id="tab-lex" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M5 3h11l3 3v15H5z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg><span class="tabtxt"><span class="tabname" data-i18n="tab.lex">Lexicon &amp; Notes</span><small class="tabdesc" data-i18n="tab.lexDesc">Search words by Strong&#39;s; keep and back up notes</small></span></button>
   </nav>
 </header>
 <main>
 <section id="view-read">
-  <aside class="libside" id="libSide" aria-label="Library: books and chapters">
-    <div class="lib-head"><h2 class="lib-title" id="libTitle">Library</h2><button type="button" class="iconbtn lib-x" id="libClose" aria-label="Collapse library" aria-controls="libSide">«</button></div>
-    <button type="button" class="lib-mine" id="libMine" aria-haspopup="dialog"><span aria-hidden="true" class="lib-mine-ic">❡</span> My highlights &amp; notes <span class="mine-n" id="libMineN"></span></button>
+  <aside class="libside" id="libSide" data-i18n-aria="aria.library" aria-label="Library: books and chapters">
+    <div class="lib-head"><h2 class="lib-title" id="libTitle" data-i18n="library">Library</h2><button type="button" class="iconbtn lib-x" id="libClose" data-i18n-aria="aria.libCollapse" aria-label="Collapse library" aria-controls="libSide">«</button></div>
+    <button type="button" class="lib-mine" id="libMine" aria-haspopup="dialog"><span aria-hidden="true" class="lib-mine-ic">❡</span> <span data-i18n="mine.title">My highlights &amp; notes</span> <span class="mine-n" id="libMineN"></span></button>
     <details class="lib-canon" id="libCanon">
-      <summary><span class="lc-k">Books shown</span> <span class="lc-sum" id="canonSum">Protestant (66 books)</span></summary>
+      <summary><span class="lc-k" data-i18n="lib.booksShown">Books shown</span> <span class="lc-sum" id="canonSum">Protestant (66 books)</span></summary>
       <div class="lc-body">
-        <div class="lc-presets" role="group" aria-label="Canon presets">
-          <button type="button" data-cp="all" aria-pressed="false">All</button><button type="button" data-cp="prot" aria-pressed="true">Protestant</button><button type="button" data-cp="cath" aria-pressed="false">Catholic</button><button type="button" data-cp="orth" aria-pressed="false">Orthodox</button>
+        <div class="lc-presets" role="group" data-i18n-aria="lib.presets" aria-label="Canon presets">
+          <button type="button" data-cp="all" aria-pressed="false" data-i18n="lib.all">All</button><button type="button" data-cp="prot" aria-pressed="true" data-i18n="lib.prot">Protestant</button><button type="button" data-cp="cath" aria-pressed="false" data-i18n="lib.cath">Catholic</button><button type="button" data-cp="orth" aria-pressed="false" data-i18n="lib.orth">Orthodox</button>
         </div>
-        <fieldset class="lc-groups"><legend class="vsr">Book groups</legend>
-          <label class="toggle"><input type="checkbox" data-cg="ot" checked> <span>Old Testament <small>39 books (Hebrew canon)</small></span></label>
-          <label class="toggle"><input type="checkbox" data-cg="nt" checked> <span>New Testament <small>27 books</small></span></label>
-          <label class="toggle"><input type="checkbox" data-cg="dc"> <span>Deuterocanon <span class="lb-dc" aria-hidden="true">DC</span> <small>Tobit, Judith, 1–2 Maccabees, Wisdom, Sirach, Baruch + Letter of Jeremiah</small></span></label>
-          <label class="toggle"><input type="checkbox" data-cg="add"> <span>Greek additions <span class="lb-dc add" aria-hidden="true">+Gk</span> <small>Esther 4:18–47, 10:4–14 · Daniel 3:24–90 (Azariah, Three Young Men), 13 (Susanna), 14 (Bel)</small></span></label>
-          <label class="toggle"><input type="checkbox" data-cg="orth"> <span>Orthodox books <span class="lb-dc orth" aria-hidden="true">Orth</span> <small>1 Esdras, Prayer of Manasseh, 3 Maccabees, Psalm 151</small></span></label>
-          <label class="toggle"><input type="checkbox" data-cg="app"> <span>Appendix books <span class="lb-dc app" aria-hidden="true">App</span> <small>4 Maccabees (Greek appendix) · 2 Esdras (Slavonic and Latin appendix; English only)</small></span></label>
+        <fieldset class="lc-groups"><legend class="vsr" data-i18n="lib.groups">Book groups</legend>
+          <label class="toggle"><input type="checkbox" data-cg="ot" checked> <span><span data-i18n="lib.ot">Old Testament</span> <small data-i18n="lib.otSmall">39 books (Hebrew canon)</small></span></label>
+          <label class="toggle"><input type="checkbox" data-cg="nt" checked> <span><span data-i18n="lib.nt">New Testament</span> <small data-i18n="lib.ntSmall">27 books</small></span></label>
+          <label class="toggle"><input type="checkbox" data-cg="dc"> <span><span data-i18n="lib.dc">Deuterocanon</span> <span class="lb-dc" aria-hidden="true">DC</span> <small data-i18n="lib.dcSmall">Tobit, Judith, 1–2 Maccabees, Wisdom, Sirach, Baruch + Letter of Jeremiah</small></span></label>
+          <label class="toggle"><input type="checkbox" data-cg="add"> <span><span data-i18n="lib.add">Greek additions</span> <span class="lb-dc add" aria-hidden="true">+Gk</span> <small data-i18n="lib.addSmall">Esther 4:18–47, 10:4–14 · Daniel 3:24–90 (Azariah, Three Young Men), 13 (Susanna), 14 (Bel)</small></span></label>
+          <label class="toggle"><input type="checkbox" data-cg="orth"> <span><span data-i18n="lib.orthBooks">Orthodox books</span> <span class="lb-dc orth" aria-hidden="true">Orth</span> <small data-i18n="lib.orthSmall">1 Esdras, Prayer of Manasseh, 3 Maccabees, Psalm 151</small></span></label>
+          <label class="toggle"><input type="checkbox" data-cg="app"> <span><span data-i18n="lib.app">Appendix books</span> <span class="lb-dc app" aria-hidden="true">App</span> <small data-i18n="lib.appSmall">4 Maccabees (Greek appendix) · 2 Esdras (Slavonic and Latin appendix; English only)</small></span></label>
         </fieldset>
         <p class="lc-note" id="canonNote" role="status" aria-live="polite"></p>
       </div>
     </details>
-    <input type="search" class="search lib-q" id="libQ" placeholder="Find a book…" aria-label="Find a book" autocomplete="off">
+    <input type="search" class="search lib-q" id="libQ" data-i18n-placeholder="lib.find" data-i18n-aria="aria.findBook" placeholder="Find a book…" aria-label="Find a book" autocomplete="off">
     <nav class="lib-list" id="libList" aria-labelledby="libTitle"></nav>
   </aside>
   <div class="libscrim" id="libScrim" aria-hidden="true"></div>
   <div class="read-col">
   <nav class="chapterhead">
-    <button type="button" class="charr" id="prevCh" aria-label="Previous chapter">‹</button>
+    <button type="button" class="charr" id="prevCh" data-i18n-aria="aria.prev" aria-label="Previous chapter">‹</button>
     <div class="chapterhead-main">
       <button type="button" class="chaptertitle" id="pickBtn" aria-haspopup="dialog"><span id="pickLabel">Genesis 1</span></button>
       <div class="cov" id="covLine"></div>
     </div>
-    <button type="button" class="charr" id="nextCh" aria-label="Next chapter">›</button>
+    <button type="button" class="charr" id="nextCh" data-i18n-aria="aria.next" aria-label="Next chapter">›</button>
   </nav>
   <div id="readBar" class="readbar">
-    <button type="button" class="barbtn libbtn" id="libToggle" aria-controls="libSide" aria-expanded="false" aria-label="Library: books and chapters"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h3v14H4zM9 5h3v14H9zM14.2 5.6l2.9-.8 3.6 13.5-2.9.8z"/></svg><span>Library</span></button>
+    <button type="button" class="barbtn libbtn" id="libToggle" aria-controls="libSide" aria-expanded="false" data-i18n-aria="aria.library" aria-label="Library: books and chapters"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h3v14H4zM9 5h3v14H9zM14.2 5.6l2.9-.8 3.6 13.5-2.9.8z"/></svg><span data-i18n="library">Library</span></button>
     <div id="witnessWrap">
       <div class="seg" id="witSeg"></div>
     </div>
-    <select class="sel" id="vfSel" aria-label="Show verses"></select>
-    <select class="sel ensel" id="enSel" aria-label="Bible version"></select>
-    <button type="button" class="barbtn" id="flipAll">Flip All</button>
+    <select class="sel" id="vfSel" data-i18n-aria="aria.showVerses" aria-label="Show verses"></select>
+    <select class="sel ensel" id="enSel" data-i18n-aria="aria.bibleVer" aria-label="Bible version"></select>
+    <button type="button" class="barbtn" id="flipAll" data-i18n="flipAll">Flip All</button>
   </div>
   <div class="hint welcome livenews" id="liveNews" role="region" aria-labelledby="liveNewsTitle" hidden>
-    <button type="button" class="hintx" id="liveNewsX" aria-label="Dismiss this announcement">✕</button>
-    <p class="wl-title" id="liveNewsTitle"><span class="newtag">New</span> <b>Now with the NLT, NKJV, and the Reina-Valera 1909</b></p>
-    <p class="ln-body">Hive Scribe now has the New Living Translation and the New King James Version, which load live, with permission, from API.Bible and need an internet connection, and the Reina-Valera 1909 (Español), which is built in and works offline. Pick them in the Bible version menu.</p>
-    <div class="wl-foot"><button type="button" class="btn primary" id="liveNewsTry">Read in the NLT</button><button type="button" class="btn" id="liveNewsLater">Not now</button></div>
+    <button type="button" class="hintx" id="liveNewsX" data-i18n-aria="aria.dismissNews" aria-label="Dismiss this announcement">✕</button>
+    <p class="wl-title" id="liveNewsTitle"><span class="newtag" data-i18n="news.badge">New</span> <b data-i18n="news.title">Now with the NLT, NKJV, and the Reina-Valera 1909</b></p>
+    <p class="ln-body" data-i18n="news.body">Hive Scribe now has the New Living Translation and the New King James Version, which load live, with permission, from API.Bible and need an internet connection, and the Reina-Valera 1909 (Español), which is built in and works offline. Pick them in the Bible version menu.</p>
+    <div class="wl-foot"><button type="button" class="btn primary" id="liveNewsTry" data-i18n="news.try">Read in the NLT</button><button type="button" class="btn" id="liveNewsLater" data-i18n="news.later">Not now</button></div>
   </div>
   <div class="hint welcome" id="hint" role="note" aria-labelledby="hintTitle">
-    <button type="button" class="hintx" id="hintDismiss" aria-label="Dismiss these tips">✕</button>
-    <p class="wl-title" id="hintTitle"><b>New here?</b> Three steps to start:</p>
+    <button type="button" class="hintx" id="hintDismiss" data-i18n-aria="aria.dismissTips" aria-label="Dismiss these tips">✕</button>
+    <p class="wl-title" id="hintTitle" data-i18n-html="hint.title"><b>New here?</b> Three steps to start:</p>
     <ol class="wl-steps">
-      <li><b>Tap a verse</b> to flip it to the original language chosen above.</li>
-      <li><b>Tap a word</b> to study it: form, Strong&#39;s number, lexicon entry, other occurrences, your note. <b>Hold</b> for a quick card.</li>
-      <li><b>Follow the connections</b> in <b>Polyglot &amp; Logos</b> (every text side by side) and <b>Canonical Chords</b> (a cross-reference map).</li>
+      <li data-i18n-html="hint.step1"><b>Tap a verse</b> to flip it to the original language chosen above.</li>
+      <li data-i18n-html="hint.step2"><b>Tap a word</b> to study it: form, Strong&#39;s number, lexicon entry, other occurrences, your note. <b>Hold</b> for a quick card.</li>
+      <li data-i18n-html="hint.step3"><b>Follow the connections</b> in <b>Polyglot &amp; Logos</b> (every text side by side) and <b>Canonical Chords</b> (a cross-reference map).</li>
     </ol>
-    <div class="wl-foot"><button type="button" class="btn primary" id="hintGotIt">Got it</button><span class="wl-note">Your notes stay in this browser. Back them up from Lexicon &amp; Notes.</span></div>
+    <div class="wl-foot"><button type="button" class="btn primary" id="hintGotIt" data-i18n="hint.gotIt">Got it</button><span class="wl-note" data-i18n-html="hint.note">Your notes stay in this browser. Back them up from Lexicon &amp; Notes.</span></div>
   </div>
-  <div id="verses"><div class="loading">Loading…</div></div>
+  <div id="verses"><div class="loading" data-i18n="loading">Loading…</div></div>
   <div class="livecopy" id="liveCopyRead" hidden></div>
-  <div class="chapterfoot"><button type="button" class="textnav" id="prevCh2">‹ Previous chapter</button><button type="button" class="textnav" id="nextCh2">Next chapter ›</button></div>
+  <div class="chapterfoot"><button type="button" class="textnav" id="prevCh2" data-i18n="nav.prevShort">‹ Previous chapter</button><button type="button" class="textnav" id="nextCh2" data-i18n="nav.nextShort">Next chapter ›</button></div>
   </div>
   <aside class="wpanel" id="wordPanel" aria-labelledby="wpTitle" hidden>
     <div class="wp-grab" aria-hidden="true"></div>
-    <div class="wp-head"><div class="wp-headtxt"><div class="wp-kicker">Word study</div><h2 class="wp-title" id="wpTitle" tabindex="-1"></h2></div><button type="button" class="iconbtn wp-x" id="wpClose" aria-label="Close word study">✕</button></div>
+    <div class="wp-head"><div class="wp-headtxt"><div class="wp-kicker" data-i18n="wp.kicker">Word study</div><h2 class="wp-title" id="wpTitle" tabindex="-1"></h2></div><button type="button" class="iconbtn wp-x" id="wpClose" data-i18n-aria="aria.closeWord" aria-label="Close word study">✕</button></div>
     <div class="wp-body" id="wpBody"></div>
   </aside>
   <aside class="wpanel ppanel" id="passPanel" aria-labelledby="ppTitle" hidden>
     <div class="wp-grab" aria-hidden="true"></div>
-    <div class="wp-head"><div class="wp-headtxt"><div class="wp-kicker">Passage</div><h2 class="wp-title" id="ppTitle" tabindex="-1"></h2></div><button type="button" class="iconbtn wp-x" id="ppClose" aria-label="Close passage panel">✕</button></div>
+    <div class="wp-head"><div class="wp-headtxt"><div class="wp-kicker" data-i18n="pp.kicker">Passage</div><h2 class="wp-title" id="ppTitle" tabindex="-1"></h2></div><button type="button" class="iconbtn wp-x" id="ppClose" data-i18n-aria="aria.closePass" aria-label="Close passage panel">✕</button></div>
     <div class="wp-body" id="ppBody"></div>
   </aside>
 </section>
 
 <section id="view-poly" hidden>
-  <p class="modeintro"><b>Polyglot &amp; Logos.</b> <b>Parallel matrix</b> shows each verse in every text the app carries for this chapter (Hebrew, Greek, Aramaic Targum, Latin Vulgate and English), side by side. <b>Logos Bridge</b> reads Genesis 1:1–3 next to John 1:1–5, with shared words highlighted and hand-written study notes.</p>
-  <div class="seg" id="polySeg"><button data-pm="matrix" aria-pressed="true">Parallel matrix</button><button data-pm="bridge" aria-pressed="false">Logos Bridge</button></div>
+  <p class="modeintro" data-i18n-html="poly.intro"><b>Polyglot &amp; Logos.</b> <b>Parallel matrix</b> shows each verse in every text the app carries for this chapter (Hebrew, Greek, Aramaic Targum, Latin Vulgate and English), side by side. <b>Logos Bridge</b> reads Genesis 1:1–3 next to John 1:1–5, with shared words highlighted and hand-written study notes.</p>
+  <div class="seg" id="polySeg"><button data-pm="matrix" aria-pressed="true" data-i18n="poly.matrix">Parallel matrix</button><button data-pm="bridge" aria-pressed="false" data-i18n="poly.bridge">Logos Bridge</button></div>
   <div id="polyBody"></div>
   <div class="livecopy" id="liveCopyPoly" hidden></div>
 </section>
 
 <section id="view-study" hidden>
-  <div id="studyBody"><div class="loading">Loading studies…</div></div>
+  <div id="studyBody"><div class="loading" data-i18n="loading.studies">Loading studies…</div></div>
 </section>
 
 <section id="view-lex" hidden>
-  <p class="modeintro"><b>Lexicon &amp; Notes.</b> Search the Hebrew, Aramaic and Greek lexicon by lemma, English gloss or Strong's number, and see where each word occurs. Below that is your Scribe Notebook, with export and backup.</p>
+  <p class="modeintro" data-i18n-html="lex.intro"><b>Lexicon &amp; Notes.</b> Search the Hebrew, Aramaic and Greek lexicon by lemma, English gloss or Strong's number, and see where each word occurs. Below that is your Scribe Notebook, with export and backup.</p>
   <div class="study-teaser" id="studyTeaser">
-    <h2 class="sec" style="margin-top:0">Studies</h2>
-    <p class="note" style="margin-top:0">Guided topical studies that open verses here in Read, with original-language highlights. Progress is saved only on this device.</p>
-    <button type="button" class="btn" id="openStudies">Open Studies</button>
+    <h2 class="sec" style="margin-top:0" data-i18n="studies.heading">Studies</h2>
+    <p class="note" style="margin-top:0" data-i18n="studies.teaser">Guided topical studies that open verses here in Read, with original-language highlights. Progress is saved only on this device.</p>
+    <button type="button" class="btn" id="openStudies" data-i18n="studies.open">Open Studies</button>
   </div>
-  <h2 class="sec">Lexicon &amp; concordance</h2>
+  <h2 class="sec" data-i18n="lex.heading">Lexicon &amp; concordance</h2>
   <div class="seg" id="lexSeg"></div>
-  <input class="search" id="lexQ" type="search" placeholder="Search the whole Bible: lemma, gloss, Strong's…" aria-label="Search the lexicon">
+  <input class="search" id="lexQ" type="search" data-i18n-placeholder="lex.placeholder" data-i18n-aria="aria.lexSearch" placeholder="Search the whole Bible: lemma, gloss, Strong's…" aria-label="Search the lexicon">
   <div id="lexCount" class="note" style="margin:0 2px 4px"></div>
   <div id="lexList"></div>
-  <h2 class="sec">Scribe Notebook</h2>
-  <div class="backup-remind" id="backupRemind" role="note"><b>Back up your notes.</b> Notes, highlights and study answers are kept only in this browser on this device. Clearing your browsing data deletes them, and a private window or another device will not have them. Export a backup now and then. <span class="br-last" data-backup-last></span><div class="btnrow"><button type="button" class="btn primary" data-backup="json">Back up now (JSON)</button><button type="button" class="btn" data-backup="md">Readable copy (Markdown)</button></div></div>
-  <div class="note" style="margin-top:0">Your personal notes on words, verses and studies. Saved on this device only (never uploaded). Add notes from a word’s popup, the ✎ button on a verse, or a study lesson. Export and import let you move them to another device.</div>
-  <div class="btnrow"><button class="btn" id="expMd">Export notes (Markdown)</button><button class="btn" id="expJson">Export notes (JSON)</button><button class="btn" id="expNotesPrint">Print notes / save PDF</button><button class="btn" id="copyMd">Copy Markdown</button></div>
-  <div class="btnrow"><button class="btn" id="expAllMd">Export everything (Markdown)</button><button class="btn" id="expAllJson">Export everything (JSON)</button><button class="btn" id="expAllPrint">Print everything / save PDF</button><button class="btn primary" id="impBtn">Import / restore backup (JSON)</button><input type="file" id="impFile" accept="application/json,.json" hidden></div>
-  <div class="note">“Export everything” includes the Scribe Notebook plus Studies progress and answers. On a phone, export may open the share sheet when the browser allows it; otherwise a file downloads. Import merges; if an item already exists with different text, you will be asked before anything is overwritten.</div>
-  <div class="btnrow"><button type="button" class="btn" id="nbMine">My highlights &amp; notes</button></div>
+  <h2 class="sec" data-i18n="nb.heading">Scribe Notebook</h2>
+  <div class="backup-remind" id="backupRemind" role="note"><b data-i18n="nb.backupTitle">Back up your notes.</b> <span data-i18n="nb.backupBody">Notes, highlights and study answers are kept only in this browser on this device. Clearing your browsing data deletes them, and a private window or another device will not have them. Export a backup now and then.</span> <span class="br-last" data-backup-last></span><div class="btnrow"><button type="button" class="btn primary" data-backup="json" data-i18n="nb.backupJson">Back up now (JSON)</button><button type="button" class="btn" data-backup="md" data-i18n="nb.backupMd">Readable copy (Markdown)</button></div></div>
+  <div class="note" style="margin-top:0" data-i18n="nb.intro">Your personal notes on words, verses and studies. Saved on this device only (never uploaded). Add notes from a word’s popup, the ✎ button on a verse, or a study lesson. Export and import let you move them to another device.</div>
+  <div class="btnrow"><button class="btn" id="expMd" data-i18n="nb.expMd">Export notes (Markdown)</button><button class="btn" id="expJson" data-i18n="nb.expJson">Export notes (JSON)</button><button class="btn" id="expNotesPrint" data-i18n="nb.expPrint">Print notes / save PDF</button><button class="btn" id="copyMd" data-i18n="nb.copyMd">Copy Markdown</button></div>
+  <div class="btnrow"><button class="btn" id="expAllMd" data-i18n="nb.expAllMd">Export everything (Markdown)</button><button class="btn" id="expAllJson" data-i18n="nb.expAllJson">Export everything (JSON)</button><button class="btn" id="expAllPrint" data-i18n="nb.expAllPrint">Print everything / save PDF</button><button class="btn primary" id="impBtn" data-i18n="nb.import">Import / restore backup (JSON)</button><input type="file" id="impFile" accept="application/json,.json" hidden></div>
+  <div class="note" data-i18n="nb.expAllNote">“Export everything” includes the Scribe Notebook plus Studies progress and answers. On a phone, export may open the share sheet when the browser allows it; otherwise a file downloads. Import merges; if an item already exists with different text, you will be asked before anything is overwritten.</div>
+  <div class="btnrow"><button type="button" class="btn" id="nbMine" data-i18n="nb.mine">My highlights &amp; notes</button></div>
   <div id="nbList"></div>
 </section>
 
 <section id="view-conn" hidden>
-  <p class="modeintro"><b>Canonical Chords.</b> A map of this chapter's cross-references from OpenBible.info: each line joins a verse here to a related passage elsewhere in the Bible, and thicker lines have more votes. Tap a line, dot or book name to read both passages.</p>
+  <p class="modeintro" data-i18n-html="conn.intro"><b>Canonical Chords.</b> A map of this chapter's cross-references from OpenBible.info: each line joins a verse here to a related passage elsewhere in the Bible, and thicker lines have more votes. Tap a line, dot or book name to read both passages.</p>
   <div id="chordStage">
-    <canvas id="chordGl" aria-label="Cross-reference visualization"></canvas>
-    <svg id="chord" viewBox="0 0 360 360" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Circular cross-reference diagram"></svg>
+    <canvas id="chordGl" data-i18n-aria="aria.chords" aria-label="Cross-reference visualization"></canvas>
+    <svg id="chord" viewBox="0 0 360 360" preserveAspectRatio="xMidYMid meet" role="img" data-i18n-aria="aria.chordsSvg" aria-label="Circular cross-reference diagram"></svg>
     <div id="chordLabels" aria-hidden="true"></div>
     <div id="chordBar">
       <div class="seg" id="xTestSeg"></div>
-      <select class="sel" id="xVerseSel" aria-label="Verse"></select>
+      <select class="sel" id="xVerseSel" data-i18n-aria="aria.verse" aria-label="Verse"></select>
       <div class="seg" id="xTopSeg"></div>
       <div class="seg" id="xShapeSeg"></div>
     </div>
     <div id="xCount"></div>
     <div id="chordLegend" aria-hidden="true">
-      <div class="leg-label">Relationship strength</div>
+      <div class="leg-label" data-i18n="chords.strength">Relationship strength</div>
       <div class="leg-bar"></div>
-      <div class="leg-ends"><span>Weaker</span><span>Stronger</span></div>
-      <div class="leg-note">OpenBible.info votes (thicker, brighter lines)</div>
+      <div class="leg-ends"><span data-i18n="chords.weaker">Weaker</span><span data-i18n="chords.stronger">Stronger</span></div>
+      <div class="leg-note" data-i18n="chords.votes">OpenBible.info votes (thicker, brighter lines)</div>
     </div>
     <div class="panel" id="connPanel"></div>
   </div>
@@ -1164,12 +1198,13 @@ header.noselect{top:var(--chl-nav-h,52px);padding-top:10px}
 
 <section id="view-about" class="credits" hidden>
   <img class="brandimg" src="brand/brand-full-640.webp" alt="Hive Scribe logo">
-  <div class="tagline">BIBLE STUDY • TRANSLATION COMPARE • NOTES</div>
-  <h3>What this is</h3>
-  <p>Hive Scribe is a free interlinear Bible study app by Codex Hive Labs (formerly BIBLE SCOL). Logo and app icons: Valentin's Hive Scribe brand art. The whole 73-book Catholic canon plus the Orthodox / Septuagint books (1 Esdras, Prayer of Manasseh, 3 Maccabees, Psalm 151) and the appendix books 4 Maccabees and 2 Esdras, loaded chapter by chapter. Use <b>Books shown</b> in the Library to pick a canon. Labels on each verse show where each piece of data comes from.</p>
-  <h3>Coverage</h3>
+  <div class="tagline" data-i18n="about.tagline">BIBLE STUDY • TRANSLATION COMPARE • NOTES</div>
+  <h3 data-i18n="about.what">What this is</h3>
+  <p data-i18n-html="about.whatBody">Hive Scribe is a free interlinear Bible study app by Codex Hive Labs (formerly BIBLE SCOL). Logo and app icons: Valentin's Hive Scribe brand art. The whole 73-book Catholic canon plus the Orthodox / Septuagint books (1 Esdras, Prayer of Manasseh, 3 Maccabees, Psalm 151) and the appendix books 4 Maccabees and 2 Esdras, loaded chapter by chapter. Use <b>Books shown</b> in the Library to pick a canon. Labels on each verse show where each piece of data comes from.</p>
+  <h3 data-i18n="about.coverage">Coverage</h3>
   <ul id="covList"></ul>
-  <h3>Data sources and licenses</h3>
+  <h3 data-i18n="about.sourcesTitle">Data sources and licenses</h3>
+  <p class="i18n-orig-note" data-i18n="about.origNote" hidden>Copyright notices and licenses are shown in their original wording below.</p>
   <ul>
     <li><b>English, default: King James Version (KJV), with the Apocrypha:</b> the Authorized Version in the standardized text of 1769, with the Apocrypha of the 1611 KJV (Tobit, Judith, the Rest of Esther, Wisdom, Sirach, Baruch with the Epistle of Jeremy, the Song of the Three Children, Susanna, Bel and the Dragon, the Prayer of Manasses, 1–2 Maccabees, 1–2 Esdras), from eBible.org “eng-kjv” (<a href="https://ebible.org/Scriptures/eng-kjv_vpl.zip">eng-kjv_vpl.zip</a>), courtesy of the Crosswire Bible Society and eBible.org. eBible.org marks it “Public Domain” and notes: “Letters patent issued by King James with no expiration date means that to print this translation in the United Kingdom or import printed copies into the UK, you need permission … This royal decree has no effect outside of the UK, where this work is firmly in the Public Domain.” Words the translators supplied (italic in printed KJVs, bracketed in the source) are shown in italics. The KJV text is placed on the app's verse numbers (see the WEB below) so the original-language layers stay aligned; where the KJV numbers a verse differently its own reference is shown beside the verse: Romans 16:25–27 (shown at 14:24–26, where the Greek has the doxology), Greek Esther (the Rest of Esther chapters 10–16 placed where the Greek has them), Daniel 3 (the Song of the Three Children) and 13–14 (Susanna, Bel), a few verses of Sirach, and 2 Esdras 7 (the KJV lacks verses 36–105 of the modern text). Placement in those books was done automatically by comparing the KJV with the WEB. 3 and 4 Maccabees and Psalm 151 are not in the KJV, so they are shown in the WEB. Choose the English version in Settings or the reading bar.</li>
     <li><b>English, alternative (all books):</b> World English Bible, 2020 stable text, with the deuterocanonical books (eBible.org “eng-web”), public domain. Esther uses the WEB's Greek Esther (with the additions) and Daniel the WEB's Greek Daniel (with the Prayer of Azariah and Song of the Three, Susanna, and Bel and the Dragon), as in Catholic Bibles. Baruch 6 is the Letter of Jeremiah. <b>Chapter and verse numbers in the app follow the WEB</b> (English tradition, essentially the same as the KJV's), so a few differ from the NABRE (e.g. Joel has 3 chapters and Malachi 4).</li>
@@ -1191,81 +1226,90 @@ header.noselect{top:var(--chl-nav-h,52px);padding-top:10px}
     <li>Fonts: Noto Serif and Noto Serif Hebrew (© The Noto Project Authors, SIL Open Font License 1.1), bundled so the app works offline.</li>
     <li><b>Hebrew and Aramaic fragments not included:</b> this app does not invent text for sources it does not carry. Sirach (Ecclesiasticus) is known in Hebrew for about two-thirds of the book (Cairo Geniza, Masada, and related finds), but no openly packaged, clearly licensed Hebrew Sirach was included here, so Sirach is Greek (LXX) and Latin only. Tobit is attested in Aramaic and Hebrew fragments from Qumran; those fragments are not in this app. A Greek fragment of the Letter of Jeremiah (Baruch 6) is known as 7Q2; the text here is the Brenton Septuagint (and the Vulgate where aligned), not a transcription of 7Q2. These are notes about what exists, not additional readings.</li>
   </ul>
-  <h3 id="copyright" hidden>Copyright notices (live translations)</h3>
+  <h3 id="copyright" hidden data-i18n="about.copyrightTitle">Copyright notices (live translations)</h3>
   <div id="liveCopyAbout" hidden></div>
-  <h3>Known limits</h3>
+  <h3 data-i18n="about.limits">Known limits</h3>
   <ul>
-    <li>The full Bible needs the app served over http(s) (it loads chapters on demand). The single-file version contains Genesis 1 and John 1 only.</li>
-    <li>Your view and notes are saved on this device when the browser allows it.</li>
-    <li>Dyslexia reading mode uses wider spacing, a sans-serif face and higher contrast (OpenDyslexic is not bundled).</li>
-    <li>Guided Studies present a named author’s position in original lesson notes; they do not reproduce copyrighted book text. See each study’s source note.</li>
-    <li>Links: the address bar follows what you are reading (for example <code>#gen.1.2?wit=tg&amp;word=H7307</code> or <code>#conn/john.1.1</code>), so Back and Forward work and a copied link opens the same verse, text and word.</li>
+    <li data-i18n="about.limit1">The full Bible needs the app served over http(s) (it loads chapters on demand). The single-file version contains Genesis 1 and John 1 only.</li>
+    <li data-i18n="about.limit2">Your view and notes are saved on this device when the browser allows it.</li>
+    <li data-i18n="about.limit3">Dyslexia reading mode uses wider spacing, a sans-serif face and higher contrast (OpenDyslexic is not bundled).</li>
+    <li data-i18n="about.limit4">Guided Studies present a named author’s position in original lesson notes; they do not reproduce copyrighted book text. See each study’s source note.</li>
+    <li data-i18n-html="about.limit5">Links: the address bar follows what you are reading (for example <code>#gen.1.2?wit=tg&amp;word=H7307</code> or <code>#conn/john.1.1</code>), so Back and Forward work and a copied link opens the same verse, text and word.</li>
   </ul>
 </section>
 </main>
 
-<div class="sheet" id="settingsSheet" role="dialog" aria-modal="true" aria-label="Reading settings"><div class="bd"></div><div class="pn">
-  <h2>Typography &amp; reading <button class="iconbtn x" data-close aria-label="Close">✕</button></h2>
-  <div class="srow"><div class="lbl">Text size</div><div class="seg" id="fsSeg"><button data-fs="S">S</button><button data-fs="M">M</button><button data-fs="L">L</button><button data-fs="XL">XL</button></div></div>
-  <div class="srow"><label class="toggle"><input type="checkbox" id="dysChk"> Dyslexia reading mode</label><div class="desc">Sans-serif, extra letter and word spacing, higher contrast, no italics.</div></div>
-  <div class="srow"><div class="lbl">Bible version</div><div class="seg" id="enSeg" role="group" aria-label="Bible version"></div><div class="ensoonmsg" id="enSoonMsg" role="status" aria-live="polite" hidden></div>
-    <div class="desc" id="enDesc">The Bible text shown in Read, Polyglot, Connections and the word panel. The original-language layers stay on the same verses whichever version you pick.</div></div>
-  <div class="srow"><div class="lbl">Hebrew &amp; Aramaic vowels</div><div class="seg" id="vowSeg"><button data-vow="full">Full points</button><button data-vow="cons">Consonants only</button></div>
-    <label class="toggle"><input type="checkbox" id="cantChk"> Show cantillation marks (te'amim)</label><div class="desc">Cantillation marks come with the Westminster Leningrad Codex Hebrew; the Targum texts have vowels but no cantillation. Consonants only also hides the vowels.</div></div>
-  <div class="srow"><div class="lbl">Canon</div>
-    <label class="toggle"><input type="checkbox" id="dcChk"> Show deuterocanonical books</label>
-    <div class="desc">For finer control (Old Testament, New Testament, deuterocanonical books, Greek additions to Esther and Daniel) and quick presets, use <b>Books shown</b> at the top of the Library.</div>
-    <div class="desc">When this is off (the default), you get a 66-book Protestant view, the same books as the KJV: Tobit, Judith, Wisdom, Sirach, Baruch, 1–2 Maccabees, and the Greek additions to Esther and Daniel are hidden from the picker, chapter nav, lexicon hits and cross-references. When it is on, the app uses the 73-book Catholic canon.</div></div>
-  <div class="srow"><div class="lbl">Original-language witnesses</div>
-    <label class="toggle"><input type="checkbox" id="witHeb" checked> Hebrew (WLC)</label>
-    <label class="toggle"><input type="checkbox" id="witGrk" checked> Greek NT (SBLGNT)</label>
-    <label class="toggle"><input type="checkbox" id="witByz" checked> Greek NT (Byzantine, Robinson-Pierpont)</label>
-    <label class="toggle"><input type="checkbox" id="witLxx" checked> Septuagint (LXX, Brenton)</label>
-    <label class="toggle"><input type="checkbox" id="witTg" checked> Targum (Aramaic)</label>
-    <label class="toggle"><input type="checkbox" id="witVul" checked> Latin Vulgate (Clementine)</label>
-    <div class="desc">Turn a witness off to hide it from the chapter chips and the Polyglot matrix. The Bible text (version chosen above) is always shown.</div></div>
-  <div class="srow"><div class="lbl">Offline</div>
-    <div class="desc" id="dlInfo">Chapters you open are kept for offline use.</div>
-    <div class="progress" id="dlBar" role="progressbar" aria-label="Offline download" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden><div></div></div><div class="dlstat" id="dlStat" role="status" aria-live="polite"></div>
-    <div class="btnrow"><button class="btn primary" id="dlBtn">Download entire canon for offline</button><button class="btn" id="dlPause" hidden>Pause</button><button class="btn" id="dlCancel" hidden>Cancel</button><button class="btn" id="dlClear">Remove offline data</button></div></div>
-  <div class="srow"><button class="btn" id="openSources">About &amp; sources</button></div>
+<div class="sheet" id="settingsSheet" role="dialog" aria-modal="true" data-i18n-aria="set.aria" aria-label="Reading settings"><div class="bd"></div><div class="pn">
+  <h2><span data-i18n="set.title">Typography &amp; reading</span> <button class="iconbtn x" data-close data-i18n-aria="aria.close" aria-label="Close">✕</button></h2>
+  <div class="srow" id="langRow">
+    <div class="lbl" data-i18n="lang.label">Interface language</div>
+    <div class="seg langseg" role="group" data-i18n-aria="aria.lang" aria-label="Interface language">
+      <button type="button" data-uilang="en" aria-pressed="true">English</button>
+      <button type="button" data-uilang="es" aria-pressed="false">Español</button>
+    </div>
+    <div class="desc" data-i18n="lang.desc">Menus, buttons and book names. The Bible text is chosen separately below; in Español the default is the Reina-Valera 1909.</div>
+  </div>
+  <div class="srow"><div class="lbl" data-i18n="set.size">Text size</div><div class="seg" id="fsSeg"><button data-fs="S">S</button><button data-fs="M">M</button><button data-fs="L">L</button><button data-fs="XL">XL</button></div></div>
+  <div class="srow"><label class="toggle"><input type="checkbox" id="dysChk"> <span data-i18n="set.dyslexia">Dyslexia reading mode</span></label><div class="desc" data-i18n="set.dyslexiaDesc">Sans-serif, extra letter and word spacing, higher contrast, no italics.</div></div>
+  <div class="srow"><div class="lbl" data-i18n="set.bibleVer">Bible version</div><div class="seg" id="enSeg" role="group" data-i18n-aria="aria.bibleVer" aria-label="Bible version"></div><div class="ensoonmsg" id="enSoonMsg" role="status" aria-live="polite" hidden></div>
+    <div class="desc" id="enDesc" data-i18n-html="enDesc.generic">The Bible text shown in Read, Polyglot, Connections and the word panel. The original-language layers stay on the same verses whichever version you pick.</div></div>
+  <div class="srow"><div class="lbl" data-i18n="set.vowels">Hebrew &amp; Aramaic vowels</div><div class="seg" id="vowSeg"><button data-vow="full" data-i18n="set.vowelsFull">Full points</button><button data-vow="cons" data-i18n="set.vowelsCons">Consonants only</button></div>
+    <label class="toggle"><input type="checkbox" id="cantChk"> <span data-i18n="set.cant">Show cantillation marks (te'amim)</span></label><div class="desc" data-i18n="set.cantDesc">Cantillation marks come with the Westminster Leningrad Codex Hebrew; the Targum texts have vowels but no cantillation. Consonants only also hides the vowels.</div></div>
+  <div class="srow"><div class="lbl" data-i18n="set.canon">Canon</div>
+    <label class="toggle"><input type="checkbox" id="dcChk"> <span data-i18n="set.dc">Show deuterocanonical books</span></label>
+    <div class="desc" data-i18n-html="set.dcDesc1">For finer control (Old Testament, New Testament, deuterocanonical books, Greek additions to Esther and Daniel) and quick presets, use <b>Books shown</b> at the top of the Library.</div>
+    <div class="desc" data-i18n="set.dcDesc2">When this is off (the default), you get a 66-book Protestant view, the same books as the KJV: Tobit, Judith, Wisdom, Sirach, Baruch, 1–2 Maccabees, and the Greek additions to Esther and Daniel are hidden from the picker, chapter nav, lexicon hits and cross-references. When it is on, the app uses the 73-book Catholic canon.</div></div>
+  <div class="srow"><div class="lbl" data-i18n="set.witnesses">Original-language witnesses</div>
+    <label class="toggle"><input type="checkbox" id="witHeb" checked> <span data-i18n="wit.heb">Hebrew (WLC)</span></label>
+    <label class="toggle"><input type="checkbox" id="witGrk" checked> <span data-i18n="wit.grk">Greek NT (SBLGNT)</span></label>
+    <label class="toggle"><input type="checkbox" id="witByz" checked> <span data-i18n="wit.byzLong">Greek NT (Byzantine, Robinson-Pierpont)</span></label>
+    <label class="toggle"><input type="checkbox" id="witLxx" checked> <span data-i18n="wit.lxxLong">Septuagint (LXX, Brenton)</span></label>
+    <label class="toggle"><input type="checkbox" id="witTg" checked> <span data-i18n="wit.tg">Targum (Aramaic)</span></label>
+    <label class="toggle"><input type="checkbox" id="witVul" checked> <span data-i18n="wit.vul">Latin Vulgate (Clementine)</span></label>
+    <div class="desc" data-i18n="set.witDesc">Turn a witness off to hide it from the chapter chips and the Polyglot matrix. The Bible text (version chosen above) is always shown.</div></div>
+  <div class="srow"><div class="lbl" data-i18n="set.offline">Offline</div>
+    <div class="desc" id="dlInfo" data-i18n="set.dlInfo">Chapters you open are kept for offline use.</div>
+    <div class="progress" id="dlBar" role="progressbar" data-i18n-aria="aria.offlineDl" aria-label="Offline download" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden><div></div></div><div class="dlstat" id="dlStat" role="status" aria-live="polite"></div>
+    <div class="btnrow"><button class="btn primary" id="dlBtn" data-i18n="set.dlBtn">Download entire canon for offline</button><button class="btn" id="dlPause" hidden data-i18n="set.pause">Pause</button><button class="btn" id="dlCancel" hidden data-i18n="set.cancel">Cancel</button><button class="btn" id="dlClear" data-i18n="set.dlClear">Remove offline data</button></div></div>
+  <div class="srow"><button class="btn" id="openSources" data-i18n="set.aboutBtn">About &amp; sources</button></div>
 </div></div>
-<div class="sheet" id="pickSheet" role="dialog" aria-modal="true" aria-label="Choose a book and chapter"><div class="bd"></div><div class="pn">
-  <h2>Choose book &amp; chapter <button class="iconbtn x" data-close aria-label="Close">✕</button></h2>
-  <div class="note" style="margin-top:0" id="pickNote">Tap a book, then a chapter. The current chapter is gold. Under each book: which original-language texts it has.</div>
+<div class="sheet" id="pickSheet" role="dialog" aria-modal="true" data-i18n-aria="pick.aria" aria-label="Choose a book and chapter"><div class="bd"></div><div class="pn">
+  <h2><span data-i18n="pick.title">Choose book &amp; chapter</span> <button class="iconbtn x" data-close data-i18n-aria="aria.close" aria-label="Close">✕</button></h2>
+  <div class="note" style="margin-top:0" id="pickNote" data-i18n="pick.note">Tap a book, then a chapter. The current chapter is gold. Under each book: which original-language texts it has.</div>
   <div class="canon" id="canonList"></div>
 </div></div>
-<div class="sheet" id="noteSheet" role="dialog" aria-modal="true" aria-label="Verse note"><div class="bd"></div><div class="pn">
-  <h2><span id="noteTitle">Note</span> <button class="iconbtn x" data-close aria-label="Close">✕</button></h2>
-  <textarea class="notebox" id="noteText" placeholder="Your note…"></textarea>
-  <div class="btnrow"><button class="btn primary" id="noteSave">Save note</button><button class="btn" id="noteDel">Delete</button><span class="saved" id="noteSaved"></span></div>
+<div class="sheet" id="noteSheet" role="dialog" aria-modal="true" data-i18n-aria="aria.verseNote" aria-label="Verse note"><div class="bd"></div><div class="pn">
+  <h2><span id="noteTitle" data-i18n="mine.noteTag">Note</span> <button class="iconbtn x" data-close data-i18n-aria="aria.close" aria-label="Close">✕</button></h2>
+  <textarea class="notebox" id="noteText" data-i18n-placeholder="note.placeholder" placeholder="Your note…"></textarea>
+  <div class="btnrow"><button class="btn primary" id="noteSave" data-i18n="note.save">Save note</button><button class="btn" id="noteDel" data-i18n="note.delete">Delete</button><span class="saved" id="noteSaved"></span></div>
 </div></div>
 
-<div class="sheet" id="importSheet" role="dialog" aria-modal="true" aria-label="Import conflicts"><div class="bd"></div><div class="pn">
-  <h2><span id="impTitle">Import conflicts</span> <button class="iconbtn x" data-close aria-label="Close">✕</button></h2>
-  <p class="note" id="impCount">Some items already exist with different text.</p>
-  <p class="note" id="impExplain">New items with no match are always added. Choose what to do with the conflicts. Nothing is overwritten until you pick.</p>
-  <p class="note"><button type="button" class="btn" id="impSafety">Download a backup of this device first</button></p>
+<div class="sheet" id="importSheet" role="dialog" aria-modal="true" data-i18n-aria="imp.title" aria-label="Import conflicts"><div class="bd"></div><div class="pn">
+  <h2><span id="impTitle" data-i18n="imp.title">Import conflicts</span> <button class="iconbtn x" data-close data-i18n-aria="aria.close" aria-label="Close">✕</button></h2>
+  <p class="note" id="impCount" data-i18n="imp.count">Some items already exist with different text.</p>
+  <p class="note" id="impExplain" data-i18n="imp.explain">New items with no match are always added. Choose what to do with the conflicts. Nothing is overwritten until you pick.</p>
+  <p class="note"><button type="button" class="btn" id="impSafety" data-i18n="imp.safety">Download a backup of this device first</button></p>
   <div id="impConflicts"></div>
   <div class="btnrow">
-    <button class="btn" id="impKeep">Keep mine (skip conflicts)</button>
-    <button class="btn primary" id="impUse">Use imported on conflicts</button>
-    <button class="btn primary" id="impAdd" hidden>Add these items</button>
-    <button class="btn" data-close>Cancel</button>
+    <button class="btn" id="impKeep" data-i18n="imp.keep">Keep mine (skip conflicts)</button>
+    <button class="btn primary" id="impUse" data-i18n="imp.use">Use imported on conflicts</button>
+    <button class="btn primary" id="impAdd" hidden data-i18n="imp.add">Add these items</button>
+    <button class="btn" data-close data-i18n="set.cancel">Cancel</button>
     <span class="saved" id="impMsg"></span>
   </div>
 </div></div>
 
 <div class="sheet" id="mineSheet" role="dialog" aria-modal="true" aria-labelledby="mineTitle"><div class="bd"></div><div class="pn">
-  <h2><span id="mineTitle" tabindex="-1">My highlights &amp; notes</span> <button class="iconbtn x" data-close aria-label="Close">✕</button></h2>
-  <p class="note" style="margin-top:0">Highlights and passage notes are saved on this device and included in Notebook export / import. Tap one to open it in Read.</p>
-  <div class="mine-filter" id="mineFilter" role="group" aria-label="Filter by highlight color"></div>
+  <h2><span id="mineTitle" tabindex="-1" data-i18n="mine.title">My highlights &amp; notes</span> <button class="iconbtn x" data-close data-i18n-aria="aria.close" aria-label="Close">✕</button></h2>
+  <p class="note" style="margin-top:0" data-i18n="mine.intro">Highlights and passage notes are saved on this device and included in Notebook export / import. Tap one to open it in Read.</p>
+  <div class="mine-filter" id="mineFilter" role="group" data-i18n-aria="aria.filterHl" aria-label="Filter by highlight color"></div>
   <div class="mine-list" id="mineList"></div>
 </div></div>
 <div id="dim" aria-hidden="true"></div>
 <div id="lift" aria-hidden="true"><span class="o"></span><span class="g"></span></div>
 <div class="arm" id="arm"></div>
 <div class="callout" id="callout" role="dialog" aria-modal="true"></div>
+<script src="js/i18n.js"></script>
 <script src="js/apibible.config.js"></script>
 <script src="js/plus.js"></script>
 <script>
@@ -1276,6 +1320,8 @@ header.noselect{top:var(--chl-nav-h,52px);padding-top:10px}
 const INLINE = null;
 const DATA_BASE = 'data/';
 const $ = s=>document.querySelector(s);
+const T=(k,v)=> (typeof HS_I18N!=='undefined'?HS_I18N.t(k,v):k);
+const bookLabel=(b)=>{ const id=typeof b==='string'?b:(b&&b.id); return (typeof HS_I18N!=='undefined')?HS_I18N.bookName(id):(BOOK[id]?BOOK[id].name:id); };
 const esc = s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 async function gunzipJSON(buf){
   const u=new Uint8Array(buf);
@@ -1314,7 +1360,7 @@ function vidToRef(vid){ // -> {b,c,v}
   return null;
 }
 const sampleOnly = (b,c)=> INLINE && !INLINE.files[`ch/${b}.${c}.json.gz`];
-const refName = (b,c,v)=> `${BOOK[b]?BOOK[b].name:b} ${c}${v?':'+v:''}`;
+const refName = (b,c,v)=> `${bookLabel(b)} ${c}${v?':'+v:''}`;
 
 // ---------- letter values ----------
 const HEB_VAL = {'א':1,'ב':2,'ג':3,'ד':4,'ה':5,'ו':6,'ז':7,'ח':8,'ט':9,'י':10,'כ':20,'ך':20,'ל':30,'מ':40,'ם':40,'נ':50,'ן':50,'ס':60,'ע':70,'פ':80,'ף':80,'צ':90,'ץ':90,'ק':100,'ר':200,'ש':300,'ת':400};
@@ -1411,6 +1457,17 @@ function persist(){
 const FS = {S:.9, M:1, L:1.15, XL:1.3};
 const savedSet = (saved.settings && typeof saved.settings==='object') ? saved.settings : {};
 state.settings = { fs: FS[savedSet.fs]?savedSet.fs:'M', dys: !!savedSet.dys, vow: savedSet.vow==='cons'?'cons':'full', cant: savedSet.cant===undefined?true:!!savedSet.cant, hideHint: !!savedSet.hideHint, showDC: savedSet.showDC!==false, enVer: (typeof savedSet.enVer==='string' && savedSet.enVer) ? savedSet.enVer : 'kjv', wits: Object.assign({heb:true,grk:true,byz:true,lxx:true,tg:true,vul:true}, (savedSet.wits&&typeof savedSet.wits==='object')?savedSet.wits:{}) };
+(function initEnVerDefault(){
+  const implicit=(typeof HS_I18N!=='undefined')?HS_I18N.implicitTextVer():'kjv';
+  if(typeof savedSet.enVerExplicit==='boolean'){
+    state.settings.enVerExplicit=savedSet.enVerExplicit;
+  }else if(typeof savedSet.enVer==='string' && savedSet.enVer && savedSet.enVer!=='kjv'){
+    state.settings.enVerExplicit=true;
+  }else{
+    state.settings.enVerExplicit=false;
+  }
+  if(!state.settings.enVerExplicit) state.settings.enVer=implicit;
+})();
 (function(){
   const PROT={ot:true,nt:true,dc:false,add:false,orth:false,app:false};
   const KEYS=['ot','nt','dc','add','orth','app'];
@@ -1464,9 +1521,9 @@ function saveNotes(){ try{ localStorage.setItem(NOTES_KEY, JSON.stringify(NOTES)
 // ---------- backup reminders (notes live only in this browser) ----------
 const BACKUP_KEY='hiveScribe.lastBackup';
 function markBackup(name){ if(!/^hive-scribe-(export|notes)\./.test(String(name||''))) return; try{ localStorage.setItem(BACKUP_KEY,new Date().toISOString()); }catch(e){} refreshBackupLast(); }
-function lastBackupText(){ let t=null; try{ t=localStorage.getItem(BACKUP_KEY); }catch(e){} if(!t) return 'No backup exported from this browser yet.'; const d=new Date(t); return isNaN(d)?'':'Last backup exported '+d.toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'})+'.'; }
+function lastBackupText(){ let t=null; try{ t=localStorage.getItem(BACKUP_KEY); }catch(e){} if(!t) return T('backup.none'); const d=new Date(t); return isNaN(d)?'':T('backup.last',{date:d.toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'})}); }
 function refreshBackupLast(){ document.querySelectorAll('[data-backup-last]').forEach(el=>el.textContent=lastBackupText()); }
-function backupNudgeHTML(){ return `<p class="wp-backup">Saved only in this browser. <button type="button" class="linkbtn" data-backup="json">Back up notes</button> · <button type="button" class="linkbtn" data-backup="md">Readable copy</button> · <button type="button" class="linkbtn" data-backup="import">Restore</button> <span class="br-last" data-backup-last>${esc(lastBackupText())}</span></p>`; }
+function backupNudgeHTML(){ return `<p class="wp-backup">${esc(T('nb.nudge'))} <button type="button" class="linkbtn" data-backup="json">${esc(T('nb.nudgeJson'))}</button> · <button type="button" class="linkbtn" data-backup="md">${esc(T('nb.nudgeMd'))}</button> · <button type="button" class="linkbtn" data-backup="import">${esc(T('nb.nudgeImp'))}</button> <span class="br-last" data-backup-last>${esc(lastBackupText())}</span></p>`; }
 function backupToast(t){ let el=document.getElementById('backupToast'); if(!el){ el=document.createElement('div'); el.id='backupToast'; el.setAttribute('role','status'); el.setAttribute('aria-live','polite'); document.body.appendChild(el); } el.textContent=t; el.classList.add('on'); clearTimeout(el._t); el._t=setTimeout(()=>el.classList.remove('on'),3200); }
 document.addEventListener('click',e=>{ const b=e.target.closest('[data-backup]'); if(!b) return; const k=b.dataset.backup;
   if(k==='json') exportAll('json').then(r=>{ if(r==='download'||r==='share') backupToast('Backup saved: hive-scribe-export.json'); });
@@ -1512,8 +1569,8 @@ function enFor(b){ const p=enPref(); return enHas(p,b) ? p : (EN_VERSIONS.find(x
 function enHTML(t){ if(ENV&&ENV.live) return esc(t||''); return esc(t||'').replace(/\[([^\]]*)\]/g,'<i class="kit">$1</i>').replace(/¶\s*/g,'<span class="pil" aria-hidden="true">¶ </span>'); }
 function enPlain(t){ if(ENV&&ENV.live) return String(t||''); return String(t||'').replace(/[\[\]]/g,'').replace(/¶\s*/g,''); }
 function enVerseHTML(v){ const t=EN&&EN[v], r=ENR&&ENR[v], n=ENN&&ENN[v], ab=ENV?ENV.abbr:'';
-  return (t?enHTML(t):'')+(r?` <span class="kref" title="${esc(ab)} numbering">${esc(ab)} ${esc(r)}</span>`:'')+(!t&&n?`<span class="ennote">${esc(ab)}: ${esc(n)}</span>`:''); }
-function enFallbackNote(b){ const p=enPref(), e=enFor(b); return p.id===e.id?'':`${p.abbr} has no ${BOOK[b]?BOOK[b].name:b}; showing the ${e.abbr}`; }
+  return (t?enHTML(t):'')+(r?` <span class="kref" title="${esc(T('kref.title',{abbr:ab}))}">${esc(ab)} ${esc(r)}</span>`:'')+(!t&&n?`<span class="ennote">${esc(ab)}: ${esc(n)}</span>`:''); }
+function enFallbackNote(b){ const p=enPref(), e=enFor(b); return p.id===e.id?'':T('cov.lacks',{pref:p.abbr,book:bookLabel(b),have:e.abbr}); }
 const WNAME = {heb:'Hebrew (WLC)', grk:'Greek NT (SBLGNT)', byz:'Greek NT (Byzantine RP)', lxx:'Greek (LXX, Brenton)', tg:null, vul:'Latin Vulgate (Clementine)'};
 function canonOn(g){ const c=state.settings.canon||{}; return c[g]!==false; }
 function showDC(){ return canonOn('dc') && canonOn('add'); }
@@ -1536,12 +1593,12 @@ function nearestVisible(b,c){
 function visibleChapters(b){ return Array.from({length:BOOK[b].ch.length},(_,i)=>i+1).filter(c=>chapterVisible(b,c)); }
 function witnessesFor(b,c){
   const B=BOOK[b], m=B.ch[c-1], ws=[];
-  if(B.nt && (m.g||B.nt) && witOn('grk')) ws.push({id:'grk',name:'Greek NT (SBLGNT)',cls:'grk',rtl:false});
-  if(B.nt && m.bz && witOn('byz')) ws.push({id:'byz',name:'Greek NT (Byzantine RP)',cls:'grk',rtl:false});
-  if(m.h && witOn('heb')) ws.push({id:'heb',name:(b==='Dan'&&(c>=2&&c<=7))||(b==='Ezra'&&(c===4||c===5||c===6||c===7))?'Hebrew / Aramaic (WLC)':'Hebrew (WLC)',cls:'heb',rtl:true});
-  if(m.l && witOn('lxx')) ws.push({id:'lxx',name:'Greek (LXX, Brenton)',cls:'grk',rtl:false});
-  if(m.t && witOn('tg')) ws.push({id:'tg',name:['Gen','Exod','Lev','Num','Deut'].includes(b)?'Aramaic (Targum Onkelos)':'Aramaic (Targum Jonathan)',cls:'arc',rtl:true});
-  if((m.vlt||(m.vlt===undefined&&CH&&CH.vul&&Object.keys(CH.vul).length)) && witOn('vul')) ws.push({id:'vul',name:'Latin Vulgate (Clementine)',cls:'lat',rtl:false});
+  if(B.nt && (m.g||B.nt) && witOn('grk')) ws.push({id:'grk',name:T('wit.grk'),cls:'grk',rtl:false});
+  if(B.nt && m.bz && witOn('byz')) ws.push({id:'byz',name:T('wit.byz'),cls:'grk',rtl:false});
+  if(m.h && witOn('heb')) ws.push({id:'heb',name:(b==='Dan'&&(c>=2&&c<=7))||(b==='Ezra'&&(c===4||c===5||c===6||c===7))?T('wit.hebAram'):T('wit.heb'),cls:'heb',rtl:true});
+  if(m.l && witOn('lxx')) ws.push({id:'lxx',name:T('wit.lxx'),cls:'grk',rtl:false});
+  if(m.t && witOn('tg')) ws.push({id:'tg',name:['Gen','Exod','Lev','Num','Deut'].includes(b)?T('wit.tgOnkelos'):T('wit.tgJonathan'),cls:'arc',rtl:true});
+  if((m.vlt||(m.vlt===undefined&&CH&&CH.vul&&Object.keys(CH.vul).length)) && witOn('vul')) ws.push({id:'vul',name:T('wit.vul'),cls:'lat',rtl:false});
   return ws;
 }
 function defaultWit(b,c){
@@ -1602,7 +1659,7 @@ async function gotoChapter(b,c,opts={}){
   if(state.xVerse!=='all' && !vlabels(b,c).includes(state.xVerse)) state.xVerse='all';
   $('#pickLabel').textContent = refName(b,c);
   renderCov();
-  $('#verses').innerHTML = '<div class="loading">Loading '+esc(refName(b,c))+'…</div>';
+  $('#verses').innerHTML = '<div class="loading">'+esc(T('loading.ref',{ref:refName(b,c)}))+'</div>';
   persist();
   try{
     const {ch,en,ev} = await loadChapter(b,c);
@@ -1619,7 +1676,7 @@ async function gotoChapter(b,c,opts={}){
     if(seq!==loadSeq) return;
     CH=null; EN=null; ENR={}; ENN={}; liveAfterLoad();
     $('#verses').innerHTML = e.message==='not-in-sample' ? `<div class="err">${esc(refName(b,c))} is not in this single-file sample (it has Genesis 1 and John 1). Open the full app (dist/) for the whole Bible.</div>`
-      : `<div class="err">Could not load ${esc(refName(b,c))}: ${esc(e.message)}. ${navigator.onLine===false?'You are offline and this chapter has not been downloaded yet.':''}</div>`;
+      : `<div class="err">${esc(T('err.load',{ref:refName(b,c),err:e.message}))} ${navigator.onLine===false?esc(T('err.offlineChapter')):''}</div>`;
   }
 }
 function neighbour(d){
@@ -1634,23 +1691,26 @@ function neighbour(d){
 }
 function prefetchNeighbours(){ if(INLINE) return; const n=neighbour(1); if(n) setTimeout(()=>getJSON(`ch/${n[0]}.${n[1]}.json.gz`).catch(()=>{}),800); }
 function dcBadge(b){
-  if(b.dc===1) return ' <span class="dc">Deuterocanonical · Greek (Septuagint) original</span>';
-  if(b.dc===2) return ' <span class="dc">includes Greek additions (LXX)</span>';
-  if(b.dc===3) return ' <span class="dc">Orthodox · Septuagint book</span>';
-  if(b.dc===4) return ' <span class="dc">Appendix (Orthodox / Slavonic / Latin Bibles)</span>';
+  if(b.dc===1) return ' <span class="dc">'+esc(T('dc.greekOrig'))+'</span>';
+  if(b.dc===2) return ' <span class="dc">'+esc(T('dc.greekAdd'))+'</span>';
+  if(b.dc===3) return ' <span class="dc">'+esc(T('dc.orthBook'))+'</span>';
+  if(b.dc===4) return ' <span class="dc">'+esc(T('dc.appBadge'))+'</span>';
   return '';
 }
 function renderCov(){
   const B=BOOK[state.book], m=B.ch[state.ch-1], parts=[], n=visibleVlabels(state.book,state.ch).length;
-  if(B.nt && m.g) parts.push(`<b>Greek NT</b> ${m.g}/${m.n}`);
-  if(B.nt && m.bz) parts.push(`<b>Byzantine</b> ${m.bz}/${m.n}`);
-  if(m.h) parts.push(`<b>Hebrew</b> ${m.h}/${m.n}`);
-  if(m.l) parts.push(`<b>LXX</b> ${m.l}/${m.n}`);
-  if(m.t) parts.push(`<b>Targum (Aramaic)</b> ${m.t}/${m.n}`);
-  if(m.vlt) parts.push(`<b>Vulgate</b> ${m.vlt}/${m.n}`);
+  if(B.nt && m.g) parts.push(`<b>${esc(T('cov.grkNT'))}</b> ${m.g}/${m.n}`);
+  if(B.nt && m.bz) parts.push(`<b>${esc(T('cov.byzantine'))}</b> ${m.bz}/${m.n}`);
+  if(m.h) parts.push(`<b>${esc(T('cov.hebrew'))}</b> ${m.h}/${m.n}`);
+  if(m.l) parts.push(`<b>${esc(T('cov.lxx'))}</b> ${m.l}/${m.n}`);
+  if(m.t) parts.push(`<b>${esc(T('cov.targum'))}</b> ${m.t}/${m.n}`);
+  if(m.vlt) parts.push(`<b>${esc(T('cov.vulgate'))}</b> ${m.vlt}/${m.n}`);
   const lfb=ENV&&ENV._fallbackFor&&ENV._b===state.book&&ENV._c===state.ch;
   const evShow=lfb?ENV:enFor(state.book);
-  $('#covLine').innerHTML = `${n} verse${n===1?'':'s'} · ${evShow.id==='rvr1909'?'Spanish':'English'} (${esc(evShow.abbr)}${lfb?` <span class="enfb">· ${esc(ENV._fallbackFor.abbr)} unavailable</span>`:enFallbackNote(state.book)?` <span class="enfb">· ${esc(enPref().abbr)} lacks this book</span>`:''}) · ${parts.join(' · ')||'no original-language text'}${dcBadge(B)}`;
+  const vlab=n===1?T('cov.verses',{n}):T('cov.versesN',{n});
+  const lang=evShow.id==='rvr1909'?T('cov.spanish'):T('cov.english');
+  const fb=lfb?` <span class="enfb">· ${esc(T('cov.unavail',{pref:ENV._fallbackFor.abbr}))}</span>`:enFallbackNote(state.book)?` <span class="enfb">· ${esc(T('cov.lacksShort',{pref:enPref().abbr}))}</span>`:'';
+  $('#covLine').innerHTML = `${esc(vlab)} · ${esc(lang)} (${esc(evShow.abbr)}${fb}) · ${parts.join(' · ')||esc(T('cov.noneOrig'))}${dcBadge(B)}`;
 }
 
 // ===================== API.Bible live translations (NLT, NKJV) =====================
@@ -1808,7 +1868,7 @@ function liveCopyHTML(){
   if(ev && ev._fallbackFor && ev._b===state.book && ev._c===state.ch) return `<div class="lc-msg" role="status">${esc(ev._msg)}</div>`;
   if(!ev || !ev.live || ev._b!==state.book || ev._c!==state.ch) return '';
   const line=ev._copyright || ev.notice;
-  return `<div class="lc-line"><b>${esc(ev.abbr)}</b> · ${esc(line)} <a href="#copyright" data-livecopy="1">Copyright notices</a> · Text via <a href="https://api.bible" target="_blank" rel="noopener">API.Bible</a></div>`;
+  return `<div class="lc-line"><b>${esc(ev.abbr)}</b> · ${esc(line)} <a href="#copyright" data-livecopy="1">${esc(T('live.copyNotices'))}</a> · ${esc(T('live.via'))} <a href="https://api.bible" target="_blank" rel="noopener">API.Bible</a></div>`;
 }
 function liveAfterLoad(){
   const h=liveCopyHTML();
@@ -1819,7 +1879,7 @@ function liveAboutHTML(){
   const L=EN_VERSIONS.filter(x=>x.live); if(!L.length) return '';
   return '<ul>'+L.map(x=>{ const body=/^\s*Scripture quotations/i.test(x.notice||'')?esc(x.notice):`Scripture quotations marked (${esc(x.abbr)}) are taken from the ${esc(x.notice)} Used by permission.`;
     return `<li>${body} <a href="${esc(x.ownerUrl)}" target="_blank" rel="noopener">${esc(x.ownerUrl.replace(/^https?:\/\//,''))}</a></li>`; }).join('')+
-    `<li>The ${L.map(x=>esc(x.abbr)).join(' and ')} ${L.length>1?'are':'is'} loaded live, chapter by chapter, from <a href="https://api.bible" target="_blank" rel="noopener">API.Bible</a> (American Bible Society) for non-commercial use. ${L.length>1?'They are':'It is'} not stored in the app, so ${L.length>1?'they need':'it needs'} an internet connection and ${L.length>1?'are':'is'} not part of the offline download. Views are counted anonymously by API.Bible's Fair Use Management System, as its terms require.</li></ul>`;
+    `<li>${(L.length>1?T('live.aboutHowN',{names:L.map(x=>esc(x.abbr)).join(' y ')}):T('live.aboutHow1',{names:esc(L[0].abbr)}))}</li></ul>`;
 }
 function liveAboutInit(){ const box=$('#liveCopyAbout'); if(!box) return; const h=liveAboutHTML(); box.innerHTML=h; const hd=$('#copyright'); if(hd) hd.hidden=!h; box.hidden=!h; }
 document.addEventListener('click',e=>{ const a=e.target.closest('[data-livecopy]'); if(!a) return; e.preventDefault(); showTab('about'); requestAnimationFrame(()=>{ const h=$('#copyright'); if(h) h.scrollIntoView({block:'start'}); }); });
@@ -1841,12 +1901,12 @@ document.addEventListener('click',e=>{
 // ---------- Read view ----------
 function renderWitSeg(){
   $('#witnessWrap').hidden = !WITS.length;
-  const WSHORT={heb:'Hebrew',grk:'SBLGNT',byz:'Byzantine',lxx:'LXX',tg:'Targum (Aramaic)',vul:'Vulgate'}, WTINY={tg:'Aramaic'};
+  const WSHORT={heb:T('wit.short.heb'),grk:T('wit.short.grk'),byz:T('wit.short.byz'),lxx:T('wit.short.lxx'),tg:T('wit.short.tg'),vul:T('wit.short.vul')}, WTINY={tg:T('wit.tiny.tg')};
   $('#witSeg').innerHTML = WITS.map(w=>`<button data-wit="${w.id}" aria-pressed="${w.id===state.wit}" aria-label="${esc(w.name)}" title="${esc(w.name)}"><span class="wfull">${esc(w.name)}</span><span class="wshort" aria-hidden="true">${WTINY[w.id]?`<span class="wlong">${esc(WSHORT[w.id])}</span><span class="wtiny">${esc(WTINY[w.id])}</span>`:esc(WSHORT[w.id]||w.name)}</span></button>`).join('');
 }
 function visibleVerses(){ const all=visibleVlabels(state.book,state.ch); return state.vf==='all'?all:all.filter(v=>v===state.vf); }
 function renderVF(){
-  $('#vfSel').innerHTML = `<option value="all">All ${visibleVlabels(state.book,state.ch).length} verses</option>`+visibleVlabels(state.book,state.ch).map(v=>`<option value="${v}"${v===state.vf?' selected':''}>Verse ${v}</option>`).join('');
+  $('#vfSel').innerHTML = `<option value="all">${esc(T('vf.all',{n:visibleVlabels(state.book,state.ch).length}))}</option>`+visibleVlabels(state.book,state.ch).map(v=>`<option value="${v}"${v===state.vf?' selected':''}>${esc(T('vf.verse',{n:v}))}</option>`).join('');
   $('#vfSel').value=state.vf;
 }
 const vid_ = v=>`${state.book}.${state.ch}.${v}`;
@@ -1860,7 +1920,7 @@ function interHTML(v){
   const wit=WITS.find(w=>w.id===state.wit);
   if(!wit) return `<div class="missing">${state.book==='2Esd'?'2 Esdras is English only here: it survives mainly in Latin, and neither Brenton’s Septuagint nor the Clementine Vulgate used here contains it.':'No original-language text is available for this verse with the witnesses you have turned on.'}</div>`;
   const ws=verseWords(wit.id,v);
-  if(!ws) return `<div class="missing">No ${esc(wit.name)} text for this verse${wit.id==='lxx'?' (not found in the Septuagint, or the automatic alignment found no match)':wit.id==='grk'?' (not in the SBLGNT; the WEB follows the Majority Text here)':wit.id==='byz'?' (not in the Robinson-Pierpont Byzantine text)':wit.id==='heb'?' (Greek addition (LXX): no Hebrew or Aramaic in the sources used)':wit.id==='vul'?' (not found in the Clementine Vulgate, or the automatic alignment found no match)':''}.</div>`;
+  if(!ws){ const tail={lxx:T('miss.lxx'),grk:T('miss.grk'),byz:T('miss.byz'),heb:T('miss.heb'),vul:T('miss.vul')}[wit.id]||''; const base=T('miss.generic',{name:wit.name}).replace(/\.$/,''); return `<div class="missing">${esc(base)}${esc(tail)}.</div>`; }
   const rn=witRefNote(wit.id,v), lang=wit.cls==='grk'?'grc':wit.cls==='lat'?'la':(wit.cls==='heb'?'he':'arc');
   const vd=ws.fill?null:varFor(wit.id,v), gaps=(vd&&vd.gapsA)||{};
   const fillNote=ws.fill==='byz'?`<div class="varfill"><span class="badge varbadge">Textual Variant: Byzantine</span> ${wit.id==='grk'?'Not in the SBLGNT. ':''}Shown from the Robinson-Pierpont Byzantine Textform 2018.</div>`:ws.fill==='tr'?`<div class="varfill"><span class="badge varbadge">Textual Variant: TR</span> In neither the SBLGNT nor the Byzantine text (RP2018). Shown from Scrivener's 1894 Textus Receptus (unaccented transcription).</div>`:'';
@@ -1875,7 +1935,7 @@ function renderVerses(){
   $('#verses').innerHTML = visibleVerses().map(v=>{
     const id=vid_(v), open=state.open.has(id);
     const inter=open?`<div class="interwrap open"><div class="inter-inner">${interHTML(v)}</div></div>`:'';
-    return `<article class="verse${open?' open':''}${vxClass(v)}" id="v-${state.book}-${state.ch}-${v}" data-id="${id}" data-v="${v}"><span class="vhead vref" tabindex="0" role="button" aria-label="${esc(refName(state.book,state.ch,v))}: open the passage panel (Shift+Enter extends the selection)" title="${esc(refName(state.book,state.ch,v))}">${esc(String(v))}</span><button class="vnote${NOTES[`v|${state.book}|${state.ch}|${v}`]?' has':''}" data-note="v|${state.book}|${state.ch}|${v}" aria-label="Note on ${esc(refName(state.book,state.ch,v))}">✎</button>${vxMarks(v)}<div class="eng">${enVerseHTML(v)}</div>${inter}</article>`;
+    return `<article class="verse${open?' open':''}${vxClass(v)}" id="v-${state.book}-${state.ch}-${v}" data-id="${id}" data-v="${v}"><span class="vhead vref" tabindex="0" role="button" aria-label="${esc(refName(state.book,state.ch,v))}: open the passage panel (Shift+Enter extends the selection)" title="${esc(refName(state.book,state.ch,v))}">${esc(String(v))}</span><button class="vnote${NOTES[`v|${state.book}|${state.ch}|${v}`]?' has':''}" data-note="v|${state.book}|${state.ch}|${v}" aria-label="${esc(T('aria.noteOn',{ref:refName(state.book,state.ch,v)}))}">✎</button>${vxMarks(v)}<div class="eng">${enVerseHTML(v)}</div>${inter}</article>`;
   }).join('') || '<div class="loading">No verses.</div>';
   wpSync();
 }
@@ -1961,7 +2021,7 @@ function valueRow(word, cls){
 }
 function lexInfoHTML(wit, raw){
   if(wit==='heb'){
-    const L=LEXF.H; if(!L) return '<div class="c-row" style="color:var(--ink3)">Loading lexicon…</div>';
+    const L=LEXF.H; if(!L) return '<div class="c-row" style="color:var(--ink3)">'+esc(T('loading.lexicon'))+'</div>';
     const parts=raw[3].split('/').map(t=>t.replace(/[{}]/g,'').replace(/\\.*$/,'').replace(/\+$/,'')).filter(Boolean);
     const root=rootTag(raw[3]); const e=root&&L[root];
     const affix=parts.filter(t=>t!==root).map(t=>L[t]?`${esc(L[t][0])} “${esc(L[t][3])}”`:esc(t));
@@ -1971,7 +2031,7 @@ function lexInfoHTML(wit, raw){
       (e?`<div class="c-row"><b>Occurrences:</b> ${e[5]} in the Hebrew Bible <button class="btn" style="min-height:36px;padding:4px 10px" data-conc="${esc(root)}">Concordance →</button></div>`:'');
   }
   if(isGkWit(wit)){
-    const L=LEXF.G; if(!L) return '<div class="c-row" style="color:var(--ink3)">Loading lexicon…</div>';
+    const L=LEXF.G; if(!L) return '<div class="c-row" style="color:var(--ink3)">'+esc(T('loading.lexicon'))+'</div>';
     const k=(/G\d+[A-Za-z]?/.exec(raw[3])||[])[0]; const e=k&&L[k];
     return (e&&e[4]?`<div class="c-def"><b>Brief lexicon:</b> ${esc(e[4])} <span style="color:var(--ink3)">(STEPBible TBESG)</span></div>`:'')+
       (e?`<div class="c-row"><b>Occurrences:</b> ${e[5]} in the NT (SBLGNT) <button class="btn" style="min-height:36px;padding:4px 10px" data-conc="${esc(k)}">Concordance →</button></div>`:'');
@@ -2013,17 +2073,17 @@ function openPopup(wEl, animate){
       `<div class="c-row"><b>Where:</b> ${esc(witRefNote(wit.id,v)||ref)}</div>`+valueRow(d.w,wit.cls)+`<div>${BADGE[wit.id]}</div>`;
   }
   callout.innerHTML = body +
-    `<div class="c-row" style="margin-top:10px"><b>Personal Scribe Note</b> <span style="color:var(--ink3)">(${esc(ref)}, ${esc(wit.name)}; saved on this device)</span></div>`+
+    `<div class="c-row" style="margin-top:10px"><b>${esc(T('callout.personal'))}</b> <span style="color:var(--ink3)">(${esc(ref)}, ${esc(wit.name)}; ${esc(T('callout.savedHere'))})</span></div>`+
     `<textarea class="notebox" id="pnote" placeholder="Your note on this word…">${esc((NOTES[key]||{}).text||'')}</textarea>`+
-    `<div class="btnrow"><button class="btn primary" id="pnoteSave">Save note</button><span class="saved" id="pnoteMsg"></span></div>`+
+    `<div class="btnrow"><button class="btn primary" id="pnoteSave">${esc(T('note.save'))}</button><span class="saved" id="pnoteMsg"></span></div>`+
     `<div class="c-close">Tap the dimmed area or double-tap this box to close.</div>`;
   $('#pnoteSave').onclick=()=>{
     const ok=setNote(key,$('#pnote').value,{kind:'word',ref,word:d.w,wit:wit.name,book:state.book,ch:state.ch,witId:wit.id,v,i});
-    $('#pnoteMsg').textContent = ok?($('#pnote').value.trim()?'Saved ✓':'Note removed'):'Could not save (storage blocked)';
+    $('#pnoteMsg').textContent = ok?($('#pnote').value.trim()?T('saved'):T('noteRemoved')):T('err.save');
     wEl.classList.toggle('noted',!!NOTES[key]);
   };
   const L = wit.id==='heb'?'H':isGkWit(wit.id)?'G':null;
-  if(L && !LEXF[L]) lexFile(L).then(()=>{ if(popupOpen && popupKey===key){ const el=callout.querySelector('.c-lexinfo'); if(el){ el.innerHTML=lexInfoHTML(isGkWit(wit.id)?'grk':wit.id,raw); placePopup(false); } } }).catch(()=>{ const el=callout.querySelector('.c-lexinfo'); if(el) el.innerHTML='<div class="c-row" style="color:var(--ink3)">Lexicon not available offline yet.</div>'; });
+  if(L && !LEXF[L]) lexFile(L).then(()=>{ if(popupOpen && popupKey===key){ const el=callout.querySelector('.c-lexinfo'); if(el){ el.innerHTML=lexInfoHTML(isGkWit(wit.id)?'grk':wit.id,raw); placePopup(false); } } }).catch(()=>{ const el=callout.querySelector('.c-lexinfo'); if(el) el.innerHTML='<div class="c-row" style="color:var(--ink3)">'+esc(T('lex.offlineYet'))+'</div>'; });
   dim.classList.add('on'); callout.classList.add('on'); arm.classList.add('on');
   if(!popupOpen) saveScroll();
   if(!popupOpen) dimArmed=false;
@@ -2122,35 +2182,35 @@ function openNoteSheet(key){ noteKey=key; const [,b,c,v]=key.split('|');
   $('#noteTitle').textContent=`Note on ${refName(b,c,v)}`; $('#noteText').value=(NOTES[key]||{}).text||''; $('#noteSaved').textContent=''; openSheet('#noteSheet'); }
 $('#noteSave').onclick=()=>{ const [,b,c,v]=noteKey.split('|');
   const ok=setNote(noteKey,$('#noteText').value,{kind:'verse',ref:refName(b,c,v),book:b,ch:+c,v});
-  $('#noteSaved').textContent=ok?($('#noteText').value.trim()?'Saved ✓':'Note removed'):'Could not save (storage blocked)'; renderVerses(); };
-$('#noteDel').onclick=()=>{ setNote(noteKey,''); $('#noteText').value=''; $('#noteSaved').textContent='Note removed'; renderVerses(); };
+  $('#noteSaved').textContent=ok?($('#noteText').value.trim()?T('saved'):T('noteRemoved')):T('err.save'); renderVerses(); };
+$('#noteDel').onclick=()=>{ setNote(noteKey,''); $('#noteText').value=''; $('#noteSaved').textContent=T('noteRemoved'); renderVerses(); };
 
 // ---------- canon picker ----------
 const OT_GROUPS=['Pentateuch','Historical books','Wisdom books','Prophets'];
 function covText(b){
   const sum=k=>b.ch.reduce((a,c)=>a+(c[k]||0),0), n=b.ch.reduce((a,c)=>a+c.n,0), pc=k=>Math.round(100*sum(k)/n);
-  const out=['English'];
-  if(b.nt) out.push(`Greek NT ${pc('g')}%`);
-  if(sum('h')) out.push(`Hebrew ${pc('h')}%`);
-  if(sum('l')) out.push(`LXX ${pc('l')}%`);
-  if(sum('t')) out.push(`Targum (Aramaic) ${pc('t')}%`);
-  if(sum('vlt')) out.push(`Vulgate ${pc('vlt')}%`);
+  const out=[T('cov.english')];
+  if(b.nt) out.push(`${T('cov.grkNT')} ${pc('g')}%`);
+  if(sum('h')) out.push(`${T('cov.hebrew')} ${pc('h')}%`);
+  if(sum('l')) out.push(`${T('cov.lxx')} ${pc('l')}%`);
+  if(sum('t')) out.push(`${T('cov.targum')} ${pc('t')}%`);
+  if(sum('vlt')) out.push(`${T('cov.vulgate')} ${pc('vlt')}%`);
   return out;
 }
 function renderCanon(){
   let html='', lastGrp=null;
   const list=BOOKS.filter(b=>bookVisible(b.id));
   list.forEach((b,bi)=>{
-    if(bi===0 && !b.nt) html+='<h3>Old Testament</h3>'; if(b.nt && (bi===0 || !list[bi-1].nt)) html+='<h3>New Testament</h3>';
-    if(b.grp!==lastGrp){ html+=`<h3 style="margin-top:6px;font-size:11px;opacity:.8">${esc(b.grp)}</h3>`; lastGrp=b.grp; }
-    const chs=visibleChapters(b.id);
-    html+=`<div class="bk" data-book="${b.id}"><button aria-expanded="false">${esc(b.name)}${dcBadge(b)}<span class="meta">${chs.length} ch.</span></button>`+
+    if(bi===0 && !b.nt) html+='<h3>'+esc(T('pick.ot'))+'</h3>'; if(b.nt && (bi===0 || !list[bi-1].nt)) html+='<h3>'+esc(T('pick.nt'))+'</h3>';
+    if(b.grp!==lastGrp){ html+=`<h3 style="margin-top:6px;font-size:11px;opacity:.8">${esc(typeof HS_I18N!=='undefined'?HS_I18N.groupName(b.grp):b.grp)}</h3>`; lastGrp=b.grp; }
+    const chs=visibleChapters(b.id), nm=bookLabel(b.id);
+    html+=`<div class="bk" data-book="${b.id}"><button aria-expanded="false">${esc(nm)}${dcBadge(b)}<span class="meta">${esc(T('pick.ch',{n:chs.length}))}</span></button>`+
       `<div class="covline">${covText(b).map(t=>`<span>${esc(t)}</span>`).join('')}</div>`+
       `<div class="chgrid" hidden>${chs.map(c=>{ const na=sampleOnly(b.id,c), cur=b.id===state.book&&c===state.ch;
-        return `<button class="avail${cur?' cur':''}${na?' na':''}" data-go="${b.id}" data-c="${c}" aria-label="${esc(b.name)} ${c}${na?', full app only':''}">${c}</button>`; }).join('')}</div></div>`;
+        return `<button class="avail${cur?' cur':''}${na?' na':''}" data-go="${b.id}" data-c="${c}" aria-label="${esc(nm)} ${c}${na?esc(T('pick.fullOnly')):''}">${c}</button>`; }).join('')}</div></div>`;
   });
   const nch=list.reduce((a,b)=>a+visibleChapters(b.id).length,0);
-  $('#canonList').innerHTML=html+`<div class="note">${list.length} books · ${nch} chapters · ${esc(canonSummary())}.${INLINE?' This single-file sample opens Genesis 1 and John 1 only; faded chapters need the full app.':''}</div>`;
+  $('#canonList').innerHTML=html+`<div class="note">${esc(T('pick.footer',{n:list.length,ch:nch,sum:canonSummary()}))}${INLINE?' '+esc(T('pick.sampleNote')):''}</div>`;
 }
 $('#pickBtn').onclick=()=>{ renderCanon(); const cur=document.querySelector(`#canonList .bk[data-book="${state.book}"]`);
   if(cur){ cur.querySelector('.chgrid').hidden=false; cur.firstChild.setAttribute('aria-expanded','true'); } openSheet('#pickSheet');
@@ -2195,28 +2255,28 @@ function polyRows(ch, wits, v, hi={}){
     const ws = (()=>{ const d=ch[w.id]&&ch[w.id][v]; if(!d) return null;
       if(w.id==='heb'||isGkWit(w.id)) return d.w.map(a=>({w:a[0],raw:a})); return d.t.split(/\s+/).filter(Boolean).map(t=>({w:t})); })();
     if(!ws && w.id==='grk' && !(ch.byz&&ch.byz[v]) && ch.tr && ch.tr[v]){ h+=rowHTML('Greek NT (Scrivener 1894 TR)', '<span class="badge varbadge mini">Textual Variant: TR</span>', 'grk', ch.tr[v].t.split(/\s+/).filter(Boolean).map(t=>({w:t})), null, null); continue; }
-    if(!ws){ h+=`<div class="prow"><div class="plabel">${esc(w.name)}</div><div class="missing">no text for this verse${w.id==='byz'?' in the Robinson-Pierpont Byzantine text':w.id==='grk'?' in the SBLGNT':''}</div></div>`; continue; }
+    if(!ws){ h+=`<div class="prow"><div class="plabel">${esc(w.name)}</div><div class="missing">${esc(T('poly.noText'))}${w.id==='byz'?esc(T('poly.noByz')):w.id==='grk'?esc(T('poly.noGrk')):''}</div></div>`; continue; }
     const d=ch[w.id][v]; const rn = w.id==='lxx'?' · LXX '+d.r.join(', '):(d.r?' · Heb. '+d.r:'');
     const vd = isGkWit(w.id) && wits.some(x=>x.id===otherGk(w.id)) && ch[otherGk(w.id)] && ch[otherGk(w.id)][v] ? (()=>{ const r=gkDiff(d.w.map(a=>a[0]), ch[otherGk(w.id)][v].w.map(a=>a[0])); r.other=otherGk(w.id); return r; })() : null;
     h+=rowHTML(esc(w.name)+esc(rn), MINI[w.id], w.cls, ws, hi[w.id], vd);
   }
   return h;
 }
-const enRow=(t,extra='',ev=ENV||enPref(),html=null)=>`<div class="prow"><div class="plabel">${ev.id==='rvr1909'?'Spanish':'English'} · ${esc(ev.abbr)} <span class="badge ok mini">${esc(ev.lic)}</span>${extra}</div><div class="polytext en">${html!=null?html:enHTML(t)}</div></div>`;
+const enRow=(t,extra='',ev=ENV||enPref(),html=null)=>`<div class="prow"><div class="plabel">${esc(ev.id==='rvr1909'?T('en.row.spanish'):T('en.row.english'))} · ${esc(ev.abbr)} <span class="badge ok mini">${esc(ev.lic)}</span>${extra}</div><div class="polytext en">${html!=null?html:enHTML(t)}</div></div>`;
 function renderPoly(){
   document.querySelectorAll('#polySeg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.pm===state.pm));
   if(state.pm==='matrix'){
-    if(!CH){ $('#polyBody').innerHTML='<div class="loading">Loading…</div>'; return; }
+    if(!CH){ $('#polyBody').innerHTML='<div class="loading">'+esc(T('loading'))+'</div>'; return; }
     const vs=visibleVerses();
-    $('#polyBody').innerHTML=`<div class="note" style="margin-top:0">${esc(refName(state.book,state.ch))}: every witness side by side${vs.length>1?` (${vs.length} verses; pick one verse in Read to narrow this down)`:''}.</div>`+
-      vs.map(v=>`<div class="pcard" id="pm-${state.book}-${state.ch}-${v}"><div class="vhead"><span class="vref">${esc(refName(state.book,state.ch,v))}</span></div>${polyRows(CH,WITS,v)}${enRow(EN[v],'',ENV||enPref(),enVerseHTML(v))}<button class="jump" data-v="${v}">Open in Read →</button></div>`).join('');
+    $('#polyBody').innerHTML=`<div class="note" style="margin-top:0">${esc(T('poly.sideNote',{ref:refName(state.book,state.ch)}))}${vs.length>1?esc(T('poly.narrow',{n:vs.length})):''}.</div>`+
+      vs.map(v=>`<div class="pcard" id="pm-${state.book}-${state.ch}-${v}"><div class="vhead"><span class="vref">${esc(refName(state.book,state.ch,v))}</span></div>${polyRows(CH,WITS,v)}${enRow(EN[v],'',ENV||enPref(),enVerseHTML(v))}<button class="jump" data-v="${v}">${esc(T('open.passage'))}</button></div>`).join('');
   } else renderBridge();
 }
 async function renderBridge(){
-  $('#polyBody').innerHTML='<div class="loading">Loading Genesis 1 and John 1…</div>';
+  $('#polyBody').innerHTML='<div class="loading">'+esc(T('loading.bridge'))+'</div>';
   let G1,J1,EG,EJ;
   try{ [G1,J1,EG,EJ]=await Promise.all([getJSON('ch/Gen.1.json.gz'),getJSON('ch/John.1.json.gz'),getJSON(`${enFor('Gen').dir}/Gen.json.gz`),getJSON(`${enFor('John').dir}/John.json.gz`)]); }
-  catch(e){ $('#polyBody').innerHTML=`<div class="err">Could not load Genesis 1 / John 1: ${esc(e.message)}</div>`; return; }
+  catch(e){ $('#polyBody').innerHTML=`<div class="err">${esc(T('err.bridge',{err:e.message}))}</div>`; return; }
   if(state.pm!=='bridge'||state.tab!=='poly') return;
   const S = re => w=> w.raw && re.test(w.raw[3]||'');
   const N = list => w=> list.includes(String(w.w).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^\p{L}]/gu,'').toLowerCase());
@@ -2242,9 +2302,9 @@ const bookIdx = b=>BOOKS.findIndex(x=>x.id===b);
 let GEO=null, LINKS=[], NODES={}, VCOL={};
 function css(v){ return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
 function renderXFilters(){
-  $('#xTestSeg').innerHTML=[['all','All'],['OT','Old Testament'],['NT','New Testament']].map(([id,l])=>`<button data-xtest="${id}" aria-pressed="${id===state.xTest}">${l}</button>`).join('');
+  $('#xTestSeg').innerHTML=[['all',T('lib.all')],['OT',T('lib.ot')],['NT',T('lib.nt')]].map(([id,l])=>`<button data-xtest="${id}" aria-pressed="${id===state.xTest}">${esc(l)}</button>`).join('');
   const vs=CH?visibleVlabels(state.book,state.ch).filter(v=>CH.x[v]):[];
-  $('#xVerseSel').innerHTML=`<option value="all">All verses of ${esc(refName(state.book,state.ch))}</option>`+vs.map(v=>`<option value="${v}">${esc(refName(state.book,state.ch,v))}</option>`).join('');
+  $('#xVerseSel').innerHTML=`<option value="all">${esc(T('chords.allVerses',{ref:refName(state.book,state.ch)}))}</option>`+vs.map(v=>`<option value="${v}">${esc(refName(state.book,state.ch,v))}</option>`).join('');
   $('#xVerseSel').value=vs.includes(state.xVerse)?state.xVerse:'all';
   $('#xTopSeg').innerHTML=[3,5,10].map(n=>`<button data-xt="${n}" aria-pressed="${n===state.xTop}">Top ${n}</button>`).join('');
   $('#xShapeSeg').innerHTML=[['ring','Ring'],['sphere','Sphere']].map(([id,l])=>`<button data-xshape="${id}" aria-pressed="${id===state.xShape}">${l}</button>`).join('');
@@ -2307,7 +2367,7 @@ async function selectLinks(ks,title){
   document.querySelectorAll('.chordline').forEach(p=>{ const on=ks.includes(+p.dataset.k); p.classList.toggle('active',on); p.classList.toggle('faded',!on); });
   if(window.chordsGL) chordsGL.setSelection(ks);
   const Ls=ks.map(k=>LINKS[k]); const refs=[...new Set(Ls.map(L=>L.ref))].slice(0,12); const vs=[...new Set(Ls.map(L=>L.v))].slice(0,6);
-  $('#connPanel').innerHTML=`<h3>${esc(title)}</h3><div class="loading">Loading texts…</div>`;
+  $('#connPanel').innerHTML=`<h3>${esc(title)}</h3><div class="loading">${esc(T('loading.texts'))}</div>`;
   const texts=await Promise.all(refs.map(refText));
   $('#connPanel').innerHTML=`<h3>${esc(title)}</h3>`+
     Ls.slice(0,20).map(L=>`<div class="note">${esc(refName(state.book,state.ch,L.v))} ↔ ${esc(shortRef(L.ref))} · ${L.votes} votes</div>`).join('')+
@@ -2320,9 +2380,9 @@ $('#chord').addEventListener('click',e=>{
   if(nd){ const id=nd.dataset.id; const ks=LINKS.filter(L=>L.ref===id||'S'+L.v===id).map(L=>L.k); const n=NODES[id];
     selectLinks(ks, `${n.cur?refName(state.book,state.ch,n.v):shortRef(id)}: ${ks.length} connection${ks.length===1?'':'s'}`); }
   else if(h){ const L=LINKS[+h.dataset.k]; selectLinks([L.k], `${refName(state.book,state.ch,L.v)} ↔ ${shortRef(L.ref)}`); }
-  else if(bl){ const b=bl.dataset.book; const ks=LINKS.filter(L=>b==='__cur'||parseRef(L.ref).b===b).map(L=>L.k); selectLinks(ks, `${b==='__cur'?refName(state.book,state.ch):BOOK[b].name}: ${ks.length} connection${ks.length===1?'':'s'}`); }
+  else if(bl){ const b=bl.dataset.book; const ks=LINKS.filter(L=>b==='__cur'||parseRef(L.ref).b===b).map(L=>L.k); selectLinks(ks, (ks.length===1?T('chords.connections',{name:b==='__cur'?refName(state.book,state.ch):bookLabel(b),n:ks.length}):T('chords.connectionsN',{name:b==='__cur'?refName(state.book,state.ch):bookLabel(b),n:ks.length}))); }
 });
-function resetPanel(){ $('#connPanel').innerHTML=`<h3>Tap a line, dot or book name</h3><div class="note">The gold arc is ${esc(refName(state.book,state.ch))}; lines are colored by its verse. Other books run in Bible order clockwise. Thicker lines have more votes.</div>`; }
+function resetPanel(){ $('#connPanel').innerHTML=`<h3>${esc(T('chords.tap'))}</h3><div class="note">${esc(T('chords.tapNote',{ref:refName(state.book,state.ch)}))}</div>`; }
 function renderConn(){ renderXFilters(); drawChord(); resetPanel(); }
 $('#xTestSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; state.xTest=b.dataset.xtest; persist(); renderConn(); });
 $('#xVerseSel').addEventListener('change',e=>{ state.xVerse=e.target.value; persist(); renderConn(); });
@@ -2354,7 +2414,7 @@ function entryHTML(key,e,extra){
     `<div class="meta">${e?`<i>${esc(e[1])}</i> · ${esc(e[3])} · `:''}${strongLink(key, plainStrong(key), 'lex-strong')} <span style="color:var(--ink3)">(${esc(key)})</span>${e?` · ${e[5]} occurrence${e[5]===1?'':'s'} in the ${key[0]==='G'?'NT':'Hebrew Bible'}`:''}</div>`+
     (e&&e[4]&&lexOpen===key?`<div class="c-def">${esc(e[4])}</div>`:'')+(extra||'')+
     `<div class="btnrow" style="margin-top:4px"><button class="btn" data-occ="${esc(key)}" style="min-height:36px;padding:4px 10px">${lexOpen===key?'Hide':'All occurrences'}</button></div>`+
-    (lexOpen===key?`<div class="occlist" id="occ-${esc(key)}"><div class="loading">Loading concordance…</div></div>`:'')+`</div>`;
+    (lexOpen===key?`<div class="occlist" id="occ-${esc(key)}"><div class="loading">${esc(T('loading.conc'))}</div></div>`:'')+`</div>`;
 }
 async function renderLex(){
   $('#lexSeg').innerHTML=LANGS.map(([id,l])=>`<button data-lang="${id}" aria-pressed="${id===state.lexLang}">${l}</button>`).join('');
@@ -2363,14 +2423,14 @@ async function renderLex(){
     const items=chapterLemmas().filter(it=>state.lexLang==='all'||langOf(it.key, (LEXF[it.key[0]]||{})[it.key])===state.lexLang);
     $('#lexCount').textContent = CH ? (items.length?`${items.length} lemmas in ${refName(state.book,state.ch)}. Search to look across the whole Bible.`:`No lemma data for ${refName(state.book,state.ch)}: the Septuagint and Aramaic Targum texts here are not lemmatized. Search to look across the Hebrew Bible and NT.`) : '';
     const need=[...new Set(items.map(it=>it.key[0]))].filter(L=>!LEXF[L]);
-    if(need.length){ $('#lexList').innerHTML='<div class="loading">Loading lexicon…</div>'; try{ await Promise.all(need.map(lexFile)); }catch(e){ $('#lexList').innerHTML=`<div class="err">Lexicon not available: ${esc(e.message)}</div>`; return; } return renderLex(); }
+    if(need.length){ $('#lexList').innerHTML='<div class="loading">'+esc(T('loading.lexicon'))+'</div>'; try{ await Promise.all(need.map(lexFile)); }catch(e){ $('#lexList').innerHTML=`<div class="err">${esc(T('err.lexicon',{err:e.message}))}</div>`; return; } return renderLex(); }
     $('#lexList').innerHTML=items.slice(0,300).map(it=>{ const e=LEXF[it.key[0]][it.key]; const cls=it.key[0]==='G'?'grk':'heb';
       return entryHTML(it.key,e,`<div>${it.occ.map(o=>`<button class="occ" data-b="${state.book}" data-c="${state.ch}" data-w="${o.wit}" data-v="${o.v}" data-i="${o.i}">${esc(state.book)} ${state.ch}:${o.v} <span class="f" style="font-family:${cls==='grk'?'var(--grk)':'var(--heb)'}">${esc(view(o.w,cls))}</span></button>`).join('')}</div>`); }).join('');
     fillOcc(); return;
   }
   const Ls = state.lexLang==='grk'?['G']:(state.lexLang==='all'?['H','G']:['H']);
   const need=Ls.filter(L=>!LEXF[L]);
-  if(need.length){ $('#lexCount').textContent='Loading lexicon…'; try{ await Promise.all(need.map(lexFile)); }catch(e){ $('#lexCount').textContent='Lexicon not available: '+e.message; return; } }
+  if(need.length){ $('#lexCount').textContent=T('loading.lexicon'); try{ await Promise.all(need.map(lexFile)); }catch(e){ $('#lexCount').textContent=T('err.lexicon',{err:e.message}); return; } }
   const qs=q.replace(/^([hg])0*(\d)/,'$1$2');
   const res=[];
   for(const L of Ls) for(const [k,e] of Object.entries(LEXF[L])){
@@ -2437,15 +2497,15 @@ let dlRunning=false;
 async function dlHave(c){ return new Set((await c.keys()).map(r=>new URL(r.url).pathname.split('/data/')[1])); }
 async function updateOfflineInfo(){
   const info=$('#dlInfo'), btn=$('#dlBtn'), clr=$('#dlClear'), pause=$('#dlPause'), cancel=$('#dlCancel');
-  if(INLINE){ info.textContent='This single-file sample has Genesis 1 and John 1 built in. The whole Bible needs the full app (dist/ served over http).'; btn.hidden=true; clr.hidden=true; return; }
-  if(!('caches' in window)){ info.textContent='This browser does not allow offline storage here.'; btn.disabled=true; return; }
+  if(INLINE){ info.textContent=T('dl.sample'); btn.hidden=true; clr.hidden=true; return; }
+  if(!('caches' in window)){ info.textContent=T('dl.noCache'); btn.disabled=true; return; }
   const c=await caches.open(DATA_CACHE); const have=await dlHave(c);
   const n=INDEX.files.filter(f=>have.has(f[0])), bytes=n.reduce((a,f)=>a+f[1],0), all=n.length===INDEX.files.length;
   let quota='';
-  try{ if(navigator.storage&&navigator.storage.estimate){ const e=await navigator.storage.estimate(); if(e&&e.quota) quota=` Space this browser allows the app: about ${fmtMB(Math.max(0,e.quota-(e.usage||0)))} free.`; } }catch(e){}
-  info.textContent=`Entire canon with lexicons, concordance, word-matching data, both English versions and the RVR 1909: ${INDEX.files.length.toLocaleString()} files, ${fmtMB(INDEX.bytes)} (exact size of the files listed in the app's data index). Stored now: ${n.length.toLocaleString()} files (${fmtMB(bytes)}). Chapters you open are kept automatically.${quota}`;
+  try{ if(navigator.storage&&navigator.storage.estimate){ const e=await navigator.storage.estimate(); if(e&&e.quota) quota=T('dl.spaceFree',{left:fmtMB(Math.max(0,e.quota-(e.usage||0)))}); } }catch(e){}
+  info.textContent=T('dl.info',{files:INDEX.files.length.toLocaleString(),size:fmtMB(INDEX.bytes),have:n.length.toLocaleString(),haveSize:fmtMB(bytes)})+quota;
   const running=DL.state==='running', paused=DL.state==='paused';
-  btn.textContent = all?'Entire canon downloaded ✓':paused?`Resume download (${fmtMB(INDEX.bytes-bytes)} left)`:running?'Downloading…':`Download entire canon for offline (${fmtMB(INDEX.bytes-bytes)})`;
+  btn.textContent = all?T('dl.done'):paused?T('dl.resumeLeft',{left:fmtMB(INDEX.bytes-bytes)}):running?T('dl.downloading'):T('dl.btnLeft',{left:fmtMB(INDEX.bytes-bytes)});
   btn.disabled = all || running;
   pause.hidden=!running; cancel.hidden=!(running||paused);
   window.__offline={have:n.length,total:INDEX.files.length,bytes,totalBytes:INDEX.bytes,state:DL.state};
@@ -2453,7 +2513,7 @@ async function updateOfflineInfo(){
 function dlTick(){
   const pct=DL.totalBytes?100*DL.bytes/DL.totalBytes:0;
   $('#dlBar>div').style.width=pct.toFixed(1)+'%'; $('#dlBar').setAttribute('aria-valuenow',Math.round(pct));
-  $('#dlStat').textContent=`${DL.done.toLocaleString()} / ${DL.total.toLocaleString()} files · ${fmtMB(DL.bytes)} of ${fmtMB(DL.totalBytes)}${DL.failed?` · ${DL.failed} failed`:''}${DL.state==='paused'?' · paused':''}`;
+  $('#dlStat').textContent=T('dl.progress',{done:DL.done.toLocaleString(),total:DL.total.toLocaleString(),have:fmtMB(DL.bytes),need:fmtMB(DL.totalBytes)})+(DL.failed?T('dl.failed',{n:DL.failed}):'')+(DL.state==='paused'?T('dl.pausedTag'):'');
 }
 async function downloadAll(){
   if(DL.state==='running') return;
@@ -2461,7 +2521,7 @@ async function downloadAll(){
   const todo=INDEX.files.filter(f=>!have.has(f[0])).map(f=>({path:f[0],url:new URL(DATA_BASE+f[0],location.href).href,size:f[1]}));
   const need=todo.reduce((a,f)=>a+f.size,0);
   // check the space first, so the download does not fail half way
-  try{ if(navigator.storage&&navigator.storage.estimate){ const e=await navigator.storage.estimate(); if(e&&e.quota&&e.quota-(e.usage||0)<need*1.05){ $('#dlBar').hidden=false; $('#dlStat').textContent=`Not enough storage: this needs ${fmtMB(need)} but the browser allows about ${fmtMB(Math.max(0,e.quota-(e.usage||0)))} more for this site. Free some space, or keep using chapter-by-chapter caching.`; return; } } }catch(e){}
+  try{ if(navigator.storage&&navigator.storage.estimate){ const e=await navigator.storage.estimate(); if(e&&e.quota&&e.quota-(e.usage||0)<need*1.05){ $('#dlBar').hidden=false; $('#dlStat').textContent=T('dl.noStorage',{need:fmtMB(need),have:fmtMB(Math.max(0,e.quota-(e.usage||0)))}); return; } } }catch(e){}
   try{ if(navigator.storage&&navigator.storage.persist) navigator.storage.persist().catch(()=>{}); }catch(e){}
   const run=++DL.run; Object.assign(DL,{state:'running', done:INDEX.files.length-todo.length, total:INDEX.files.length, totalBytes:INDEX.bytes, bytes:INDEX.bytes-need, failed:0}); dlRunning=true;
   $('#dlBar').hidden=false; updateOfflineInfo(); dlTick();
@@ -2476,16 +2536,16 @@ async function downloadAll(){
   await Promise.all(Array.from({length:6},worker));
   if(DL.run!==run) return;
   dlRunning=false;
-  if(quotaHit){ $('#dlStat').textContent=`Storage is full: the browser refused more data after ${fmtMB(DL.bytes)}. Everything already stored still works offline. Free some space and press Resume, or use Remove offline data.`; DL.state='paused'; }
+  if(quotaHit){ $('#dlStat').textContent=T('dl.full',{mb:fmtMB(DL.bytes)}); DL.state='paused'; }
   else if(DL.state==='paused'){ dlTick(); }
-  else if(DL.state==='cancelled'){ $('#dlStat').textContent=`Stopped. ${fmtMB(DL.bytes)} is stored and keeps working offline; use Remove offline data to free it.`; DL.state='idle'; }
-  else { DL.state='idle'; $('#dlStat').textContent+= DL.failed?' — some files failed; press the button again for the rest':' — done: the entire canon works offline'; }
+  else if(DL.state==='cancelled'){ $('#dlStat').textContent=T('dl.stopped',{mb:fmtMB(DL.bytes)}); DL.state='idle'; }
+  else { DL.state='idle'; $('#dlStat').textContent+= DL.failed?T('dl.someFailed'):T('dl.doneTag'); }
   updateOfflineInfo();
 }
 $('#dlBtn').onclick=downloadAll;
 $('#dlPause').onclick=()=>{ if(DL.state!=='running') return; DL.state='paused'; DL.run++; dlRunning=false; dlTick(); updateOfflineInfo(); };
-$('#dlCancel').onclick=()=>{ const was=DL.state; DL.state='idle'; DL.run++; dlRunning=false; $('#dlStat').textContent=was==='running'||was==='paused'?`Cancelled. ${fmtMB(DL.bytes)} already stored stays available offline; use Remove offline data to free it.`:''; updateOfflineInfo(); };
-$('#dlClear').onclick=async()=>{ DL.run++; DL.state='idle'; dlRunning=false; if('caches' in window){ await caches.delete(DATA_CACHE); memo.clear(); } $('#dlBar').hidden=true; $('#dlStat').textContent='Offline data removed.'; updateOfflineInfo(); };
+$('#dlCancel').onclick=()=>{ const was=DL.state; DL.state='idle'; DL.run++; dlRunning=false; $('#dlStat').textContent=was==='running'||was==='paused'?T('dl.cancelled',{mb:fmtMB(DL.bytes)}):''; updateOfflineInfo(); };
+$('#dlClear').onclick=async()=>{ DL.run++; DL.state='idle'; dlRunning=false; if('caches' in window){ await caches.delete(DATA_CACHE); memo.clear(); } $('#dlBar').hidden=true; $('#dlStat').textContent=T('dl.removed'); updateOfflineInfo(); };
 window.__downloadAll=downloadAll; window.__DL=DL;
 
 // ---------- theme ----------
@@ -2496,18 +2556,19 @@ function renderCovList(){
   if(!INDEX) return; const ot=BOOKS.filter(b=>!b.nt), dc=ot.filter(b=>b.dc===1);
   const sum=(bs,k)=>bs.reduce((a,b)=>a+b.ch.reduce((x,c)=>x+(c[k]||0),0),0), nv=bs=>bs.reduce((a,b)=>a+b.ch.reduce((x,c)=>x+c.n,0),0);
   const nt=BOOKS.filter(b=>b.nt);
+  const missing=BOOKS.filter(b=>!b.kjv).map(b=>bookLabel(b.id)).join(', ')||T('inv.kjvNone');
   $('#covList').innerHTML=[
-    `English (KJV 1769 with the Apocrypha): ${BOOKS.filter(b=>b.kjv).length} of ${BOOKS.length} books (not in the KJV: ${BOOKS.filter(b=>!b.kjv).map(b=>b.name).join(', ')||'none'}, shown in the WEB).`,
-    `Spanish (Reina-Valera 1909): ${BOOKS.filter(b=>b.rvr1909).length} of ${BOOKS.length} books (the 66 Protestant books, built in and available offline; other books are shown in the KJV or WEB).`,
-    `English (WEB): all ${BOOKS.length} books, ${nv(BOOKS).toLocaleString()} verses. Verse numbers follow the WEB; the KJV is placed on the same verses.`,
-    `Hebrew/Aramaic (TAHOT): ${ot.filter(b=>sum([b],'h')).length} books, ${sum(ot,'h').toLocaleString()} WEB verses (Esther and Daniel: the Hebrew/Aramaic parts only).`,
-    `Greek NT (SBLGNT): ${nt.length} books, ${sum(nt,'g').toLocaleString()} of ${nv(nt).toLocaleString()} WEB verses.`,
-    `Greek NT (Byzantine, Robinson-Pierpont 2018): ${nt.filter(b=>sum([b],'bz')).length} books, ${sum(nt,'bz').toLocaleString()} of ${nv(nt).toLocaleString()} WEB verses.`,
-    `Septuagint (Brenton): ${ot.filter(b=>sum([b],'l')).length} books, ${sum(ot,'l').toLocaleString()} of ${nv(ot).toLocaleString()} OT verses placed (${dc.length} deuterocanonical books in Greek only).`,
-    `Targum (Aramaic): ${ot.filter(b=>sum([b],'t')).length} books (Onkelos: Torah; Jonathan: Joshua–Kings, Isaiah–Malachi), ${sum(ot,'t').toLocaleString()} verses.`,
-    `Latin Vulgate (Clementine): ${BOOKS.filter(b=>sum([b],'vlt')).length} books, ${sum(BOOKS,'vlt').toLocaleString()} of ${nv(BOOKS).toLocaleString()} WEB verses placed.`,
-    `Cross-references: ${INDEX.xrefVerses?INDEX.xrefVerses.toLocaleString():'—'} verses with links (none for the deuterocanon).`,
-    `Download size for offline use: ${fmtMB(INDEX.bytes)} (${INDEX.files.length} files).`
+    T('inv.kjv',{have:BOOKS.filter(b=>b.kjv).length,total:BOOKS.length,missing}),
+    T('inv.rvr',{have:BOOKS.filter(b=>b.rvr1909).length,total:BOOKS.length}),
+    T('inv.web',{total:BOOKS.length,verses:nv(BOOKS).toLocaleString()}),
+    T('inv.tahot',{books:ot.filter(b=>sum([b],'h')).length,verses:sum(ot,'h').toLocaleString()}),
+    T('inv.sbl',{books:nt.length,have:sum(nt,'g').toLocaleString(),total:nv(nt).toLocaleString()}),
+    T('inv.byz',{books:nt.filter(b=>sum([b],'bz')).length,have:sum(nt,'bz').toLocaleString(),total:nv(nt).toLocaleString()}),
+    T('inv.lxx',{books:ot.filter(b=>sum([b],'l')).length,have:sum(ot,'l').toLocaleString(),total:nv(ot).toLocaleString(),dc:dc.length}),
+    T('inv.tg',{books:ot.filter(b=>sum([b],'t')).length,verses:sum(ot,'t').toLocaleString()}),
+    T('inv.vul',{books:BOOKS.filter(b=>sum([b],'vlt')).length,have:sum(BOOKS,'vlt').toLocaleString(),total:nv(BOOKS).toLocaleString()}),
+    T('inv.xref',{n:INDEX.xrefVerses?INDEX.xrefVerses.toLocaleString():'—'}),
+    T('inv.dlsize',{mb:fmtMB(INDEX.bytes),n:INDEX.files.length})
   ].map(t=>`<li>${esc(t)}</li>`).join('');
 }
 
@@ -2526,7 +2587,7 @@ if('serviceWorker' in navigator && location.protocol!=='file:'){ addEventListene
     else { const r=await fetch(DATA_BASE+'index.json',{cache:'no-cache'}); if(!r.ok) throw new Error('HTTP '+r.status); ix=await r.json(); }
     buildIndex(ix);
   }catch(e){
-    $('#verses').innerHTML=`<div class="err">Could not load the Bible index (${esc(e.message)}). The full app must be opened over http(s), e.g. run <code>python3 -m http.server</code> in the dist folder and open http://localhost:8000. ${location.protocol==='file:'?'You opened it as a local file.':''}</div>`;
+    $('#verses').innerHTML=`<div class="err">${esc(T('err.index',{err:e.message}))}${location.protocol==='file:'?' '+esc(T('err.indexFile')):''}</div>`;
     window.__restored=true; return;
   }
   if(!INLINE && 'caches' in window){ try{ const k='hiveScribe.dataVersion'; const old=localStorage.getItem(k);
@@ -3038,7 +3099,7 @@ if('serviceWorker' in navigator && location.protocol!=='file:'){ addEventListene
       const s=e.target.closest('span'); if(!s) return;
       const b=s.dataset.book;
       const ks=LINKS.filter(L=>b==='__cur'||parseRef(L.ref).b===b).map(L=>L.k);
-      selectLinks(ks, `${b==='__cur'?refName(state.book,state.ch):BOOK[b].name}: ${ks.length} connection${ks.length===1?'':'s'}`);
+      selectLinks(ks, (ks.length===1?T('chords.connections',{name:b==='__cur'?refName(state.book,state.ch):bookLabel(b),n:ks.length}):T('chords.connectionsN',{name:b==='__cur'?refName(state.book,state.ch):bookLabel(b),n:ks.length})));
     });
   }
 
@@ -3210,7 +3271,7 @@ function renderStudyDetail(s){
       ${L.furtherReading?`<div class="note">Further reading: ${esc(L.furtherReading)}</div>`:''}
       <div class="lesson-notes"><label class="label" for="sn-${esc(L.id)}">Your notes on this lesson</label>
         <textarea class="notebox" id="sn-${esc(L.id)}" data-snote="${esc(L.id)}" placeholder="Saved on this device…">${esc(note)}</textarea>
-        <div class="btnrow"><button type="button" class="btn" data-save-snote="${esc(L.id)}">Save note</button>
+        <div class="btnrow"><button type="button" class="btn" data-save-snote="${esc(L.id)}">${esc(T('note.save'))}</button>
           <button type="button" class="btn" data-done-lesson="${esc(L.id)}">${done?'Mark uncomplete':'Mark complete'}</button>
           <span class="saved" id="smsg-${esc(L.id)}"></span></div></div>
     </article>`;
@@ -3578,16 +3639,16 @@ function libRender(scrollCur){
   if(typeof canonUI==='function') canonUI();
   const q=stripMarks(($('#libQ').value||'').trim());
   libExpanded.add(state.book);
-  const list=BOOKS.filter(b=>bookVisible(b.id) && (!q || stripMarks(b.name).includes(q) || b.id.toLowerCase().startsWith(q)));
+  const list=BOOKS.filter(b=>bookVisible(b.id) && (!q || stripMarks((typeof HS_I18N!=='undefined'?HS_I18N.bookHaystack(b):b.name)).includes(q) || b.id.toLowerCase().startsWith(q)));
   let html='', lastNT=null;
   list.forEach(b=>{
-    if(!!b.nt!==lastNT){ html+=`<h3 class="lib-h">${b.nt?'New Testament':'Old Testament'}</h3>`; lastNT=!!b.nt; }
-    const exp=libExpanded.has(b.id)||(q&&list.length<=3), chs=visibleChapters(b.id), cur=b.id===state.book;
-    html+=`<div class="lb${cur?' curbook':''}" data-book="${b.id}"><button type="button" class="lb-name" aria-expanded="${exp}" aria-controls="lbc-${b.id}"><span class="lb-t">${esc(b.name)}</span>${canonTag(b)}<span class="lb-n">${chs.length}</span></button>`+
+    if(!!b.nt!==lastNT){ html+=`<h3 class="lib-h">${esc(b.nt?T('lib.nt'):T('lib.ot'))}</h3>`; lastNT=!!b.nt; }
+    const exp=libExpanded.has(b.id)||(q&&list.length<=3), chs=visibleChapters(b.id), cur=b.id===state.book, nm=bookLabel(b.id);
+    html+=`<div class="lb${cur?' curbook':''}" data-book="${b.id}"><button type="button" class="lb-name" aria-expanded="${exp}" aria-controls="lbc-${b.id}"><span class="lb-t">${esc(nm)}</span>${canonTag(b)}<span class="lb-n">${chs.length}</span></button>`+
       `<div class="lb-ch" id="lbc-${b.id}"${exp?'':' hidden'}>${exp?chs.map(c=>{ const on=cur&&c===state.ch, na=sampleOnly(b.id,c);
-        return `<button type="button" data-lgo="${b.id}" data-c="${c}" class="${on?'cur':''}${na?' na':''}"${on?' aria-current="page"':''} aria-label="${esc(b.name)} ${c}">${c}</button>`; }).join(''):''}</div></div>`;
+        return `<button type="button" data-lgo="${b.id}" data-c="${c}" class="${on?'cur':''}${na?' na':''}"${on?' aria-current="page"':''} aria-label="${esc(nm)} ${c}">${c}</button>`; }).join(''):''}</div></div>`;
   });
-  $('#libList').innerHTML = html || '<div class="note">No book matches.</div>';
+  $('#libList').innerHTML = html || '<div class="note">'+esc(T('lib.noMatch'))+'</div>';
   const key=state.book+'.'+state.ch;
   if(scrollCur || key!==libLastCur){ libLastCur=key; const side=$('#libSide'), cur=$('#libList .lb.curbook');
     if(cur && !q){ const top=cur.offsetTop-side.offsetTop; if(top<side.scrollTop+40 || top>side.scrollTop+side.clientHeight-120) side.scrollTop=Math.max(0,top-80); } }
@@ -3624,7 +3685,7 @@ function wpChapterOcc(witId, key){
 }
 function wpLexHTML(witId, raw){
   const L=witId==='heb'?'H':'G', lex=LEXF[L];
-  if(!lex) return `<div class="wp-muted">Loading lexicon…</div>`;
+  if(!lex) return `<div class="wp-muted">${esc(T('loading.lexicon'))}</div>`;
   const key=wpKeyOf(raw,witId), e=key&&lex[key];
   let h='';
   if(witId==='heb'){
@@ -3643,7 +3704,7 @@ function wpOccHTML(witId, raw, v, i){
   const occ=wpChapterOcc(witId,key), cls=isGkWit(witId)?'grk':'heb';
   let h=`<div class="wp-sec"><div class="wp-lbl">In ${esc(refName(state.book,state.ch))} <span class="wp-src">${occ.length} time${occ.length===1?'':'s'}</span></div><div class="wp-chips">`+
     occ.map(o=>{ const me=String(o.v)===String(v)&&o.i===i; return `<button type="button" class="occ wp-occ${me?' me':''}" data-wpv="${esc(o.v)}" data-wpi="${o.i}"${me?' aria-current="true"':''}>${esc(String(o.v))} <span class="f" style="font-family:${cls==='grk'?'var(--grk)':'var(--heb)'}">${esc(view(o.w,cls))}</span></button>`; }).join('')+`</div></div>`;
-  h+=`<div class="wp-sec"><div class="wp-lbl">Across the Bible <span class="wp-src">${e?`${e[5]} in the ${isGkWit(witId)?'Greek NT (SBLGNT)':'Hebrew Bible'}`:''}</span></div><div class="wp-chips" id="wpConc"><span class="wp-muted">Loading concordance…</span></div>`+
+  h+=`<div class="wp-sec"><div class="wp-lbl">Across the Bible <span class="wp-src">${e?`${e[5]} in the ${isGkWit(witId)?'Greek NT (SBLGNT)':'Hebrew Bible'}`:''}</span></div><div class="wp-chips" id="wpConc"><span class="wp-muted">${esc(T('loading.conc'))}</span></div>`+
     `<div class="btnrow"><button type="button" class="btn" data-conc="${esc(key)}">Full concordance →</button></div></div>`;
   return h;
 }
@@ -3677,7 +3738,7 @@ function wpBodyHTML(wit, d, v, i, n, noteWit){
   }
   const val=(cls==='grk'||cls==='heb'||cls==='arc')?valueRow(d.w,cls):''; if(val) h+=`<div class="wp-sec wp-val2">${val}</div>`;
   if(EN && EN[v]) h+=`<div class="wp-sec"><div class="wp-lbl">${esc(ref)} <span class="wp-src">${esc((ENV||enPref()).abbr)}</span></div><p class="wp-ctx">${enVerseHTML(v)}</p></div>`;
-  h+=`<div class="wp-sec"><div class="wp-lbl">Personal Scribe note <span class="wp-src">saved on this device</span></div><textarea class="notebox" id="wpNote" placeholder="Your note on this word…">${esc((NOTES[key]||{}).text||'')}</textarea><div class="btnrow"><button type="button" class="btn primary" id="wpNoteSave">Save note</button><span class="saved" id="wpNoteMsg"></span></div>${backupNudgeHTML()}</div>`;
+  h+=`<div class="wp-sec"><div class="wp-lbl">${esc(T('wp.personalNote'))} <span class="wp-src">${esc(T('wp.savedHere'))}</span></div><textarea class="notebox" id="wpNote" placeholder="${esc(T('pp.notePh',{ref:T('wp.kicker')}))}">${esc((NOTES[key]||{}).text||'')}</textarea><div class="btnrow"><button type="button" class="btn primary" id="wpNoteSave">${esc(T('note.save'))}</button><span class="saved" id="wpNoteMsg"></span></div>${backupNudgeHTML()}</div>`;
   h+=`<div class="wp-badges">${BADGE[wit.id]||''}</div>`;
   h+=`<div class="btnrow wp-share"><button type="button" class="btn" data-copylink>Copy link to this word</button></div>`;
   return h;
@@ -3705,7 +3766,7 @@ function wpOpen(wEl, opts){
   };
   panel.hidden=false; document.body.classList.add('wp-open');
   const L=wit.id==='heb'?'H':isGkWit(wit.id)?'G':null;
-  if(L && !LEXF[L]) lexFile(L).then(()=>{ if(seq!==wpSeq) return; const el=$('#wpLex'); if(el) el.innerHTML=wpLexHTML(wit.id,d.raw); }).catch(()=>{ const el=$('#wpLex'); if(el&&seq===wpSeq) el.innerHTML='<div class="wp-muted">Lexicon not available offline yet.</div>'; });
+  if(L && !LEXF[L]) lexFile(L).then(()=>{ if(seq!==wpSeq) return; const el=$('#wpLex'); if(el) el.innerHTML=wpLexHTML(wit.id,d.raw); }).catch(()=>{ const el=$('#wpLex'); if(el&&seq===wpSeq) el.innerHTML='<div class="wp-muted">'+esc(T('lex.offlineYet'))+'</div>'; });
   const ck=wpKeyOf(d.raw,wit.id); if(ck) wpFillConc(seq,wit.id,ck);
   wpPlace();
   requestAnimationFrame(()=>{ wpReveal(wEl); if(opts.focus!==false) $('#wpTitle').focus({preventScroll:true}); });
@@ -3849,7 +3910,7 @@ function varLegendHTML(d, witId){
 // ---------- canon filter (Library: "Books shown") ----------
 const CANON_PRESETS={all:{ot:true,nt:true,dc:true,add:true,orth:true,app:true},prot:{ot:true,nt:true,dc:false,add:false,orth:false,app:false},cath:{ot:true,nt:true,dc:true,add:true,orth:false,app:false},orth:{ot:true,nt:true,dc:true,add:true,orth:true,app:true}};
 const CANON_KEYS=['ot','nt','dc','add','orth','app'];
-const CANON_NAME={all:'All books',prot:'Protestant',cath:'Catholic',orth:'Orthodox'};
+const CANON_NAME=()=>({all:T('lib.allBooks'),prot:T('lib.prot'),cath:T('lib.cath'),orth:T('lib.orth')});
 function canonTag(b){
   if(b.dc===1) return '<span class="lb-dc" title="Deuterocanonical book (Catholic and Orthodox canons)">DC</span>';
   if(b.dc===2) return `<span class="lb-dc add" title="Includes the Greek additions (Catholic and Orthodox canons)${canonOn('add')?'':'; additions hidden'}">+Gk</span>`;
@@ -3866,9 +3927,11 @@ function canonPresetNow(){
 function canonCounts(){ const bs=BOOKS.filter(b=>bookVisible(b.id)); return {books:bs.length, ch:bs.reduce((a,b)=>a+visibleChapters(b.id).length,0)}; }
 function canonSummary(){
   const p=canonPresetNow(), n=canonCounts().books;
-  if(p) return `${CANON_NAME[p]} (${n} book${n===1?'':'s'})`;
-  const c=state.settings.canon, parts=[c.ot&&'OT',c.nt&&'NT',c.dc&&'Deuterocanon',c.add&&'Greek additions',c.orth&&'Orthodox',c.app&&'Appendix'].filter(Boolean);
-  return `Custom: ${parts.join(' + ')} (${n} book${n===1?'':'s'})`;
+  if(p==='all') return T('lib.sumAll',{n});
+  if(p==='prot') return T('lib.sumProt',{n});
+  if(p==='cath') return T('lib.sumCath',{n});
+  if(p==='orth') return T('lib.sumOrth',{n});
+  return T('lib.sumCustom',{n});
 }
 function canonUI(){
   const box=$('#libCanon'); if(!box) return;
@@ -3877,17 +3940,17 @@ function canonUI(){
   box.querySelectorAll('[data-cp]').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.cp===p)));
   $('#canonSum').textContent=canonSummary();
   const k=canonCounts();
-  let note=`${k.books} books · ${k.ch.toLocaleString()} chapters shown. Hidden books stay downloaded; they are skipped in the library, book picker, next/previous chapter, lexicon hits and cross-references.`;
-  if(p==='orth') note+=' Orthodox (Septuagint) books: the Catholic 73 plus 1 Esdras, the Prayer of Manasseh, 3 Maccabees and Psalm 151, with 4 Maccabees (Greek appendix) and 2 Esdras (Slavonic appendix). Orthodox churches differ on the appendix books.';
-  if(p==='all') note+=' Every book in Hive Scribe, including the Orthodox and appendix books.';
-  if(p==='cath') note+=' The 73-book Catholic canon: Esther and Daniel include their Greek additions.';
-  if(p==='prot') note+=' The 66-book Protestant canon: Esther and Daniel follow the Hebrew/Aramaic text, without the Greek additions.';
-  if(c.add && !c.ot) note+=' Esther and Daniel show only their Greek-addition verses.';
-  if(!c.add && c.ot) note+=' Esther 1:1 and 8:13 keep short Greek passages that the WEB prints inside those verses.';
+  let note=T('lib.noteBase',{n:k.books,ch:k.ch.toLocaleString()});
+  if(p==='orth') note+=T('lib.noteOrth');
+  if(p==='all') note+=T('lib.noteAll');
+  if(p==='cath') note+=T('lib.noteCath');
+  if(p==='prot') note+=T('lib.noteProt');
+  if(c.add && !c.ot) note+=T('lib.noteAddOnly');
+  if(!c.add && c.ot) note+=T('lib.noteEstherKeep');
   $('#canonNote').textContent=note;
 }
 function canonSet(next, preset){
-  if(!Object.values(next).some(Boolean)){ canonUI(); $('#canonNote').textContent='Keep at least one group of books turned on.'; return false; }
+  if(!Object.values(next).some(Boolean)){ canonUI(); $('#canonNote').textContent=T('lib.keepOne'); return false; }
   state.settings.canon=next; state.settings.canonPreset=preset||null; state.settings.showDC=showDC();
   settingsChanged(); return true;
 }
@@ -3906,23 +3969,36 @@ const EN_SOON=[{id:'nlt',abbr:'NLT',full:'New Living Translation'},{id:'nkjv',ab
 function enSoon(){ return EN_SOON.filter(x=>!EN_VERSIONS.some(e=>e.id===x.id)); }
 function enUI(){
   const cur=enPref().id;
-  const seg=$('#enSeg'); if(seg) seg.innerHTML=EN_VERSIONS.map(x=>`<button type="button" data-env="${x.id}" aria-pressed="${x.id===cur}" title="${esc(x.full)}">${esc(x.abbr)}${enIsNew(x)?' <span class="newtag">New</span>':''}</button>`).join('')
-    +enSoon().map(x=>`<button type="button" class="soon" data-ensoon="${x.id}" aria-disabled="true" title="${esc(x.full)}: coming soon">${esc(x.abbr)} <span class="soontag">Coming soon</span></button>`).join('');
-  const sel=$('#enSel'); if(sel){ sel.innerHTML=EN_VERSIONS.map(x=>`<option value="${x.id}"${x.id===cur?' selected':''}>${esc(x.name||x.abbr)}${enIsNew(x)?' · New':''}</option>`).join('')
-    +enSoon().map(x=>`<option value="soon:${x.id}" disabled>${esc(x.abbr)} · Coming soon</option>`).join(''); sel.title='Bible version: '+enPref().full; }
-  const d=$('#enDesc'); if(d && enPref().live){ const p=enPref(); d.innerHTML=`<b>${esc(p.full)}</b>, © ${esc(p.owner)}. Loaded live from <a href="https://api.bible" target="_blank" rel="noopener">API.Bible</a> one chapter at a time, so it needs an internet connection and is not part of the offline download (offline, the KJV is shown). Not in the ${esc(p.abbr)}: the deuterocanonical and Orthodox books, shown in the KJV or WEB. <a href="#copyright" data-livecopy="1">Copyright notices</a>.`; return; }
-  if(d && cur==='rvr1909'){ d.innerHTML=`<b>${esc(enPref().full)}</b>, ${esc(enPref().lic)}. The classic Spanish Bible, built into the app so it works offline, like the KJV. It has the 66 Protestant books; deuterocanonical and Orthodox books, and the Greek additions to Esther and Daniel, are shown in the KJV or WEB. The original-language layers stay on the same verses; where the RVR 1909 numbers a verse differently, its own reference is shown beside it.`; return; }
-  if(d) d.innerHTML=`<b>${esc(enPref().full)}</b>, ${esc(enPref().lic)}. `+(cur==='kjv'?'Words the translators supplied (printed in italics in the KJV) are shown in italics. Books the KJV does not have (3 and 4 Maccabees, Psalm 151) are shown in the WEB. ':'')+'The original-language layers stay on the same verses whichever version you pick; where the KJV numbers a verse differently, its own reference is shown beside it.';
+  const seg=$('#enSeg'); if(seg) seg.innerHTML=EN_VERSIONS.map(x=>`<button type="button" data-env="${x.id}" aria-pressed="${x.id===cur}" title="${esc(x.full)}">${esc(x.abbr)}${enIsNew(x)?' <span class="newtag">'+esc(T('newtag'))+'</span>':''}</button>`).join('')
+    +enSoon().map(x=>`<button type="button" class="soon" data-ensoon="${x.id}" aria-disabled="true" title="${esc(T('soon.title',{name:x.full}))}">${esc(x.abbr)} <span class="soontag">${esc(T('soon'))}</span></button>`).join('');
+  const sel=$('#enSel'); if(sel){ sel.innerHTML=EN_VERSIONS.map(x=>`<option value="${x.id}"${x.id===cur?' selected':''}>${esc(x.name||x.abbr)}</option>`).join('')
+    +enSoon().map(x=>`<option value="soon:${x.id}" disabled>${esc(x.abbr)} · ${esc(T('soon'))}</option>`).join(''); sel.title=T('en.selTitle',{full:enPref().full}); }
+  const d=$('#enDesc'); if(d && enPref().live){ const p=enPref(); d.innerHTML=T('enDesc.live',{full:esc(p.full),owner:esc(p.owner),abbr:esc(p.abbr)}); return; }
+  if(d && cur==='rvr1909'){ const p=enPref(); d.innerHTML=T('enDesc.rvr',{full:esc(p.full),lic:esc(p.lic)}); return; }
+  if(d){ const p=enPref(); d.innerHTML=cur==='kjv'?T('enDesc.kjv',{full:esc(p.full),lic:esc(p.lic)}):T('enDesc.other',{full:esc(p.full),lic:esc(p.lic)}); }
 }
-function setEnVer(id){
-  if(!EN_VERSIONS.some(x=>x.id===id) || id===state.settings.enVer) { enUI(); return; }
-  state.settings.enVer=id; persist(); enUI();
+function applyImplicitTextVer(){
+  if(state.settings.enVerExplicit) return false;
+  const want=HS_I18N.implicitTextVer();
+  if(state.settings.enVer===want) return false;
+  state.settings.enVer=want; persist(); return true;
+}
+function setEnVer(id, opts){
+  if(!EN_VERSIONS.some(x=>x.id===id)) { enUI(); return; }
+  const implicit=opts&&opts.implicit;
+  if(id===state.settings.enVer){
+    if(!implicit){ state.settings.enVerExplicit=true; persist(); }
+    enUI(); return;
+  }
+  state.settings.enVer=id;
+  if(!implicit) state.settings.enVerExplicit=true;
+  persist(); enUI();
   gotoChapter(state.book,state.ch,{keepScroll:true}).then(()=>{ if(state.tab==='poly'&&state.pm==='bridge') renderBridge(); });
 }
 document.addEventListener('click',e=>{ const b=e.target.closest('#enSeg [data-env]'); if(b) setEnVer(b.dataset.env); });
 document.addEventListener('click',e=>{ const b=e.target.closest('#enSeg [data-ensoon]'); if(!b) return; e.preventDefault();
   const x=EN_SOON.find(v=>v.id===b.dataset.ensoon), m=$('#enSoonMsg'); if(!x||!m) return;
-  m.textContent=`The ${x.full} (${x.abbr}) is coming soon to Hive Scribe.`; m.hidden=false; clearTimeout(m._t); m._t=setTimeout(()=>{ m.hidden=true; },4000); });
+  m.textContent=T('en.soonMsg',{full:x.full,abbr:x.abbr}); m.hidden=false; clearTimeout(m._t); m._t=setTimeout(()=>{ m.hidden=true; },4000); });
 { const sel=$('#enSel'); if(sel) sel.addEventListener('change',()=>setEnVer(sel.value)); }
 enUI();
 liveAboutInit();
@@ -3974,7 +4050,7 @@ function ppBodyHTML(){
     `<div class="wp-muted" id="ppHlState" aria-live="polite">${all?`Highlighted ${esc(HL_NAME[all])}`:any?'Mixed highlights':'Not highlighted'}</div></div>`+
     `<div class="wp-sec"><label class="wp-lbl" for="ppNote">${vs.length===1?'Verse note':'Passage note'} <span class="wp-src" id="ppNoteRef">${esc(ref)} · saved on this device</span></label>`+
     `<textarea class="notebox" id="ppNote" placeholder="Your note on ${esc(ref)}…">${esc(note)}</textarea><div class="wp-muted" id="ppNoteMsg" aria-live="polite">${vs.length===1?'Same note as the ✎ verse note. ':''}Saves as you type.</div>${backupNudgeHTML()}</div>`+
-    `<div class="wp-sec"><div class="wp-lbl">${esc(ref)} <span class="wp-src">${esc(ev.abbr)}</span></div><p class="wp-ctx" id="ppText">${preview||'<span class="wp-muted">No English text for these verses.</span>'}</p></div>`+
+    `<div class="wp-sec"><div class="wp-lbl">${esc(ref)} <span class="wp-src">${esc(ev.abbr)}</span></div><p class="wp-ctx" id="ppText">${preview||`<span class="wp-muted">${esc(T('en.noText'))}</span>`}</p></div>`+
     `<div class="btnrow"><button type="button" class="btn primary" id="ppCopy">Copy passage</button><button type="button" class="btn" id="ppMine">My highlights &amp; notes</button><button type="button" class="btn" data-copylink>Copy link</button></div><div class="wp-muted" id="ppCopyMsg" aria-live="polite"></div>`;
 }
 function ppRender(focus){
@@ -4098,13 +4174,13 @@ function mineItems(){
 function hlCount(){ const el=$('#libMineN'); if(el){ const n=mineItems().length; el.textContent=n?String(n):''; } }
 function renderMine(){
   const all=mineItems(), cnt={all:all.length,notes:all.filter(i=>i.note).length}; HL_COLORS.forEach(x=>cnt[x.id]=all.filter(i=>i.col===x.id).length);
-  $('#mineFilter').innerHTML=[['all','All'],...HL_COLORS.map(x=>[x.id,x.name]),['notes','Notes']].map(([id,l])=>`<button type="button" class="mine-chip" data-mf="${id}" aria-pressed="${MINE_FILTER===id}">${HL_NAME[id]?`<span class="pp-dot sm hlc-${id}" aria-hidden="true"></span>`:id==='notes'?'<span aria-hidden="true">✎</span>':''}${l} <span class="mine-n">${cnt[id]||0}</span></button>`).join('');
+  $('#mineFilter').innerHTML=[['all',T('mine.all')],...HL_COLORS.map(x=>[x.id,T('hl.'+x.id)]),['notes',T('mine.notes')]].map(([id,l])=>`<button type="button" class="mine-chip" data-mf="${id}" aria-pressed="${MINE_FILTER===id}">${HL_NAME[id]?`<span class="pp-dot sm hlc-${id}" aria-hidden="true"></span>`:id==='notes'?'<span aria-hidden="true">✎</span>':''}${l} <span class="mine-n">${cnt[id]||0}</span></button>`).join('');
   const list=all.filter(i=>MINE_FILTER==='all'||(MINE_FILTER==='notes'?!!i.note:i.col===MINE_FILTER));
   $('#mineList').innerHTML=list.length?list.map(i=>{ const ref=refName(i.b,i.c,i.a)+(i.z!==i.a?'–'+i.z:'');
     return `<button type="button" class="mine-item" data-b="${esc(i.b)}" data-c="${i.c}" data-a="${esc(i.a)}" data-z="${esc(i.z)}">`+
-      `<span class="mine-top">${i.col?`<span class="pp-dot sm hlc-${i.col}" aria-hidden="true"></span><span class="mine-tag">${esc(HL_NAME[i.col])}</span>`:''}${i.note?'<span class="mine-tag">✎ Note</span>':''}<span class="mine-ref">${esc(ref)}</span></span>`+
+      `<span class="mine-top">${i.col?`<span class="pp-dot sm hlc-${i.col}" aria-hidden="true"></span><span class="mine-tag">${esc(HL_NAME[i.col])}</span>`:''}${i.note?'<span class="mine-tag">✎ '+esc(T('mine.noteChip'))+'</span>':''}<span class="mine-ref">${esc(ref)}</span></span>`+
       (i.note?`<span class="mine-note">${esc(i.note.length>160?i.note.slice(0,160)+'…':i.note)}</span>`:'')+`</button>`; }).join('')
-    : `<div class="note">${all.length?'Nothing with this filter.':'No highlights or passage notes yet. Press and hold a verse (or select verses) in Read to add one.'}</div>`;
+    : `<div class="note">${all.length?esc(T('mine.filterEmpty')):esc(T('mine.empty'))}</div>`;
 }
 function openMine(){ ppFlush(); renderMine(); openSheet('#mineSheet'); requestAnimationFrame(()=>{ const t=$('#mineTitle'); if(t) t.focus({preventScroll:true}); }); }
 async function mineJump(b,c,a,z){
@@ -4121,6 +4197,45 @@ $('#mineList').addEventListener('click',e=>{ const b=e.target.closest('.mine-ite
 document.addEventListener('click',e=>{ const a=e.target.closest('.slink'); if(!a||a.closest('#callout,#wordPanel')) return; e.preventDefault(); closePopup(); wpClose(false); ppClose(false); closeSheets(); openConcordance(a.dataset.conc); });
 hlCount();
 window.__pp={open:ppOpen,close:ppClose,setHL:ppSetHL,sel:()=>PSEL&&Object.assign({vs:ppRange()},PSEL),copyText:()=>PSEL&&passCopyText(PSEL.b,PSEL.c,ppRange()),HLS:()=>HLS,items:mineItems,openMine};
+
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-uilang]'); if(!b) return;
+  e.preventDefault();
+  HS_I18N.setLang(b.getAttribute('data-uilang'));
+});
+window.hsAfterI18n=function(){
+  const verChanged=applyImplicitTextVer();
+  enUI();
+  if(typeof liveAboutInit==='function') liveAboutInit();
+  if(typeof canonUI==='function') canonUI();
+  if(typeof libRender==='function' && LIB_READY) libRender();
+  if(typeof renderCovList==='function') renderCovList();
+  if(typeof updateOfflineInfo==='function') updateOfflineInfo();
+  if(typeof refreshBackupLast==='function') refreshBackupLast();
+  if(typeof hlCount==='function') hlCount();
+  const mine=$('#mineSheet'); if(mine && mine.classList.contains('open') && typeof renderMine==='function') renderMine();
+  const pick=$('#pickSheet'); if(pick && pick.classList.contains('open') && typeof renderCanon==='function') renderCanon();
+  function relabel(){
+    if(!CH) return;
+    WITS=witnessesFor(state.book,state.ch);
+    if(state.wit && !WITS.some(w=>w.id===state.wit)) state.wit=defaultWit(state.book,state.ch);
+    if(typeof renderWitSeg==='function') renderWitSeg();
+    if(typeof renderVF==='function') renderVF();
+    const pl=$('#pickLabel'); if(pl) pl.textContent=refName(state.book,state.ch);
+    if(typeof renderCov==='function') renderCov();
+    if(typeof renderVerses==='function') renderVerses();
+    if(state.tab==='poly'){ if(state.pm==='bridge' && typeof renderBridge==='function') renderBridge(); else if(typeof renderPoly==='function') renderPoly(); }
+    if(state.tab==='conn'){ if(typeof resetPanel==='function') resetPanel(); if(typeof drawChord==='function') drawChord(); }
+    if(typeof renderLex==='function' && state.tab==='lex') renderLex();
+  }
+  if(verChanged && typeof gotoChapter==='function'){
+    gotoChapter(state.book,state.ch,{keepScroll:true}).then(()=>{ if(state.tab==='poly'&&state.pm==='bridge'&&typeof renderBridge==='function') renderBridge(); });
+    return;
+  }
+  relabel();
+};
+
+if(typeof HS_I18N!=='undefined') HS_I18N.apply();
 
 </script>
 <script type="module">import * as THREE from "./vendor/three.module.min.js"; window.THREE=THREE; dispatchEvent(new Event("three-ready"));</script>

@@ -309,8 +309,9 @@ const bkey = s => String(s||'').toLowerCase().replace(/[\s.]/g,'').replace(/^i{3
 HSP.resolveBook = function(s){
   const k=bkey(s); if(!k) return null;
   if(ALIAS[k] && BOOK[ALIAS[k]]) return ALIAS[k];
-  const exact=BOOKS.find(b=>b.id.toLowerCase()===k||bkey(b.name)===k); if(exact) return exact.id;
-  if(k.length>=2){ const pre=BOOKS.find(b=>bkey(b.name).startsWith(k)||b.id.toLowerCase().startsWith(k)); if(pre) return pre.id; }
+  const esn=b=> (typeof HS_I18N!=='undefined' && HS_I18N.BOOKS.es[b.id]) || '';
+  const exact=BOOKS.find(b=>b.id.toLowerCase()===k||bkey(b.name)===k||bkey(esn(b))===k); if(exact) return exact.id;
+  if(k.length>=2){ const pre=BOOKS.find(b=>bkey(b.name).startsWith(k)||bkey(esn(b)).startsWith(k)||b.id.toLowerCase().startsWith(k)); if(pre) return pre.id; }
   return null;
 };
 HSP.parseRef = function(q){
@@ -324,12 +325,13 @@ function palVer(id){
   if(id==='rvr1909') return {id:'rvr1909', dir:'rvr1909', abbr:'RVR 1909', ok:b=>!!(b&&b.rvr1909)};
   return {id:'web', dir:'en', abbr:'WEB', ok:()=>true};
 }
+const T=(k,v)=> (typeof HS_I18N!=='undefined'?HS_I18N.t(k,v):k);
 function palEl(){
   if(PAL) return PAL;
-  const d=document.createElement('div'); d.id='cmdk'; d.className='cmdk'; d.hidden=true; d.setAttribute('role','dialog'); d.setAttribute('aria-modal','true'); d.setAttribute('aria-label','Search and jump');
-  d.innerHTML=`<div class="cmdk-bd" data-cmdk-close></div><div class="cmdk-pn"><div class="cmdk-top"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input id="cmdkQ" type="search" autocomplete="off" spellcheck="false" placeholder="Gen 1:2 · jn 3 16 · H7363 · ברא · λόγος · “hovering”" aria-label="Search: a reference, Strong's number, Hebrew or Greek word, or English phrase" aria-controls="cmdkList" aria-autocomplete="list"><kbd class="cmdk-kbd">Esc</kbd></div>
-  <div class="cmdk-opts"><span class="cmdk-hint" id="cmdkHint">References, Strong's numbers, Hebrew/Greek lemmas, or a phrase in the text</span><span class="seg cmdk-en" role="group" aria-label="Bible text to search"><button type="button" data-en="web" aria-pressed="true">WEB</button><button type="button" data-en="kjv" aria-pressed="false">KJV</button><button type="button" data-en="rvr1909" aria-pressed="false">RVR 1909</button></span></div>
-  <div class="cmdk-list" id="cmdkList" role="listbox" aria-label="Results"></div><div class="cmdk-foot"><span>↑↓ to choose · Enter to open</span><button type="button" class="linkbtn" id="cmdkCopy">Copy link to this view</button></div></div>`;
+  const d=document.createElement('div'); d.id='cmdk'; d.className='cmdk'; d.hidden=true; d.setAttribute('role','dialog'); d.setAttribute('aria-modal','true'); d.setAttribute('aria-label',T('cmdk.aria'));
+  d.innerHTML=`<div class="cmdk-bd" data-cmdk-close></div><div class="cmdk-pn"><div class="cmdk-top"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input id="cmdkQ" type="search" autocomplete="off" spellcheck="false" placeholder="Gen 1:2 · jn 3 16 · H7363 · ברא · λόγος · “hovering”" aria-label="${T('cmdk.ariaInput')}" aria-controls="cmdkList" aria-autocomplete="list"><kbd class="cmdk-kbd">Esc</kbd></div>
+  <div class="cmdk-opts"><span class="cmdk-hint" id="cmdkHint">${T('cmdk.hintEmpty')}</span><span class="seg cmdk-en" role="group" aria-label="${T('cmdk.ariaText')}"><button type="button" data-en="web" aria-pressed="true">WEB</button><button type="button" data-en="kjv" aria-pressed="false">KJV</button><button type="button" data-en="rvr1909" aria-pressed="false">RVR 1909</button></span></div>
+  <div class="cmdk-list" id="cmdkList" role="listbox" aria-label="${T('cmdk.results')}"></div><div class="cmdk-foot"><span>${T('cmdk.foot')}</span><button type="button" class="linkbtn" id="cmdkCopy">${T('cmdk.copyView')}</button></div></div>`;
   document.body.appendChild(d); PAL=d;
   const q=d.querySelector('#cmdkQ'); let t=null;
   q.addEventListener('input',()=>{ clearTimeout(t); t=setTimeout(()=>palRun(q.value),120); });
@@ -371,7 +373,7 @@ HSP.paletteKind = function(q){
 async function palRun(raw){
   const seq=++palSeq, q=String(raw||'').trim(), kind=HSP.paletteKind(q); palSel=0;
   const hint=PAL.querySelector('#cmdkHint');
-  hint.textContent={empty:"References, Strong's numbers, Hebrew/Greek lemmas, or a phrase in the text",strong:"Strong's number",ref:'Bible reference',heb:'Hebrew / Aramaic lemma',grk:'Greek lemma',text:`Phrase in the ${palVer(palEn).abbr}`}[kind];
+  hint.textContent={empty:T('cmdk.hintEmpty'),strong:T('cmdk.hintStrong'),ref:T('cmdk.hintRef'),heb:T('cmdk.hintHeb'),grk:T('cmdk.hintGrk'),text:T('cmdk.hintText',{abbr:palVer(palEn).abbr})}[kind];
   PAL.dataset.kind=kind;
   if(kind==='empty'){ palRender([
       {group:'Try',title:'Gen 1:2',sub:'Go to a verse',go:()=>HSP.openPalette('Gen 1:2')},
@@ -382,25 +384,25 @@ async function palRun(raw){
       {group:'This view',title:'Copy link to this view',sub:location.origin+location.pathname+HSP.hashFor(),go:()=>HSP.copyLink()}]); return; }
   if(kind==='ref'){
     const r=HSP.parseRef(q); const name=refName(r.b,r.c,r.v);
-    let sub=r.v?'Open this verse in Read':'Open this chapter';
+    let sub=r.v?T('open.verseRead'):T('open.chapter');
     const items=[{group:'Go to',title:name,sub,go:()=>HSP.goRef(r)}];
-    if(r.v) items.push({group:'Go to',title:`${name} in Canonical Chords`,sub:'Cross-references of this verse',go:()=>HSP.apply({tab:'conn',b:r.b,c:r.c,v:r.v})});
+    if(r.v) items.push({group:T('cmdk.groupGo'),title:T('cmdk.inChords',{name}),sub:T('cmdk.xrefVerse'),go:()=>HSP.apply({tab:'conn',b:r.b,c:r.c,v:r.v})});
     palRender(items);
     if(r.v){ try{ const pv=palVer(palEn), dir=pv.ok(BOOK[r.b])?pv.dir:'en'; const en=await getJSON(`${dir}/${r.b}.json.gz`); if(seq!==palSeq) return; const t=(en[String(r.c)]||{})[r.v]; if(t){ items[0].sub=enPlain(t).slice(0,160); palRender(items); } }catch(e){} }
     return;
   }
   if(kind==='strong'){
-    const L=q[0].toUpperCase(); palRender([],'Loading the lexicon…');
-    try{ await lex(L); }catch(e){ if(seq===palSeq) palRender([],'The lexicon is not available offline yet.'); return; }
+    const L=q[0].toUpperCase(); palRender([],T('cmdk.lexLoading'));
+    try{ await lex(L); }catch(e){ if(seq===palSeq) palRender([],T('cmdk.lexOffline')); return; }
     if(seq!==palSeq) return;
     const lx=LEXF[L], num=L+q.slice(1).replace(/^0+/,'').replace(/[a-z]$/i,'').padStart(4,'0'), suf=(q.match(/[a-z]$/i)||[''])[0].toUpperCase();
     const keys=Object.keys(lx).filter(k=>k.startsWith(num) && !/\d/.test(k.slice(num.length)) && (!suf||k===num+suf)).sort((a,b)=>(lx[b][5]||0)-(lx[a][5]||0));
-    palRender(keys.slice(0,8).map(k=>{ const e=lx[k]; return {group:"Strong's",html:`<bdi class="${L==='H'?'cmdk-heb':'cmdk-grk'}">${E(e[0])}</bdi> <i>${E(e[1])}</i> · ${E(e[3])} <span class="cmdk-k">${E(k)}</span>`,sub:`${e[5]||0} occurrences · open in Lexicon & concordance`,go:()=>openConcordance(k)}; }), keys.length?'':'No lexicon entry with that number.');
+    palRender(keys.slice(0,8).map(k=>{ const e=lx[k]; return {group:"Strong's",html:`<bdi class="${L==='H'?'cmdk-heb':'cmdk-grk'}">${E(e[0])}</bdi> <i>${E(e[1])}</i> · ${E(e[3])} <span class="cmdk-k">${E(k)}</span>`,sub:T('cmdk.occOpen',{n:e[5]||0}),go:()=>openConcordance(k)}; }), keys.length?'':T('cmdk.noEntry'));
     return;
   }
   if(kind==='heb'||kind==='grk'){
-    const L=kind==='heb'?'H':'G'; palRender([],'Loading the lexicon…');
-    try{ await lex(L); }catch(e){ if(seq===palSeq) palRender([],'The lexicon is not available offline yet.'); return; }
+    const L=kind==='heb'?'H':'G'; palRender([],T('cmdk.lexLoading'));
+    try{ await lex(L); }catch(e){ if(seq===palSeq) palRender([],T('cmdk.lexOffline')); return; }
     if(seq!==palSeq) return;
     const lx=LEXF[L], n=kind==='heb'?hcons(q):gnorm(q), f=kind==='heb'?hcons:gnorm;
     const hits=[]; for(const [k,e] of Object.entries(lx)){ const m=f(e[0]); if(!m) continue; const s=m===n?0:m.startsWith(n)?1:0; if(m===n||(n.length>=2&&m.startsWith(n))) hits.push([s,-(e[5]||0),k]); }
@@ -408,8 +410,8 @@ async function palRun(raw){
     const items=hits.slice(0,12).map(([,,k])=>{ const e=lx[k]; return {group:'Lexicon',html:`<bdi class="${L==='H'?'cmdk-heb':'cmdk-grk'}">${E(e[0])}</bdi> <i>${E(e[1])}</i> · ${E(e[3])} <span class="cmdk-k">${E(strongNum(k))}</span>`,sub:`${e[5]||0} occurrences${String(e[2]).startsWith('A:')?' · Aramaic':''} · open in Lexicon & concordance`,go:()=>openConcordance(k)}; });
     // a spelling that is a tagged surface form
     try{ const fm=await morph(kind==='heb'?'hform':'gform'); if(seq!==palSeq) return; const hit=fm[n]||fm['~'+n];
-      if(hit) hit.split('|').reverse().forEach(k=>{ const e=lx[k]; if(e && !items.some(x=>x.key===k)) items.unshift({group:'This spelling',key:k,html:`<bdi class="${L==='H'?'cmdk-heb':'cmdk-grk'}">${E(q)}</bdi> → <bdi class="${L==='H'?'cmdk-heb':'cmdk-grk'}">${E(e[0])}</bdi> · ${E(e[3])} <span class="cmdk-k">${E(strongNum(k))}</span>`,sub:'Form found in the tagged text · open in Lexicon & concordance',go:()=>openConcordance(k)}); }); }catch(e){}
-    palRender(items, items.length?'':'No lemma found with that spelling.');
+      if(hit) hit.split('|').reverse().forEach(k=>{ const e=lx[k]; if(e && !items.some(x=>x.key===k)) items.unshift({group:'This spelling',key:k,html:`<bdi class="${L==='H'?'cmdk-heb':'cmdk-grk'}">${E(q)}</bdi> → <bdi class="${L==='H'?'cmdk-heb':'cmdk-grk'}">${E(e[0])}</bdi> · ${E(e[3])} <span class="cmdk-k">${E(strongNum(k))}</span>`,sub:T('cmdk.formFound'),go:()=>openConcordance(k)}); }); }catch(e){}
+    palRender(items, items.length?'':T('cmdk.noLemma'));
     return;
   }
   // English phrase search across one English version, loaded book by book (and cached for offline)
