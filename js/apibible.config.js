@@ -9,7 +9,7 @@
 //
 // proxy: '' (empty) = NLT and NKJV are hidden and the app behaves exactly as before.
 var APIBIBLE_CONFIG = {
-  proxy: '',   // e.g. 'https://hive-scribe-bible.<your-subdomain>.workers.dev' (https only)
+  proxy: 'https://hive-scribe-bible.voineagvalentin5.workers.dev',   // e.g. 'https://hive-scribe-bible.<your-subdomain>.workers.dev' (https only)
   bibles: [
     // bibleId: from api.bible/bibles (public list). Confirm in the API.Bible dashboard after sign-up.
     {id:'nlt',  abbr:'NLT',  bibleId:'d6e14a625393b4da-01', name:'New Living Translation', full:'New Living Translation (Tyndale House Publishers)',
