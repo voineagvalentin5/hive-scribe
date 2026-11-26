@@ -49,6 +49,36 @@
   --hl:#5c4a12; --dim:rgba(0,0,0,.55); --shadow:0 12px 36px rgba(0,0,0,.55);
   --glow:rgba(232,178,58,.32); --frame:rgba(232,178,58,.48); --glass:rgba(24,25,30,.72);}
 *{box-sizing:border-box}
+/* Thin honey scrollbars on the Library panel and the other overflow panels
+   (word-study, notes/settings sheets, search palette, callouts).
+   Firefox: scrollbar-width / scrollbar-color. Chromium/Safari: ::-webkit-scrollbar.
+   Arrow buttons are removed. The bar stays visible so scrolling stays discoverable. */
+:root{
+  --scroll-thumb: color-mix(in srgb, #F2A900 45%, transparent);
+  --scroll-thumb-hover: color-mix(in srgb, #F2A900 80%, transparent);
+  --scroll-track: transparent;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+  --scroll-thumb: color-mix(in srgb, #F2A900 35%, transparent);
+  --scroll-thumb-hover: color-mix(in srgb, #F2A900 70%, transparent);
+}}
+:root[data-theme=dark]{
+  --scroll-thumb: color-mix(in srgb, #F2A900 35%, transparent);
+  --scroll-thumb-hover: color-mix(in srgb, #F2A900 70%, transparent);
+}
+html{scrollbar-width:thin;scrollbar-color:var(--scroll-thumb) var(--scroll-track);color-scheme:light}
+@media (prefers-color-scheme:dark){html:not([data-theme=light]){color-scheme:dark}}
+html[data-theme=dark]{color-scheme:dark}
+html[data-theme=light]{color-scheme:light}
+.libside,.wp-body,.sheet .pn,.callout,#view-conn .panel,#importSheet .pn,.ppanel .wp-ctx,.cmdk-list{
+  scrollbar-width:thin;scrollbar-color:var(--scroll-thumb) var(--scroll-track);
+}
+*::-webkit-scrollbar{width:6px;height:6px}
+*::-webkit-scrollbar-button{display:none;width:0;height:0}
+*::-webkit-scrollbar-track{background:var(--scroll-track)}
+*::-webkit-scrollbar-thumb{background:var(--scroll-thumb);border-radius:99px}
+*::-webkit-scrollbar-thumb:hover{background:var(--scroll-thumb-hover)}
+*::-webkit-scrollbar-corner{background:transparent}
 html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);-webkit-text-size-adjust:100%}
 body{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 /* no selection / callout glitches on long-press */
